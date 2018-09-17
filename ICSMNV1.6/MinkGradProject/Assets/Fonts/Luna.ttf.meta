@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ac68dede4576f23478f7f61c8f543807
+timeCreated: 1529747307
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Luna
+  fontNames:
+  - Luna
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

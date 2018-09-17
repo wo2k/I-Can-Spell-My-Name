@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: de8aec4706c3f4248994ffc7462aec34
+timeCreated: 1529747308
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: azmoonfleet
+  fontNames:
+  - azmoonfleet
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

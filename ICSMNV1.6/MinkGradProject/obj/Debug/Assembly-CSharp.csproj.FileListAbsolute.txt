@@ -1,0 +1,96 @@
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.TestRunner.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.Timeline.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\ExCSS.Unity.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEditor.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.TestRunner.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\nunit.framework.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.Timeline.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.Analytics.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\obj\Debug\Assembly-CSharp.dll
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Brandon Rodriguez\Documents\ICANSPELLMYNAME\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.TestRunner.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.Timeline.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\ExCSS.Unity.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEditor.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.TestRunner.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\nunit.framework.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.Timeline.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.Analytics.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\obj\Debug\Assembly-CSharp.dll
+C:\Users\Brandon Rodriguez\Desktop\MinkGradProject\obj\Debug\Assembly-CSharp.pdb
+E:\MinkGradProject\Temp\bin\Debug\Assembly-CSharp.dll
+E:\MinkGradProject\Temp\bin\Debug\Assembly-CSharp.pdb
+E:\MinkGradProject\Temp\bin\Debug\nunit.framework.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEditor.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.Analytics.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.HoloLens.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.Networking.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.TestRunner.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.Timeline.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.UI.dll
+E:\MinkGradProject\Temp\bin\Debug\Mono.Cecil.dll
+E:\MinkGradProject\Temp\bin\Debug\Unity.SerializationLogic.dll
+E:\MinkGradProject\Temp\bin\Debug\Unity.DataContract.dll
+E:\MinkGradProject\Temp\bin\Debug\ExCSS.Unity.dll
+E:\MinkGradProject\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
+E:\MinkGradProject\Temp\bin\Debug\Unity.UNetWeaver.dll
+E:\MinkGradProject\Temp\bin\Debug\Unity.CecilTools.dll
+E:\MinkGradProject\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+E:\MinkGradProject\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.xml
+E:\MinkGradProject\Temp\bin\Debug\UnityEditor.xml
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.UI.xml
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.Networking.xml
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.TestRunner.xml
+E:\MinkGradProject\Temp\bin\Debug\nunit.framework.xml
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.Timeline.xml
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.Analytics.xml
+E:\MinkGradProject\Temp\bin\Debug\UnityEngine.HoloLens.xml
+E:\MinkGradProject\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+E:\MinkGradProject\obj\Debug\Assembly-CSharp.dll
+E:\MinkGradProject\obj\Debug\Assembly-CSharp.pdb

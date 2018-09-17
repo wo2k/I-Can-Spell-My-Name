@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 03c6d14d8069ea04397edc866b3f8a63
+timeCreated: 1529747307
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Reeses
+  fontNames:
+  - Reeses
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

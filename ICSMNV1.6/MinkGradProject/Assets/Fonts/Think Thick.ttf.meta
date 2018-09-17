@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 91c6c830c6b63c24cbff1c0b7afefb4a
+timeCreated: 1533848539
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Think Thick
+  fontNames:
+  - Think Thick
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
