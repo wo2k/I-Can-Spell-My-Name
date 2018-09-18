@@ -7,10 +7,12 @@ using UnityEngine;
 
 public class SetCharacter : MonoBehaviour {
 	public List<Sprite> Fish;
+    public List<Sprite> Jellyfish;
 	public List<Sprite> Star;
 	public List<Sprite> Urchin;
 	public List<Sprite> Angel;
 	public List<Sprite> Shark;
+    public List<Sprite> Whale;
 	public GameObject GameManager;
 	public int color;
 	public int vari;
@@ -87,33 +89,33 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Fish [0];
+						this.GetComponent<Image> ().sprite = Fish[0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Fish [1];
+						this.GetComponent<Image> ().sprite = Fish[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Fish [2];
+						this.GetComponent<Image> ().sprite = Fish[2];
 						break;
 					
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Fish [3];
+						this.GetComponent<Image> ().sprite = Fish[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Fish [4];
+						this.GetComponent<Image> ().sprite = Fish[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Fish [5];
+						this.GetComponent<Image> ().sprite = Fish[5];
 						break;
 					}
 				}
@@ -125,33 +127,33 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Star [0];
+						this.GetComponent<Image> ().sprite = Jellyfish[0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Star [1];
+						this.GetComponent<Image> ().sprite = Jellyfish[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Star [2];
+						this.GetComponent<Image> ().sprite = Jellyfish[2];
 						break;
 
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Star [3];
+						this.GetComponent<Image> ().sprite = Jellyfish[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Star [4];
+						this.GetComponent<Image> ().sprite = Jellyfish[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Star [5];
+						this.GetComponent<Image> ().sprite = Jellyfish[5];
 						break;
 					}
 				}
@@ -163,33 +165,33 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [0];
+						this.GetComponent<Image> ().sprite = Star [0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [1];
+						this.GetComponent<Image> ().sprite = Star[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [2];
+						this.GetComponent<Image> ().sprite = Star[2];
 						break;
 
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [3];
+						this.GetComponent<Image> ().sprite = Star[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [4];
+						this.GetComponent<Image> ().sprite = Star[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [5];
+						this.GetComponent<Image> ().sprite = Star[5];
 						break;
 					}
 				}
@@ -201,33 +203,33 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Angel [0];
+						this.GetComponent<Image> ().sprite = Urchin[0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Angel [1];
+						this.GetComponent<Image> ().sprite = Urchin[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Angel [2];
+						this.GetComponent<Image> ().sprite = Urchin[2];
 						break;
 
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Angel [3];
+						this.GetComponent<Image> ().sprite = Urchin[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Angel [4];
+						this.GetComponent<Image> ().sprite = Urchin[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Angel [5];
+						this.GetComponent<Image> ().sprite = Urchin[5];
 						break;
 					}
 				}
@@ -239,40 +241,118 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Shark [0];
+						this.GetComponent<Image> ().sprite = Angel [0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Shark [1];
+						this.GetComponent<Image> ().sprite = Angel[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Shark [2];
+						this.GetComponent<Image> ().sprite = Angel[2];
 						break;
 
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Shark [3];
+						this.GetComponent<Image> ().sprite = Angel[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Shark [4];
+						this.GetComponent<Image> ().sprite = Angel[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Shark [5];
+						this.GetComponent<Image> ().sprite = Angel[5];
 						break;
 					}
 				}
 
 				break;
 			}
-		}
+            case 6:
+                {
+                    switch (vari)
+                    {
+                        case 1:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[0];
+                                break;
+                            }
+                        case 2:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[1];
+                                break;
+                            }
+                        case 3:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[2];
+                                break;
+
+                            }
+                        case 4:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[3];
+                                break;
+                            }
+                        case 5:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[4];
+                                break;
+                            }
+                        case 6:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[5];
+                                break;
+                            }
+                    }
+
+                    break;
+                }
+            case 7:
+                {
+                    switch (vari)
+                    {
+                        case 1:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[0];
+                                break;
+                            }
+                        case 2:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[1];
+                                break;
+                            }
+                        case 3:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[2];
+                                break;
+
+                            }
+                        case 4:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[3];
+                                break;
+                            }
+                        case 5:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[4];
+                                break;
+                            }
+                        case 6:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[5];
+                                break;
+                            }
+                    }
+
+                    break;
+                }
+        }
 
 
 	}
@@ -419,33 +499,33 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [0];
+						this.GetComponent<Image> ().sprite = Jellyfish [0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [1];
+						this.GetComponent<Image> ().sprite = Jellyfish[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [2];
+						this.GetComponent<Image> ().sprite = Jellyfish[2];
 						break;
 
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [3];
+						this.GetComponent<Image> ().sprite = Jellyfish[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [4];
+						this.GetComponent<Image> ().sprite = Jellyfish[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Urchin [5];
+						this.GetComponent<Image> ().sprite = Jellyfish[5];
 						break;
 					}
 				}
@@ -457,33 +537,33 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Angel [0];
+						this.GetComponent<Image> ().sprite = Urchin [0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Angel [1];
+						this.GetComponent<Image> ().sprite = Urchin[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Angel [2];
+						this.GetComponent<Image> ().sprite = Urchin[2];
 						break;
 
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Angel [3];
+						this.GetComponent<Image> ().sprite = Urchin[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Angel [4];
+						this.GetComponent<Image> ().sprite = Urchin[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Angel [5];
+						this.GetComponent<Image> ().sprite = Urchin[5];
 						break;
 					}
 				}
@@ -495,40 +575,120 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Shark [0];
+						this.GetComponent<Image> ().sprite = Angel [0];
 						break;
 					}
 				case 2:
 					{
-						this.GetComponent<Image> ().sprite = Shark [1];
+						this.GetComponent<Image> ().sprite = Angel[1];
 						break;
 					}
 				case 3:
 					{
-						this.GetComponent<Image> ().sprite = Shark [2];
+						this.GetComponent<Image> ().sprite = Angel[2];
 						break;
 
 					}
 				case 4:
 					{
-						this.GetComponent<Image> ().sprite = Shark [3];
+						this.GetComponent<Image> ().sprite = Angel[3];
 						break;
 					}
 				case 5:
 					{
-						this.GetComponent<Image> ().sprite = Shark [4];
+						this.GetComponent<Image> ().sprite = Angel[4];
 						break;
 					}
 				case 6:
 					{
-						this.GetComponent<Image> ().sprite = Shark [5];
+						this.GetComponent<Image> ().sprite = Angel[5];
 						break;
 					}
 				}
 
 				break;
 			}
-		}
+
+            case 6:
+                {
+                    switch (vari)
+                    {
+                        case 1:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[0];
+                                break;
+                            }
+                        case 2:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[1];
+                                break;
+                            }
+                        case 3:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[2];
+                                break;
+
+                            }
+                        case 4:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[3];
+                                break;
+                            }
+                        case 5:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[4];
+                                break;
+                            }
+                        case 6:
+                            {
+                                this.GetComponent<Image>().sprite = Shark[5];
+                                break;
+                            }
+                    }
+
+                    break;
+                }
+
+            case 7:
+                {
+                    switch (vari)
+                    {
+                        case 1:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[0];
+                                break;
+                            }
+                        case 2:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[1];
+                                break;
+                            }
+                        case 3:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[2];
+                                break;
+
+                            }
+                        case 4:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[3];
+                                break;
+                            }
+                        case 5:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[4];
+                                break;
+                            }
+                        case 6:
+                            {
+                                this.GetComponent<Image>().sprite = Whale[5];
+                                break;
+                            }
+                    }
+
+                    break;
+                }
+        }
 
 
 	}

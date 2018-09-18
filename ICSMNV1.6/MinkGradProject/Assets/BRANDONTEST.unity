@@ -26995,7 +26995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -380, y: -135}
+  m_AnchoredPosition: {x: -380, y: 25.5}
   m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &555389610
@@ -27031,7 +27031,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 0.75
   m_Text: "Executive Producer \n\nProducer\n\nLead Artist\n\nLead Developer\n\nLead
-    Audio\n"
+    Audio\n\nProgrammer\n"
 --- !u!222 &555389611
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -48891,11 +48891,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114492537188872160, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
-        type: 2}
-      propertyPath: GameManager
-      value: 
-      objectReference: {fileID: 999026023}
     - target: {fileID: 114369622205370066, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
         type: 2}
       propertyPath: MenuToGoTo
@@ -48906,6 +48901,11 @@ Prefab:
       propertyPath: CurrentMenu
       value: 
       objectReference: {fileID: 109404976}
+    - target: {fileID: 114492537188872160, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 999026023}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00eeb8023c50dbb4bbf46dab6c9cc677, type: 2}
   m_IsPrefabParent: 0
@@ -50275,7 +50275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tutorial: {fileID: 1041260629}
   MainhMenu: {fileID: 109404976}
-  ConfirmSubMenu: {fileID: 829715057}
+  ConfirmSubMenu: {fileID: 1119719413}
+  Level1A: {fileID: 1660186543}
   LoginNumber: 0
   input: {fileID: 830219430}
 --- !u!4 &999026025
@@ -65419,7 +65420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 596, y: -135.00003}
+  m_AnchoredPosition: {x: 596, y: 25.5}
   m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1264835328
@@ -65466,7 +65467,10 @@ MonoBehaviour:
     Brandon Rodriguez
 
 
-    Tyler'
+    Tyler
+
+
+    Anthony Gonzalez'
 --- !u!222 &1264835329
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -83397,6 +83401,7 @@ MonoBehaviour:
   Miss: 0
   Tutorial: {fileID: 191486859}
   MainMenu: {fileID: 109404976}
+  gameStart: 0
   NamesChosen: []
 --- !u!114 &1660186546
 MonoBehaviour:

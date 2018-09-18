@@ -169,24 +169,24 @@ public class CharacterSelection : MonoBehaviour {
 	public void SetVariation (int Var) {
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstVar", Variation);
+				PlayerPrefs.SetInt("firstVar", Var);
 				break;
 			}
 		case 2:
 			{
 
-				PlayerPrefs.SetInt("secondVar", Variation);
+				PlayerPrefs.SetInt("secondVar", Var);
 				break;
 			}
 		case 3:
 			{
 				
-				PlayerPrefs.SetInt("thirdtVar", Variation);
+				PlayerPrefs.SetInt("thirdtVar", Var);
 				break;
 			}
 		case 4:
 			{
-				PlayerPrefs.SetInt ("fourthVar", Variation);
+				PlayerPrefs.SetInt ("fourthVar", Var);
 				break;
 			}
 		}
@@ -273,29 +273,70 @@ public class CharacterSelection : MonoBehaviour {
 
 
 	}
-	public void SelectJelly () {
+
+    public void SelectFish()
+    {
+        Fish.GetComponent<ColorMe>().SetUp(Variation);
+        switch (GameManager.GetComponent<FirstPlayButtons>().LoginNumber)
+        {
+            case 1:
+                {
+                    PlayerPrefs.SetInt("firstCharacter", 1);
+                    PlayerPrefs.SetInt("firstVar", Variation);
+                    break;
+                }
+            case 2:
+                {
+                    PlayerPrefs.SetInt("secondCharacter", 1);
+                    PlayerPrefs.SetInt("secondVar", Variation);
+                    break;
+                }
+            case 3:
+                {
+                    PlayerPrefs.SetInt("thirdCharacter", 1);
+                    PlayerPrefs.SetInt("thirdVar", Variation);
+                    break;
+                }
+            case 4:
+                {
+                    PlayerPrefs.SetInt("fourthCharacter", 1);
+                    PlayerPrefs.SetInt("fourthVar", Variation);
+                    break;
+                }
+        }
+
+        JellyText.SetActive(false);
+        FishText.SetActive(true);
+        StarText.SetActive(false);
+        AngelText.SetActive(false);
+        SharkText.SetActive(false);
+        WhaleText.SetActive(false);
+        UrchinText.SetActive(false);
+    }
+
+    public void SelectJelly () {
 		Jelly.GetComponent<ColorMe> ().SetUp (Variation);
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 1);
+				PlayerPrefs.SetInt("firstCharacter", 2);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
 			}
 		case 2:
 			{
-				PlayerPrefs.SetInt ("secondCharacter", 1);
+				PlayerPrefs.SetInt ("secondCharacter", 2);
 				PlayerPrefs.SetInt("secondVar", Variation);
 				break;
 			}
 		case 3:
 			{
-				PlayerPrefs.SetInt ("thirdCharacter", 1);
+				PlayerPrefs.SetInt ("thirdCharacter", 2);
 				PlayerPrefs.SetInt("thirdVar", Variation);
 				break;
 			}
 		case 4:
 			{
-				PlayerPrefs.SetInt ("fourthCharacter", 1);
+				PlayerPrefs.SetInt ("fourthCharacter", 2);
 				PlayerPrefs.SetInt("fourthVar", Variation);
 				break;
 			}
@@ -309,46 +350,6 @@ public class CharacterSelection : MonoBehaviour {
 		WhaleText.SetActive (false);
 		UrchinText.SetActive (false);
 	}
-
-
-
-	public void SelectFish() {
-		Fish.GetComponent<ColorMe> ().SetUp (Variation);
-		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
-	case 1:{
-			PlayerPrefs.SetInt("firstCharacter", 2);
-			PlayerPrefs.SetInt("firstVar", Variation);
-			break;
-		}
-	case 2:
-		{
-			PlayerPrefs.SetInt ("secondCharacter", 2);
-			PlayerPrefs.SetInt("secondVar", Variation);
-			break;
-		}
-	case 3:
-		{
-			PlayerPrefs.SetInt ("thirdCharacter", 2);
-			PlayerPrefs.SetInt("thirdVar", Variation);
-			break;
-		}
-	case 4:
-		{
-			PlayerPrefs.SetInt ("fourthCharacter", 2);
-			PlayerPrefs.SetInt("fourthVar", Variation);
-			break;
-		}
-	}
-
-		JellyText.SetActive (false);
-		FishText.SetActive (true);
-		StarText.SetActive (false);
-		AngelText.SetActive (false);
-		SharkText.SetActive (false);
-		WhaleText.SetActive (false);
-		UrchinText.SetActive (false);
-}
-
 
 	public void SelectStar () {
 		Star.GetComponent<ColorMe> ().SetUp (Variation);
@@ -427,42 +428,6 @@ public class CharacterSelection : MonoBehaviour {
 		Shark.GetComponent<ColorMe> ().SetUp (Variation);
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 5);
-				PlayerPrefs.SetInt("firstVar", Variation);
-				break;
-			}
-		case 2:
-			{
-				PlayerPrefs.SetInt ("secondCharacter", 5);
-				PlayerPrefs.SetInt("secondVar", Variation);
-				break;
-			}
-		case 3:
-			{
-				PlayerPrefs.SetInt ("thirdCharacter", 5);
-				PlayerPrefs.SetInt("thirdVar", Variation);
-				break;
-			}
-		case 4:
-			{
-				PlayerPrefs.SetInt ("fourthCharacter", 5);
-				PlayerPrefs.SetInt("fourthVar", Variation);
-				break;
-			}
-		}
-
-		JellyText.SetActive (false);
-		FishText.SetActive (false);
-		StarText.SetActive (false);
-		AngelText.SetActive (false);
-		SharkText.SetActive (true);
-		WhaleText.SetActive (false);
-		UrchinText.SetActive (false);
-	}
-	public void SelectAngel () {
-		Angel.GetComponent<ColorMe> ().SetUp (Variation);
-		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
-		case 1:{
 				PlayerPrefs.SetInt("firstCharacter", 6);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
@@ -482,6 +447,42 @@ public class CharacterSelection : MonoBehaviour {
 		case 4:
 			{
 				PlayerPrefs.SetInt ("fourthCharacter", 6);
+				PlayerPrefs.SetInt("fourthVar", Variation);
+				break;
+			}
+		}
+
+		JellyText.SetActive (false);
+		FishText.SetActive (false);
+		StarText.SetActive (false);
+		AngelText.SetActive (false);
+		SharkText.SetActive (true);
+		WhaleText.SetActive (false);
+		UrchinText.SetActive (false);
+	}
+	public void SelectAngel () {
+		Angel.GetComponent<ColorMe> ().SetUp (Variation);
+		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
+		case 1:{
+				PlayerPrefs.SetInt("firstCharacter", 5);
+				PlayerPrefs.SetInt("firstVar", Variation);
+				break;
+			}
+		case 2:
+			{
+				PlayerPrefs.SetInt ("secondCharacter", 5);
+				PlayerPrefs.SetInt("secondVar", Variation);
+				break;
+			}
+		case 3:
+			{
+				PlayerPrefs.SetInt ("thirdCharacter", 5);
+				PlayerPrefs.SetInt("thirdVar", Variation);
+				break;
+			}
+		case 4:
+			{
+				PlayerPrefs.SetInt ("fourthCharacter", 5);
 				PlayerPrefs.SetInt("fourthVar", Variation);
 				break;
 			}

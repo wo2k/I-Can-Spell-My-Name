@@ -141,6 +141,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 151a77976afbba444b7da8d7c341c8e0, type: 3}
   - {fileID: 21300000, guid: 13e26eaf36d361f46bd1f543e7f87a68, type: 3}
   - {fileID: 21300000, guid: ae973a603ecaa1c4898ae8b6dfafa3d3, type: 3}
+  Jellyfish:
+  - {fileID: 21300000, guid: 12e9b193f314aee409c9d79585ffeced, type: 3}
+  - {fileID: 21300000, guid: 71cff23b013545448a5e224a4f8ecd16, type: 3}
+  - {fileID: 21300000, guid: 3cfdee3d705729146874121e72253126, type: 3}
+  - {fileID: 21300000, guid: 7e24ae32c72ff5f4cb592c163352180b, type: 3}
+  - {fileID: 21300000, guid: 9e8444f00e90df149b8c2f9e775d8cf6, type: 3}
+  - {fileID: 21300000, guid: 773b6202e17c6374297714321ae644ca, type: 3}
   Star:
   - {fileID: 21300000, guid: c3bf770523d23b3488fa1025afa3c591, type: 3}
   - {fileID: 21300000, guid: b03318e492bf94f4fb92a1acd1190d8c, type: 3}
@@ -169,6 +176,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 231ce7f50e732f74d8b62ed45058750d, type: 3}
   - {fileID: 21300000, guid: bf966382ab453b440b350cd0a58bf719, type: 3}
   - {fileID: 21300000, guid: 2f70764f559db7143ab39dfc1707e273, type: 3}
+  Whale:
+  - {fileID: 21300000, guid: cc2b80768bf851a4fb5007196291f99f, type: 3}
+  - {fileID: 21300000, guid: 792714824f4535b4787efbd27406428e, type: 3}
+  - {fileID: 21300000, guid: 4f8def60f066de24f83172f8373165ea, type: 3}
+  - {fileID: 21300000, guid: a1f522dd1b600f444abf35ab1198b5b4, type: 3}
+  - {fileID: 21300000, guid: 08528d0cfde08724ebf6485038d9e94f, type: 3}
+  - {fileID: 21300000, guid: 1bfbad57ba7ff4744bf20e095d2d91f4, type: 3}
   GameManager: {fileID: 0}
   color: 0
   vari: 0
@@ -194,6 +208,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5.61}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 511, y: -269}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -7,15 +7,31 @@ public class FirstPlayButtons : MonoBehaviour {
 	public GameObject Tutorial;
 	public GameObject MainhMenu;
 	public GameObject ConfirmSubMenu;
+    public GameObject Level1A;
 	public int LoginNumber = 0;
 	bool firstplay;
 	public InputField input;
 	bool EditToggle = false;
 
-	// Use this for initialization
-	void Start () {
-		PlayerPrefs.SetInt ("loginNumber", LoginNumber );
-	}
+    // Use this for initialization
+    void Start() {
+        PlayerPrefs.SetInt("loginNumber", LoginNumber);
+
+     /*   switch (LoginNumber)
+        {
+            case 1:
+                PlayerPrefs.GetInt("firstCharacter");
+                PlayerPrefs.GetInt("firstColor");
+                PlayerPrefs.GetInt("firstVar");
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }*/
+    }
 
 	public void SavePlayer (){
 		input.text = input.text.ToUpper ();
@@ -153,9 +169,15 @@ public class FirstPlayButtons : MonoBehaviour {
 		}
 		ConfirmSubMenu.SetActive (false);
 	}
+
 	public void Decline(){
-		ConfirmSubMenu.SetActive (false);
-	}
+        Level1A.GetComponent<Level1A>().Reset();
+        Level1A.SetActive(false);
+        ConfirmSubMenu.SetActive (false);
+        MainhMenu.SetActive(true);
+        Level1A.GetComponent<Level1A>().StartMenu.SetActive(true);
+    }
+
 	public void Edit(){
 		if (!EditToggle){ EditToggle = true;
 		} else {

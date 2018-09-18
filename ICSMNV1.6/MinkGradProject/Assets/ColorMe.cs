@@ -58,16 +58,16 @@ public class ColorMe : MonoBehaviour {
 			Choices [i].GetComponent<CheckMe> ().CheckThis (false);
 		}
 		Choices [0].GetComponent<CheckMe> ().CheckThis (true);
-		Controller.SetVariation(0,Choices[0].GetComponent<Image>().sprite);
-		Controller.SetVariation (0);
+		Controller.SetVariation(1,Choices[0].GetComponent<Image>().sprite);
+		Controller.SetVariation (1);
 	}
 	public void SetVar2(){
 		for(int i = 0; i < Choices.Count;i++){
 			Choices [i].GetComponent<CheckMe> ().CheckThis (false);
 		}
 		Choices [1].GetComponent<CheckMe> ().CheckThis (true);
-		Controller.SetVariation(1,Choices[1].GetComponent<Image>().sprite);
-		Controller.SetVariation (1);
+		Controller.SetVariation(2,Choices[1].GetComponent<Image>().sprite);
+		Controller.SetVariation (2);
 	}
 
 	public void SetVar3(){
@@ -75,8 +75,8 @@ public class ColorMe : MonoBehaviour {
 			Choices [i].GetComponent<CheckMe> ().CheckThis (false);
 		}
 		Choices [2].GetComponent<CheckMe> ().CheckThis (true);
-		Controller.SetVariation(2,Choices[2].GetComponent<Image>().sprite);
-		Controller.SetVariation (2);
+		Controller.SetVariation(3,Choices[2].GetComponent<Image>().sprite);
+		Controller.SetVariation (3);
 
 	}
 
@@ -85,8 +85,8 @@ public class ColorMe : MonoBehaviour {
 			Choices [i].GetComponent<CheckMe> ().CheckThis (false);
 		}
 		Choices [3].GetComponent<CheckMe> ().CheckThis (true);
-		Controller.SetVariation(3,Choices[3].GetComponent<Image>().sprite);
-		Controller.SetVariation (3);
+		Controller.SetVariation(4,Choices[3].GetComponent<Image>().sprite);
+		Controller.SetVariation (4);
 
 	}
 
@@ -95,8 +95,8 @@ public class ColorMe : MonoBehaviour {
 			Choices [i].GetComponent<CheckMe> ().CheckThis (false);
 		}
 		Choices [4].GetComponent<CheckMe> ().CheckThis (true);
-		Controller.SetVariation(4,Choices[4].GetComponent<Image>().sprite);
-		Controller.SetVariation (4);
+		Controller.SetVariation(5,Choices[4].GetComponent<Image>().sprite);
+		Controller.SetVariation (5);
 
 	}
 	public void SetVar6(){
@@ -104,8 +104,8 @@ public class ColorMe : MonoBehaviour {
 			Choices [i].GetComponent<CheckMe> ().CheckThis (false);
 		}
 		Choices [5].GetComponent<CheckMe> ().CheckThis (true);
-		Controller.SetVariation(5,Choices[5].GetComponent<Image>().sprite);
-		Controller.SetVariation (5);
+		Controller.SetVariation(6,Choices[5].GetComponent<Image>().sprite);
+		Controller.SetVariation (6);
 
 	}
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Level1A : MonoBehaviour {
 	public GameObject NameData;
 	public GameObject StartMenu;
@@ -25,7 +25,7 @@ public class Level1A : MonoBehaviour {
 	int Total = 0;
 	public GameObject Tutorial;
 	public GameObject MainMenu;
-	bool gameStart = false;
+	public bool gameStart = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 	// Use this for initialization
@@ -36,6 +36,7 @@ public class Level1A : MonoBehaviour {
 	}
 
 	void Start () {
+        StartMenu.SetActive(true);
 		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 		switch(LoginNumber){
 		case 1:{
@@ -228,12 +229,20 @@ public class Level1A : MonoBehaviour {
 	}
 	*/
 
-	void Reset (){
+	public void Reset (){
 		ScoreText.text = "00000";
 		Score = 0;
 		Multi = 1;
-		answerIndex = 8;
-		AnswerHint.text = Names[answerIndex];
+        timetext.text = "1:00";
+        for (int i = 0; i < Names.Count; i++)
+        {
+            Names[i] = Names[i].ToUpper();
+            if (AnswerHint.text == Names[i])
+                answerIndex = i;
+        }
+
+        //answerIndex = 8;
+        AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
 	//	SetOtherButtons ();
