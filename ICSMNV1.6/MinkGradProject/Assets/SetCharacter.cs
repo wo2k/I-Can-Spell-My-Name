@@ -461,44 +461,6 @@ public class SetCharacter : MonoBehaviour {
 				switch (vari) {
 				case 1:
 					{
-						this.GetComponent<Image> ().sprite = Star [0];
-						break;
-					}
-				case 2:
-					{
-						this.GetComponent<Image> ().sprite = Star [1];
-						break;
-					}
-				case 3:
-					{
-						this.GetComponent<Image> ().sprite = Star [2];
-						break;
-
-					}
-				case 4:
-					{
-						this.GetComponent<Image> ().sprite = Star [3];
-						break;
-					}
-				case 5:
-					{
-						this.GetComponent<Image> ().sprite = Star [4];
-						break;
-					}
-				case 6:
-					{
-						this.GetComponent<Image> ().sprite = Star [5];
-						break;
-					}
-				}
-
-				break;
-			}
-		case 3:
-			{
-				switch (vari) {
-				case 1:
-					{
 						this.GetComponent<Image> ().sprite = Jellyfish [0];
 						break;
 					}
@@ -526,6 +488,44 @@ public class SetCharacter : MonoBehaviour {
 				case 6:
 					{
 						this.GetComponent<Image> ().sprite = Jellyfish[5];
+						break;
+					}
+				}
+
+				break;
+			}
+		case 3:
+			{
+				switch (vari) {
+				case 1:
+					{
+						this.GetComponent<Image> ().sprite = Star [0];
+						break;
+					}
+				case 2:
+					{
+						this.GetComponent<Image> ().sprite = Star[1];
+						break;
+					}
+				case 3:
+					{
+						this.GetComponent<Image> ().sprite = Star[2];
+						break;
+
+					}
+				case 4:
+					{
+						this.GetComponent<Image> ().sprite = Star[3];
+						break;
+					}
+				case 5:
+					{
+						this.GetComponent<Image> ().sprite = Star[4];
+						break;
+					}
+				case 6:
+					{
+						this.GetComponent<Image> ().sprite = Star[5];
 						break;
 					}
 				}

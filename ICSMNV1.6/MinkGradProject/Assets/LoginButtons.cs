@@ -27,14 +27,18 @@ public class LoginButtons : MonoBehaviour {
 	public Image Angel;
 	public Image Urchin;
 	public Image Blank;
-	public GameObject Character;
-
+	public GameObject Character01;
+    public GameObject Character02;
+    public GameObject Character03;
+    public GameObject Character04;
+    public int color;
+    public int character;
 
 	// Use this for initialization
 	public void SetImages(){
 		firstName = PlayerPrefs.GetString ("firstName");
-		int color = PlayerPrefs.GetInt ("firstColor");
-		int Character = PlayerPrefs.GetInt ("firstCharacter");
+	    color = PlayerPrefs.GetInt ("firstColor");
+	    character = PlayerPrefs.GetInt ("firstCharacter");
 		if (color == 1)
 			one.image.color = Color.red;
 		if (color == 2)
@@ -43,29 +47,29 @@ public class LoginButtons : MonoBehaviour {
 			one.image.color = new Color (1.0F, (206.0F / 255.0F), 0, 1);
 		if (color == 4)
 			one.image.color = Color.cyan;
-		if (Character == 1)
+		if (character == 1)
 			one.image.sprite = Blank.sprite;
 		if (color == 0)
 			one.image.color = Color.white;
 
-		if (Character == 0)
+		if (character == 0)
 			one.image.sprite = Blank.sprite;
-		if (Character == 1)
+		if (character == 1)
 			one.image.sprite = Jelly.sprite;
-		if (Character == 2)
+		if (character == 2)
 			one.image.sprite = Fish.sprite;
-		if (Character == 3)
+		if (character == 3)
 			one.image.sprite = Star.sprite;
-		if (Character == 4)
+		if (character == 4)
 			one.image.sprite = Urchin.sprite;
 
-		if (Character == 5)
+		if (character == 5)
 			one.image.sprite = Shark.sprite;
 
-		if (Character == 6)
+		if (character == 6)
 			one.image.sprite = Angel.sprite;
 
-		if (Character == 7)
+		if (character == 7)
 			one.image.sprite = Whale.sprite;
 
 
@@ -73,8 +77,8 @@ public class LoginButtons : MonoBehaviour {
 
 		secondName = PlayerPrefs.GetString ("secondName");
 		color = PlayerPrefs.GetInt ("secondColor");
-		Character = PlayerPrefs.GetInt ("secondCharacter");
-		if (Character == 0)
+		character = PlayerPrefs.GetInt ("secondCharacter");
+		if (character == 0)
 			two.image.sprite = Blank.sprite;
 		if (color == 0)
 			two.image.color = Color.white;
@@ -87,28 +91,28 @@ public class LoginButtons : MonoBehaviour {
 		if (color == 4)
 			two.image.color = Color.cyan;
 
-		if (Character == 1)
+		if (character == 1)
 			two.image.sprite = Jelly.sprite;
-		if (Character == 2)
+		if (character == 2)
 			two.image.sprite = Fish.sprite;
-		if (Character == 3)
+		if (character == 3)
 			two.image.sprite = Star.sprite;
-		if (Character == 4)
+		if (character == 4)
 			one.image.sprite = Urchin.sprite;
 
-		if (Character == 5)
+		if (character == 5)
 			two.image.sprite = Shark.sprite;
 
-		if (Character == 6)
+		if (character == 6)
 			two.image.sprite = Angel.sprite;
 
-		if (Character == 7)
+		if (character == 7)
 			two.image.sprite = Whale.sprite;
 
 		thirdName = PlayerPrefs.GetString ("thirdName");
 		color = PlayerPrefs.GetInt ("thirdColor");
-		Character = PlayerPrefs.GetInt ("thirdCharacter");
-		if (Character == 0)
+		character = PlayerPrefs.GetInt ("thirdCharacter");
+		if (character == 0)
 			three.image.sprite = Blank.sprite;
 		if (color == 0)
 			three.image.color = Color.white;
@@ -121,29 +125,29 @@ public class LoginButtons : MonoBehaviour {
 		if (color == 4)
 			three.image.color = Color.cyan;
 
-		if (Character == 1)
+		if (character == 1)
 			three.image.sprite = Jelly.sprite;
-		if (Character == 2)
+		if (character == 2)
 			three.image.sprite = Fish.sprite;
-		if (Character == 3)
+		if (character == 3)
 			three.image.sprite = Star.sprite;
-		if (Character == 4)
+		if (character == 4)
 			three.image.sprite = Urchin.sprite;
 
-		if (Character == 5)
+		if (character == 5)
 			three.image.sprite = Shark.sprite;
 
-		if (Character == 6)
+		if (character == 6)
 			three.image.sprite = Angel.sprite;
 
-		if (Character == 7)
+		if (character == 7)
 			three.image.sprite = Whale.sprite;
 
 
 		fourthName = PlayerPrefs.GetString ("fourthName");
 		color = PlayerPrefs.GetInt ("fourthColor");
-		Character = PlayerPrefs.GetInt ("fourthCharacter");
-		if (Character == 0)
+		character = PlayerPrefs.GetInt ("fourthCharacter");
+		if (character == 0)
 			four.image.sprite = Blank.sprite;
 		if (color == 0)
 			four.image.color = Color.white;
@@ -156,22 +160,22 @@ public class LoginButtons : MonoBehaviour {
 		if (color == 4)
 			four.image.color = Color.cyan;
 
-		if (Character == 1)
+		if (character == 1)
 			four.image.sprite = Jelly.sprite;
-		if (Character == 2)
+		if (character == 2)
 			four.image.sprite = Fish.sprite;
-		if (Character == 3)
+		if (character == 3)
 			four.image.sprite = Star.sprite;
-		if (Character == 4)
+		if (character == 4)
 			four.image.sprite = Urchin.sprite;
 
-		if (Character == 5)
+		if (character == 5)
 			four.image.sprite = Shark.sprite;
 
-		if (Character == 6)
+		if (character == 6)
 			four.image.sprite = Angel.sprite;
 
-		if (Character == 7)
+		if (character == 7)
 			four.image.sprite = Whale.sprite;
 
 
@@ -352,28 +356,30 @@ public class LoginButtons : MonoBehaviour {
 
 		firstPlayer.text = PlayerPrefs.GetString ("firstName");
 		if (firstPlayer.text != "Add Player") {
-			Character.GetComponent<SetCharacter> ().SetUpLogin (1);
-			one.image.sprite = Character.GetComponent<Image> ().sprite;
-			one.image.color = Character.GetComponent<Image> ().color;
+			Character01.GetComponent<SetCharacter> ().SetUpLogin (1);
+			one.image.sprite = Character01.GetComponent<Image> ().sprite;
+			one.image.color = Character01.GetComponent<Image> ().color;
 		}
 
 		secondPlayer.text = PlayerPrefs.GetString ("secondName");
-		if (secondPlayer.text != "Add Player") {
-			Character.GetComponent<SetCharacter> ().SetUpLogin (2);
-			one.image.sprite = Character.GetComponent<Image> ().sprite;
-			one.image.color = Character.GetComponent<Image> ().color;
-		}
-		thirdPlayer.text = PlayerPrefs.GetString ("thirdName");
-		if (thirdPlayer.text != "Add Player") {
-			Character.GetComponent<SetCharacter> ().SetUpLogin (3);
-			one.image.sprite = Character.GetComponent<Image> ().sprite;
-			one.image.color = Character.GetComponent<Image> ().color;
-		}
-		fourthPlayer.text = PlayerPrefs.GetString ("fourthName");
-		if (fourthPlayer.text != "Add Player") {
-			Character.GetComponent<SetCharacter> ().SetUpLogin (4);
-			one.image.sprite = Character.GetComponent<Image> ().sprite;
-			one.image.color = Character.GetComponent<Image> ().color;
+        if (secondPlayer.text != "Add Player")
+        {
+            Character02.GetComponent<SetCharacter>().SetUpLogin(2);
+            two.image.sprite = Character02.GetComponent<Image>().sprite;
+            two.image.color = Character02.GetComponent<Image>().color;
+        }     
+        thirdPlayer.text = PlayerPrefs.GetString ("thirdName");
+        if (thirdPlayer.text != "Add Player")
+        {
+            Character03.GetComponent<SetCharacter>().SetUpLogin(3);
+            three.image.sprite = Character03.GetComponent<Image>().sprite;
+            three.image.color = Character03.GetComponent<Image>().color;
+        }
+        fourthPlayer.text = PlayerPrefs.GetString ("fourthName");
+        if (fourthPlayer.text != "Add Player") {
+			Character04.GetComponent<SetCharacter> ().SetUpLogin (4);
+			four.image.sprite = Character04.GetComponent<Image> ().sprite;
+			four.image.color = Character04.GetComponent<Image> ().color;
 		}
 	}
 	public void Edit(){
