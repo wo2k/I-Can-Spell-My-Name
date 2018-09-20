@@ -60,6 +60,8 @@
      <Compile Include="Assets\ChoseColor.cs" />
      <Compile Include="Assets\ColorMe.cs" />
      <Compile Include="Assets\CorrectName.cs" />
+     <Compile Include="Assets\CreditScreen.cs" />
+     <Compile Include="Assets\FadeScript.cs" />
      <Compile Include="Assets\FileHandler.cs" />
      <Compile Include="Assets\FirstPlayButtons.cs" />
      <Compile Include="Assets\HealthScript.cs" />

@@ -6,6 +6,9 @@ public class ChestCheck : MonoBehaviour {
 	public List<GameObject> Chests;
 	public GameObject Keyboard;
 	// Use this for initialization
+	public bool FadeOn = false;
+	public float FadeTime;
+	public bool Playing = false;
 	void Start () {
 	}
 	public void ResetAll() {
@@ -15,7 +18,6 @@ public class ChestCheck : MonoBehaviour {
 	public void Turnoff(int index) {
 		Chests [index].SetActive (false);
 		Keyboard.GetComponent<Keyboard> ().answerString = "";
-		Keyboard.GetComponent<Keyboard> ().TurnOffChestPanel ();
 		int count =	Keyboard.GetComponent<Keyboard> ().LetterBlocks.Count;
 		for (int i = 0; i < count; i++)
 			Keyboard.GetComponent<Keyboard> ().LetterBlocks [i].GetComponent<LetterPlacement> ().RemoveLetter ();
@@ -29,10 +31,28 @@ public class ChestCheck : MonoBehaviour {
 		if (index == Keyboard.GetComponent<Keyboard> ().chestwin) {
 			Keyboard.GetComponent<Keyboard> ().wintreasue = true;
 		}
+		FadeOn = true;
 	}
 
 	// Update is called once per frame
 	void Update () {
+
+	
+		float time = 2.0f;
+		if (FadeOn == true) {
+			FadeScript.instance.Fade (true, time);
+			FadeOn = false;
+			Playing = true;
+		}
+
+		if(Playing)
+		FadeTime += Time.deltaTime;
 		
+		if (FadeTime > time) {
+			Playing = false;
+			FadeTime = 0;
+			FadeScript.instance.Fade(false,time);
+			Keyboard.GetComponent<Keyboard> ().TurnOffChestPanel ();
+		}
 	}
 }

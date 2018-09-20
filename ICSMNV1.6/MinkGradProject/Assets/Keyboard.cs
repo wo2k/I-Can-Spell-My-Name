@@ -50,6 +50,8 @@ public class Keyboard : MonoBehaviour {
 	public int chestwin = 0;
 	public GameObject ChestPanel;
 	public bool wintreasue = false;
+	public float FadeTime;
+	public bool FadeOn = true;
 	void SetName () {
 		int Num_Boxes = PlayersName.Length;
 		Answers.GetComponent<Letters> ().SetLetters (Num_Boxes);
@@ -236,9 +238,21 @@ public class Keyboard : MonoBehaviour {
 		}
 		if (LevelNum == 4) 
 		{
+
 			if (PlayersName == answerString) 
 			{
-				ChestPanel.SetActive(true);
+				float time = 2.0f;
+				if (FadeOn == true) {
+					FadeScript.instance.Fade (true, time);
+					FadeOn = false;
+				}
+				FadeTime += Time.deltaTime;
+				if (FadeTime > time) {
+					FadeTime = 0;
+					FadeScript.instance.Fade(false,time);
+					ChestPanel.SetActive (true);
+					answerString = "";
+				}
 			}
 
 			if (wintreasue) {
@@ -248,6 +262,7 @@ public class Keyboard : MonoBehaviour {
 		}
 	}
 	public void TurnOffChestPanel(){
+		
 		ChestPanel.SetActive(false);
 	}
 	
