@@ -5,21 +5,34 @@ using UnityEngine.UI;
 
 public class CreditScreen : MonoBehaviour {
 
-    public List<string> JobTitle;
-    public List<string> Name;
+    [Header("Credit Settings")]
+    public bool LoopCredits;
+    public int CreditSpeed;
 
+    public List<string> JobTitle;
+    public List<string> PrimaryName;
+    public List<string> SecondaryName;
+    public List<string> ThirdName;
+    [Space]
     public Text Job;
-    public Text Person;
+    public Text Person01;
+    public Text Person02;
+    public Text Person03;
     public Image BigBubbles;
     public Image SmallBubbles;
+
+    bool isPaused;
+    bool isPausedThird;
 
 	void Start ()
     {
         Job.text = JobTitle[0].ToString();
-        Person.text = Name[0].ToString();
+        Person01.text = PrimaryName[0].ToString();
         StartCoroutine("JobRoleAnim");
-        StartCoroutine("NamesAnim");
-	}
+        StartCoroutine("PrimaryNameAnim");
+        StartCoroutine("SecondaryNameAnim");
+        StartCoroutine("ThirdNameAnim");
+    }
 	
 
     IEnumerator JobRoleAnim()
@@ -29,20 +42,102 @@ public class CreditScreen : MonoBehaviour {
             Job.GetComponentInParent<Animation>().Play();
             BigBubbles.GetComponent<Animation>().Play();
             Job.text = item;
-            yield return new WaitForSeconds(5);        
+            yield return new WaitForSeconds(CreditSpeed);        
         }
-        yield return StartCoroutine("JobRoleAnim");
+        if (LoopCredits)
+            yield return StartCoroutine("JobRoleAnim");
+        else
+            yield break;
     }
 
-    IEnumerator NamesAnim()
+    IEnumerator PrimaryNameAnim()
     {
-        foreach (string item in Name)
+        isPaused = true;
+        isPausedThird = true;
+
+        foreach (string item in PrimaryName)
         {
-            Person.GetComponentInParent<Animation>().Play();
+
+            if (item == PrimaryName[1])
+                isPaused = false;
+
+            if (item == PrimaryName[3])
+                isPaused = true;
+
+            if (item == PrimaryName[4])
+            {
+                isPaused = false;
+                isPausedThird = false;
+            }
+
+              if (item == PrimaryName[5])
+                 isPausedThird = true;
+
+            if (item == PrimaryName[6])
+                isPaused = true;
+
+            Person01.GetComponentInParent<Animation>().Play();
             SmallBubbles.GetComponent<Animation>().Play();
-            Person.text = item;
-            yield return new WaitForSeconds(5);
+            Person01.text = item;
+            yield return new WaitForSeconds(CreditSpeed);
+
+    
         }
-        yield return StartCoroutine("NamesAnim");
+        if (LoopCredits)
+            yield return StartCoroutine("PrimaryNameAnim");
+        else
+            yield break;
+    }
+
+    IEnumerator SecondaryNameAnim()
+    {
+        foreach (string item in SecondaryName)
+        {
+            while (isPaused)
+            {
+                Person02.text = "";
+                yield return null;
+            }
+
+            Person02.GetComponentInParent<Animation>().Play();
+            Person02.text = item;
+            yield return new WaitForSeconds(CreditSpeed);
+
+            while (isPaused)
+            {
+                Person02.text = "";
+                yield return null;
+            }
+        }
+        if (LoopCredits)
+            yield return StartCoroutine("SecondaryNameAnim");
+        else
+            yield break;
+    }
+
+    IEnumerator ThirdNameAnim()
+    {
+        foreach (string item in ThirdName)
+        {
+            while (isPausedThird)
+            {
+                Person03.text = "";
+                yield return null;
+            }
+
+            Person03.GetComponentInParent<Animation>().Play();
+            Person03.text = item;
+            yield return new WaitForSeconds(CreditSpeed);
+
+            while (isPausedThird)
+            {
+                Person03.text = "";
+                yield return null;
+            }
+        }
+        if (LoopCredits)
+            yield return StartCoroutine("ThirdNameAnim");
+        else
+            yield break;
     }
 }
