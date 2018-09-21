@@ -88,6 +88,7 @@
     <Compile Include="Assets\ColorMe.cs" />
     <Compile Include="Assets\CorrectName.cs" />
     <Compile Include="Assets\CreditScreen.cs" />
+    <Compile Include="Assets\FadeScript.cs" />
     <Compile Include="Assets\FileHandler.cs" />
     <Compile Include="Assets\FirstPlayButtons.cs" />
     <Compile Include="Assets\HealthScript.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\Scripts\SFXListener.cs" />
     <Compile Include="Assets\Scripts\SoundManagement.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\ScrollingTexture.cs" />
     <Compile Include="Assets\SelectFishType.cs" />
     <Compile Include="Assets\SelectVarType.cs" />
     <Compile Include="Assets\SetCharacter.cs" />
