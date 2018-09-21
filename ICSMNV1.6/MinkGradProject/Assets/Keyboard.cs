@@ -252,6 +252,7 @@ public class Keyboard : MonoBehaviour {
 					FadeScript.instance.Fade(false,time);
 					ChestPanel.SetActive (true);
 					answerString = "";
+					FadeOn = true;
 				}
 			}
 

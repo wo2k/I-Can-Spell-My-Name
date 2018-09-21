@@ -30,8 +30,10 @@ public class ChestCheck : MonoBehaviour {
 
 		if (index == Keyboard.GetComponent<Keyboard> ().chestwin) {
 			Keyboard.GetComponent<Keyboard> ().wintreasue = true;
+		} else {
+			FadeOn = true;
 		}
-		FadeOn = true;
+
 	}
 
 	// Update is called once per frame
