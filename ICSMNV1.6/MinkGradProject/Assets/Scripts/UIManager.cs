@@ -11,9 +11,11 @@ public class UIManager : MonoBehaviour {
     public GameObject mainMenu;
     public GameObject confirmSubMenu;
     public GameObject pauseButton;
+    [HideInInspector]
     public GameObject levelName;
     [HideInInspector]
     public bool gameStart = false;
+    [HideInInspector]
     public bool inGame = false;
 
     public static UIManager instance;
@@ -66,6 +68,38 @@ public class UIManager : MonoBehaviour {
         pauseMenu.SetActive(false);
         gameStart = true;
     }
+
+    public void GameOver()
+    {
+        endMenu.SetActive(true);
+        gameStart = false;
+    }
+
+    public void RestartGame()
+    {
+        switch (levelName.name)
+        {
+            case "Level1-A":
+                levelName.GetComponent<Level1A>().Reset();
+                break;
+            case "Level1-B":
+                levelName.GetComponent<Level1B>().Reset();
+                break;
+            case "Level1-C":
+                levelName.GetComponent<Level1C>().Reset();
+                break;
+            case "Level1-D":
+                levelName.GetComponent<Level1D>().Reset();
+                break;
+            case "Level1-E":
+                levelName.GetComponent<Level1E>().Reset();
+                break;
+        }
+
+        endMenu.SetActive(false);
+        gameStart = true;
+    }
+
     public void GoToMainMenu()
     {
         switch (levelName.name)
@@ -91,6 +125,9 @@ public class UIManager : MonoBehaviour {
         mainMenu.SetActive(true);
         startMenu.SetActive(true);
         inGame = false;
+
+        if (endMenu)
+            endMenu.SetActive(false);
     }
     // Update is called once per frame
     void Update () {

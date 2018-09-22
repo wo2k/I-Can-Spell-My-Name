@@ -75,8 +75,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}
@@ -90,8 +90,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 
 		}
@@ -105,8 +105,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}
@@ -119,8 +119,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3) {
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}

@@ -103,8 +103,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-			gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 		}
 		}
 	}
@@ -131,8 +131,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-			gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 		}
 		}
 	}
@@ -159,8 +159,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-			gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 		}
 		}
 	}
@@ -187,8 +187,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3) {
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}
