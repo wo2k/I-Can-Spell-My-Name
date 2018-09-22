@@ -23,6 +23,8 @@ ExportedObj/
 *.svd
 *.pdb
 *.opendb
+*.mb
+
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -35,3 +37,8 @@ sysinfo.txt
 *.apk
 *.unitypackage
 /ICSMNV1.6/MinkGradProject/Library
+/MinkGradProject/Library
+/ICSMNV1.6/MinkGradProject/obj
+/MinkGradProject/obj
+/ICSMNV1.6/MinkGradProject/Temp
+/MinkGradProject/Temp
