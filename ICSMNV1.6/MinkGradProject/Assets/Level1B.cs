@@ -248,9 +248,9 @@ public class Level1B : MonoBehaviour {
 				if (timer <= 0)
 					timer = 0;
 			} else if (timer <= 0) {
-				EndMenu.SetActive (true);
+                UIManager.instance.GameOver();
 
-			}
+            }
 			minutes = Mathf.Floor (timer / 60);
 			seconds = timer % 60;
 
