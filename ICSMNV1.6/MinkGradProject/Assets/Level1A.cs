@@ -36,7 +36,6 @@ public class Level1A : MonoBehaviour {
 	}
 
 	void Start () {
-        StartMenu.SetActive(true);
 		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 		switch(LoginNumber){
 		case 1:{
@@ -320,7 +319,7 @@ public class Level1A : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (gameStart) {
+		if (UIManager.instance.gameStart) {
 
 			if (timer > 0) {
 				timer -= Time.deltaTime;

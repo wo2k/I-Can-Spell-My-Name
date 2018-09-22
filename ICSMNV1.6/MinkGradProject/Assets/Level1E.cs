@@ -159,12 +159,13 @@ public class Level1E: MonoBehaviour {
 	}
 	*/
 
-	void Reset (){
+	public void Reset (){
 		ScoreText.text = "00000";
 		Score = 0;
 		Multi = 1;
 		answerIndex = 8;
-		AnswerHint.text = Names[answerIndex];
+        timetext.text = "1:00";
+        AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
 		//	SetOtherButtons ();
@@ -228,7 +229,7 @@ public class Level1E: MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (gameStart) {
+		if (UIManager.instance.gameStart) {
 
 			if (timer > 0) {
 				timer -= Time.deltaTime;
