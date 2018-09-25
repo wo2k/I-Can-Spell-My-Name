@@ -50,6 +50,12 @@ public class SFXListener : MonoBehaviour {
 	private UnityAction BoatCreek2;
 	private UnityAction SuctionCup;
 	private UnityAction WindHowl;
+    private UnityAction CorrectAnswer;
+    private UnityAction LevelComplete;
+    private UnityAction WrongAnswer;
+    private UnityAction ClockLoop;
+    private UnityAction LoudClock;
+    private UnityAction TimeRunningOut;
 
 	public List<AudioClip> A_Sounds;
 	public List<AudioClip> B_Sounds;
@@ -129,8 +135,12 @@ public class SFXListener : MonoBehaviour {
 		BoatCreek2 = new UnityAction (PlayEffect14);
 		SuctionCup = new UnityAction (PlayEffect15);
 		WindHowl = new UnityAction (PlayEffect16);
-
-
+        CorrectAnswer = new UnityAction (PlayEffect17);
+        LevelComplete = new UnityAction (PlayEffect18);
+        WrongAnswer = new UnityAction (PlayEffect19);
+        ClockLoop = new UnityAction (PlayEffect20);
+        LoudClock = new UnityAction (PlayEffect21);
+        TimeRunningOut = new UnityAction (PlayEffect22);
 
 	
 	}
@@ -180,9 +190,15 @@ public class SFXListener : MonoBehaviour {
 		SoundManagement.Startlistening ("PlayBoatCreek2", BoatCreek2);
 		SoundManagement.Startlistening ("PlaySuctionCup", SuctionCup);
 		SoundManagement.Startlistening ("PlayWindHowl", WindHowl);
+        SoundManagement.Startlistening ("PlayCorrect", CorrectAnswer);
+        SoundManagement.Startlistening ("PlayLevelComplete", LevelComplete);
+        SoundManagement.Startlistening ("PlayWrongAnswer", WrongAnswer);
+        SoundManagement.Startlistening ("PlayClockLoop", ClockLoop);
+        SoundManagement.Startlistening ("PlayLoudClock", LoudClock);
+        SoundManagement.Startlistening ("PlayTimeRunningOut", TimeRunningOut);
 
 
-	}
+    }
 	void OnDisable(){
 		SoundManagement.Stoplistening ("PlayA", A);
 		SoundManagement.Stoplistening ("PlayB", B);
@@ -228,9 +244,14 @@ public class SFXListener : MonoBehaviour {
 		SoundManagement.Stoplistening ("PlayBoatCreek2", BoatCreek2);
 		SoundManagement.Stoplistening ("PlaySuctionCup", SuctionCup);
 		SoundManagement.Stoplistening ("PlayWindHowl", WindHowl);
+        SoundManagement.Stoplistening ("PlayCorrect", CorrectAnswer);
+        SoundManagement.Stoplistening ("PlayLevelComplete", LevelComplete);
+        SoundManagement.Stoplistening ("PlayWrongAnswer", WrongAnswer);
+        SoundManagement.Stoplistening ("PlayClockLoop", ClockLoop);
+        SoundManagement.Stoplistening ("PlayLoudClock", LoudClock);
+        SoundManagement.Stoplistening ("PlayTimeRunningOut", TimeRunningOut);
 
-	
-	}
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -444,7 +465,30 @@ public class SFXListener : MonoBehaviour {
 	void PlayEffect16(){
 		MyAudio.PlayOneShot (Effects [16]);
 	}
-
+    void PlayEffect17()
+    {
+        MyAudio.PlayOneShot(Effects[17]);
+    }
+    void PlayEffect18()
+    {
+        MyAudio.PlayOneShot(Effects[18]);
+    }
+    void PlayEffect19()
+    {
+        MyAudio.PlayOneShot(Effects[19]);
+    }
+    void PlayEffect20()
+    {
+        MyAudio.PlayOneShot(Effects[20]);
+    }
+    void PlayEffect21()
+    {
+        MyAudio.PlayOneShot(Effects[21]);
+    }
+    void PlayEffect22()
+    {
+        MyAudio.PlayOneShot(Effects[22]);
+    }
 }
 
 

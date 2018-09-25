@@ -1,7 +1,14 @@
 fileFormatVersion: 2
 guid: 85ac2bf1c68a69449b93d9ab7d6fef1e
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: SpriteSheet_LevelUnlock_1
+    21300002: SpriteSheet_LevelUnlock_0
+    21300004: SpriteSheet_LevelUnlock_2
+    21300006: SpriteSheet_LevelUnlock_3
+    21300008: SpriteSheet_LevelUnlock_4
+    21300010: SpriteSheet_LevelUnlock_5
+    21300012: SpriteSheet_LevelUnlock_6
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -38,7 +45,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,11 +120,151 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: SpriteSheet_LevelUnlock_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 15
+        width: 509
+        height: 496
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e4965981a098ce4db517e243bc2c70e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_LevelUnlock_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15
+        width: 509
+        height: 491
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a9ddebe48aa2a44b86e12e3a550538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_LevelUnlock_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 15
+        width: 509
+        height: 491
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a833e5fdae9f4184ca9c497c689d37ed
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_LevelUnlock_3
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 0
+        width: 510
+        height: 510
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acf2886f27a0aab44854d82f697a97c4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_LevelUnlock_4
+      rect:
+        serializedVersion: 2
+        x: 2049
+        y: 0
+        width: 511
+        height: 509
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ca0459773e2179429f4ba2822386004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_LevelUnlock_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a04f82508e6a3944b910d88ab15ce4c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_LevelUnlock_6
+      rect:
+        serializedVersion: 2
+        x: 3070
+        y: 0
+        width: 514
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882155fb737649e4bad826d4ca5a8262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c4f24a4e76abaae44b2b58efbdf3e203
     vertices: []
     indices: 
     edges: []

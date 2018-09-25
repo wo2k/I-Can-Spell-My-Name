@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+
+    private GameObject currentMenu;
+    private GameObject menuToGoTo;
+
     [Header ("Menu Objects")]
     public GameObject startMenu;
     public GameObject endMenu;
@@ -11,6 +15,11 @@ public class UIManager : MonoBehaviour {
     public GameObject mainMenu;
     public GameObject confirmSubMenu;
     public GameObject pauseButton;
+    public GameObject winScreen;
+
+    public char levelLetter;
+    public int levelNum;
+
     [HideInInspector]
     public GameObject levelName;
     [HideInInspector]
@@ -27,11 +36,6 @@ public class UIManager : MonoBehaviour {
         else
             Destroy(gameObject);
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
 
     public void StartGame()
     { 
@@ -73,6 +77,15 @@ public class UIManager : MonoBehaviour {
     {
         endMenu.SetActive(true);
         gameStart = false;
+    }
+
+    public void WinGame()
+    {
+        SoundManagement.TriggerEvent("PlayLevelComplete");
+        winScreen.SetActive(true);
+        gameStart = false;
+        GameManager.instance.subLevelPassed1++;
+        PlayerPrefs.SetInt("SubLevelPassed", GameManager.instance.subLevelPassed1);
     }
 
     public void RestartGame()
@@ -128,7 +141,27 @@ public class UIManager : MonoBehaviour {
 
         if (endMenu)
             endMenu.SetActive(false);
+        if (winScreen)
+            winScreen.SetActive(false);
     }
+
+    public void NextLevel()
+    {
+        SoundManagement.TriggerEvent("PlayPop");
+        GoToMainMenu();
+    //    menuToGoTo.SetActive(true);
+      //  currentMenu.SetActive(false);
+
+     /*   inGame = true;
+        pauseButton.SetActive(true);
+        levelName = menuToGoTo;
+
+        if (endMenu)
+            endMenu.SetActive(false);
+        if (winScreen)
+            winScreen.SetActive(false);*/
+    }
+
     // Update is called once per frame
     void Update () {
         if (inGame)

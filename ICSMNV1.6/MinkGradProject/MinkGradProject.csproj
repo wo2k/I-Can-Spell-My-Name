@@ -114,6 +114,7 @@
     <Compile Include="Assets\OnClick.cs" />
     <Compile Include="Assets\PlaySound.cs" />
     <Compile Include="Assets\SaveName.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\SFXListener.cs" />
     <Compile Include="Assets\Scripts\SoundManagement.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
