@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public int levelPassed, subLevelPassed1;
     public GameObject level1Parent;
     public GameObject lockLevel;
+    public bool locked = true;
     public static GameManager instance;
 
     void Awake()
@@ -39,8 +40,8 @@ public class GameManager : MonoBehaviour {
         {
             case 1:
                 level1_B.interactable = true;
-                lockLevel.GetComponent<Animator>().enabled = true;
-
+                lockLevel.GetComponent<Animator>().enabled = true;  
+                locked = false;
                 break;
             case 2:
                 level1_B.interactable = true;
@@ -92,8 +93,13 @@ public class GameManager : MonoBehaviour {
     public GameObject InstantiateLock(Transform ButtonPos)
     {
         GameObject _Lock = Instantiate((GameObject)Resources.Load("Prefabs/UnlockLevel"), ButtonPos);
-        _Lock.GetComponent<Animator>().enabled = false;
+        //_Lock.GetComponent<Animator>().enabled = false;
         return _Lock;
+    }
+
+    public bool LevelLocked(bool locked)
+    {
+        return locked;
     }
 
     void Update () {

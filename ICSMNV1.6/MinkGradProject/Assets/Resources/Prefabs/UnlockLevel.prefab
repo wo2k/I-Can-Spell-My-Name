@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224695676043768602}
   - component: {fileID: 222066595020512872}
   - component: {fileID: 114090227463510216}
+  - component: {fileID: 114243472393877756}
   - component: {fileID: 95446347744841214}
   m_Layer: 5
   m_Name: UnlockLevel
@@ -74,6 +75,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114243472393877756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988576971079936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29bb2215e9e8415428d01c5f7ea39e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222066595020512872
 CanvasRenderer:
   m_ObjectHideFlags: 1
