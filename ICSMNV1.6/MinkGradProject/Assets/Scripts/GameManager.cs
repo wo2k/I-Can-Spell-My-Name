@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour {
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
         subLevelPassed1 = PlayerPrefs.GetInt("SubLevelPassed");
         lockLevel = InstantiateLock(level1Parent.transform);
-        level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
-        level2.interactable = false;
-        level3.interactable = false;
+      //  level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
+       // level2.interactable = false;
+      //  level3.interactable = false;
         CheckLevelState();
     }
 
@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour {
         subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
         levelPassed = 0;     PlayerPrefs.SetInt("LevelPassed", levelPassed);
         AllLevelsLockState(false);
+        locked = true;
     }
 
     public GameObject InstantiateLock(Transform ButtonPos)
