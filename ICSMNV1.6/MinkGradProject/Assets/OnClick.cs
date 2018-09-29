@@ -20,7 +20,7 @@ public class OnClick : MonoBehaviour {
 		SoundManagement.TriggerEvent ("PlayPop");
 		MenuToGoTo.SetActive (true);
 		CurrentMenu.SetActive(false);
-        GameManager.instance.CheckLevelState();
+        GameManager.instance.CheckLevelState(false);
 	} 
 
     public void GoToGameMode()

@@ -28,35 +28,65 @@ public class GameManager : MonoBehaviour {
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
         subLevelPassed1 = PlayerPrefs.GetInt("SubLevelPassed");
         lockLevel = InstantiateLock(level1Parent.transform);
-      //  level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
-       // level2.interactable = false;
-      //  level3.interactable = false;
-        CheckLevelState();
+        level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
+      //  level2.interactable = false;
+       // level3.interactable = false;
+        CheckLevelState(false);
     }
 
-    public void CheckLevelState()
+    public void CheckLevelState(bool disableLevelBtns)
     {
         switch (subLevelPassed1)
         {
             case 1:
                 level1_B.interactable = true;
-                lockLevel.GetComponent<Animator>().enabled = true;  
                 locked = false;
+
+                if (lockLevel)
+                    lockLevel.GetComponent<Animator>().enabled = true;
+
+                if(disableLevelBtns)
+                {
+                    level1_C.interactable = false;
+                    level1_D.interactable = false;
+                    level1_E.interactable = false;
+                }
+
                 break;
             case 2:
                 level1_B.interactable = true;
                 level1_C.interactable = true;
+
+                if (lockLevel)
+                    lockLevel.GetComponent<Animator>().enabled = true;
+
+                if (disableLevelBtns)
+                {
+                    level1_D.interactable = false;
+                    level1_E.interactable = false;
+                }
+
                 break;
             case 3:
                 level1_B.interactable = true;
                 level1_C.interactable = true;
                 level1_D.interactable = true;
+
+                if (lockLevel)
+                    lockLevel.GetComponent<Animator>().enabled = true;
+
+                if (disableLevelBtns)
+                    level1_E.interactable = false;
+
                 break;
             case 4:
                 level1_B.interactable = true;
                 level1_C.interactable = true;
                 level1_D.interactable = true;
                 level1_E.interactable = true;
+
+                if (lockLevel)
+                    lockLevel.GetComponent<Animator>().enabled = true;
                 break;
         }
 
@@ -89,12 +119,16 @@ public class GameManager : MonoBehaviour {
         levelPassed = 0;     PlayerPrefs.SetInt("LevelPassed", levelPassed);
         AllLevelsLockState(false);
         locked = true;
+
+        if (!lockLevel)
+           lockLevel = InstantiateLock(level1Parent.transform);
+        else
+            return;
     }
 
     public GameObject InstantiateLock(Transform ButtonPos)
     {
         GameObject _Lock = Instantiate((GameObject)Resources.Load("Prefabs/UnlockLevel"), ButtonPos);
-        //_Lock.GetComponent<Animator>().enabled = false;
         return _Lock;
     }
 

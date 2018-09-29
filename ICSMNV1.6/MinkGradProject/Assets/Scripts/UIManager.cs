@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour {
     private GameObject currentMenu;
     private GameObject menuToGoTo;
 
+    public GameObject[] subLevels;
+
     [Header ("Menu Objects")]
     public GameObject startMenu;
     public GameObject endMenu;
@@ -20,7 +22,6 @@ public class UIManager : MonoBehaviour {
     public char levelLetter;
     public int levelNum;
 
-    [HideInInspector]
     public GameObject levelName;
     [HideInInspector]
     public bool gameStart = false;
@@ -148,18 +149,19 @@ public class UIManager : MonoBehaviour {
     public void NextLevel()
     {
         SoundManagement.TriggerEvent("PlayPop");
-        GoToMainMenu();
-    //    menuToGoTo.SetActive(true);
-      //  currentMenu.SetActive(false);
+        currentMenu = levelName;
+        currentMenu.SetActive(false);
+        levelName = subLevels[GameManager.instance.subLevelPassed1];
+        menuToGoTo = levelName;
+        menuToGoTo.SetActive(true);
 
-     /*   inGame = true;
+        inGame = true;
         pauseButton.SetActive(true);
-        levelName = menuToGoTo;
 
         if (endMenu)
             endMenu.SetActive(false);
         if (winScreen)
-            winScreen.SetActive(false);*/
+            winScreen.SetActive(false);
     }
 
     // Update is called once per frame
