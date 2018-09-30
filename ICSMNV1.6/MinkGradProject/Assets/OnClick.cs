@@ -9,7 +9,6 @@ public class OnClick : MonoBehaviour {
 	public GameObject CurrentMenu;
 
 
-
 	// Use this for initialization
 	void Start () {
 		
@@ -21,7 +20,19 @@ public class OnClick : MonoBehaviour {
 		SoundManagement.TriggerEvent ("PlayPop");
 		MenuToGoTo.SetActive (true);
 		CurrentMenu.SetActive(false);
+        GameManager.instance.CheckLevelState(false);
 	} 
+
+    public void GoToGameMode()
+    {
+        SoundManagement.TriggerEvent("PlayPop");
+        MenuToGoTo.SetActive(true);
+        CurrentMenu.SetActive(false);
+        UIManager.instance.inGame = true;
+        UIManager.instance.pauseButton.SetActive(true);
+        UIManager.instance.levelName = MenuToGoTo;
+    }
+
 	public void PlayLevelA1Music(){
 		SoundManagement.TriggerEvent ("PlayLevel1A");
 	

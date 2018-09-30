@@ -40,6 +40,7 @@ public class Keyboard : MonoBehaviour {
 	public int RPSPlayerChoice =0;
 	public GameObject PlayerHealth;
 	public GameObject BossHealth;
+	public bool NameEntered;
 
 
 
@@ -52,10 +53,18 @@ public class Keyboard : MonoBehaviour {
 	public bool wintreasue = false;
 	public float FadeTime;
 	public bool FadeOn = true;
+	public void EnterNam () {
+		NameEntered = true;
+	}
 	void SetName () {
+		if(LevelNum == 1){
 		int Num_Boxes = PlayersName.Length;
 		Answers.GetComponent<Letters> ().SetLetters (Num_Boxes);
 	//	Answers = Answers.GetComponent<Letters> ().letter;
+		}
+		if (LevelNum == 2) {
+			Answers.GetComponent<Letters> ().SetLetters (10);
+		}
 	}
 	void Start () {
 		if (LevelNum == 4) {
@@ -153,7 +162,7 @@ public class Keyboard : MonoBehaviour {
 		}
 
 		if (LevelNum == 2) {
-			if (PlayersName == answerString) {
+			if (NameEntered == true) {
 				int BossChoice = 0;
 				RPSChoices.SetActive (true);
 
@@ -177,6 +186,7 @@ public class Keyboard : MonoBehaviour {
 							if(PlayerHealth.GetComponent<HealthScript> ().LoseHealth () == 0)
 							this.GetComponentInParent<Win> ().LoseState ();
 						}
+						NameEntered = false;
 						RPSChoices.SetActive (false);
 						break;
 					}
@@ -195,6 +205,7 @@ public class Keyboard : MonoBehaviour {
 							if(PlayerHealth.GetComponent<HealthScript> ().LoseHealth () == 0)
 							this.GetComponentInParent<Win> ().LoseState ();
 						}
+						NameEntered = false;
 						RPSChoices.SetActive (false);
 						break;
 					}
@@ -214,6 +225,7 @@ public class Keyboard : MonoBehaviour {
 							if(PlayerHealth.GetComponent<HealthScript> ().LoseHealth () == 0)
 							this.GetComponentInParent<Win> ().LoseState ();
 						}
+						NameEntered = false;
 						RPSChoices.SetActive (false);
 						break;
 					}

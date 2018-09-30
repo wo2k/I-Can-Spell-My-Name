@@ -23,7 +23,8 @@ public class Level1B : MonoBehaviour {
 	int Total = 0;
 	public GameObject Tutorial;
 	public GameObject MainMenu;
-	bool gameStart = false;
+    public GameObject PauseMenu;
+    bool gameStart = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
     public Animator ButtonAnim1;
@@ -74,8 +75,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}
@@ -89,8 +90,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 
 		}
@@ -104,8 +105,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}
@@ -118,8 +119,8 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
 			if (Miss == 3) {
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}
@@ -159,12 +160,13 @@ public class Level1B : MonoBehaviour {
 	}
 	*/
 
-	void Reset (){
+	public void Reset (){
 		ScoreText.text = "00000";
 		Score = 0;
 		Multi = 1;
 		answerIndex = 8;
-		AnswerHint.text = Names[answerIndex];
+        timetext.text = "1:00";
+        AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
 		//	SetOtherButtons ();
@@ -181,7 +183,18 @@ public class Level1B : MonoBehaviour {
 		gameStart = true;
 	}
 
-	public void PlaceAnswer(){
+    public void PauseGame()
+    {
+        PauseMenu.SetActive(true);
+        gameStart = false;
+    }
+    public void UnPauseGame()
+    {
+        PauseMenu.SetActive(false);
+        gameStart = true;
+    }
+
+    public void PlaceAnswer(){
 		NamesChosen = new string[4];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
@@ -228,16 +241,16 @@ public class Level1B : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (gameStart) {
+		if (UIManager.instance.gameStart) {
 
 			if (timer > 0) {
 				timer -= Time.deltaTime;
 				if (timer <= 0)
 					timer = 0;
 			} else if (timer <= 0) {
-				EndMenu.SetActive (true);
+                UIManager.instance.GameOver();
 
-			}
+            }
 			minutes = Mathf.Floor (timer / 60);
 			seconds = timer % 60;
 

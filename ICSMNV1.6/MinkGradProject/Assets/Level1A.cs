@@ -28,7 +28,10 @@ public class Level1A : MonoBehaviour {
 	public bool gameStart = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
-	// Use this for initialization
+
+    public int correctAnswerPoints = 0;
+
+
 	public void RestartGame(){
 		EndMenu.SetActive (false);
 		Reset ();
@@ -36,7 +39,6 @@ public class Level1A : MonoBehaviour {
 	}
 
 	void Start () {
-        StartMenu.SetActive(true);
 		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 		switch(LoginNumber){
 		case 1:{
@@ -76,20 +78,24 @@ public class Level1A : MonoBehaviour {
 
 	}
 	public void ScorePoints(){
-		Score += 1 * Multi;
+        Score += 1;// * Multi;
 		ScoreText.text = Score.ToString ();
 		Total++;
+        correctAnswerPoints++;
+        SoundManagement.TriggerEvent("PlayCorrect");
+        if (correctAnswerPoints >= 3)
+            UIManager.instance.WinGame();
 		}
 
 	public void Choice1(){
 		if (answerButton == 0) {
 			NextLetter ();
 			ScorePoints ();
-			Multi++;
+			//Multi++;
 		} else {
-			Multi = 1;
+			//Multi = 1;
 			Miss++;
-
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
 			//Remove to better area
 			if (Miss >= 1)
 				Misses [0].SetActive (true);
@@ -104,8 +110,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-			gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 		}
 		}
 	}
@@ -113,13 +119,13 @@ public class Level1A : MonoBehaviour {
 		if (answerButton == 1) {
 			NextLetter ();
 			ScorePoints ();
-			Multi++;
+		//	Multi++;
 		} else {
-			Multi = 1;
+			//Multi = 1;
 			Miss++;
-
-			//Remove to better area
-			if (Miss >= 1)
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            //Remove to better area
+            if (Miss >= 1)
 				Misses [0].SetActive (true);
 			else
 				Misses [0].SetActive (false);
@@ -132,8 +138,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);;
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-			gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 		}
 		}
 	}
@@ -141,13 +147,13 @@ public class Level1A : MonoBehaviour {
 		if (answerButton == 2) {
 			NextLetter ();
 			ScorePoints ();
-			Multi++;
+			//Multi++;
 		} else {
-			Multi = 1;
+		//	Multi = 1;
 			Miss++;
-
-			//Remove to better area
-			if (Miss >= 1)
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            //Remove to better area
+            if (Miss >= 1)
 				Misses [0].SetActive (true);
 			else
 				Misses [0].SetActive (false);
@@ -160,8 +166,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3){
-				EndMenu.SetActive (true);
-			gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 		}
 		}
 	}
@@ -169,13 +175,13 @@ public class Level1A : MonoBehaviour {
 		if (answerButton == 3) {
 			NextLetter ();
 			ScorePoints ();
-			Multi++;
+			//Multi++;
 		} else {
-			Multi = 1;
+			//Multi = 1;
 			Miss++;
-
-			//Remove to better area
-			if (Miss >= 1)
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            //Remove to better area
+            if (Miss >= 1)
 				Misses [0].SetActive (true);
 			else
 				Misses [0].SetActive (false);
@@ -188,8 +194,8 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3) {
-				EndMenu.SetActive (true);
-				gameStart = false;
+                UIManager.instance.GameOver();
+                gameStart = false;
 			}
 		}
 	}
@@ -230,9 +236,10 @@ public class Level1A : MonoBehaviour {
 	*/
 
 	public void Reset (){
-		ScoreText.text = "00000";
+		ScoreText.text = "0";
 		Score = 0;
-		Multi = 1;
+        correctAnswerPoints = 0;
+		//Multi = 1;
         timetext.text = "1:00";
         for (int i = 0; i < Names.Count; i++)
         {
@@ -320,16 +327,17 @@ public class Level1A : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (gameStart) {
+		if (UIManager.instance.gameStart) {
 
 			if (timer > 0) {
 				timer -= Time.deltaTime;
 				if (timer <= 0)
 					timer = 0;
-			} else if (timer <= 0) {
-				EndMenu.SetActive (true);
+			} else if (timer <= 0)
+            {
+                UIManager.instance.GameOver();
+            }
 
-			}
 			minutes = Mathf.Floor (timer / 60);
 			seconds = timer % 60;
 
