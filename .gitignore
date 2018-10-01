@@ -6,6 +6,8 @@
 /Temp/
 /Library/
 /obj/
+Library/
+obj/
 
 /Assets/AssetStoreTools*
 
