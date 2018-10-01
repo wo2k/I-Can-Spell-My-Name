@@ -75,7 +75,7 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            GameManager.instance.VibrateOnHandHeld();
+            LevelManager.instance.VibrateOnHandHeld();
 
             if (Miss == 3){
                 UIManager.instance.GameOver();
@@ -93,7 +93,7 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            GameManager.instance.VibrateOnHandHeld();
+            LevelManager.instance.VibrateOnHandHeld();
 
             if (Miss == 3){
                 UIManager.instance.GameOver();
@@ -111,7 +111,7 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            GameManager.instance.VibrateOnHandHeld();
+            LevelManager.instance.VibrateOnHandHeld();
 
             if (Miss == 3){
                 UIManager.instance.GameOver();
@@ -128,7 +128,7 @@ public class Level1B : MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            GameManager.instance.VibrateOnHandHeld();
+            LevelManager.instance.VibrateOnHandHeld();
 
             if (Miss == 3) {
                 UIManager.instance.GameOver();

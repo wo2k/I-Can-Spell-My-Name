@@ -20,7 +20,7 @@ public class LockState : MonoBehaviour {
 
 	void Update ()
     {
-        SetState(GameManager.instance.locked);
+        SetState(LevelManager.instance.locked);
 
         animClip = anim.GetCurrentAnimatorClipInfo(0);
         animState = anim.GetCurrentAnimatorStateInfo(0);
@@ -35,10 +35,10 @@ public class LockState : MonoBehaviour {
             SetButtonsInteractable(false);
             if (animTime >= 3.0f)
             {
-                GameManager.instance.lockLevel = null;
+                LevelManager.instance.lockLevel = null;
                 Destroy(gameObject);
                 SetButtonsInteractable(true);
-                GameManager.instance.CheckLevelState(true);
+                LevelManager.instance.CheckLevelState(true);
             }
         }
         else
