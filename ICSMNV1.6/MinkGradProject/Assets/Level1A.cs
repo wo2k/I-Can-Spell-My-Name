@@ -82,7 +82,7 @@ public class Level1A : MonoBehaviour {
         Score += 1;// * Multi;
         ScoreText.text = Score.ToString();
         Total++;
-        GameManager.instance.CheckAnswer(true);
+        LevelManager.instance.CheckAnswer(true);
     }
 
 	public void Choice1(){
@@ -93,7 +93,7 @@ public class Level1A : MonoBehaviour {
 		} else {
 			//Multi = 1;
 			Miss++;
-            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
 			//Remove to better area
 		/*	if (Miss >= 1)
 				Misses [0].SetActive (true);
@@ -121,7 +121,7 @@ public class Level1A : MonoBehaviour {
 		} else {
 			//Multi = 1;
 			Miss++;
-            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
             //Remove to better area
            /* if (Miss >= 1)
 				Misses [0].SetActive (true);
@@ -149,7 +149,7 @@ public class Level1A : MonoBehaviour {
 		} else {
 		//	Multi = 1;
 			Miss++;
-            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
             //Remove to better area
            /* if (Miss >= 1)
 				Misses [0].SetActive (true);
@@ -177,7 +177,7 @@ public class Level1A : MonoBehaviour {
 		} else {
 			//Multi = 1;
 			Miss++;
-            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
             //Remove to better area
           /*  if (Miss >= 1)
 				Misses [0].SetActive (true);
@@ -236,7 +236,7 @@ public class Level1A : MonoBehaviour {
 	public void Reset (){
 		ScoreText.text = "0";
 		Score = 0;
-        GameManager.instance.correctAnswerPoints = 0;
+        LevelManager.instance.correctAnswerPoints = 0;
 		//Multi = 1;
         timetext.text = "1:00";
         for (int i = 0; i < Names.Count; i++)

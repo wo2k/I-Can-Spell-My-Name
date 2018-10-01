@@ -70,9 +70,9 @@ public class FirstPlayButtons : MonoBehaviour {
 			if (temp == 0) {
 				Tutorial.SetActive (true);
 
-			} else {
+			}/* else {
 				MainhMenu.SetActive (true);
-			}
+			}*/
 		}
 	}
 	public void SetLogin2(){

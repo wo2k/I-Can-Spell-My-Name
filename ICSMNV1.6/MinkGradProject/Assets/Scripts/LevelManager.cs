@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour {
 
     public int correctAnswerPoints = 0;
     [Header("Main Buttons")]
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
     public bool locked = true;
 
     public GameObject toggleVibration;
-    public static GameManager instance;
+    public static LevelManager instance;
 
     void Awake()
     {
@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
             instance = this;
         else
             Destroy(gameObject);
+
+        DontDestroyOnLoad(instance);
     }
 
     void LoadPlayerPrefs()
@@ -138,12 +140,12 @@ public class GameManager : MonoBehaviour {
     {
         subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
         levelPassed = 0;     PlayerPrefs.SetInt("LevelPassed", levelPassed);
-        UIManager.instance.heartsAmount = 0;
+        UIManager.instance.heartsAmount = 3;
 
         for (int i = 0; i < UIManager.instance.hearts.Length; i++)
         {
             UIManager.instance.hearts[i].GetComponent<Image>().color = new Color(1,1,1,1);
-            UIManager.instance.hearts[i].transform.position = UIManager.instance.heartTransform[i].position;
+           // UIManager.instance.hearts[i].transform.position = UIManager.instance.heartTransform[i].position;
         }
 
         AllLevelsLockState(false);

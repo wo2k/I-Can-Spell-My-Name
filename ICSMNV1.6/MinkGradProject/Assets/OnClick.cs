@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class OnClick : MonoBehaviour {
 	public GameObject MenuToGoTo;
@@ -20,8 +20,13 @@ public class OnClick : MonoBehaviour {
 		SoundManagement.TriggerEvent ("PlayPop");
 		MenuToGoTo.SetActive (true);
 		CurrentMenu.SetActive(false);
-        GameManager.instance.CheckLevelState(false);
+        LevelManager.instance.CheckLevelState(false);
     } 
+
+    public void LoadLevel(string LevelName)
+    {
+        SceneManager.LoadScene(LevelName);
+    }
 
     public void GoToGameMode()
     {
@@ -30,8 +35,10 @@ public class OnClick : MonoBehaviour {
         CurrentMenu.SetActive(false);
         UIManager.instance.inGame = true;
         UIManager.instance.pauseButton.SetActive(true);
-        UIManager.instance.healthBar.SetActive(true);
+       // UIManager.instance.healthBar.SetActive(true);
         UIManager.instance.levelName = MenuToGoTo;
+        if (UIManager.instance.heartsAmount <= 0)
+            UIManager.instance.heartsAmount = 3;
     }
 
 	public void PlayLevelA1Music(){

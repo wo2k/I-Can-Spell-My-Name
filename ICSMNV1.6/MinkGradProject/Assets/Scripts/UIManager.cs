@@ -40,6 +40,8 @@ public class UIManager : MonoBehaviour {
             instance = this;
         else
             Destroy(gameObject);
+
+        DontDestroyOnLoad(instance);
     }
 
     public void StartGame()
@@ -65,6 +67,16 @@ public class UIManager : MonoBehaviour {
         startMenu.SetActive(false);
         gameStart = true;
         inGame = false;
+
+        if (healthBar)
+            Destroy(healthBar);
+        if (heartsAmount != 3)
+            heartsAmount = 3;
+        healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform);
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i] = healthBar.transform.GetChild(i).gameObject;
+        }
     }
 
     public void PauseGame()
@@ -89,8 +101,8 @@ public class UIManager : MonoBehaviour {
         SoundManagement.TriggerEvent("PlayLevelComplete");
         winScreen.SetActive(true);
         gameStart = false;
-        GameManager.instance.subLevelPassed1++;
-        PlayerPrefs.SetInt("SubLevelPassed", GameManager.instance.subLevelPassed1);
+        LevelManager.instance.subLevelPassed1++;
+        PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
     }
 
     public void RestartGame()
@@ -116,6 +128,15 @@ public class UIManager : MonoBehaviour {
 
         endMenu.SetActive(false);
         gameStart = true;
+        if(healthBar)
+        Destroy(healthBar);
+        healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform);
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i] = healthBar.transform.GetChild(i).gameObject;
+        }
+        if (heartsAmount != 3)
+            heartsAmount = 3;
     }
 
     public void GoToMainMenu()
@@ -148,6 +169,10 @@ public class UIManager : MonoBehaviour {
             endMenu.SetActive(false);
         if (winScreen)
             winScreen.SetActive(false);
+        if (healthBar)
+            Destroy(healthBar);
+        if (heartsAmount != 3)
+            heartsAmount = 3;
     }
 
     public void NextLevel()
@@ -155,7 +180,7 @@ public class UIManager : MonoBehaviour {
         SoundManagement.TriggerEvent("PlayPop");
         currentMenu = levelName;
         currentMenu.SetActive(false);
-        levelName = subLevels[GameManager.instance.subLevelPassed1];
+        levelName = subLevels[LevelManager.instance.subLevelPassed1];
         menuToGoTo = levelName;
         menuToGoTo.SetActive(true);
 
@@ -166,6 +191,17 @@ public class UIManager : MonoBehaviour {
             endMenu.SetActive(false);
         if (winScreen)
             winScreen.SetActive(false);
+        if (healthBar)
+            Destroy(healthBar);
+        if (heartsAmount != 3)
+            heartsAmount = 3;
+    }
+
+    public GameObject InstantiatePlayerHealth(Transform hpPlacement)
+    {
+        GameObject hpHolder = Instantiate(Resources.Load("Prefabs/PlayerHealth"), hpPlacement) as GameObject;
+        hpHolder.transform.SetSiblingIndex(0);
+        return hpHolder;
     }
 
     // Update is called once per frame
