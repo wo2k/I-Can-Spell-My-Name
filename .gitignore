@@ -3,9 +3,9 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
-Temp/
-Library/
-obj/
+/Temp/
+/Library/
+/obj/
 
 /Assets/AssetStoreTools*
 
@@ -43,10 +43,13 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Ignore these generated file directories
+**/ICSMNV1.6/MinkGradProject/Library
+**/ICSMNV1.6/MinkGradProject/obj
+/ICSMNV1.6/MinkGradProject/.vs/MinkGradProject/v14/.suo
 /ICSMNV1.6/MinkGradProject/Library
-/MinkGradProject/Library
+/ICSMNV1.6/MinkGradProject/Library/metadata
 /ICSMNV1.6/MinkGradProject/obj
-/MinkGradProject/obj
 /ICSMNV1.6/MinkGradProject/Temp
-/MinkGradProject/Temp
 
