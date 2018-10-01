@@ -21,6 +21,16 @@ public class UpdateSound : MonoBehaviour {
 
     void Start()
     {
+        if (!LevelManager.instance.toggleVibration)
+            LevelManager.instance.toggleVibration = GameObject.Find("Toggle");
+
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer ||
+            Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
+            LevelManager.instance.toggleVibration.SetActive(false);
+
+        if (!audioSfx)
+            audioSfx = FindObjectOfType<LevelManager>().gameObject.GetComponent<AudioSource>();
+
         /*Retrieves saved Music Volume___________________________Retrieves saved Music Slider Value*//////////////////////////
         audioMusic.volume = PlayerPrefs.GetFloat("MusicVolume"); MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");////
         /*Retrieves saved Music Volume___________________________Retrieves saved Music Slider Value*/////////////////////////

@@ -19,7 +19,8 @@ public class SetCharacter : MonoBehaviour {
 	public int chara;
 	// Use this for initialization
 	void Start () {
-		
+
+        GameManager = FindObjectOfType<LevelManager>().gameObject;
 	}
 
 	public void SetUp () {

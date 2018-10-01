@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/MainMenu.unity
     guid: 34c8aa2960893f8409678c0695493ba7
+  - enabled: 1
+    path: Assets/Levels/Credits.unity
+    guid: 09b8c8fec72d413458ed83a6e152e412
+  - enabled: 1
+    path: Assets/Levels/CharacterSelect.unity
+    guid: c45e25243bc3ab14ab70c19ed109bb1c
   m_configObjects: {}

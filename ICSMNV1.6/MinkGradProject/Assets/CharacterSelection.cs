@@ -28,7 +28,9 @@ public class CharacterSelection : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
+        GameManager = FindObjectOfType<LevelManager>().gameObject;
+
+        switch (GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 
 		case 1:{
 				selected = PlayerPrefs.GetInt("firstCharacter");
