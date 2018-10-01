@@ -8,6 +8,10 @@ public class UIManager : MonoBehaviour {
     private GameObject currentMenu;
     private GameObject menuToGoTo;
 
+    public GameObject[] hearts;
+    public GameObject healthBar;
+    public int heartsAmount = 3;
+
     public GameObject[] subLevels;
 
     [Header ("Menu Objects")]

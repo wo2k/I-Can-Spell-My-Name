@@ -6,13 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    public int correctAnswerPoints = 0;
+    [Header("Main Buttons")]
     public Button level2;
     public Button level3;
+    [Space]
+    [Header("Sub Level Buttons")]
     public Button level1_B, level1_C, level1_D, level1_E;
+
     public int levelPassed, subLevelPassed1;
+
     public GameObject level1Parent;
     public GameObject lockLevel;
+
     public bool locked = true;
+
+    public GameObject toggleVibration;
     public static GameManager instance;
 
     void Awake()
@@ -23,10 +32,20 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
     }
 
-    void Start ()
+    void LoadPlayerPrefs()
     {
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
         subLevelPassed1 = PlayerPrefs.GetInt("SubLevelPassed");
+    }
+
+    void Start ()
+    {
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer ||
+            Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
+            toggleVibration.SetActive(false);
+
+        LoadPlayerPrefs();
+
         lockLevel = InstantiateLock(level1Parent.transform);
         level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
       //  level2.interactable = false;
@@ -34,6 +53,7 @@ public class GameManager : MonoBehaviour {
         CheckLevelState(false);
     }
 
+    #region Set Level State
     public void CheckLevelState(bool disableLevelBtns)
     {
         switch (subLevelPassed1)
@@ -112,11 +132,20 @@ public class GameManager : MonoBehaviour {
         level2.interactable = isLocked; level3.interactable = isLocked;
         //Main Levels
     }
+    #endregion Set Level State
 
     public void Reset()
     {
         subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
         levelPassed = 0;     PlayerPrefs.SetInt("LevelPassed", levelPassed);
+        UIManager.instance.heartsAmount = 0;
+
+        for (int i = 0; i < UIManager.instance.hearts.Length; i++)
+        {
+            UIManager.instance.hearts[i].GetComponent<Image>().color = new Color(1,1,1,1);
+            UIManager.instance.hearts[i].transform.position = UIManager.instance.heartTransform[i].position;
+        }
+
         AllLevelsLockState(false);
         locked = true;
 
@@ -132,10 +161,57 @@ public class GameManager : MonoBehaviour {
         return _Lock;
     }
 
-    public bool LevelLocked(bool locked)
+    public void VibrateOnHandHeld()
     {
-        return locked;
+        if (Application.isMobilePlatform && toggleVibration.GetComponent<Toggle>().isOn)
+            Handheld.Vibrate();
+        else
+            return;
     }
+
+    #region CheckAnswer
+    public void CheckAnswer(bool isCorrect, int heartsQty)
+    {
+        if (isCorrect)
+        {
+            SoundManagement.TriggerEvent("PlayCorrect");
+            correctAnswerPoints++;
+
+            if (correctAnswerPoints >= 3)
+                UIManager.instance.WinGame();
+        }
+
+        else
+        {
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            VibrateOnHandHeld();
+            heartsQty--;
+            UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
+            if (heartsQty <= 0)
+                UIManager.instance.GameOver();
+        }
+
+        UIManager.instance.heartsAmount = heartsQty;
+    }
+
+    public void CheckAnswer(bool isCorrect)
+    {
+        if (isCorrect)
+        {
+            SoundManagement.TriggerEvent("PlayCorrect");
+            correctAnswerPoints++;
+
+            if (correctAnswerPoints >= 3)
+                UIManager.instance.WinGame();
+        }
+
+        else
+        {
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            VibrateOnHandHeld();
+        }
+    }
+    #endregion CheckAnswer
 
     void Update () {
 		

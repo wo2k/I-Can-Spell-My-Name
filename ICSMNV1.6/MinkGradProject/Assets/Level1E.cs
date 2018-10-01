@@ -73,7 +73,10 @@ public class Level1E: MonoBehaviour {
 		} else {
 			Multi = 1;
 			Miss++;
-			if (Miss == 3){
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.VibrateOnHandHeld();
+
+            if (Miss == 3){
                 UIManager.instance.GameOver();
                 gameStart = false;
 			}
@@ -88,7 +91,10 @@ public class Level1E: MonoBehaviour {
 		} else {
 			Multi = 1;
 			Miss++;
-			if (Miss == 3){
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.VibrateOnHandHeld();
+
+            if (Miss == 3){
                 UIManager.instance.GameOver();
                 gameStart = false;
 			}
@@ -103,7 +109,10 @@ public class Level1E: MonoBehaviour {
 		} else {
 			Multi = 1;
 			Miss++;
-			if (Miss == 3){
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.VibrateOnHandHeld();
+
+            if (Miss == 3){
                 UIManager.instance.GameOver();
                 gameStart = false;
 			}
@@ -117,7 +126,10 @@ public class Level1E: MonoBehaviour {
 		} else {
 			Multi = 1;
 			Miss++;
-			if (Miss == 3) {
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.VibrateOnHandHeld();
+
+            if (Miss == 3) {
                 UIManager.instance.GameOver();
                 gameStart = false;
 			}

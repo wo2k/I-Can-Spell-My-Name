@@ -21,7 +21,7 @@ public class OnClick : MonoBehaviour {
 		MenuToGoTo.SetActive (true);
 		CurrentMenu.SetActive(false);
         GameManager.instance.CheckLevelState(false);
-	} 
+    } 
 
     public void GoToGameMode()
     {
@@ -30,6 +30,7 @@ public class OnClick : MonoBehaviour {
         CurrentMenu.SetActive(false);
         UIManager.instance.inGame = true;
         UIManager.instance.pauseButton.SetActive(true);
+        UIManager.instance.healthBar.SetActive(true);
         UIManager.instance.levelName = MenuToGoTo;
     }
 

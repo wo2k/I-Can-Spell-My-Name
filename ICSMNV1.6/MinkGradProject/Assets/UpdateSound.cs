@@ -27,7 +27,9 @@ public class UpdateSound : MonoBehaviour {
 
         /*Retrieves saved SfX Volume___________________________Retrieves saved SfX Slider Value*//////////////////////////
         audioSfx.volume = PlayerPrefs.GetFloat("SFXVolume");     SfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");/////
-        /*Retrieves saved SfX Volume___________________________Retrieves saved SfX Slider Value*//////////////////////////
+         /*Retrieves saved SfX Volume___________________________Retrieves saved SfX Slider Value*//////////////////////////
+
+
     }
 
     #region Do we need this?
@@ -60,6 +62,8 @@ public class UpdateSound : MonoBehaviour {
         /*Sets SfX Volume______________________Saves SfX Slider Value*/////////////////////////////////////
         audioSfx.volume = SfxSlider.value;     PlayerPrefs.SetFloat("SFXVolume", SfxSlider.value);/////////
         /*Sets SfX Volume______________________Saves SfX Slider Value*/////////////////////////////////////
+
+
     }
 
     #region Legacy Function

@@ -29,7 +29,7 @@ public class Level1A : MonoBehaviour {
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 
-    public int correctAnswerPoints = 0;
+
 
 
 	public void RestartGame(){
@@ -77,15 +77,13 @@ public class Level1A : MonoBehaviour {
 		}
 
 	}
-	public void ScorePoints(){
+    public void ScorePoints()
+    {
         Score += 1;// * Multi;
-		ScoreText.text = Score.ToString ();
-		Total++;
-        correctAnswerPoints++;
-        SoundManagement.TriggerEvent("PlayCorrect");
-        if (correctAnswerPoints >= 3)
-            UIManager.instance.WinGame();
-		}
+        ScoreText.text = Score.ToString();
+        Total++;
+        GameManager.instance.CheckAnswer(true);
+    }
 
 	public void Choice1(){
 		if (answerButton == 0) {
@@ -95,9 +93,9 @@ public class Level1A : MonoBehaviour {
 		} else {
 			//Multi = 1;
 			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
 			//Remove to better area
-			if (Miss >= 1)
+		/*	if (Miss >= 1)
 				Misses [0].SetActive (true);
 			else
 				Misses [0].SetActive (false);
@@ -109,10 +107,10 @@ public class Level1A : MonoBehaviour {
 				Misses [2].SetActive (true);
 			else
 				Misses [2].SetActive (false);
-			if (Miss == 3){
-                UIManager.instance.GameOver();
+			if (Miss == 3){*/
+                
                 gameStart = false;
-		}
+		//}
 		}
 	}
 	public void Choice2(){
@@ -123,9 +121,9 @@ public class Level1A : MonoBehaviour {
 		} else {
 			//Multi = 1;
 			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
             //Remove to better area
-            if (Miss >= 1)
+           /* if (Miss >= 1)
 				Misses [0].SetActive (true);
 			else
 				Misses [0].SetActive (false);
@@ -138,9 +136,9 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);;
 			if (Miss == 3){
-                UIManager.instance.GameOver();
+                UIManager.instance.GameOver();*/
                 gameStart = false;
-		}
+		//}
 		}
 	}
 	public void Choice3(){
@@ -151,9 +149,9 @@ public class Level1A : MonoBehaviour {
 		} else {
 		//	Multi = 1;
 			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
             //Remove to better area
-            if (Miss >= 1)
+           /* if (Miss >= 1)
 				Misses [0].SetActive (true);
 			else
 				Misses [0].SetActive (false);
@@ -166,9 +164,9 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3){
-                UIManager.instance.GameOver();
+                UIManager.instance.GameOver();*/
                 gameStart = false;
-		}
+	//	}
 		}
 	}
 	public void Choice4(){
@@ -179,9 +177,9 @@ public class Level1A : MonoBehaviour {
 		} else {
 			//Multi = 1;
 			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            GameManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
             //Remove to better area
-            if (Miss >= 1)
+          /*  if (Miss >= 1)
 				Misses [0].SetActive (true);
 			else
 				Misses [0].SetActive (false);
@@ -194,9 +192,9 @@ public class Level1A : MonoBehaviour {
 			else
 				Misses [2].SetActive (false);
 			if (Miss == 3) {
-                UIManager.instance.GameOver();
+                UIManager.instance.GameOver();*/
                 gameStart = false;
-			}
+			//}
 		}
 	}
 
@@ -238,7 +236,7 @@ public class Level1A : MonoBehaviour {
 	public void Reset (){
 		ScoreText.text = "0";
 		Score = 0;
-        correctAnswerPoints = 0;
+        GameManager.instance.correctAnswerPoints = 0;
 		//Multi = 1;
         timetext.text = "1:00";
         for (int i = 0; i < Names.Count; i++)
