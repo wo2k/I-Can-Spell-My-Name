@@ -107,6 +107,7 @@
     <Compile Include="Assets\Level2A.cs" />
     <Compile Include="Assets\Level2B.cs" />
     <Compile Include="Assets\Level2C.cs" />
+    <Compile Include="Assets\LevelManagerEditor.cs" />
     <Compile Include="Assets\LoginButtons.cs" />
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\MusicListener.cs" />
@@ -134,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\data\dta.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
