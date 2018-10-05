@@ -6,15 +6,66 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Levels/Options.unity
-    guid: 0c2f7a3f99a112c46ac8c660f9486696
+    path: Assets/Levels/BRANDONTEST.unity
+    guid: 08af2ecb57cc89446896316ae9919ae4
   - enabled: 1
-    path: Assets/Levels/MainMenu.unity
-    guid: 34c8aa2960893f8409678c0695493ba7
+    path: Assets/Levels/Campaign.unity
+    guid: f62c9e8ed4f1d424093da5e3b2fbfd0a
+  - enabled: 1
+    path: Assets/Levels/CharacterSelect.unity
+    guid: c45e25243bc3ab14ab70c19ed109bb1c
   - enabled: 1
     path: Assets/Levels/Credits.unity
     guid: 09b8c8fec72d413458ed83a6e152e412
   - enabled: 1
-    path: Assets/Levels/CharacterSelect.unity
-    guid: c45e25243bc3ab14ab70c19ed109bb1c
+    path: Assets/Levels/Level1.unity
+    guid: 4efbda6bb96ec074c9903919d0455d4a
+  - enabled: 1
+    path: Assets/Levels/Level1A.unity
+    guid: 7e8e5251aa7bcd84e8dd8fcc2d0a54b4
+  - enabled: 1
+    path: Assets/Levels/Level1B.unity
+    guid: cefa7b0a611ffd14492d07cb6c2f71a6
+  - enabled: 1
+    path: Assets/Levels/Level1C.unity
+    guid: b77358c3c8ea5574eba5c14677d7d912
+  - enabled: 1
+    path: Assets/Levels/Level1D.unity
+    guid: 11fcdadfc0e6b054aad5cf96a7bd396b
+  - enabled: 1
+    path: Assets/Levels/Level1E.unity
+    guid: b125fff12f8ebad4c9dd489b9c3d78c4
+  - enabled: 1
+    path: Assets/Levels/Level2.unity
+    guid: 282ee63e1d4f78c4a86607aafd8f65ce
+  - enabled: 1
+    path: Assets/Levels/Level3.unity
+    guid: 82b20e745d0778047a51e7b3415f3fe2
+  - enabled: 1
+    path: Assets/Levels/MainMenu.unity
+    guid: 34c8aa2960893f8409678c0695493ba7
+  - enabled: 1
+    path: Assets/Levels/Level2A.unity
+    guid: 9d9516737f630d54386787d369551c62
+  - enabled: 1
+    path: Assets/Levels/Level2B.unity
+    guid: 1c7c893c8a5179842bd9d4d864a55415
+  - enabled: 1
+    path: Assets/Levels/Level2C.unity
+    guid: 0388419f044c9034497f8fee326c63f3
+  - enabled: 1
+    path: Assets/Levels/Level2D.unity
+    guid: d794e08497408b34781491e7c01536e7
+  - enabled: 1
+    path: Assets/Levels/Level2E.unity
+    guid: 2424a1156e82a3d4e86e6f00fb163b09
+  - enabled: 1
+    path: Assets/Levels/Level2F.unity
+    guid: d220cc38a0a014c468ef98fa8c984b00
+  - enabled: 1
+    path: Assets/Levels/Level3A.unity
+    guid: 8f55c24bce97efb419e2d99af06b2b19
+  - enabled: 1
+    path: Assets/Levels/Options.unity
+    guid: 0c2f7a3f99a112c46ac8c660f9486696
   m_configObjects: {}

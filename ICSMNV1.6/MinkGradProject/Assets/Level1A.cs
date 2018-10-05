@@ -39,29 +39,32 @@ public class Level1A : MonoBehaviour {
 	}
 
 	void Start () {
-		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
+        NameData = FindObjectOfType<LevelManager>().gameObject;
+        UIManager.instance.StartGame();
+
+    int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 		switch(LoginNumber){
 		case 1:{
 				AnswerHint.text =  PlayerPrefs.GetString ("firstName");
-				NameData.GetComponent<NameData> ().AddName (PlayerPrefs.GetString ("firstName"));
+				NameData.GetComponentInParent<NameData> ().AddName (PlayerPrefs.GetString ("firstName"));
 				break;
 			}
 		case 2:
 			{
 				AnswerHint.text =  PlayerPrefs.GetString ("secondName");
-				NameData.GetComponent<NameData> ().AddName (PlayerPrefs.GetString ("secondName"));
+                    NameData.GetComponentInParent<NameData>().AddName (PlayerPrefs.GetString ("secondName"));
 				break;
 			}
 		case 3:
 			{
 				AnswerHint.text =  PlayerPrefs.GetString ("thirdName");
-				NameData.GetComponent<NameData> ().AddName (PlayerPrefs.GetString ("thirdName"));
+                    NameData.GetComponentInParent<NameData>().AddName (PlayerPrefs.GetString ("thirdName"));
 				break;
 			}
 		case 4:
 			{
 				AnswerHint.text =  PlayerPrefs.GetString ("fourthName");
-				NameData.GetComponent<NameData> ().AddName (PlayerPrefs.GetString ("fourthName"));
+                    NameData.GetComponentInParent<NameData>().AddName (PlayerPrefs.GetString ("fourthName"));
 				break;
 			}
 		}

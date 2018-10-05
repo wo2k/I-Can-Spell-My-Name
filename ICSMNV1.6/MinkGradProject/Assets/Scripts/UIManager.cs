@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
-
-    private GameObject currentMenu;
-    private GameObject menuToGoTo;
 
     public GameObject[] hearts;
     public GameObject healthBar;
@@ -26,14 +24,14 @@ public class UIManager : MonoBehaviour {
     public char levelLetter;
     public int levelNum;
 
-    public GameObject levelName;
+    public string levelName;
     [HideInInspector]
     public bool gameStart = false;
     [HideInInspector]
     public bool inGame = false;
 
     public static UIManager instance;
-
+    
     void Awake()
     {
         if (instance == null)
@@ -46,22 +44,22 @@ public class UIManager : MonoBehaviour {
 
     public void StartGame()
     { 
-        switch (levelName.name)
+        switch (levelName)
         {
-            case "Level1-A":
-                levelName.GetComponent<Level1A>().PlaceAnswer();
+            case "Level1A":
+                GameObject.FindGameObjectWithTag("Level1A").GetComponent<Level1A>().PlaceAnswer();
                 break;
-            case "Level1-B":
-                levelName.GetComponent<Level1B>().PlaceAnswer();
+            case "Level1B":
+                FindObjectOfType<Level1B>().PlaceAnswer();
                 break;
-            case "Level1-C":
-                levelName.GetComponent<Level1C>().PlaceAnswer();
+            case "Level1C":
+                FindObjectOfType<Level1C>().PlaceAnswer();
                 break;
-            case "Level1-D":
-                levelName.GetComponent<Level1D>().PlaceAnswer();
+            case "Level1D":
+                FindObjectOfType<Level1D>().PlaceAnswer();
                 break;
-            case "Level1-E":
-                levelName.GetComponent<Level1E>().PlaceAnswer();
+            case "Level1E":
+                FindObjectOfType<Level1E>().PlaceAnswer();
                 break;
         }
         startMenu.SetActive(false);
@@ -107,22 +105,22 @@ public class UIManager : MonoBehaviour {
 
     public void RestartGame()
     {
-        switch (levelName.name)
+        switch (levelName)
         {
-            case "Level1-A":
-                levelName.GetComponent<Level1A>().Reset();
+            case "Level1A":
+                FindObjectOfType<Level1A>().Reset();
                 break;
-            case "Level1-B":
-                levelName.GetComponent<Level1B>().Reset();
+            case "Level1B":
+                FindObjectOfType<Level1B>().Reset();
                 break;
-            case "Level1-C":
-                levelName.GetComponent<Level1C>().Reset();
+            case "Level1C":
+                FindObjectOfType<Level1C>().Reset();
                 break;
-            case "Level1-D":
-                levelName.GetComponent<Level1D>().Reset();
+            case "Level1D":
+                FindObjectOfType<Level1D>().Reset();
                 break;
-            case "Level1-E":
-                levelName.GetComponent<Level1E>().Reset();
+            case "Level1E":
+                FindObjectOfType<Level1E>().Reset();
                 break;
         }
 
@@ -141,30 +139,30 @@ public class UIManager : MonoBehaviour {
 
     public void GoToMainMenu()
     {
-        switch (levelName.name)
+        switch (levelName)
         {
-            case "Level1-A":
-                levelName.GetComponent<Level1A>().Reset();
+            case "Level1A":
+                FindObjectOfType<Level1A>().Reset();
                 break;
-            case "Level1-B":
-                levelName.GetComponent<Level1B>().Reset();
+            case "Level1B":
+                FindObjectOfType<Level1B>().Reset();
                 break;
-            case "Level1-C":
-                levelName.GetComponent<Level1C>().Reset();
+            case "Level1C":
+                FindObjectOfType<Level1C>().Reset();
                 break;
-            case "Level1-D":
-                levelName.GetComponent<Level1D>().Reset();
+            case "Level1D":
+                FindObjectOfType<Level1D>().Reset();
                 break;
-            case "Level1-E":
-                levelName.GetComponent<Level1E>().Reset();
+            case "Level1E":
+                FindObjectOfType<Level1E>().Reset();
                 break;
         }
-        levelName.SetActive(false);
-        confirmSubMenu.SetActive(false);
-        mainMenu.SetActive(true);
-        startMenu.SetActive(true);
-        inGame = false;
 
+        pauseButton.SetActive(false);
+        confirmSubMenu.SetActive(false);
+
+        inGame = false;
+        SceneManager.LoadScene("MainMenu");
         if (endMenu)
             endMenu.SetActive(false);
         if (winScreen)
@@ -178,11 +176,11 @@ public class UIManager : MonoBehaviour {
     public void NextLevel()
     {
         SoundManagement.TriggerEvent("PlayPop");
-        currentMenu = levelName;
-        currentMenu.SetActive(false);
-        levelName = subLevels[LevelManager.instance.subLevelPassed1];
-        menuToGoTo = levelName;
-        menuToGoTo.SetActive(true);
+        //currentMenu = levelName;
+        //currentMenu.SetActive(false);
+       // levelName = subLevels[LevelManager.instance.subLevelPassed1];
+       // menuToGoTo = levelName;
+       // menuToGoTo.SetActive(true);
 
         inGame = true;
         pauseButton.SetActive(true);
@@ -206,10 +204,10 @@ public class UIManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (inGame)
-        {
-            startMenu.SetActive(true);
-        }
+       // if (inGame)
+      //  {
+      //      startMenu.SetActive(true);
+       // }
 		
 	}
 }

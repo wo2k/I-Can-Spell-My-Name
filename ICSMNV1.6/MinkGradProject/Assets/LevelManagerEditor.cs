@@ -9,65 +9,94 @@ using UnityEditor.SceneManagement;
 [CanEditMultipleObjects]
 public class LevelManagerEditor : Editor {
 
+    //Objects
     LevelManager levelManager;
+    SerializedObject m_Target;
     Scene m_Scene;
-    Scene currScene;
 
-    public string sceneName;
-    public int showSceneCreation;
+    //Toolbar button names
+    public string[] toolbarButtonNames = new string[] { "Create New Scene", "Add Scene", "Add to Build Settings" };
 
+    //Allows you to show LevelManager Script properties
     public bool showInheritedVars = false;
+
+    //GUI Settings
     Color defBackgroundColor;
+    GUISkin defGUISkin;
+    GUIStyle defGUIStyle;
     float labelWidth;
     float fieldWidth;
+    GUISkin toolBarSkin;
+    GUIStyle tabStyle;
 
-    List<SceneAsset> sceneAssets = new List<SceneAsset>(); 
+    //Saved Preferences
+    private SerializedProperty sceneNameCapture;
+    private SerializedProperty sceneAssetCapture;
+    private SerializedProperty containerSizeCapture;
+    List<string> buildSettingSceneNames;
 
     void OnEnable()
     {
-        currScene = SceneManager.GetActiveScene();
+        levelManager = (LevelManager)target;
+        m_Target = new SerializedObject(target);
+
+        //Retrieve custom GUISkin for Toolbar
+        toolBarSkin = Resources.Load("GUISkin/Toolbar") as GUISkin;
+        tabStyle = toolBarSkin.GetStyle("Tab");
+
+        //Captures saved variable in LevelManager by the name of sceneName 
+        sceneNameCapture = m_Target.FindProperty("sceneName");
+        this.sceneAssetCapture = this.m_Target.FindProperty("sceneAssets");
+        containerSizeCapture = m_Target.FindProperty("containerSize");
+
+        buildSettingSceneNames = new List<string>();
     }
 
     public override void OnInspectorGUI()
     {
-       // base.OnInspectorGUI();
-        levelManager = (LevelManager)target;
+
+        m_Target.Update();
+        SerializedProperty sceneCaptureCopy = sceneAssetCapture.Copy();
+        
+        //Set Inspector background and parimeters to public variables
         defBackgroundColor = GUI.backgroundColor;
+        defGUISkin = GUI.skin;
         labelWidth = EditorGUIUtility.labelWidth;
         fieldWidth = EditorGUIUtility.fieldWidth;
 
-       
+       // CustomHelpBox("Scene Manager Tools", Color.cyan, 15, FontStyle.Bold, Color.grey, TextAnchor.MiddleCenter);
+        GUI.skin = toolBarSkin;
+           
+        EditorGUILayout.Space();
 
-        for (int i = 0; i < sceneAssets.Count; i++)
-            sceneAssets[i] = (SceneAsset)EditorGUILayout.ObjectField(sceneAssets[i], typeof(SceneAsset), false);
+        levelManager.currentTab = GUILayout.Toolbar(levelManager.currentTab, toolbarButtonNames, tabStyle);
+      
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();      
 
-        EditorGUILayout.BeginHorizontal();
-
-        EditorGUILayout.BeginVertical();
-        if(showSceneCreation == 1) GUI.color = Color.green; else GUI.color = defBackgroundColor;
-        if (GUILayout.Button("Create New Scene"))
+        switch (levelManager.currentTab)
         {
-            if (showSceneCreation == 1)
-                showSceneCreation = 0;
-            else
-                showSceneCreation = 1;
-        }
-        GUI.color = defBackgroundColor;
+            case 0://Create New Scene button
+                MakeScene();              
+                break;
 
-        if (showSceneCreation == 1)
-            MakeScene();
-        EditorGUILayout.EndVertical();
+            case 1://Add Scene button
+                EditSceneContainer();
 
-        if (GUILayout.Button("Add Scene"))
-        {
-            sceneAssets.Add(null);
+                for (int i = 0; i < sceneCaptureCopy.arraySize; i++)
+                {
+                   EditorGUILayout.ObjectField(sceneCaptureCopy.GetArrayElementAtIndex(i));
+                }
+                break;
+
+            case 2://Add to Build Settings button
+                CaptureBuildContainer();
+                AddScenesToEditorBuild();
+                break;
         }
 
-        if(GUILayout.Button("Add to Build Settings"))
-        {
-            AddScenesToEditorBuild();
-        }
-        EditorGUILayout.EndHorizontal();
+        GUI.skin = defGUISkin;
         EditorGUIUtility.labelWidth = labelWidth;
         EditorGUIUtility.fieldWidth = fieldWidth;
         showInheritedVars = EditorGUILayout.Toggle("Show Full Script", showInheritedVars);
@@ -75,36 +104,160 @@ public class LevelManagerEditor : Editor {
         if (showInheritedVars)
             DrawDefaultInspector();
 
-        serializedObject.Update();
+        m_Target.ApplyModifiedProperties();
+
     }
 
     public void AddScenesToEditorBuild()
     {
-        List<EditorBuildSettingsScene> m_Scenes = new List<EditorBuildSettingsScene>();
-
-        foreach(var m_Scene in sceneAssets)
+        if (GUILayout.Button("Generate Scenes to Build"))
         {
-            string pathName = AssetDatabase.GetAssetPath(m_Scene);
-            if (!string.IsNullOrEmpty(pathName))
-                m_Scenes.Add(new EditorBuildSettingsScene(pathName, true));
-        }
+            List<EditorBuildSettingsScene> m_Scenes = new List<EditorBuildSettingsScene>();
+            SerializedProperty sceneCaptureCopy = sceneAssetCapture.Copy();
 
-        EditorBuildSettings.scenes = m_Scenes.ToArray();
+            for (int i = 0; i < sceneCaptureCopy.arraySize; i++)
+            {
+                string pathName = AssetDatabase.GetAssetPath(sceneCaptureCopy.GetArrayElementAtIndex(i).objectReferenceValue);
+                if (!string.IsNullOrEmpty(pathName))
+                    m_Scenes.Add(new EditorBuildSettingsScene(pathName, true));
+            }
+
+            EditorBuildSettings.scenes = m_Scenes.ToArray();
+        }
     }
 
     public void MakeScene()
     {
-       sceneName = EditorGUILayout.TextField("Type Scene Name Here: ", sceneName);
+        Heading(MessageType.Info, "Create your scene here. First type the name of the scene you want it to be called. Then hit Create and go to Add Scene.", Color.cyan, true);
+        sceneNameCapture.stringValue = EditorGUILayout.TextField("Type Scene Name Here: ", sceneNameCapture.stringValue);
 
         if (GUILayout.Button("Create"))
         {
             m_Scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Additive);
             string pathName = "Assets/Levels/" + m_Scene + ".unity";
             EditorSceneManager.SaveScene(m_Scene, pathName, true);
-            AssetDatabase.RenameAsset(pathName, sceneName);
+            AssetDatabase.RenameAsset(pathName, levelManager.sceneName);
             
             EditorSceneManager.CloseScene(m_Scene, true);
-            EditorSceneManager.OpenScene("Assets/Levels/" + sceneName + ".unity", OpenSceneMode.Additive);
+            EditorSceneManager.OpenScene("Assets/Levels/" + sceneNameCapture.stringValue + ".unity", OpenSceneMode.Additive);
         }
     }
+
+    public void EditSceneContainer()
+    {
+        Heading(MessageType.Info, "Container Size of scenes in Build Settings.", Color.cyan, true);
+
+        EditorGUILayout.BeginHorizontal("box");
+        containerSizeCapture.intValue = EditorGUILayout.IntField("Size of Container", containerSizeCapture.intValue);
+        SerializedProperty sceneCaptureCopy = sceneAssetCapture.Copy();
+
+        if (GUILayout.Button("+1"))
+        {
+            containerSizeCapture.intValue += 1;
+            sceneCaptureCopy.InsertArrayElementAtIndex(containerSizeCapture.intValue-1);
+        }
+
+        if (GUILayout.Button("-1"))
+        {
+            if (sceneAssetCapture.arraySize > 0)
+            {
+                containerSizeCapture.intValue -= 1;
+                sceneCaptureCopy.DeleteArrayElementAtIndex(containerSizeCapture.intValue);
+            }
+        }
+
+        if (GUILayout.Button("Clear"))
+        {
+            containerSizeCapture.intValue = 0;
+            sceneCaptureCopy.ClearArray();
+        }
+        EditorGUILayout.EndHorizontal();
+    }
+
+    public void CaptureBuildContainer()
+    {
+        Heading(MessageType.Info, "Shows all scenes in build settings. If no scenes are visible, please add scenes then generate.", Color.cyan , true);
+        foreach(EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+        {
+            if (scene.enabled)
+                buildSettingSceneNames.Add(scene.path);
+        }
+        for (int i = 0; i < EditorBuildSettingsScene.GetActiveSceneList(EditorBuildSettings.scenes).Length; i++)
+        {
+            EditorGUILayout.BeginHorizontal("Box");
+            EditorGUILayout.LabelField(buildSettingSceneNames.ToArray()[i].ToString());         
+            EditorGUILayout.EndHorizontal();
+        }
+    }
+
+
+    #region Custom GUI Settings
+    bool TitleBar(bool fold)
+    {
+        fold = EditorGUILayout.InspectorTitlebar(fold, Selection.activeObject);
+        return fold;
+    }
+
+    void Heading(MessageType type, string _heading, Color _color, bool _AddSpaces = false)
+    {
+
+        if (_AddSpaces) EditorGUILayout.Space();
+        GUI.color = _color;
+        EditorGUILayout.HelpBox(_heading, type);
+        GUI.color = defBackgroundColor;
+        if (_AddSpaces) EditorGUILayout.Space();
+    }
+
+    void Heading2(MessageType type, string _heading, Color _color, Color txtColor, bool _AddSpaces = false)
+    {
+        GUIStyle txt = new GUIStyle();
+        txt.normal.textColor = txtColor;
+        if (_AddSpaces) EditorGUILayout.Space();
+        GUI.color = _color;
+        EditorGUILayout.HelpBox(_heading, type);
+        GUI.color = defBackgroundColor;
+        if (_AddSpaces) EditorGUILayout.Space();
+    }
+
+    void CustomHelpBox(string txt, Color txtColor, int size, FontStyle fontStyle, Color boxColor)
+    {
+        GUI.color = boxColor;
+        GUIStyle style = GUI.skin.GetStyle("HelpBox");
+        style.richText = true;
+        style.normal.textColor = txtColor;
+        style.fontSize = size;
+        style.fontStyle = fontStyle;
+        EditorGUILayout.TextArea(txt, style);
+        GUI.color = defBackgroundColor;
+    }
+    void CustomHelpBox(string txt, Color txtColor, int size, FontStyle fontStyle, Color boxColor, TextAnchor align)
+    {
+        GUI.color = boxColor;
+        GUIStyle style = GUI.skin.GetStyle("HelpBox");
+        style.alignment = align;
+        style.richText = true;
+        style.normal.textColor = txtColor;
+        style.fontSize = size;
+        style.fontStyle = fontStyle;
+        EditorGUILayout.TextArea(txt, style);
+        GUI.color = defBackgroundColor;
+    }
+
+    GUIStyle Label(GUIStyle labelType, Color _color, int _size)
+    {
+        GUIStyle txt = new GUIStyle(labelType);
+        txt.normal.textColor = _color;
+        txt.fontSize = _size;
+        return txt;
+    }
+
+    GUIStyle Label(GUIStyle labelType, Color _color, int _size, FontStyle fontStyle)
+    {
+        GUIStyle txt = new GUIStyle(labelType);
+        txt.normal.textColor = _color;
+        txt.fontSize = _size;
+        txt.fontStyle = fontStyle;
+        return txt;
+    }
+    #endregion
 }
