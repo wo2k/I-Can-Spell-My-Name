@@ -5,8 +5,11 @@ using UnityEngine.Events;
 public class SoundManagement : MonoBehaviour {
 	private Dictionary <string,UnityEvent> eventDictionary;
 
-	private float SFXVolume = 0.5f;
-	private float MusicVolume = 0.5f;
+    [Range(0.0f, 1.0f)]
+    public static float SFXVolume;
+    [Range(0.0f, 1.0f)]
+    public float MusicVolume;
+
 	public AudioSource SFXSource;
 	public AudioSource MusicSource;
 
@@ -32,11 +35,12 @@ public class SoundManagement : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start() {
-		SFXVolume = PlayerPrefs.GetFloat ("SFXVolume");
-		MusicVolume = PlayerPrefs.GetFloat ("MusicVolume");
-
-		MusicSource.volume = MusicVolume;
-		SFXSource.volume = SFXVolume;
+		SFXSource.volume = PlayerPrefs.GetFloat ("SFXVolume");
+		MusicSource.volume = PlayerPrefs.GetFloat ("MusicVolume");
+        MusicVolume = MusicSource.volume;
+        SFXVolume = SFXSource.volume;
+		//MusicSource.volume = MusicVolume;
+		//SFXSource.volume = SFXVolume;
 	}
 	void Init(){
 		if (eventDictionary == null) 
@@ -75,7 +79,10 @@ public class SoundManagement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        SFXSource.volume = PlayerPrefs.GetFloat("SFXVolume");
+        MusicSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+        MusicVolume = MusicSource.volume;
+        SFXVolume = SFXSource.volume;
+    }
 
 }
