@@ -128,6 +128,7 @@
     <Compile Include="Assets\SetCharacter.cs" />
     <Compile Include="Assets\SetEndSubState.cs" />
     <Compile Include="Assets\ShowCorrectVarMenu.cs" />
+    <Compile Include="Assets\SoundManagementEditor.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
     <Compile Include="Assets\TypedLetter.cs" />
     <Compile Include="Assets\UpdateSound.cs" />

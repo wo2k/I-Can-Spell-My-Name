@@ -16,8 +16,8 @@ public class MusicListener : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		MyAudio = GetComponent<AudioSource>();
-
+		MyAudio = GetComponentInChildren<AudioSource>();
+        SoundManagement.instance.musicName = MyAudio.clip.name;
 	}
 	void Awake(){
 		Level1A = new UnityAction (PlayLevel1A);
@@ -65,6 +65,6 @@ public class MusicListener : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        SoundManagement.instance.musicName = MyAudio.clip.name;
+    }
 }

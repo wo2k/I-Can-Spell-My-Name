@@ -6,7 +6,7 @@ public class SoundManagement : MonoBehaviour {
 	private Dictionary <string,UnityEvent> eventDictionary;
 
     [Range(0.0f, 1.0f)]
-    public static float SFXVolume;
+    public float SFXVolume;
     [Range(0.0f, 1.0f)]
     public float MusicVolume;
 
@@ -33,14 +33,32 @@ public class SoundManagement : MonoBehaviour {
 			return eventManager;
 		}
 	}
-	// Use this for initialization
-	void Start() {
+
+    //Sound Management Editor Variables
+    [SerializeField][HideInInspector]
+    public AudioClip musicClip;
+    [SerializeField][HideInInspector]
+    public AudioClip sfxClip;
+    [HideInInspector]
+    public string musicName;
+    [HideInInspector]
+    public string sfxName;
+    //Sound Management Editor Variables
+
+   
+    void Start()
+    {
 		SFXSource.volume = PlayerPrefs.GetFloat ("SFXVolume");
 		MusicSource.volume = PlayerPrefs.GetFloat ("MusicVolume");
         MusicVolume = MusicSource.volume;
         SFXVolume = SFXSource.volume;
-		//MusicSource.volume = MusicVolume;
-		//SFXSource.volume = SFXVolume;
+
+      //  musicClip = MusicSource.clip;
+       // sfxClip = SFXSource.clip;
+      //  musicName = musicClip.name;
+       // sfxName = sfxClip.name;
+    //   musicClip
+
 	}
 	void Init(){
 		if (eventDictionary == null) 
@@ -78,11 +96,16 @@ public class SoundManagement : MonoBehaviour {
 		}
 	}
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         SFXSource.volume = PlayerPrefs.GetFloat("SFXVolume");
         MusicSource.volume = PlayerPrefs.GetFloat("MusicVolume");
         MusicVolume = MusicSource.volume;
         SFXVolume = SFXSource.volume;
+      //  musicClip = MusicSource.clip;
+       // sfxClip = SFXSource.clip;
+      //  musicName = musicClip.name;
+        //sfxName = sfxClip.name;
     }
 
 }

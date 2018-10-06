@@ -9381,6 +9381,7 @@ GameObject:
   - component: {fileID: 832350550}
   - component: {fileID: 832350549}
   - component: {fileID: 832350548}
+  - component: {fileID: 832350552}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -9503,6 +9504,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &832350552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832350546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50440564e5dfb664caadf0a3d4834d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuToGoTo: {fileID: 0}
+  CurrentMenu: {fileID: 0}
 --- !u!1 &849150721
 GameObject:
   m_ObjectHideFlags: 0
@@ -11564,6 +11578,11 @@ Prefab:
       value: 
       objectReference: {fileID: 102900000, guid: 0c2f7a3f99a112c46ac8c660f9486696,
         type: 3}
+    - target: {fileID: 82120821551883160, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}
   m_IsPrefabParent: 0
@@ -13206,7 +13225,7 @@ Prefab:
     - target: {fileID: 114726488425692036, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224031115240480602, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}
@@ -13344,7 +13363,7 @@ Prefab:
     - target: {fileID: 114726488425692036, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114726488425692036, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}
@@ -13355,11 +13374,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 832350552}
     - target: {fileID: 114726488425692036, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LoadLevel
+      value: PlayLevelA1Music
       objectReference: {fileID: 0}
     - target: {fileID: 114726488425692036, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}
@@ -13369,7 +13388,7 @@ Prefab:
     - target: {fileID: 114726488425692036, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: MainMenu
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114726488425692036, guid: 7038e1477e481ea43a11710dbbe7521c,
         type: 2}

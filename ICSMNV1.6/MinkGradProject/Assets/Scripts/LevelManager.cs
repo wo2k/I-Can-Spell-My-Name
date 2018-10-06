@@ -55,12 +55,12 @@ public class LevelManager : MonoBehaviour {
     void Start ()
     {
         LoadPlayerPrefs();
-
-       // lockLevel = InstantiateLock(levelParent.transform);
-       // level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
-      //  level2.interactable = false;
-       // level3.interactable = false;
-       // CheckLevelState(false);
+       // SoundManagement.TriggerEvent("PlayLevel1A");
+        // lockLevel = InstantiateLock(levelParent.transform);
+        // level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
+        //  level2.interactable = false;
+        // level3.interactable = false;
+        // CheckLevelState(false);
     }
 
     #region Set Level State
