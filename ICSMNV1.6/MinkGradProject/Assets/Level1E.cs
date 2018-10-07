@@ -36,7 +36,10 @@ public class Level1E: MonoBehaviour {
 
 	void Start () {
 		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
-		switch(LoginNumber){
+
+        UIManager.instance.mode = UIManager.subLevels1.Level1A;
+
+        switch (LoginNumber){
 		case 1:{
 				AnswerHint.text =  PlayerPrefs.GetString ("firstName");
 				break;

@@ -114,6 +114,7 @@
     <Compile Include="Assets\NameData.cs" />
     <Compile Include="Assets\OnClick.cs" />
     <Compile Include="Assets\PlaySound.cs" />
+    <Compile Include="Assets\ProgessionCheck.cs" />
     <Compile Include="Assets\SaveName.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LoadLevel.cs" />

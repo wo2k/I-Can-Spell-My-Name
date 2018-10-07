@@ -23,13 +23,15 @@ public class LevelManager : MonoBehaviour {
     public GameObject lockLevel;
 
     public bool locked = true;
+    public bool hasLockedBefore = false;
 
     public GameObject toggleVibration;
     public static LevelManager instance;
 
     //LevelManager Editor Variables
+    [HideInInspector]
     public int currentTab;
-    [SerializeField]
+    [SerializeField][HideInInspector]
     public int containerSize;
     [HideInInspector]
     public string sceneName;
@@ -55,12 +57,6 @@ public class LevelManager : MonoBehaviour {
     void Start ()
     {
         LoadPlayerPrefs();
-       // SoundManagement.TriggerEvent("PlayLevel1A");
-        // lockLevel = InstantiateLock(levelParent.transform);
-        // level1_B.interactable = false; level1_C.interactable = false; level1_D.interactable = false; level1_E.interactable = false;
-        //  level2.interactable = false;
-        // level3.interactable = false;
-        // CheckLevelState(false);
     }
 
     #region Set Level State
@@ -70,8 +66,8 @@ public class LevelManager : MonoBehaviour {
         {
             case 1:
                 level1_B.interactable = true;
-                locked = false;
-                levelParent = GameObject.FindGameObjectWithTag("Level1A");
+                //locked = false;
+
                 if (lockLevel)
                     lockLevel.GetComponent<Animator>().enabled = true;
 
@@ -86,7 +82,6 @@ public class LevelManager : MonoBehaviour {
             case 2:
                 level1_B.interactable = true;
                 level1_C.interactable = true;
-                levelParent = FindObjectOfType<Level1B>().gameObject;
                 if (lockLevel)
                     lockLevel.GetComponent<Animator>().enabled = true;
 
@@ -101,7 +96,6 @@ public class LevelManager : MonoBehaviour {
                 level1_B.interactable = true;
                 level1_C.interactable = true;
                 level1_D.interactable = true;
-                levelParent = FindObjectOfType<Level1C>().gameObject;
                 if (lockLevel)
                     lockLevel.GetComponent<Animator>().enabled = true;
 
@@ -114,7 +108,6 @@ public class LevelManager : MonoBehaviour {
                 level1_C.interactable = true;
                 level1_D.interactable = true;
                 level1_E.interactable = true;
-                levelParent = FindObjectOfType<Level1D>().gameObject;
                 if (lockLevel)
                     lockLevel.GetComponent<Animator>().enabled = true;
                 break;
@@ -151,12 +144,15 @@ public class LevelManager : MonoBehaviour {
         UIManager.instance.heartsAmount = 3;
 
         for (int i = 0; i < UIManager.instance.hearts.Length; i++)
-            UIManager.instance.hearts[i].GetComponent<Image>().color = new Color(1,1,1,1);
+        {
+            if(UIManager.instance.hearts[i] != null)
+            UIManager.instance.hearts[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        }
 
-        AllLevelsLockState(false);
+       // AllLevelsLockState(false);
         locked = true;
 
-        if (!lockLevel)
+        if (lockLevel != null)
            lockLevel = InstantiateLock(levelParent.transform);
         else
             return;
@@ -165,6 +161,8 @@ public class LevelManager : MonoBehaviour {
     public GameObject InstantiateLock(Transform ButtonPos)
     {
         GameObject _Lock = Instantiate((GameObject)Resources.Load("Prefabs/UnlockLevel"), ButtonPos);
+        //_Lock.transform.position = ButtonPos.position;
+        _Lock.transform.localPosition =  Vector3.zero;
         return _Lock;
     }
 

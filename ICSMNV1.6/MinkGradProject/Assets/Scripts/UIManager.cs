@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour {
     public int heartsAmount = 3;
 
     public GameObject[] subLevels;
+    public enum subLevels1 {Level1A, Level1B, Level1C, Level1D, LevelE};
+    public subLevels1 mode;
 
     [Header ("Menu Objects")]
     public GameObject startMenu;
@@ -176,11 +178,30 @@ public class UIManager : MonoBehaviour {
     public void NextLevel()
     {
         SoundManagement.TriggerEvent("PlayPop");
-        //currentMenu = levelName;
-        //currentMenu.SetActive(false);
-       // levelName = subLevels[LevelManager.instance.subLevelPassed1];
-       // menuToGoTo = levelName;
-       // menuToGoTo.SetActive(true);
+
+        switch (mode)
+        {
+            case subLevels1.Level1A:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
+                break;
+            case subLevels1.Level1B:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
+                break;
+            case subLevels1.Level1C:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
+                break;
+            case subLevels1.Level1D:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
+                break;
+            case subLevels1.LevelE:
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
+                break;
+        }
 
         inGame = true;
         pauseButton.SetActive(true);

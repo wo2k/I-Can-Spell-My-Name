@@ -41,6 +41,7 @@ public class Level1A : MonoBehaviour {
 	void Start () {
         NameData = FindObjectOfType<LevelManager>().gameObject;
         UIManager.instance.StartGame();
+        UIManager.instance.mode = UIManager.subLevels1.Level1A;
 
     int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 		switch(LoginNumber){
