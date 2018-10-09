@@ -9,7 +9,9 @@ public class MainMenu : MonoBehaviour {
 	public Text Playername2;
 	// Use this for initialization
 	void Start () {
-		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
+        UIManager.instance.mode = UIManager.subLevels1.None;
+
+        int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 		string temp = "fixthis"; 
 		switch(LoginNumber){
 		case 1:{

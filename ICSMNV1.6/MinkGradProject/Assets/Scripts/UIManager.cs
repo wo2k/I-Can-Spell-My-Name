@@ -11,8 +11,10 @@ public class UIManager : MonoBehaviour {
     public int heartsAmount = 3;
 
     public GameObject[] subLevels;
-    public enum subLevels1 {Level1A, Level1B, Level1C, Level1D, LevelE};
+    public enum subLevels1 {Level1A, Level1B, Level1C, Level1D, Level1E, None};
     public subLevels1 mode;
+    public bool[] hasWonAlready = { false, false, false, false, false };
+    public int hasWonIndex; 
 
     [Header ("Menu Objects")]
     public GameObject startMenu;
@@ -45,7 +47,8 @@ public class UIManager : MonoBehaviour {
     }
 
     public void StartGame()
-    { 
+    {
+        LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
         switch (levelName)
         {
             case "Level1A":
@@ -64,30 +67,20 @@ public class UIManager : MonoBehaviour {
                 FindObjectOfType<Level1E>().PlaceAnswer();
                 break;
         }
-        startMenu.SetActive(false);
-        gameStart = true;
-        inGame = false;
-
-        if (healthBar)
-            Destroy(healthBar);
-        if (heartsAmount != 3)
-            heartsAmount = 3;
-        healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform);
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            hearts[i] = healthBar.transform.GetChild(i).gameObject;
-        }
+        ResetGameStats();
     }
 
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
         gameStart = false;
+        LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
     }
     public void UnPauseGame()
     {
         pauseMenu.SetActive(false);
         gameStart = true;
+        LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
     }
 
     public void GameOver()
@@ -96,17 +89,94 @@ public class UIManager : MonoBehaviour {
         gameStart = false;
     }
 
+    public int BoolToInt(bool value)
+    {
+        if (value)
+            return 1;
+        else
+            return 0;
+    }
+
+    public bool IntToBool(int value)
+    {
+        if (value != 0)
+            return true;
+        else
+            return false;
+    }
+
+
     public void WinGame()
     {
         SoundManagement.TriggerEvent("PlayLevelComplete");
         winScreen.SetActive(true);
         gameStart = false;
-        LevelManager.instance.subLevelPassed1++;
-        PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
+        hasWonIndex = (int)mode;
+        
+        switch (mode)
+        {
+            case subLevels1.Level1A:
+                if (!hasWonAlready[hasWonIndex])
+                {
+                    hasWonAlready[hasWonIndex] = true;
+                    LevelManager.instance.subLevelPassed1++;
+                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
+                    PlayerPrefs.SetInt("HasWonAlready", BoolToInt(hasWonAlready[hasWonIndex]));
+                }
+                else
+                    return;
+                break;
+            case subLevels1.Level1B:
+                if (!hasWonAlready[hasWonIndex])
+                {
+                    hasWonAlready[hasWonIndex] = true;
+                    LevelManager.instance.subLevelPassed1++;
+                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
+                    PlayerPrefs.SetInt("HasWonAlready", BoolToInt(hasWonAlready[hasWonIndex]));
+                }
+                else
+                    return;
+                break;
+            case subLevels1.Level1C:
+                if (!hasWonAlready[hasWonIndex])
+                {
+                    hasWonAlready[hasWonIndex] = true;
+                    LevelManager.instance.subLevelPassed1++;
+                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
+                    PlayerPrefs.SetInt("HasWonAlready", BoolToInt(hasWonAlready[hasWonIndex]));
+                }
+                else
+                    return;
+                break;
+            case subLevels1.Level1D:
+                if (!hasWonAlready[hasWonIndex])
+                {
+                    hasWonAlready[hasWonIndex] = true;
+                    LevelManager.instance.subLevelPassed1++;
+                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
+                    PlayerPrefs.SetInt("HasWonAlready", BoolToInt(hasWonAlready[hasWonIndex]));
+                }
+                else
+                    return;
+                break;
+            case subLevels1.Level1E:
+                if (!hasWonAlready[hasWonIndex])
+                {
+                    hasWonAlready[hasWonIndex] = true;
+                    LevelManager.instance.subLevelPassed1++;
+                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
+                    PlayerPrefs.SetInt("HasWonAlready", BoolToInt(hasWonAlready[hasWonIndex]));
+                }
+                else
+                    return;
+                break;
+        }
+       
     }
 
     public void RestartGame()
     {
+        LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
         switch (levelName)
         {
             case "Level1A":
@@ -125,22 +195,12 @@ public class UIManager : MonoBehaviour {
                 FindObjectOfType<Level1E>().Reset();
                 break;
         }
-
-        endMenu.SetActive(false);
-        gameStart = true;
-        if(healthBar)
-        Destroy(healthBar);
-        healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform);
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            hearts[i] = healthBar.transform.GetChild(i).gameObject;
-        }
-        if (heartsAmount != 3)
-            heartsAmount = 3;
+        ResetGameStats();
     }
 
     public void GoToMainMenu()
     {
+        LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
         switch (levelName)
         {
             case "Level1A":
@@ -159,26 +219,13 @@ public class UIManager : MonoBehaviour {
                 FindObjectOfType<Level1E>().Reset();
                 break;
         }
-
-        pauseButton.SetActive(false);
-        confirmSubMenu.SetActive(false);
-
-        inGame = false;
-        SceneManager.LoadScene("MainMenu");
-        if (endMenu)
-            endMenu.SetActive(false);
-        if (winScreen)
-            winScreen.SetActive(false);
-        if (healthBar)
-            Destroy(healthBar);
-        if (heartsAmount != 3)
-            heartsAmount = 3;
+        ResetGameStats();
     }
 
     public void NextLevel()
     {
         SoundManagement.TriggerEvent("PlayPop");
-
+        LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
         switch (mode)
         {
             case subLevels1.Level1A:
@@ -197,24 +244,66 @@ public class UIManager : MonoBehaviour {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
                 break;
-            case subLevels1.LevelE:
+            case subLevels1.Level1E:
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
                 break;
         }
-
-        inGame = true;
-        pauseButton.SetActive(true);
-
-        if (endMenu)
-            endMenu.SetActive(false);
-        if (winScreen)
-            winScreen.SetActive(false);
-        if (healthBar)
-            Destroy(healthBar);
-        if (heartsAmount != 3)
-            heartsAmount = 3;
+        ResetGameStats();
+ 
     }
+    public void ResetGameStats()
+    {
+        switch (LevelManager.instance.m_Mode)
+        {
+            case LevelManager.LevelType.GameMode:
+                               
+                inGame = true;
+                gameStart = true;
+                                
+                pauseButton.SetActive(true);
+                if (startMenu)
+                    startMenu.SetActive(false);
+                if (endMenu)
+                    endMenu.SetActive(false);
+                if (winScreen)
+                    winScreen.SetActive(false);
+                if (healthBar)
+                    Destroy(healthBar);
+
+                healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform);
+
+                for (int i = 0; i < hearts.Length; i++)
+                {
+                    hearts[i] = healthBar.transform.GetChild(i).gameObject;
+                }
+
+                if (heartsAmount != 3)
+                    heartsAmount = 3;
+
+                LevelManager.instance.correctAnswerPoints = 0;
+         
+                break;
+                
+            case LevelManager.LevelType.Menus:
+
+                pauseButton.SetActive(false);
+                confirmSubMenu.SetActive(false);
+
+                inGame = false;
+                SceneManager.LoadScene("MainMenu");
+                if (endMenu)
+                    endMenu.SetActive(false);
+                if (winScreen)
+                    winScreen.SetActive(false);
+                if (healthBar)
+                    Destroy(healthBar);
+                if (heartsAmount != 3)
+                    heartsAmount = 3;
+                break;
+        }
+    }
+
 
     public GameObject InstantiatePlayerHealth(Transform hpPlacement)
     {

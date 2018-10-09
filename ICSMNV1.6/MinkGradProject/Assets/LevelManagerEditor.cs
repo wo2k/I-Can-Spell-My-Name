@@ -11,6 +11,7 @@ public class LevelManagerEditor : Editor {
 
     //Objects
     LevelManager levelManager;
+    UIManager UIManager;
     SerializedObject m_Target;
     Scene m_Scene;
 
@@ -38,6 +39,7 @@ public class LevelManagerEditor : Editor {
     void OnEnable()
     {
         levelManager = (LevelManager)target;
+        UIManager = FindObjectOfType<UIManager>();
         m_Target = new SerializedObject(target);
 
         //Retrieve custom GUISkin for Toolbar
@@ -64,7 +66,17 @@ public class LevelManagerEditor : Editor {
         labelWidth = EditorGUIUtility.labelWidth;
         fieldWidth = EditorGUIUtility.fieldWidth;
 
-       // CustomHelpBox("Scene Manager Tools", Color.cyan, 15, FontStyle.Bold, Color.grey, TextAnchor.MiddleCenter);
+        Heading(MessageType.Warning, "Will not show proper Statistics running till game is being played", Color.yellow, true);
+
+        EditorGUILayout.BeginVertical("Box");
+        EditorGUILayout.LabelField("Game Statistics", Label(GUI.skin.textField, Color.black, 12, FontStyle.Bold));
+        EditorGUILayout.LabelField("Console: " + levelManager.m_Console.ToString());
+        EditorGUILayout.LabelField("Level Type: " + levelManager.m_Mode.ToString());
+        EditorGUILayout.LabelField("Level Playing: " + UIManager.mode.ToString());
+
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.Space();
         GUI.skin = toolBarSkin;
            
         EditorGUILayout.Space();

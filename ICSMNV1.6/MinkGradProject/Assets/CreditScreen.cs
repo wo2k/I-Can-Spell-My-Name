@@ -26,6 +26,7 @@ public class CreditScreen : MonoBehaviour {
 
 	void Start ()
     {
+        UIManager.instance.mode = UIManager.subLevels1.None;
         Job.text = JobTitle[0].ToString();
         Person01.text = PrimaryName[0].ToString();
         StartCoroutine("JobRoleAnim");

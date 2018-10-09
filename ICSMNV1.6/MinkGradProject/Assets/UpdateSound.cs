@@ -24,22 +24,22 @@ public class UpdateSound : MonoBehaviour {
         if (!LevelManager.instance.toggleVibration)
             LevelManager.instance.toggleVibration = GameObject.Find("Toggle");
 
-        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer ||
-            Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
+        if (LevelManager.instance.m_Console != LevelManager.AppPlatform.iPhone || LevelManager.instance.m_Console != LevelManager.AppPlatform.Andriod)
             LevelManager.instance.toggleVibration.SetActive(false);
 
         if (!audioSfx)
             audioSfx = FindObjectOfType<LevelManager>().gameObject.GetComponent<AudioSource>();
-
+        if (!audioMusic)
+            audioMusic = FindObjectOfType<LevelManager>().gameObject.GetComponent<AudioSource>();
         /*Retrieves saved Music Volume___________________________Retrieves saved Music Slider Value*//////////////////////////
         audioMusic.volume = PlayerPrefs.GetFloat("MusicVolume"); MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");////
         /*Retrieves saved Music Volume___________________________Retrieves saved Music Slider Value*/////////////////////////
 
         /*Retrieves saved SfX Volume___________________________Retrieves saved SfX Slider Value*//////////////////////////
         audioSfx.volume = PlayerPrefs.GetFloat("SFXVolume");     SfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");/////
-         /*Retrieves saved SfX Volume___________________________Retrieves saved SfX Slider Value*//////////////////////////
+        /*Retrieves saved SfX Volume___________________________Retrieves saved SfX Slider Value*//////////////////////////
 
-
+        UIManager.instance.mode = UIManager.subLevels1.None;
     }
 
     #region Do we need this?

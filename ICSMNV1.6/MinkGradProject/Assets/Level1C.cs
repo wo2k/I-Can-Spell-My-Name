@@ -37,7 +37,7 @@ public class Level1C: MonoBehaviour {
 	void Start () {
 		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 
-        UIManager.instance.mode = UIManager.subLevels1.Level1A;
+        UIManager.instance.mode = UIManager.subLevels1.Level1C;
 
         switch (LoginNumber){
 		case 1:{

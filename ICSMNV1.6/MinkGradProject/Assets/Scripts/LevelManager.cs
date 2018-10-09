@@ -37,6 +37,10 @@ public class LevelManager : MonoBehaviour {
     public string sceneName;
     [SerializeField][HideInInspector]
     public List<SceneAsset> sceneAssets = new List<SceneAsset>();
+    public enum AppPlatform { MacOS, Windows, iPhone, Andriod };
+    public AppPlatform m_Console;
+    public enum LevelType { GameMode, Menus };
+    public LevelType m_Mode;
 
     void Awake()
     {
@@ -52,11 +56,36 @@ public class LevelManager : MonoBehaviour {
     {
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
         subLevelPassed1 = PlayerPrefs.GetInt("SubLevelPassed");
+        for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
+            UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready"));
+           // UIManager.instance.hasWonAlready[i] = (PlayerPrefs.GetInt("HasWonAlready") == 1) ? true : false;
     }
 
     void Start ()
     {
         LoadPlayerPrefs();
+
+        switch(Application.platform)
+        {
+            case RuntimePlatform.WindowsEditor:
+                m_Console = AppPlatform.Windows;
+                break;
+            case RuntimePlatform.WindowsPlayer:
+                m_Console = AppPlatform.Windows;
+                break;
+            case RuntimePlatform.OSXEditor:
+                m_Console = AppPlatform.MacOS;
+                break;
+            case RuntimePlatform.OSXPlayer:
+                m_Console = AppPlatform.MacOS;
+                break;
+            case RuntimePlatform.IPhonePlayer:
+                m_Console = AppPlatform.iPhone;
+                break;
+            case RuntimePlatform.Android:
+                m_Console = AppPlatform.Andriod;
+                break;
+        }          
     }
 
     #region Set Level State
