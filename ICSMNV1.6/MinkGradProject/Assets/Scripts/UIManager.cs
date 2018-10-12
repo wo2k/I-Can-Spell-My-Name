@@ -86,6 +86,7 @@ public class UIManager : MonoBehaviour {
                 break;
         }
         ResetGameStats();
+
     }
 
     public void PauseGame()
@@ -93,18 +94,21 @@ public class UIManager : MonoBehaviour {
         pauseMenu.SetActive(true);
         gameStart = false;
         LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
+        Time.timeScale = 0;    
     }
     public void UnPauseGame()
     {
         pauseMenu.SetActive(false);
         gameStart = true;
         LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
+        Time.timeScale = 1;
     }
 
     public void GameOver()
     {
         endMenu.SetActive(true);
         gameStart = false;
+        Time.timeScale = 0;
     }
 
     public int BoolToInt(bool value)
@@ -130,7 +134,7 @@ public class UIManager : MonoBehaviour {
         winScreen.SetActive(true);
         gameStart = false;
         hasWonIndex = (int)mode;
-        
+        Time.timeScale = 0;
         switch (mode)
         {
             case subLevels1.Level1A:
@@ -214,6 +218,7 @@ public class UIManager : MonoBehaviour {
                 break;
         }
         ResetGameStats();
+     
     }
 
     public void GoToMainMenu()
@@ -238,6 +243,7 @@ public class UIManager : MonoBehaviour {
                 break;
         }
         ResetGameStats();
+        
     }
 
     public void NextLevel()
@@ -268,10 +274,11 @@ public class UIManager : MonoBehaviour {
                 break;
         }
         ResetGameStats();
- 
+        
     }
     public void ResetGameStats()
     {
+        Time.timeScale = 1;
         switch (LevelManager.instance.m_Mode)
         {
             case LevelManager.LevelType.GameMode:
