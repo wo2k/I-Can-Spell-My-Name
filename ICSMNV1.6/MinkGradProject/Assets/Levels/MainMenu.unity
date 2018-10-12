@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5930,6 +5930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70e3c78c5fb6aa44b062513a81875ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ButtonToMode: 0
 --- !u!1 &984770393
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,6 +6494,8 @@ GameObject:
   - component: {fileID: 1337663629}
   - component: {fileID: 1337663628}
   - component: {fileID: 1337663627}
+  - component: {fileID: 1337663632}
+  - component: {fileID: 1337663631}
   m_Layer: 5
   m_Name: SeaHorse
   m_TagString: Untagged
@@ -6622,6 +6625,39 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1337663625}
+--- !u!95 &1337663631
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1337663625}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a182178d471a59244b3c80aa512e9f4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &1337663632
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1337663625}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 843e42f22cdabc04a9cdf7be7ab0bcc8, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 843e42f22cdabc04a9cdf7be7ab0bcc8, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1374838692
 Prefab:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FirstPlayButtons : MonoBehaviour {
 	public GameObject Tutorial;
@@ -34,10 +35,10 @@ public class FirstPlayButtons : MonoBehaviour {
     }
 
 	public void SavePlayer (){
-		input.text = input.text.ToUpper ();
+		//input.text = input.text.ToUpper ();
 		switch(LoginNumber){
 		case 1:{
-				PlayerPrefs.SetString ("firstName", input.text.ToUpper());
+				PlayerPrefs.SetString ("firstName", input.text);
 				break;
 			}
 		case 2:
@@ -67,12 +68,14 @@ public class FirstPlayButtons : MonoBehaviour {
 			int temp = 5;
 			temp = PlayerPrefs.GetInt ("firstPlay1");
 
-			if (temp == 0) {
-				Tutorial.SetActive (true);
+            if (temp == 0)
+            {
+                Tutorial.SetActive(true);
 
-			}/* else {
-				MainhMenu.SetActive (true);
-			}*/
+            }
+            else
+                SceneManager.LoadScene("MainMenu");
+			
 		}
 	}
 	public void SetLogin2(){

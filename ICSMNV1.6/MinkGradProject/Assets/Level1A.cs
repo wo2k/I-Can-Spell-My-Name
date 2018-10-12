@@ -74,13 +74,22 @@ public class Level1A : MonoBehaviour {
 		
 		Names = NameData.GetComponent<NameData> ().data;
 
-		for (int i = 0; i < Names.Count; i++) {
-			Names [i] =	Names [i].ToUpper ();
-			if (AnswerHint.text == Names [i])
-				answerIndex = i;
+		for (int i = 0; i < Names.Count; i++)
+        {
+            //Names [i] =	Names [i].ToUpper ();
+            if (AnswerHint.text == Names[i])
+                answerIndex = i;
 		}
 
-	}
+        for (int i = 0; i < AnswersText.Length; i++)
+        {
+            if (AnswersText[i].text.Length >= 5)
+                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
+            else
+                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+
+    }
     public void ScorePoints()
     {
         Score += 1;// * Multi;
@@ -245,7 +254,7 @@ public class Level1A : MonoBehaviour {
         timetext.text = "1:00";
         for (int i = 0; i < Names.Count; i++)
         {
-            Names[i] = Names[i].ToUpper();
+          //  Names[i] = Names[i].ToUpper();
             if (AnswerHint.text == Names[i])
                 answerIndex = i;
         }
@@ -286,7 +295,14 @@ public class Level1A : MonoBehaviour {
 		NamesChosen = new string[4];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
-		int ChosenIndex = 0;
+        for (int i = 0; i < AnswersText.Length; i++)
+        {
+            if (AnswersText[i].text.Length >= 5)
+                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
+            else
+                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        int ChosenIndex = 0;
 		for (int i = 0; i <= 3; i++) 
 		{
 			
@@ -294,8 +310,7 @@ public class Level1A : MonoBehaviour {
 			{
 				NamesChosen[ChosenIndex] = Names[answerIndex];
 				ChosenIndex++;
-
-			} 
+            } 
 			else 
 			{
 				

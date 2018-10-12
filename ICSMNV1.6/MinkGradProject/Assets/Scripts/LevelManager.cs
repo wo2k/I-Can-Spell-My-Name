@@ -58,7 +58,37 @@ public class LevelManager : MonoBehaviour {
         subLevelPassed1 = PlayerPrefs.GetInt("SubLevelPassed");
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
             UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready"));
-           // UIManager.instance.hasWonAlready[i] = (PlayerPrefs.GetInt("HasWonAlready") == 1) ? true : false;
+
+        hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
+    }
+
+    void ResetPlayerPrefs()
+    {
+        subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
+        levelPassed = 0; PlayerPrefs.SetInt("LevelPassed", levelPassed);
+        for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
+        {
+            UIManager.instance.hasWonAlready[i] = false;
+            PlayerPrefs.SetInt("HasWonAlready", UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
+        }
+        hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
+
+        PlayerPrefs.SetString("firstName", "Add Player");
+        PlayerPrefs.SetString("secondName", "Add Player");
+        PlayerPrefs.SetString("thirdName", "Add Player");
+        PlayerPrefs.SetString("fourthName", "Add Player");
+        PlayerPrefs.SetInt("firstPlay1", 0);
+        PlayerPrefs.SetInt("firstPlay2", 0);
+        PlayerPrefs.SetInt("firstPlay3", 0);
+        PlayerPrefs.SetInt("firstPlay4", 0);
+        PlayerPrefs.SetInt("firstColor", 0);
+        PlayerPrefs.SetInt("secondColor", 0);
+        PlayerPrefs.SetInt("thirdColor", 0);
+        PlayerPrefs.SetInt("fourthColor", 0);
+        PlayerPrefs.SetInt("firstCharacter", 0);
+        PlayerPrefs.SetInt("secondCharacter", 0);
+        PlayerPrefs.SetInt("thirdCharacter", 0);
+        PlayerPrefs.SetInt("fourthCharacter", 0);
     }
 
     void Start ()
@@ -93,7 +123,7 @@ public class LevelManager : MonoBehaviour {
     {
         switch (subLevelPassed1)
         {
-            case 1:
+            case 1: //Lock B
                 level1_B.interactable = true;
                 //locked = false;
 
@@ -108,7 +138,7 @@ public class LevelManager : MonoBehaviour {
                 }
 
                 break;
-            case 2:
+            case 2: //Lock C
                 level1_B.interactable = true;
                 level1_C.interactable = true;
                 if (lockLevel)
@@ -121,7 +151,7 @@ public class LevelManager : MonoBehaviour {
                 }
 
                 break;
-            case 3:
+            case 3: //Lock D
                 level1_B.interactable = true;
                 level1_C.interactable = true;
                 level1_D.interactable = true;
@@ -132,7 +162,7 @@ public class LevelManager : MonoBehaviour {
                     level1_E.interactable = false;
 
                 break;
-            case 4:
+            case 4: //Lock E
                 level1_B.interactable = true;
                 level1_C.interactable = true;
                 level1_D.interactable = true;
@@ -166,10 +196,37 @@ public class LevelManager : MonoBehaviour {
     }
     #endregion Set Level State
 
-    public void Reset()
+    public void ResetProgression()
     {
         subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
-        levelPassed = 0;     PlayerPrefs.SetInt("LevelPassed", levelPassed);
+        levelPassed = 0; PlayerPrefs.SetInt("LevelPassed", levelPassed);
+        for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
+        {
+            UIManager.instance.hasWonAlready[i] = false;
+            PlayerPrefs.SetInt("HasWonAlready", UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
+        }
+        hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
+
+        UIManager.instance.heartsAmount = 3;
+
+        for (int i = 0; i < UIManager.instance.hearts.Length; i++)
+        {
+            if (UIManager.instance.hearts[i] != null)
+                UIManager.instance.hearts[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        }
+
+        // AllLevelsLockState(false);
+        locked = true;
+
+        if (lockLevel != null)
+            lockLevel = InstantiateLock(levelParent.transform);
+        else
+            return;
+    }
+
+    public void Reset()
+    {
+        ResetPlayerPrefs();
         UIManager.instance.heartsAmount = 3;
 
         for (int i = 0; i < UIManager.instance.hearts.Length; i++)

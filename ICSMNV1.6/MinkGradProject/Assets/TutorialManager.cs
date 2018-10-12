@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour {
 	public Text[] AnswersText;
@@ -55,8 +56,9 @@ public class TutorialManager : MonoBehaviour {
 					break;
 				}
 			}
-			MainMenu.SetActive (true);
-			Tutorial.SetActive (false);
+            Tutorial.SetActive(false);
+            SceneManager.LoadScene("MainMenu");
+			
 
 		}
 	}

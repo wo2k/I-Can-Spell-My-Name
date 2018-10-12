@@ -51,6 +51,7 @@ public class ProgessionCheck : MonoBehaviour {
                             if (LevelManager.instance.locked)
                                 LevelManager.instance.locked = false;
                             LevelManager.instance.hasLockedBefore = true;
+                            PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(LevelManager.instance.hasLockedBefore));
                         }
 
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1C").gameObject;
@@ -67,6 +68,7 @@ public class ProgessionCheck : MonoBehaviour {
                             if (LevelManager.instance.locked)
                                 LevelManager.instance.locked = false;
                             LevelManager.instance.hasLockedBefore = true;
+                            PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(LevelManager.instance.hasLockedBefore));
                         }
 
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1D").gameObject;
@@ -83,6 +85,7 @@ public class ProgessionCheck : MonoBehaviour {
                             if (LevelManager.instance.locked)
                                 LevelManager.instance.locked = false;
                             LevelManager.instance.hasLockedBefore = true;
+                            PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(LevelManager.instance.hasLockedBefore));
                         }
 
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1E").gameObject;
