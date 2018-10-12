@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 public class OnClick : MonoBehaviour {
 	public GameObject MenuToGoTo;
 	public GameObject CurrentMenu;
-
-
+    public Animator anim;
+    [HideInInspector]
+    public string level;
 	// Use this for initialization
 	void Start () {
 		
@@ -59,6 +60,21 @@ public class OnClick : MonoBehaviour {
 
 	}
 		
+    public void PlaySeaHorseAnim(string LevelName)
+    {
+        level = LevelName;
+        anim.SetTrigger("Wink");
+        anim.SetTrigger("Idle");
+        StartCoroutine(LoadAfterAnim());
+    }
+
+    public IEnumerator LoadAfterAnim()
+    {
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0).Length);
+        SoundManagement.TriggerEvent("PlayPop");
+        SceneManager.LoadScene(level);
+        UIManager.instance.levelName = level;
+    }
 
 	// Update is called once per frgaame
 	void Update () {

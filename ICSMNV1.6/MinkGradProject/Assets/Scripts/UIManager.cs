@@ -45,6 +45,24 @@ public class UIManager : MonoBehaviour {
 
         DontDestroyOnLoad(instance);
     }
+    public void CloseApplication()
+    {
+        if (LevelManager.instance.m_Console == LevelManager.AppPlatform.Windows)
+        {
+            if (Application.platform == RuntimePlatform.WindowsEditor)
+                UnityEditor.EditorApplication.isPlaying = false;
+            if(Application.platform == RuntimePlatform.WindowsPlayer)
+                Application.Quit();
+        }
+
+        if (LevelManager.instance.m_Console == LevelManager.AppPlatform.MacOS)
+        {
+            if (Application.platform == RuntimePlatform.OSXEditor)
+                UnityEditor.EditorApplication.isPlaying = false;
+            if (Application.platform == RuntimePlatform.OSXPlayer)
+                Application.Quit();
+        }
+    }
 
     public void StartGame()
     {

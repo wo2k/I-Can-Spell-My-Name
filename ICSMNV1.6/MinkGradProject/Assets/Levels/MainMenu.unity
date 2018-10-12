@@ -953,6 +953,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 936072641}
+  anim: {fileID: 1337663631}
+  level: 
 --- !u!114 &652419907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,7 +995,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 652419906}
-        m_MethodName: LoadLevel
+        m_MethodName: PlaySeaHorseAnim
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6494,7 +6496,6 @@ GameObject:
   - component: {fileID: 1337663629}
   - component: {fileID: 1337663628}
   - component: {fileID: 1337663627}
-  - component: {fileID: 1337663632}
   - component: {fileID: 1337663631}
   m_Layer: 5
   m_Name: SeaHorse
@@ -6521,7 +6522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 817.7, y: -504.6}
+  m_AnchoredPosition: {x: 817.7, y: -310}
   m_SizeDelta: {x: 720, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1337663627
@@ -6537,6 +6538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 936072641}
+  anim: {fileID: 1337663631}
+  level: 
 --- !u!114 &1337663628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6578,7 +6581,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1337663627}
-        m_MethodName: LoadLevel
+        m_MethodName: PlaySeaHorseAnim
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6610,7 +6613,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b81e5273dc7216443af6bc4e568c6ace, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0bcea2410cdc6cd4db49897231421672, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6632,7 +6635,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1337663625}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a182178d471a59244b3c80aa512e9f4f, type: 2}
   m_CullingMode: 0
@@ -6643,21 +6646,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &1337663632
-Animation:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1337663625}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 843e42f22cdabc04a9cdf7be7ab0bcc8, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 843e42f22cdabc04a9cdf7be7ab0bcc8, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &1374838692
 Prefab:
   m_ObjectHideFlags: 0
@@ -6665,6 +6653,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 936072646}
     m_Modifications:
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224022464664651474, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -6773,7 +6766,7 @@ Prefab:
     - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
+      value: PlaySeaHorseAnim
       objectReference: {fileID: 0}
     - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
         type: 2}
@@ -6785,6 +6778,46 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: CharacterSelect
       objectReference: {fileID: 0}
+    - target: {fileID: 114369622205370066, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1337663631}
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1374838694}
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlaySeaHorseAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1374838694}
+    - target: {fileID: 114418631122315372, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: CharacterSelect
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00eeb8023c50dbb4bbf46dab6c9cc677, type: 2}
   m_IsPrefabParent: 0
@@ -6793,6 +6826,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224022464664651474, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
     type: 2}
   m_PrefabInternal: {fileID: 1374838692}
+--- !u!114 &1374838694 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114369622205370066, guid: 00eeb8023c50dbb4bbf46dab6c9cc677,
+    type: 2}
+  m_PrefabInternal: {fileID: 1374838692}
+  m_Script: {fileID: 11500000, guid: 50440564e5dfb664caadf0a3d4834d4f, type: 3}
 --- !u!1 &1481413475
 GameObject:
   m_ObjectHideFlags: 0
@@ -6994,6 +7033,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 936072641}
+  anim: {fileID: 1337663631}
+  level: 
 --- !u!114 &1652541883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7035,7 +7076,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1652541882}
-        m_MethodName: LoadLevel
+        m_MethodName: PlaySeaHorseAnim
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -26,6 +26,9 @@ public class Level1A : MonoBehaviour {
 	public GameObject Tutorial;
 	public GameObject MainMenu;
 	public bool gameStart = false;
+
+
+    public Animator anim;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 
@@ -92,123 +95,67 @@ public class Level1A : MonoBehaviour {
     }
     public void ScorePoints()
     {
-        Score += 1;// * Multi;
+        Score += 1;
         ScoreText.text = Score.ToString();
         Total++;
-        LevelManager.instance.CheckAnswer(true);
+        LevelManager.instance.CheckAnswer(true, anim);
     }
 
 	public void Choice1(){
-		if (answerButton == 0) {
-			NextLetter ();
-			ScorePoints ();
-			//Multi++;
-		} else {
-			//Multi = 1;
-			Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
-			//Remove to better area
-		/*	if (Miss >= 1)
-				Misses [0].SetActive (true);
-			else
-				Misses [0].SetActive (false);
-			if (Miss >= 2)
-				Misses [1].SetActive (true);
-			else
-				Misses [1].SetActive (false);
-			if (Miss >= 3)
-				Misses [2].SetActive (true);
-			else
-				Misses [2].SetActive (false);
-			if (Miss == 3){*/
-                
-                gameStart = false;
-		//}
-		}
+
+        if (answerButton == 0)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            Miss++;
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            gameStart = false;
+        }
 	}
 	public void Choice2(){
-		if (answerButton == 1) {
-			NextLetter ();
-			ScorePoints ();
-		//	Multi++;
-		} else {
-			//Multi = 1;
-			Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
-            //Remove to better area
-           /* if (Miss >= 1)
-				Misses [0].SetActive (true);
-			else
-				Misses [0].SetActive (false);
-			if (Miss >= 2)
-				Misses [1].SetActive (true);
-			else
-				Misses [1].SetActive (false);
-			if (Miss >= 3)
-				Misses [2].SetActive (true);
-			else
-				Misses [2].SetActive (false);;
-			if (Miss == 3){
-                UIManager.instance.GameOver();*/
-                gameStart = false;
-		//}
-		}
+
+        if (answerButton == 1)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            Miss++;
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            gameStart = false;
+        }
 	}
 	public void Choice3(){
-		if (answerButton == 2) {
-			NextLetter ();
-			ScorePoints ();
-			//Multi++;
-		} else {
-		//	Multi = 1;
-			Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
-            //Remove to better area
-           /* if (Miss >= 1)
-				Misses [0].SetActive (true);
-			else
-				Misses [0].SetActive (false);
-			if (Miss >= 2)
-				Misses [1].SetActive (true);
-			else
-				Misses [1].SetActive (false);
-			if (Miss >= 3)
-				Misses [2].SetActive (true);
-			else
-				Misses [2].SetActive (false);
-			if (Miss == 3){
-                UIManager.instance.GameOver();*/
-                gameStart = false;
-	//	}
-		}
+
+        if (answerButton == 2)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            Miss++;
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            gameStart = false;
+        }
 	}
 	public void Choice4(){
-		if (answerButton == 3) {
-			NextLetter ();
-			ScorePoints ();
-			//Multi++;
-		} else {
-			//Multi = 1;
-			Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount);
-            //Remove to better area
-          /*  if (Miss >= 1)
-				Misses [0].SetActive (true);
-			else
-				Misses [0].SetActive (false);
-			if (Miss >= 2)
-				Misses [1].SetActive (true);
-			else
-				Misses [1].SetActive (false);
-			if (Miss >= 3)
-				Misses [2].SetActive (true);
-			else
-				Misses [2].SetActive (false);
-			if (Miss == 3) {
-                UIManager.instance.GameOver();*/
-                gameStart = false;
-			//}
-		}
+
+        if (answerButton == 3)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            Miss++;
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            gameStart = false;
+        }
 	}
 
 	public void NextLetter(){

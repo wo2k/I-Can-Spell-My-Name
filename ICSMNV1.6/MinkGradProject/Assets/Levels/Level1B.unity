@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70e3c78c5fb6aa44b062513a81875ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ButtonToMode: 0
 --- !u!1001 &217250782
 Prefab:
   m_ObjectHideFlags: 0
@@ -587,6 +588,26 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224487947153535696, guid: d446e82b41167aa4b89179dedd3c684d,
     type: 2}
   m_PrefabInternal: {fileID: 217250782}
+--- !u!1 &217250784 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1636870159309256, guid: d446e82b41167aa4b89179dedd3c684d,
+    type: 2}
+  m_PrefabInternal: {fileID: 217250782}
+--- !u!111 &217250785
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 217250784}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: cc167b5ab812b7843a7e3744bb5bc95b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &290946422
 GameObject:
   m_ObjectHideFlags: 0

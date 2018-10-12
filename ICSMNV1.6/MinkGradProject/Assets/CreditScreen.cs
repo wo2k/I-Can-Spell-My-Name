@@ -42,6 +42,7 @@ public class CreditScreen : MonoBehaviour {
         {
             Job.GetComponentInParent<Animation>().Play();
             BigBubbles.GetComponent<Animation>().Play();
+            SoundManagement.TriggerEvent("Bubbles01");
             Job.text = item;
             yield return new WaitForSeconds(CreditSpeed);        
         }

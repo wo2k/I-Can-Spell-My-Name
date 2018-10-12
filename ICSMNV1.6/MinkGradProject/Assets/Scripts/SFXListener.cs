@@ -56,6 +56,7 @@ public class SFXListener : MonoBehaviour {
     private UnityAction ClockLoop;
     private UnityAction LoudClock;
     private UnityAction TimeRunningOut;
+    private UnityAction Bubbles01;
 
 	public List<AudioClip> A_Sounds;
 	public List<AudioClip> B_Sounds;
@@ -141,7 +142,7 @@ public class SFXListener : MonoBehaviour {
         ClockLoop = new UnityAction (PlayEffect20);
         LoudClock = new UnityAction (PlayEffect21);
         TimeRunningOut = new UnityAction (PlayEffect22);
-
+        Bubbles01 = new UnityAction(PlayEffect23);
 	
 	}
 	void OnEnable(){
@@ -196,7 +197,7 @@ public class SFXListener : MonoBehaviour {
         SoundManagement.Startlistening ("PlayClockLoop", ClockLoop);
         SoundManagement.Startlistening ("PlayLoudClock", LoudClock);
         SoundManagement.Startlistening ("PlayTimeRunningOut", TimeRunningOut);
-
+        SoundManagement.Startlistening ("Bubbles01", Bubbles01);
 
     }
 	void OnDisable(){
@@ -250,7 +251,7 @@ public class SFXListener : MonoBehaviour {
         SoundManagement.Stoplistening ("PlayClockLoop", ClockLoop);
         SoundManagement.Stoplistening ("PlayLoudClock", LoudClock);
         SoundManagement.Stoplistening ("PlayTimeRunningOut", TimeRunningOut);
-
+        SoundManagement.Stoplistening ("Bubbles01", Bubbles01);
     }
 
 	// Update is called once per frame
@@ -488,6 +489,10 @@ public class SFXListener : MonoBehaviour {
     void PlayEffect22()
     {
         MyAudio.PlayOneShot(Effects[22]);
+    }
+    void PlayEffect23()
+    {
+        MyAudio.PlayOneShot(Effects[23]);
     }
 }
 

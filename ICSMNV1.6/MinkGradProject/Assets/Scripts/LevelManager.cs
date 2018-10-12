@@ -285,8 +285,56 @@ public class LevelManager : MonoBehaviour {
         UIManager.instance.heartsAmount = heartsQty;
     }
 
+    public void CheckAnswer(bool isCorrect, int heartsQty,  Animator seahorseAnim)
+    {
+        seahorseAnim.SetTrigger("Wink");
+        seahorseAnim.SetTrigger("Idle");
+
+        if (isCorrect)
+        {
+            SoundManagement.TriggerEvent("PlayCorrect");
+            correctAnswerPoints++;
+
+            if (correctAnswerPoints >= 3)
+                UIManager.instance.WinGame();
+        }
+
+        else
+        {
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            VibrateOnHandHeld();
+            heartsQty--;
+            UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
+            if (heartsQty <= 0)
+                UIManager.instance.GameOver();
+        }
+
+        UIManager.instance.heartsAmount = heartsQty;
+    }
+
     public void CheckAnswer(bool isCorrect)
     {
+        if (isCorrect)
+        {
+            SoundManagement.TriggerEvent("PlayCorrect");
+            correctAnswerPoints++;
+
+            if (correctAnswerPoints >= 3)
+                UIManager.instance.WinGame();
+        }
+
+        else
+        {
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            VibrateOnHandHeld();
+        }
+    }
+
+    public void CheckAnswer(bool isCorrect, Animator seahorseAnim)
+    {
+        seahorseAnim.SetTrigger("Wink");
+        seahorseAnim.SetTrigger("Idle");
+
         if (isCorrect)
         {
             SoundManagement.TriggerEvent("PlayCorrect");
