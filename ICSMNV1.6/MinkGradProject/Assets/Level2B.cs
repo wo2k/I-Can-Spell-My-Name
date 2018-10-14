@@ -16,7 +16,7 @@ public class Level2B : MonoBehaviour {
 	int Score = 0;
 	public Text ScoreText;
 	int Multi = 1;
-	int Miss = 0;
+	//int Miss = 0;
 	int Total = 0;
 	public GameObject GameManager;
 	public GameObject StartMenu;
@@ -103,7 +103,7 @@ public class Level2B : MonoBehaviour {
 		 Score = 0;
 
 		Multi = 1;
-		 Miss = 0;
+		 //Miss = 0;
 		 Total = 0;
 		StartMenu.SetActive (true);
 	}
@@ -120,7 +120,7 @@ public class Level2B : MonoBehaviour {
 		Score = 0;
 
 		Multi = 1;
-		Miss = 0;
+		//Miss = 0;
 		Total = 0;
 		if (Keyboard.GetComponent<Keyboard> ().CapsLock != true)
 			Keyboard.GetComponent<Keyboard> ().Shift ();

@@ -9,21 +9,21 @@ using UnityEditor.SceneManagement;
 [CanEditMultipleObjects]
 public class SoundManagementEditor : Editor {
 
-    SoundManagement soundManager;
+  //  SoundManagement soundManager;
     SerializedObject m_Target;
 
     private SerializedProperty musicClipCapture;
-    private SerializedProperty sfxClipCapture;
+   // private SerializedProperty sfxClipCapture;
 
     Color defBackgroundColor;
 
     private void OnEnable()
     {
-        soundManager = (SoundManagement)target;
+      //  soundManager = (SoundManagement)target;
         m_Target = new SerializedObject(target);
 
         musicClipCapture = m_Target.FindProperty("musicName");
-        sfxClipCapture = m_Target.FindProperty("sfxName");
+      //  sfxClipCapture = m_Target.FindProperty("sfxName");
     }
 
     public override void OnInspectorGUI()

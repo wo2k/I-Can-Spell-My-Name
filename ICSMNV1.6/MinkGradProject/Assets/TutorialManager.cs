@@ -18,6 +18,8 @@ public class TutorialManager : MonoBehaviour {
 	public GameObject Tutorial;
 	public GameObject MainMenu;
 	public List<GameObject> Misses;
+    public string[] LetterChosen;
+    public string answer;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +32,7 @@ public class TutorialManager : MonoBehaviour {
 		SoundManagement.TriggerEvent ("PlayPop");
 	}
 	public void ScorePoints(){
-		Score += 1 * Multi;
+        Score += 1;
 		ScoreText.text = Score.ToString ();
 		Total++;
 		if (Total == 26) {
@@ -187,12 +189,67 @@ public class TutorialManager : MonoBehaviour {
 		if(answerIndex != 25)
 		answerIndex++;
 		AnswerHint.text = Letters[answerIndex];
-		answerButton = Random.Range (0, 4);
-		AnswersText[answerButton].text = Letters[answerIndex];
-		SetOtherButtons (answerButton);
-
+		//answerButton = Random.Range (0, 4);
+		//AnswersText[answerButton].text = Letters[answerIndex];
+        //SetOtherButtons (answerButton);
+        SetButtons();
 	}
-	public void SetOtherButtons(int rightanswer){
+
+    public void SetButtons()
+    {
+        LetterChosen = new string[5];
+        answerButton = Random.Range(0, 5);
+
+        AnswersText[answerButton].text = Letters[answerIndex];
+        answer = AnswersText[answerButton].text;
+
+        int ChosenIndex = 0;
+        for (int i = 0; i <= 4; i++)
+        {
+
+            if (answerButton == i)
+            {
+                LetterChosen[ChosenIndex] = Letters[answerIndex];
+                ChosenIndex++;
+
+            }
+            else
+            {
+
+                bool Used = true;
+                int wrongName = 0;
+                while (Used)
+                {
+                    wrongName = Random.Range(0, Letters.Length);
+                    //Checks to see if wrong names chosen equals to answer, if it does, choose again
+                    while (Letters[wrongName] == answer)
+                        wrongName = Random.Range(0, Letters.Length);
+
+                    Used = false;
+                    for (int j = 0; j < LetterChosen.Length; j++)
+                    {
+                        if (Letters[wrongName] == LetterChosen[j])
+                        {
+                            Used = true;
+                            break;
+                        }
+                    }
+                    if (Used != true)
+                    {
+                        LetterChosen[ChosenIndex] = Letters[wrongName];
+                        AnswersText[i].text = Letters[wrongName];
+                        ChosenIndex++;
+                        break;
+                    }
+
+
+
+                }
+
+            }
+        }
+    }
+    public void SetOtherButtons(int rightanswer){
 		if (rightanswer != 0) {
 			int randomletter = Random.Range (0, 25);
 				while(randomletter == answerIndex)

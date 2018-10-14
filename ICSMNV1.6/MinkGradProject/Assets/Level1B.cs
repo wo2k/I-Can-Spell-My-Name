@@ -24,11 +24,12 @@ public class Level1B : MonoBehaviour {
 	public GameObject Tutorial;
 	public GameObject MainMenu;
     public GameObject PauseMenu;
-    bool gameStart = false;
+    bool gameStart;// = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
     public Animator ButtonAnim1;
 	// Use this for initialization
+
 	public void RestartGame(){
 		EndMenu.SetActive (false);
 		Reset ();

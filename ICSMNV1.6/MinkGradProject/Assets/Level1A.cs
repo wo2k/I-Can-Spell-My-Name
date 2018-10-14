@@ -20,13 +20,13 @@ public class Level1A : MonoBehaviour {
 	float seconds = 0;
 	int Score = 0;
 	public Text ScoreText;
-	int Multi = 1;
+	//int Multi = 1;
 	public int Miss = 0;
 	int Total = 0;
 	public GameObject Tutorial;
 	public GameObject MainMenu;
 	public bool gameStart = false;
-
+    public string answer;
 
     public Animator anim;
 	// NEW STUFF IM WORKING WITH
@@ -91,8 +91,20 @@ public class Level1A : MonoBehaviour {
             else
                 AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
-
     }
+
+    public void RemoveNamesFromList()
+    {
+        for(int i = 0; i < Names.Count; i++)
+        {
+            for(int j = 0; j < NamesChosen.Length; j++)
+            {
+                if (Names[i] == NamesChosen[j])
+                    Names.Remove(Names[i]);
+            }
+        }
+    }
+
     public void ScorePoints()
     {
         Score += 1;
@@ -241,7 +253,9 @@ public class Level1A : MonoBehaviour {
 	public void PlaceAnswer(){
 		NamesChosen = new string[4];
 		answerButton = Random.Range (0, 4);
-		AnswersText[answerButton].text = Names[answerIndex];
+
+        AnswersText[answerButton].text = Names[answerIndex];
+        answer = AnswersText[answerButton].text;
         for (int i = 0; i < AnswersText.Length; i++)
         {
             if (AnswersText[i].text.Length >= 5)
@@ -255,29 +269,36 @@ public class Level1A : MonoBehaviour {
 			
 			if (answerButton == i) 
 			{
-				NamesChosen[ChosenIndex] = Names[answerIndex];
-				ChosenIndex++;
+				NamesChosen[ChosenIndex] = Names[answerIndex];               
+                ChosenIndex++;
+     
             } 
 			else 
 			{
-				
+                
 				bool Used = true;
 				int wrongName = 0;
 				while(Used)
 				{
 					wrongName =	Random.Range (0, Names.Count);
-					Used = false;
-					for (int j = 0; j < NamesChosen.Length - 1; j++) 
-						{
-						if (Names [wrongName] == NamesChosen [j]) {
-							Used = true;
-							break;
-						}
-						}
-					if (Used != true) {
-						NamesChosen[ChosenIndex] = Names[wrongName];
-						AnswersText[i].text = Names[wrongName];
-						ChosenIndex++;
+                    //Checks to see if wrong names chosen equals to answer, if it does, choose again
+                    while(Names[wrongName] == answer)
+                        wrongName = Random.Range(0, Names.Count);
+
+                    Used = false;
+                    for (int j = 0; j < NamesChosen.Length; j++)
+                    {
+                        if (Names[wrongName] == NamesChosen[j])
+                        {
+                            Used = true;
+                            break;
+                        }
+                    }
+					if (Used != true)
+                    {
+                            NamesChosen[ChosenIndex] = Names[wrongName];
+                            AnswersText[i].text = Names[wrongName];
+                            ChosenIndex++;
 						break;
 					}
 						
@@ -287,7 +308,9 @@ public class Level1A : MonoBehaviour {
 
 			}
 		}
-	}
+       // answer = AnswersText[answerButton].text;
+       
+    }
 
 	// Update is called once per frame
 	void Update () {
