@@ -13,7 +13,7 @@ public class Level1A : MonoBehaviour {
 	public GameObject[] Misses;
 	public Text AnswerHint;
 	public int answerButton = 0;
-	int answerIndex = 8;
+	public int answerIndex = 8;
 	public Text timetext;
 	float timer = 60.0f;
 	float minutes = 1;
@@ -81,7 +81,11 @@ public class Level1A : MonoBehaviour {
         {
             //Names [i] =	Names [i].ToUpper ();
             if (AnswerHint.text == Names[i])
+            {
                 answerIndex = i;
+                AnswersText[answerButton].text = Names[answerIndex];
+                answer = AnswersText[answerButton].text;
+            }
 		}
 
         for (int i = 0; i < AnswersText.Length; i++)
@@ -256,6 +260,7 @@ public class Level1A : MonoBehaviour {
 
         AnswersText[answerButton].text = Names[answerIndex];
         answer = AnswersText[answerButton].text;
+
         for (int i = 0; i < AnswersText.Length; i++)
         {
             if (AnswersText[i].text.Length >= 5)
