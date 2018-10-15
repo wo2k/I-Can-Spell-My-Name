@@ -14,21 +14,15 @@ public class Level1A : MonoBehaviour {
 	public Text AnswerHint;
 	public int answerButton = 0;
 	public int answerIndex = 8;
-	public Text timetext;
-	float timer = 60.0f;
-	float minutes = 1;
-	float seconds = 0;
-	int Score = 0;
-	public Text ScoreText;
+
 	//int Multi = 1;
 	public int Miss = 0;
-	int Total = 0;
+
 	public GameObject Tutorial;
 	public GameObject MainMenu;
 	public bool gameStart = false;
     public string answer;
 
-    public Animator anim;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 
@@ -43,6 +37,7 @@ public class Level1A : MonoBehaviour {
 
 	void Start () {
         NameData = FindObjectOfType<LevelManager>().gameObject;
+
         UIManager.instance.StartGame();
         UIManager.instance.mode = UIManager.subLevels1.Level1A;
 
@@ -109,26 +104,21 @@ public class Level1A : MonoBehaviour {
         }
     }
 
-    public void ScorePoints()
-    {
-        Score += 1;
-        ScoreText.text = Score.ToString();
-        Total++;
-        LevelManager.instance.CheckAnswer(true, anim);
-    }
 
 	public void Choice1(){
 
         if (answerButton == 0)
         {
             NextLetter();
-            ScorePoints();
+            UIManager.instance.ScorePoints();
         }
         else
         {
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 2)
+                NextLetter();
         }
 	}
 	public void Choice2(){
@@ -136,13 +126,15 @@ public class Level1A : MonoBehaviour {
         if (answerButton == 1)
         {
             NextLetter();
-            ScorePoints();
+            UIManager.instance.ScorePoints();
         }
         else
         {
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 2)
+                NextLetter();
         }
 	}
 	public void Choice3(){
@@ -150,13 +142,15 @@ public class Level1A : MonoBehaviour {
         if (answerButton == 2)
         {
             NextLetter();
-            ScorePoints();
+            UIManager.instance.ScorePoints();
         }
         else
         {
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 2)
+                NextLetter();
         }
 	}
 	public void Choice4(){
@@ -164,57 +158,25 @@ public class Level1A : MonoBehaviour {
         if (answerButton == 3)
         {
             NextLetter();
-            ScorePoints();
+            UIManager.instance.ScorePoints();
         }
         else
         {
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, anim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 2)
+                NextLetter();
         }
 	}
 
-	public void NextLetter(){
+	public void NextLetter()
+    {
 		PlaceAnswer ();
-	//	RemoveFirst ();
-	//	SetOtherButtons ();
-
 	}
 
-	/* public void SetOtherButtons(){
-		if (answerButton != 0) {
-			int randomletter = Random.Range (0,Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[0].text = Names[randomletter];
-		}
-		if (answerButton != 1) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[1].text = Names[randomletter];
-		}
-		if (answerButton != 2) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[2].text = Names[randomletter];
-		}
-		if (answerButton != 3) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[3].text = Names[randomletter];
-		}
-	}
-	*/
-
-	public void Reset (){
-		ScoreText.text = "0";
-		Score = 0;
-        LevelManager.instance.correctAnswerPoints = 0;
-		//Multi = 1;
-        timetext.text = "1:00";
+	public void Reset ()
+    {
         for (int i = 0; i < Names.Count; i++)
         {
           //  Names[i] = Names[i].ToUpper();
@@ -226,11 +188,7 @@ public class Level1A : MonoBehaviour {
         AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
-	//	SetOtherButtons ();
-		Total = 0;
-		timer = 60.0f;
-		minutes = 1;
-		seconds = 0;
+
 		Miss = 0;
 		PlaceAnswer ();
 	
@@ -238,6 +196,7 @@ public class Level1A : MonoBehaviour {
 			Misses [1].SetActive (false);
 			Misses [2].SetActive (false);
 	}
+
 	public void StartGame(){
 		StartMenu.SetActive (false);
 		PlaceAnswer();
@@ -313,32 +272,11 @@ public class Level1A : MonoBehaviour {
 
 			}
 		}
-       // answer = AnswersText[answerButton].text;
        
     }
 
 	// Update is called once per frame
 	void Update () {
-		if (UIManager.instance.gameStart) {
-
-			if (timer > 0) {
-				timer -= Time.deltaTime;
-				if (timer <= 0)
-					timer = 0;
-			} else if (timer <= 0)
-            {
-                UIManager.instance.GameOver();
-            }
-
-			minutes = Mathf.Floor (timer / 60);
-			seconds = timer % 60;
-
-			if(Mathf.RoundToInt (seconds) < 10 )
-				timetext.text =  Mathf.RoundToInt (minutes).ToString() + ":0" +  Mathf.RoundToInt (seconds).ToString() ;
-				else
-				timetext.text =  Mathf.RoundToInt (minutes).ToString() + ":" + Mathf.RoundToInt (seconds).ToString();
-		}
-	
-			
+					
 	}
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -335,12 +335,12 @@ GameObject:
   - component: {fileID: 244737192}
   - component: {fileID: 244737194}
   m_Layer: 5
-  m_Name: Time
+  m_Name: TimeName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &244737191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -428,12 +428,12 @@ GameObject:
   - component: {fileID: 380743559}
   - component: {fileID: 380743561}
   m_Layer: 5
-  m_Name: SCORE (1)
+  m_Name: ScoreName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &380743558
 RectTransform:
   m_ObjectHideFlags: 0
@@ -850,7 +850,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1636870159309256, guid: d446e82b41167aa4b89179dedd3c684d, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d446e82b41167aa4b89179dedd3c684d, type: 2}
@@ -1377,12 +1377,14 @@ MonoBehaviour:
   - {fileID: 462877385}
   AnswerHint: {fileID: 1571499389}
   answerButton: 0
+  answerIndex: 8
   timetext: {fileID: 2015801720}
   ScoreText: {fileID: 1749308676}
   Miss: 0
   Tutorial: {fileID: 2015801717}
   MainMenu: {fileID: 0}
   gameStart: 0
+  answer: 
   anim: {fileID: 841019227}
   NamesChosen:
   - w
@@ -1807,7 +1809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1745516226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1941,7 +1943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1749308676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2254,7 +2256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &2015801718
 CanvasRenderer:
   m_ObjectHideFlags: 0

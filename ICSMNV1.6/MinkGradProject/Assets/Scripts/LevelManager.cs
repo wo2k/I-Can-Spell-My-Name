@@ -7,7 +7,8 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public int correctAnswerPoints = 0;
     [Header("Main Buttons")]
@@ -31,11 +32,13 @@ public class LevelManager : MonoBehaviour {
     //LevelManager Editor Variables
     [HideInInspector]
     public int currentTab;
-    [SerializeField][HideInInspector]
+    [SerializeField]
+    [HideInInspector]
     public int containerSize;
     [HideInInspector]
     public string sceneName;
-    [SerializeField][HideInInspector]
+    [SerializeField]
+    [HideInInspector]
     public List<SceneAsset> sceneAssets = new List<SceneAsset>();
     public enum AppPlatform { MacOS, Windows, iPhone, Andriod };
     public AppPlatform m_Console;
@@ -56,8 +59,9 @@ public class LevelManager : MonoBehaviour {
     {
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
         subLevelPassed1 = PlayerPrefs.GetInt("SubLevelPassed");
+
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
-            UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready"));
+            UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready " + i));
 
         hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
     }
@@ -66,11 +70,13 @@ public class LevelManager : MonoBehaviour {
     {
         subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
         levelPassed = 0; PlayerPrefs.SetInt("LevelPassed", levelPassed);
+
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
         {
             UIManager.instance.hasWonAlready[i] = false;
             PlayerPrefs.SetInt("HasWonAlready", UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
         }
+
         hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
 
         PlayerPrefs.SetString("firstName", "Add Player");
@@ -91,11 +97,11 @@ public class LevelManager : MonoBehaviour {
         PlayerPrefs.SetInt("fourthCharacter", 0);
     }
 
-    void Start ()
+    void Start()
     {
         LoadPlayerPrefs();
 
-        switch(Application.platform)
+        switch (Application.platform)
         {
             case RuntimePlatform.WindowsEditor:
                 m_Console = AppPlatform.Windows;
@@ -115,7 +121,7 @@ public class LevelManager : MonoBehaviour {
             case RuntimePlatform.Android:
                 m_Console = AppPlatform.Andriod;
                 break;
-        }          
+        }
     }
 
     #region Set Level State
@@ -130,7 +136,7 @@ public class LevelManager : MonoBehaviour {
                 if (lockLevel)
                     lockLevel.GetComponent<Animator>().enabled = true;
 
-                if(disableLevelBtns)
+                if (disableLevelBtns)
                 {
                     level1_C.interactable = false;
                     level1_D.interactable = false;
@@ -231,15 +237,15 @@ public class LevelManager : MonoBehaviour {
 
         for (int i = 0; i < UIManager.instance.hearts.Length; i++)
         {
-            if(UIManager.instance.hearts[i] != null)
-            UIManager.instance.hearts[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            if (UIManager.instance.hearts[i] != null)
+                UIManager.instance.hearts[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
 
-       // AllLevelsLockState(false);
+        // AllLevelsLockState(false);
         locked = true;
 
         if (lockLevel != null)
-           lockLevel = InstantiateLock(levelParent.transform);
+            lockLevel = InstantiateLock(levelParent.transform);
         else
             return;
     }
@@ -248,7 +254,7 @@ public class LevelManager : MonoBehaviour {
     {
         GameObject _Lock = Instantiate((GameObject)Resources.Load("Prefabs/UnlockLevel"), ButtonPos);
         //_Lock.transform.position = ButtonPos.position;
-        _Lock.transform.localPosition =  Vector3.zero;
+        _Lock.transform.localPosition = Vector3.zero;
         return _Lock;
     }
 
@@ -285,16 +291,16 @@ public class LevelManager : MonoBehaviour {
         UIManager.instance.heartsAmount = heartsQty;
     }
 
-    public void CheckAnswer(bool isCorrect, int heartsQty,  Animator seahorseAnim)
+    public void CheckAnswer(bool isCorrect, int heartsQty, Animator seahorseAnim)
     {
-        seahorseAnim.SetTrigger("Wink");
-        seahorseAnim.SetTrigger("Idle");
+
 
         if (isCorrect)
         {
             SoundManagement.TriggerEvent("PlayCorrect");
             correctAnswerPoints++;
-
+            seahorseAnim.SetTrigger("Wink");
+            seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
         }
@@ -332,14 +338,14 @@ public class LevelManager : MonoBehaviour {
 
     public void CheckAnswer(bool isCorrect, Animator seahorseAnim)
     {
-        seahorseAnim.SetTrigger("Wink");
-        seahorseAnim.SetTrigger("Idle");
+
 
         if (isCorrect)
         {
             SoundManagement.TriggerEvent("PlayCorrect");
             correctAnswerPoints++;
-
+            seahorseAnim.SetTrigger("Wink");
+            seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
         }
@@ -350,9 +356,61 @@ public class LevelManager : MonoBehaviour {
             VibrateOnHandHeld();
         }
     }
+
+    public void CheckAnswer(bool isCorrect, bool isTutorial, int heartsQty, Animator seahorseAnim)
+    {
+
+        if (isTutorial)
+        {
+            if (isCorrect)
+            {
+                SoundManagement.TriggerEvent("PlayCorrect");
+                correctAnswerPoints++;
+                seahorseAnim.SetTrigger("Wink");
+                seahorseAnim.SetTrigger("Idle");
+                if (correctAnswerPoints >= 26)
+                {
+                    int LoginNumber = PlayerPrefs.GetInt("loginNumber");
+                    switch (LoginNumber)
+                    {
+                        case 1:
+                            {
+                                PlayerPrefs.SetInt("firstPlay1", 1);
+                                break;
+                            }
+                        case 2:
+                            {
+                                PlayerPrefs.SetInt("firstPlay2", 1);
+                                break;
+                            }
+                        case 3:
+                            {
+                                PlayerPrefs.SetInt("firstPlay3", 1);
+                                break;
+                            }
+                        case 4:
+                            {
+                                PlayerPrefs.SetInt("firstPlay4", 1);
+                                break;
+                            }
+                    }
+                    SceneManager.LoadScene("MainMenu");
+                    correctAnswerPoints = 0;
+                    UIManager.instance.HUD.SetActive(false);
+                    UIManager.instance.HUD.transform.GetChild(1).gameObject.SetActive(true);
+                }
+
+            }
+
+            else
+            {
+                SoundManagement.TriggerEvent("PlayWrongAnswer");
+                VibrateOnHandHeld();
+            }
+        }
+    }
     #endregion CheckAnswer
 
-    void Update () {
-		
-	}
+
 }
+

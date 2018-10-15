@@ -22,176 +22,108 @@ public class TutorialManager : MonoBehaviour {
     public string answer;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		AnswerHint.text = Letters[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Letters[answerIndex];
 		SetOtherButtons (answerButton);
-	}
+
+        UIManager.instance.HUD.SetActive(true);
+        UIManager.instance.HUD.transform.GetChild(1).gameObject.SetActive(false);
+
+    }
+
 	public void PopSound(){
 		SoundManagement.TriggerEvent ("PlayPop");
 	}
-	public void ScorePoints(){
-        Score += 1;
-		ScoreText.text = Score.ToString ();
-		Total++;
-		if (Total == 26) {
-			int LoginNumber = PlayerPrefs.GetInt ("loginNumber");
-			switch(LoginNumber){
-			case 1:{
-					PlayerPrefs.SetInt ("firstPlay1", 1);
-					break;
-				}
-			case 2:
-				{
-					PlayerPrefs.SetInt ("firstPlay2", 1);
-					break;
-				}
-			case 3:
-				{
-					PlayerPrefs.SetInt ("firstPlay3", 1);
-					break;
-				}
-			case 4:
-				{
-					PlayerPrefs.SetInt ("firstPlay4", 1);
-					break;
-				}
-			}
-            Tutorial.SetActive(false);
-            SceneManager.LoadScene("MainMenu");
-			
 
-		}
-	}
+	public void ScorePoints()
+    {
+        UIManager.instance.score += 1;
+        UIManager.instance.scoreText.text = UIManager.instance.score.ToString ();
+        UIManager.instance.total++;
+
+        LevelManager.instance.CheckAnswer(true, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+
+
+    }
+	
 	public void Choice1(){
-		if (answerButton == 0) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-			if (Miss > 0)
-				Misses [0].SetActive (false);
-			else
-				Misses [0].SetActive (true);
-			if (Miss > 1)
-				Misses [1].SetActive (false);
-			else
-				Misses [1].SetActive (true);
-			if (Miss > 2)
-				Misses [2].SetActive (false);
-			else
-				Misses [2].SetActive (true);
-			if (Miss == 3)
-				Reset ();	
-		}
-	}
+        if (answerButton == 0)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            if (LevelManager.instance.correctAnswerPoints < 25)
+                SetButtons();
+        }
+    }
+
 	public void Choice2(){
-		if (answerButton == 1) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-			if (Miss > 0)
-				Misses [0].SetActive (false);
-			else
-				Misses [0].SetActive (true);
-			if (Miss > 1)
-				Misses [1].SetActive (false);
-			else
-				Misses [1].SetActive (true);
-			if (Miss > 2)
-				Misses [2].SetActive (false);
-			else
-				Misses [2].SetActive (true);
-			if (Miss == 3)
-				Reset ();	
-		}
-	}
+        if (answerButton == 1)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            if (LevelManager.instance.correctAnswerPoints < 25)
+                SetButtons();
+        }
+    }
+
 	public void Choice3(){
-		if (answerButton == 2) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-			if (Miss > 0)
-				Misses [0].SetActive (false);
-			else
-				Misses [0].SetActive (true);
-			if (Miss > 1)
-				Misses [1].SetActive (false);
-			else
-				Misses [1].SetActive (true);
-			if (Miss > 2)
-				Misses [2].SetActive (false);
-			else
-				Misses [2].SetActive (true);
-			if (Miss == 3)
-				Reset ();	
-		}
-	}
+        if (answerButton == 2)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            if (LevelManager.instance.correctAnswerPoints < 25)
+                SetButtons();
+        }
+    }
+
 	public void Choice4(){
-		if (answerButton == 3) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-			if (Miss > 0)
-				Misses [0].SetActive (false);
-			else
-				Misses [0].SetActive (true);
-			if (Miss > 1)
-				Misses [1].SetActive (false);
-			else
-				Misses [1].SetActive (true);
-			if (Miss > 2)
-				Misses [2].SetActive (false);
-			else
-				Misses [2].SetActive (true);
-			if (Miss == 3)
-				Reset ();	
-		}
-	}
+        if (answerButton == 3)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            if (LevelManager.instance.correctAnswerPoints < 25)
+                SetButtons();
+        }
+    }
+
 	public void Choice5(){
-		if (answerButton == 4) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-			if (Miss > 0)
-				Misses [0].SetActive (false);
-			else
-				Misses [0].SetActive (true);
-			if (Miss > 1)
-				Misses [1].SetActive (false);
-			else
-				Misses [1].SetActive (true);
-			if (Miss > 2)
-				Misses [2].SetActive (false);
-			else
-				Misses [2].SetActive (true);
-			if (Miss == 3)
-				Reset ();	
-		}
-	}
+        if (answerButton == 4)
+        {
+            NextLetter();
+            ScorePoints();
+        }
+        else
+        {
+            LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            if(LevelManager.instance.correctAnswerPoints < 25)
+            SetButtons();
+        }
+    }
+
 	public void NextLetter(){
 
 		if(answerIndex != 25)
 		answerIndex++;
 		AnswerHint.text = Letters[answerIndex];
-		//answerButton = Random.Range (0, 4);
-		//AnswersText[answerButton].text = Letters[answerIndex];
-        //SetOtherButtons (answerButton);
         SetButtons();
 	}
 
@@ -249,6 +181,7 @@ public class TutorialManager : MonoBehaviour {
             }
         }
     }
+
     public void SetOtherButtons(int rightanswer){
 		if (rightanswer != 0) {
 			int randomletter = Random.Range (0, 25);
@@ -281,22 +214,15 @@ public class TutorialManager : MonoBehaviour {
 			AnswersText[4].text = Letters[randomletter];
 		}
 	}
+
 	void Reset (){
-		ScoreText.text = "00000";
-		Score = 0;
-		Multi = 1;
 		answerIndex = 0;
 		AnswerHint.text = Letters[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Letters[answerIndex];
 		SetOtherButtons (answerButton);
-		Total = 0;
-		Miss = 0;
-		for (int i = 0; i < Misses.Count; i++)
-			Misses [i].SetActive (true);
-	}
-	// Update is called once per frame
-	void Update () {
-		
+
 	}
 }
+
+
