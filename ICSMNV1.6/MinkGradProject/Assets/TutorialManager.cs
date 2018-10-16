@@ -20,6 +20,7 @@ public class TutorialManager : MonoBehaviour {
 	public List<GameObject> Misses;
     public string[] LetterChosen;
     public string answer;
+    public int letterIndex;
 
 	// Use this for initialization
 	void Start ()
@@ -31,7 +32,7 @@ public class TutorialManager : MonoBehaviour {
 
         UIManager.instance.HUD.SetActive(true);
         UIManager.instance.HUD.transform.GetChild(1).gameObject.SetActive(false);
-
+        SoundManagement.TriggerEvent("Play" + Letters[letterIndex]);
     }
 
 	public void PopSound(){
@@ -44,6 +45,11 @@ public class TutorialManager : MonoBehaviour {
         UIManager.instance.scoreText.text = UIManager.instance.score.ToString ();
         UIManager.instance.total++;
 
+        if (letterIndex < 25)
+        {
+            letterIndex++;
+            SoundManagement.TriggerEvent("Play" + Letters[letterIndex]);
+        }
         LevelManager.instance.CheckAnswer(true, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
 
 
@@ -57,6 +63,7 @@ public class TutorialManager : MonoBehaviour {
         }
         else
         {
+            SoundManagement.TriggerEvent("Play" + Letters[letterIndex]);
             LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             if (LevelManager.instance.correctAnswerPoints < 25)
                 SetButtons();
@@ -71,6 +78,7 @@ public class TutorialManager : MonoBehaviour {
         }
         else
         {
+            SoundManagement.TriggerEvent("Play" + Letters[letterIndex]);
             LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             if (LevelManager.instance.correctAnswerPoints < 25)
                 SetButtons();
@@ -85,6 +93,7 @@ public class TutorialManager : MonoBehaviour {
         }
         else
         {
+            SoundManagement.TriggerEvent("Play" + Letters[letterIndex]);
             LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             if (LevelManager.instance.correctAnswerPoints < 25)
                 SetButtons();
@@ -99,6 +108,7 @@ public class TutorialManager : MonoBehaviour {
         }
         else
         {
+            SoundManagement.TriggerEvent("Play" + Letters[letterIndex]);
             LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             if (LevelManager.instance.correctAnswerPoints < 25)
                 SetButtons();
@@ -113,6 +123,7 @@ public class TutorialManager : MonoBehaviour {
         }
         else
         {
+            SoundManagement.TriggerEvent("Play" + Letters[letterIndex]);
             LevelManager.instance.CheckAnswer(false, true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             if(LevelManager.instance.correctAnswerPoints < 25)
             SetButtons();
@@ -134,7 +145,8 @@ public class TutorialManager : MonoBehaviour {
 
         AnswersText[answerButton].text = Letters[answerIndex];
         answer = AnswersText[answerButton].text;
-
+        
+        
         int ChosenIndex = 0;
         for (int i = 0; i <= 4; i++)
         {

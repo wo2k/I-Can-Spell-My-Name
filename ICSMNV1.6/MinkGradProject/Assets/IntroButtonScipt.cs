@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IntroButtonScipt : MonoBehaviour {
 
@@ -17,6 +18,11 @@ public class IntroButtonScipt : MonoBehaviour {
 		NextMessage.SetActive (true);
 
 	}
+
+    public void LoadLevel()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 	// Update is called once per frame
 	void Update () {
 		
