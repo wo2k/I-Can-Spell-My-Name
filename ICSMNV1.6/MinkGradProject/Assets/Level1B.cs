@@ -32,10 +32,16 @@ public class Level1B : MonoBehaviour {
     public enum DolphinState {Up, Idle, Down};
     public DolphinState m_Dolphin;
 
-	void Start () {
+    public Vector3[] dolphinPos;
+    public Vector3[] dolphinIdlePos;
 
+	void Start () {
+        m_Dolphin = DolphinState.Up;
         NameData = FindObjectOfType<LevelManager>().gameObject;
         UIManager.instance.StartGame();
+        for(int i = 0; i < m_Dolphins.Length; i++)
+        dolphinPos[i] = m_Dolphins[i].transform.localPosition;
+
         StartCoroutine(DolphinUp()); 
 
         int LoginNumber = PlayerPrefs.GetInt("loginNumber");
@@ -45,7 +51,8 @@ public class Level1B : MonoBehaviour {
         switch (LoginNumber){
 		case 1:{
 				AnswerHint.text =  PlayerPrefs.GetString ("firstName");
-				break;
+                    NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("firstName"));
+                    break;
 			}
 		case 2:
 			{
@@ -112,9 +119,11 @@ public class Level1B : MonoBehaviour {
 
     IEnumerator DolphinUp()
     {
-        for(int i = 0; i < dolphinAnim.Count; i++)
-        dolphinAnim[i].Play("Dolphin-Idle");
+        m_Dolphin = DolphinState.Up;
 
+        for (int i = 0; i < dolphinAnim.Count; i++)
+        dolphinAnim[i].Play("Dolphin-Idle");
+        
         StartCoroutine(DolphinIdle());
         
         for(int i = 0; i < waterSprout.Length; i++)
@@ -130,13 +139,18 @@ public class Level1B : MonoBehaviour {
 
     IEnumerator DolphinIdle()
     {
+        m_Dolphin = DolphinState.Idle;
+
         yield return new WaitForSeconds(1);
         for (int i = 0; i < dolphinAnim.Count; i++)
             dolphinAnim[i].Play("Dolphin-Up");
-
+        
         yield return new WaitForSeconds(1);
         for (int i = 0; i < waterSprout.Length; i++)
             waterSprout[i].SetActive(true);
+
+        for(int i = 0; i < m_Dolphins.Length; i++)
+        dolphinIdlePos[i] = m_Dolphins[i].transform.position;
 
         isSprouting = true;
 
@@ -151,6 +165,8 @@ public class Level1B : MonoBehaviour {
 
     IEnumerator DolphinDown()
     {
+        m_Dolphin = DolphinState.Down;
+
         for (int i = 0; i < anim.Count; i++)
             anim[i].SetTrigger("End");
 
@@ -162,11 +178,19 @@ public class Level1B : MonoBehaviour {
         for (int i = 0; i < waterSprout.Length; i++)
             waterSprout[i].SetActive(false);
 
-        yield return new WaitForSeconds(.20f);
-     for(int i = 0; i < dolphinAnim.Count; i ++)
+        yield return new WaitForSeconds(.20f);      
+
+        for (int i = 0; i < dolphinAnim.Count; i ++)
             dolphinAnim[i].Play("Dolphin-Down");
+
+      //  for (int i = 0; i < m_Dolphins.Length; i++)
+            //m_Dolphins[i].transform.localPosition = Vector3.zero;//dolphinIdlePos[i];
+
         yield return new WaitForSeconds(1);
-        
+
+        for (int i = 0; i < m_Dolphins.Length; i++)
+            m_Dolphins[i].transform.localPosition = dolphinPos[i];
+
         StartCoroutine(DolphinUp());
 
     }
@@ -175,50 +199,61 @@ public class Level1B : MonoBehaviour {
     {
         StartCoroutine(DolphinDown());
         choiceNames[0].GetComponent<Button>().interactable = false;
-        /*    if (answerButton == 0)
-            {
+        if (answerButton == 0)
+        {
+            NextLetter();
+            UIManager.instance.ScorePoints();
+        }
+        else
+        {
+            //Miss++;
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
-                ScorePoints();
-            }
-
-            else
-            {
-            }*/
+        }
     }
 
     public void Choice2()
     {
-        //if (animTime >= animClip[0].clip.length)
-        // {
+    
         StartCoroutine(DolphinDown());
         choiceNames[1].GetComponent<Button>().interactable = false;
-        //}
-        //ButtonAnim1.SetBool ("Clicked", true);
 
-        /*	if (answerButton == 1)
-            {
-                NextLetter ();
-                ScorePoints ();	
-            }
-
-            else
-            {
-            }*/
+        if (answerButton == 1)
+        {
+            NextLetter();
+            UIManager.instance.ScorePoints();
+        }
+        else
+        {
+           // Miss++;
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 3)
+                NextLetter();
+        }
     }
 
 	public void Choice3()
     {
         StartCoroutine(DolphinDown());
         choiceNames[2].GetComponent<Button>().interactable = false;
-       /* if (answerButton == 2)
+
+        if (answerButton == 2)
         {
-			NextLetter ();
-			ScorePoints ();	
-		}
+            NextLetter();
+            UIManager.instance.ScorePoints();
+        }
         else
-        {			   
-		}*/
-	}
+        {
+         //   Miss++;
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 3)
+                NextLetter();
+        }
+    }
 
 	public void NextLetter()
     {

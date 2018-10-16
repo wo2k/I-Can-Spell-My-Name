@@ -157,6 +157,7 @@ public class UIManager : MonoBehaviour {
                     LevelManager.instance.subLevelPassed1++;
                     PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
                     PlayerPrefs.SetInt("HasWonAlready 1", BoolToInt(hasWonAlready[hasWonIndex]));
+                    LevelManager.instance.hasLockedBefore = false;
                 }
                 else
                     return;
@@ -168,6 +169,7 @@ public class UIManager : MonoBehaviour {
                     LevelManager.instance.subLevelPassed1++;
                     PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
                     PlayerPrefs.SetInt("HasWonAlready 2", BoolToInt(hasWonAlready[hasWonIndex]));
+                    LevelManager.instance.hasLockedBefore = false;
                 }
                 else
                     return;
@@ -179,6 +181,7 @@ public class UIManager : MonoBehaviour {
                     LevelManager.instance.subLevelPassed1++;
                     PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
                     PlayerPrefs.SetInt("HasWonAlready 3", BoolToInt(hasWonAlready[hasWonIndex]));
+                    LevelManager.instance.hasLockedBefore = false;
                 }
                 else
                     return;
@@ -190,6 +193,7 @@ public class UIManager : MonoBehaviour {
                     LevelManager.instance.subLevelPassed1++;
                     PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
                     PlayerPrefs.SetInt("HasWonAlready 4", BoolToInt(hasWonAlready[hasWonIndex]));
+                    LevelManager.instance.hasLockedBefore = false;
                 }
                 else
                     return;
