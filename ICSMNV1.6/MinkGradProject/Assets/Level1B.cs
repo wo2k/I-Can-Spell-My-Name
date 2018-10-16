@@ -4,40 +4,41 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Level1B : MonoBehaviour {
-	
-	public GameObject StartMenu;
-	public GameObject EndMenu;
-	public Text[] AnswersText;
-	public string[] Names;
+
+    public GameObject NameData;
+
+    public Text[] AnswersText;
+	public List<string> Names;
 	public Text AnswerHint;
 	public int answerButton = 0;
 	int answerIndex = 8;
-	public Text timetext;
-	float timer = 60.0f;
-	float minutes = 1;
-	float seconds = 0;
-	int Score = 0;
-	public Text ScoreText;
-	int Multi = 1;
-	int Miss = 0;
-	int Total = 0;
-	public GameObject Tutorial;
-	public GameObject MainMenu;
-    public GameObject PauseMenu;
+    AnimatorStateInfo animState;
+    AnimatorClipInfo[] animClip;
+    public float animTime;
+    public GameObject Tutorial;
+
     bool gameStart;// = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
-    public Animator ButtonAnim1;
-	// Use this for initialization
+    public List<Animator> anim = new List<Animator>();
+    public GameObject[] waterSprout;
+    public GameObject[] m_Dolphins;
+    public bool isSprouting;
+    public List<Animation> dolphinAnim = new List<Animation>();
+    public float dolpAnimTime;
+    public string answer;
+    public Button[] choiceNames;
 
-	public void RestartGame(){
-		EndMenu.SetActive (false);
-		Reset ();
-		gameStart = true;
-	}
+    public enum DolphinState {Up, Idle, Down};
+    public DolphinState m_Dolphin;
 
 	void Start () {
-		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
+
+        NameData = FindObjectOfType<LevelManager>().gameObject;
+        UIManager.instance.StartGame();
+        StartCoroutine(DolphinUp()); 
+
+        int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 
         UIManager.instance.mode = UIManager.subLevels1.Level1B;
 
@@ -62,218 +63,257 @@ public class Level1B : MonoBehaviour {
 				break;
 			}
 		}
+        Names = NameData.GetComponent<NameData>().data;
 
-	}
+        for (int i = 0; i < Names.Count; i++)
+        {
+            //Names [i] =	Names [i].ToUpper ();
+            if (AnswerHint.text == Names[i])
+            {
+                answerIndex = i;
+                AnswersText[answerButton].text = Names[answerIndex];
+                answer = AnswersText[answerButton].text;
+            }
+        }
+
+        for (int i = 0; i < AnswersText.Length; i++)
+        {
+            if (AnswersText[i].text.Length >= 5)
+                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
+            else
+                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+    }
+
+
 	public void ScorePoints(){
-		Score += 100 * Multi;
-		ScoreText.text = Score.ToString ();
-		Total++;
+		//Score += 100 * Multi;
+		//ScoreText.text = Score.ToString ();
+		//Total++;
 	}
 
-	public void Choice1(){
-		if (answerButton == 0) {
+
+    IEnumerator DolphinStates()
+    {
+        switch (m_Dolphin)
+        {
+            case DolphinState.Up:
+                DolphinUp();
+                break;
+            case DolphinState.Idle:
+                DolphinIdle();
+                break;
+            case DolphinState.Down:
+                DolphinDown();
+                break;
+        }
+        yield return null;
+    }
+
+    IEnumerator DolphinUp()
+    {
+        for(int i = 0; i < dolphinAnim.Count; i++)
+        dolphinAnim[i].Play("Dolphin-Idle");
+
+        StartCoroutine(DolphinIdle());
+        
+        for(int i = 0; i < waterSprout.Length; i++)
+        waterSprout[i].SetActive(false);
+
+        isSprouting = false;
+
+        for(int i = 0; i < choiceNames.Length; i++)
+        choiceNames[i].interactable = true;
+
+        yield return null;
+    }
+
+    IEnumerator DolphinIdle()
+    {
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < dolphinAnim.Count; i++)
+            dolphinAnim[i].Play("Dolphin-Up");
+
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < waterSprout.Length; i++)
+            waterSprout[i].SetActive(true);
+
+        isSprouting = true;
+
+        yield return new WaitForSeconds(0.2f);
+        for(int i = 0; i < anim.Count; i++)
+        anim[i].SetTrigger("Idle");
+
+        for (int i = 0; i < choiceNames.Length; i++)
+            choiceNames[i].gameObject.SetActive(true);
+    
+    }
+
+    IEnumerator DolphinDown()
+    {
+        for (int i = 0; i < anim.Count; i++)
+            anim[i].SetTrigger("End");
+
+        for (int i = 0; i < anim.Count; i++)
+            yield return new WaitForSeconds(.30f);
+
+        isSprouting = false;
+
+        for (int i = 0; i < waterSprout.Length; i++)
+            waterSprout[i].SetActive(false);
+
+        yield return new WaitForSeconds(.20f);
+     for(int i = 0; i < dolphinAnim.Count; i ++)
+            dolphinAnim[i].Play("Dolphin-Down");
+        yield return new WaitForSeconds(1);
+        
+        StartCoroutine(DolphinUp());
+
+    }
+
+    public void Choice1()
+    {
+        StartCoroutine(DolphinDown());
+        choiceNames[0].GetComponent<Button>().interactable = false;
+        /*    if (answerButton == 0)
+            {
+                NextLetter();
+                ScorePoints();
+            }
+
+            else
+            {
+            }*/
+    }
+
+    public void Choice2()
+    {
+        //if (animTime >= animClip[0].clip.length)
+        // {
+        StartCoroutine(DolphinDown());
+        choiceNames[1].GetComponent<Button>().interactable = false;
+        //}
+        //ButtonAnim1.SetBool ("Clicked", true);
+
+        /*	if (answerButton == 1)
+            {
+                NextLetter ();
+                ScorePoints ();	
+            }
+
+            else
+            {
+            }*/
+    }
+
+	public void Choice3()
+    {
+        StartCoroutine(DolphinDown());
+        choiceNames[2].GetComponent<Button>().interactable = false;
+       /* if (answerButton == 2)
+        {
 			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
-
-            if (Miss == 3){
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
+			ScorePoints ();	
 		}
-	}
-	public void Choice2(){
-		ButtonAnim1.SetBool ("Clicked", true);
-		if (answerButton == 1) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
-
-            if (Miss == 3){
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
-
-		}
-	}
-	public void Choice3(){
-		if (answerButton == 2) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
-
-            if (Miss == 3){
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
-		}
-	}
-	public void Choice4(){
-		if (answerButton == 3) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
-
-            if (Miss == 3) {
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
-		}
+        else
+        {			   
+		}*/
 	}
 
-	public void NextLetter(){
+	public void NextLetter()
+    {
 		PlaceAnswer ();
-		//	RemoveFirst ();
-		//	SetOtherButtons ();
-
 	}
 
-	/* public void SetOtherButtons(){
-		if (answerButton != 0) {
-			int randomletter = Random.Range (0,Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[0].text = Names[randomletter];
-		}
-		if (answerButton != 1) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[1].text = Names[randomletter];
-		}
-		if (answerButton != 2) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[2].text = Names[randomletter];
-		}
-		if (answerButton != 3) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[3].text = Names[randomletter];
-		}
-	}
-	*/
-
-	public void Reset (){
-		ScoreText.text = "00000";
-		Score = 0;
-		Multi = 1;
-		answerIndex = 8;
-        timetext.text = "1:00";
+	public void Reset ()
+    {	
+		//answerIndex = 8;      
         AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
-		//	SetOtherButtons ();
-		Total = 0;
-		timer = 60.0f;
-		minutes = 1;
-		seconds = 0;
-		Miss = 0;
+		//	SetOtherButtons ();		
 		PlaceAnswer ();
 	}
-	public void StartGame(){
-		StartMenu.SetActive (false);
-		PlaceAnswer();
-		gameStart = true;
-	}
 
-    public void PauseGame()
+
+    public void PlaceAnswer()
     {
-        PauseMenu.SetActive(true);
-        gameStart = false;
-    }
-    public void UnPauseGame()
-    {
-        PauseMenu.SetActive(false);
-        gameStart = true;
-    }
+        NamesChosen = new string[4];
+        answerButton = Random.Range(0, 3);
 
-    public void PlaceAnswer(){
-		NamesChosen = new string[4];
-		answerButton = Random.Range (0, 4);
-		AnswersText[answerButton].text = Names[answerIndex];
-		int ChosenIndex = 0;
-		for (int i = 0; i <= 3; i++) 
-		{
+        AnswersText[answerButton].text = Names[answerIndex];
+        answer = AnswersText[answerButton].text;
 
-			if (answerButton == i) 
-			{
-				NamesChosen[ChosenIndex] = Names[answerIndex];
-				ChosenIndex++;
+        for (int i = 0; i < AnswersText.Length; i++)
+        {
+            if (AnswersText[i].text.Length >= 5)
+                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
+            else
+                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        int ChosenIndex = 0;
+        for (int i = 0; i <= 2; i++)
+        {
 
-			} 
-			else 
-			{
-
-				bool Used = true;
-				int wrongName = 0;
-				while(Used)
-				{
-					wrongName =	Random.Range (0, 8);
-					Used = false;
-					for (int j = 0; j < NamesChosen.Length - 1; j++) 
-					{
-						if (Names [wrongName] == NamesChosen [j]) {
-							Used = true;
-							break;
-						}
-					}
-					if (Used != true) {
-						NamesChosen[ChosenIndex] = Names[wrongName];
-						AnswersText[i].text = Names[wrongName];
-						ChosenIndex++;
-						break;
-					}
-
-
-
-				}
-
-			}
-		}
-	}
-
-	// Update is called once per frame
-	void Update () {
-		if (UIManager.instance.gameStart) {
-
-			if (timer > 0) {
-				timer -= Time.deltaTime;
-				if (timer <= 0)
-					timer = 0;
-			} else if (timer <= 0) {
-                UIManager.instance.GameOver();
+            if (answerButton == i)
+            {
+                NamesChosen[ChosenIndex] = Names[answerIndex];
+                ChosenIndex++;
 
             }
-			minutes = Mathf.Floor (timer / 60);
-			seconds = timer % 60;
+            else
+            {
 
-			if(Mathf.RoundToInt (seconds) < 10 )
-				timetext.text =  Mathf.RoundToInt (minutes).ToString() + ":0" +  Mathf.RoundToInt (seconds).ToString() ;
-			else
-				timetext.text =  Mathf.RoundToInt (minutes).ToString() + ":" + Mathf.RoundToInt (seconds).ToString();
-		}
-	}
+                bool Used = true;
+                int wrongName = 0;
+                while (Used)
+                {
+                    wrongName = Random.Range(0, Names.Count);
+                    //Checks to see if wrong names chosen equals to answer, if it does, choose again
+                    while (Names[wrongName] == answer)
+                        wrongName = Random.Range(0, Names.Count);
+
+                    Used = false;
+                    for (int j = 0; j < NamesChosen.Length; j++)
+                    {
+                        if (Names[wrongName] == NamesChosen[j])
+                        {
+                            Used = true;
+                            break;
+                        }
+                    }
+                    if (Used != true)
+                    {
+                        NamesChosen[ChosenIndex] = Names[wrongName];
+                        AnswersText[i].text = Names[wrongName];
+                        ChosenIndex++;
+                        break;
+                    }
+
+
+
+                }
+
+            }
+        }
+
+    }
+
+
+    private void Update()
+    {
+        if (isSprouting)
+        {
+            for (int i = 0; i < anim.Count; i++)
+            {
+                animClip = anim[i].GetCurrentAnimatorClipInfo(0);
+                animState = anim[i].GetCurrentAnimatorStateInfo(0);
+                animTime = animClip[0].clip.length * animState.normalizedTime;
+            }
+        }
+
+        
+
+    }
+
 }

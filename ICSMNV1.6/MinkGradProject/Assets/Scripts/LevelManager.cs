@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
         {
             UIManager.instance.hasWonAlready[i] = false;
-            PlayerPrefs.SetInt("HasWonAlready", UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
+            PlayerPrefs.SetInt("HasWonAlready " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
         }
 
         hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
@@ -209,7 +209,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
         {
             UIManager.instance.hasWonAlready[i] = false;
-            PlayerPrefs.SetInt("HasWonAlready", UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
+            PlayerPrefs.SetInt("HasWonAlready " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
         }
         hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
 

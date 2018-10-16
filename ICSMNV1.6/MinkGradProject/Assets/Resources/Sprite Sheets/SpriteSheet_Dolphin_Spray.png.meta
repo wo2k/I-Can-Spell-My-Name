@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: 5b8931cefd61cd0499e3b3f7664d44a9
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: SpriteSheet_Dolphin_Spray_0
+    21300002: SpriteSheet_Dolphin_Spray_1
+    21300004: SpriteSheet_Dolphin_Spray_2
+    21300006: SpriteSheet_Dolphin_Spray_3
+    21300008: SpriteSheet_Dolphin_Spray_4
+    21300010: SpriteSheet_Dolphin_Spray_5
+    21300012: SpriteSheet_Dolphin_Spray_6
+    21300014: SpriteSheet_Dolphin_Spray_7
+    21300016: SpriteSheet_Dolphin_Spray_8
+    21300018: SpriteSheet_Dolphin_Spray_9
+    21300020: SpriteSheet_Dolphin_Spray_10
+    21300022: SpriteSheet_Dolphin_Spray_11
+    21300024: SpriteSheet_Dolphin_Spray_12
+    21300026: SpriteSheet_Dolphin_Spray_13
+    21300028: SpriteSheet_Dolphin_Spray_14
+    21300030: SpriteSheet_Dolphin_Spray_15
+    21300032: SpriteSheet_Dolphin_Spray_16
+    21300034: SpriteSheet_Dolphin_Spray_17
+    21300036: SpriteSheet_Dolphin_Spray_18
+    21300038: SpriteSheet_Dolphin_Spray_19
+    21300040: SpriteSheet_Dolphin_Spray_20
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -38,7 +59,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,11 +134,431 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_0
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 3119
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dd1cf3594b601e4ab7c3f5c599d70a8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_1
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 3143
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20d32ee204614d0459609af22783cfc1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_2
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 3166
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14970ab23eac66f4480343f83a2611e7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_3
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 2662
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93eb5661c6d998c49a03a9458d5e243d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_4
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 2670
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e4c6fe87c2e86d419142595a26717ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_5
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 2677
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6a26564d3e7e4c46a8a87260a93966e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_6
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 2157
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 364cfe5bdf14e44498878fae2d68c104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_7
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 2155
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e55e3c02917500242826ca5b1c0ca46e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_8
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 2153
+        width: 200
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a3687fcc6bfd94799fdaa39a2daa1c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_9
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 1617
+        width: 226
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f00cd83342504704688a1a592ba43f43
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_10
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1621
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12fdd6ad63725404b88babb905ba8d70
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_11
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 1619
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3872551085157d48adbbc4c06d93ea7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_12
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 1073
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92e54ba49bf95ba45aba2414bccee604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_13
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 1088
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6803c44b675c5304d951b23f2c949aee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_14
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 1089
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16dd96cf95913e2428b7e3845f6c940c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_15
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 576
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 272aa52c3f9a3804a8d19d081ea0d023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_16
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 580
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab2db9081c53adb4ab8ab801f91a34da
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_17
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 587
+        width: 279
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c05b77c77cf8248909e3b45edc9855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_18
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 73
+        width: 287
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da6056e1b5d40c0419d7fb58773d2e5a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_19
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 66
+        width: 287
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8429da6317d6d6343afd49c0b6cadb44
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_Dolphin_Spray_20
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 57
+        width: 223
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 447f48fcc5e2a7e4999c89f9e66fb152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: dade515905e202a40bb0346fef8decda
     vertices: []
     indices: 
     edges: []

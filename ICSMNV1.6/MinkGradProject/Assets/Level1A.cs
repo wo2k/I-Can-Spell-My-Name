@@ -117,7 +117,7 @@ public class Level1A : MonoBehaviour {
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 2)
+            if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
         }
 	}
@@ -133,7 +133,7 @@ public class Level1A : MonoBehaviour {
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 2)
+            if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
         }
 	}
@@ -149,7 +149,7 @@ public class Level1A : MonoBehaviour {
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 2)
+            if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
         }
 	}
@@ -165,7 +165,7 @@ public class Level1A : MonoBehaviour {
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 2)
+            if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
         }
 	}
