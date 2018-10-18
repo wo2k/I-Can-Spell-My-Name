@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BoatHanlder.cs" />
     <Compile Include="Assets\Case_Control.cs" />
     <Compile Include="Assets\CharacterCreation.cs" />
     <Compile Include="Assets\CharacterSelection.cs" />

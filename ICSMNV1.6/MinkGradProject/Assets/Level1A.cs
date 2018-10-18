@@ -27,14 +27,6 @@ public class Level1A : MonoBehaviour {
 	public string[] NamesChosen;
 
 
-
-
-	public void RestartGame(){
-		EndMenu.SetActive (false);
-		Reset ();
-		gameStart = true;
-	}
-
 	void Start () {
         NameData = FindObjectOfType<LevelManager>().gameObject;
 
@@ -196,22 +188,6 @@ public class Level1A : MonoBehaviour {
 			Misses [1].SetActive (false);
 			Misses [2].SetActive (false);
 	}
-
-	public void StartGame(){
-		StartMenu.SetActive (false);
-		PlaceAnswer();
-		gameStart = true;
-	}
-
-	public void PauseGame(){
-		PauseMenu.SetActive (true);
-		gameStart = false;
-	}
-	public void UnPauseGame(){
-		PauseMenu.SetActive (false);
-		gameStart = true;
-	}
-
 		
 	public void PlaceAnswer(){
 		NamesChosen = new string[4];
