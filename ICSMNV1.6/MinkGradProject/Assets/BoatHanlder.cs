@@ -10,21 +10,25 @@ public class BoatHanlder : MonoBehaviour {
     public int levelSection = 0;
     public GameObject m_Parent;
     public GameObject m_Child;
+    public GameObject m_Waves;
     public int rightBoat = 0;
     public int siblingIndex;
 
     public Level1C level1C;
-	
+
+    public int boatNumber = 1;
 
 
 	void Start ()
     {
         level1C = FindObjectOfType<Level1C>();
-        ReRouteBoat();    
-	}
+        ReRouteBoat();
+    }
 
     public void ReRouteBoat()
     {
+        level1C.hasSpawned[level1C.spawnIndex++] = true;
+
         levelSection = Random.Range(0, 2);
 
         if (levelSection == 0)//Boat cruising to Right
@@ -65,12 +69,11 @@ public class BoatHanlder : MonoBehaviour {
 
     public void SetWaveLane(int boatNumber)
     {
-       // m_Parent.transform.SetParent(m_Waves.transform);
+
 
         switch(boatNumber)
         {
             case 0:
-                // siblingIndex = 1;
                 if (!level1C.rightBoat.Contains(0))
                     level1C.rightBoat.Add(boatNumber);
                 else
@@ -78,10 +81,9 @@ public class BoatHanlder : MonoBehaviour {
                     rightBoat = RandomWithExclusion(0, m_RightBoats.Count, 0);
                     SetWaveLane(rightBoat);
                 }
-                //m_Parent.transform.SetSiblingIndex(siblingIndex);
                 break;
+
             case 1:
-                // siblingIndex = 5;
                 if (!level1C.rightBoat.Contains(1))
                     level1C.rightBoat.Add(boatNumber);
                 else
@@ -89,8 +91,8 @@ public class BoatHanlder : MonoBehaviour {
                     rightBoat = RandomWithExclusion(0, m_RightBoats.Count, 1);
                     SetWaveLane(rightBoat);
                 }
-                // m_Parent.transform.SetSiblingIndex(siblingIndex);
                 break;
+
             case 2:
                 if (!level1C.rightBoat.Contains(2))
                     level1C.rightBoat.Add(boatNumber);
@@ -98,9 +100,7 @@ public class BoatHanlder : MonoBehaviour {
                 {
                     rightBoat = RandomWithExclusion(0, m_RightBoats.Count, 2);
                     SetWaveLane(rightBoat);
-                }
-                // siblingIndex = 7;
-                // m_Parent.transform.SetSiblingIndex(siblingIndex);
+                }                
                 break;
         }
     }

@@ -331,12 +331,9 @@ MonoBehaviour:
   m_Child: {fileID: 1861621408}
   m_Waves: {fileID: 74299444}
   rightBoat: 0
-  leftBoat: 0
   siblingIndex: 0
-  taken: 000000000000
-  rBoat: 000000000000000000000000
-  lBoat: 000000000000000000000000
   level1C: {fileID: 0}
+  boatNumber: 0
 --- !u!1 &74299444 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1580458594504868, guid: 5e330a59bfe867a4a97b5273ff097340,
@@ -464,6 +461,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 76447969}
+--- !u!1 &103036495 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1485574513554604, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 127287748}
 --- !u!1001 &127287748
 Prefab:
   m_ObjectHideFlags: 0
@@ -1029,12 +1031,9 @@ MonoBehaviour:
   m_Child: {fileID: 0}
   m_Waves: {fileID: 0}
   rightBoat: 0
-  leftBoat: 0
   siblingIndex: 0
-  taken: 
-  rBoat: 
-  lBoat: 
   level1C: {fileID: 0}
+  boatNumber: 0
 --- !u!111 &452828689
 Animation:
   m_ObjectHideFlags: 0
@@ -1080,7 +1079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1537, y: -171.32}
+  m_AnchoredPosition: {x: -1537, y: -166.91}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &617504272
@@ -1113,9 +1112,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1503.66, y: -171.32}
+  m_AnchoredPosition: {x: 1503.66, y: -166.91}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &681214379 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1553235866819726, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 127287748}
+--- !u!1 &743470247 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1782080427284758, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 127287748}
+--- !u!1 &750760156 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1217834760606668, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 127287748}
 --- !u!1 &772497956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1272,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &886373082 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1048386902331820, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 127287748}
 --- !u!1 &904243545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,7 +1363,6 @@ GameObject:
   - component: {fileID: 928321132}
   - component: {fileID: 928321133}
   - component: {fileID: 928321134}
-  - component: {fileID: 928321135}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -1411,24 +1429,9 @@ MonoBehaviour:
   m_Child: {fileID: 772497956}
   m_Waves: {fileID: 74299444}
   rightBoat: 0
-  leftBoat: 0
   siblingIndex: 0
-  taken: 000000000000
-  rBoat: 000000000000000000000000
-  lBoat: 000000000000000000000000
   level1C: {fileID: 0}
---- !u!114 &928321135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 928321131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d2249734c1032b4fae43236f4cd9111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level1C: {fileID: 0}
+  boatNumber: 0
 --- !u!1 &969495862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,6 +1948,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1440599743}
+--- !u!1 &1447778576 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1924645457909624, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 127287748}
 --- !u!1 &1474154808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,12 +2179,9 @@ MonoBehaviour:
   m_Child: {fileID: 8246403}
   m_Waves: {fileID: 74299444}
   rightBoat: 0
-  leftBoat: 0
   siblingIndex: 0
-  taken: 000000000000
-  rBoat: 000000000000000000000000
-  lBoat: 000000000000000000000000
   level1C: {fileID: 0}
+  boatNumber: 0
 --- !u!1 &1713551930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,20 +2245,20 @@ MonoBehaviour:
   - {fileID: 1710343826}
   siblingIndex: 000000000000000000000000
   m_Waves: {fileID: 74299444}
-  waveLaneTaken: 000000000000
-  leftBoat: 000000000000000000000000
+  m_WavesLane:
+  - {fileID: 103036495}
+  - {fileID: 750760156}
+  - {fileID: 1447778576}
+  - {fileID: 886373082}
+  - {fileID: 681214379}
+  - {fileID: 743470247}
   rightBoat: 
-  newWave: 000000
-  index: 0
-  firstRun: 1
-  m_RightBoats:
-  - {fileID: 255017679}
-  - {fileID: 617504272}
-  - {fileID: 1474154808}
-  m_LeftBoats:
-  - {fileID: 1488973032}
-  - {fileID: 455478792}
-  - {fileID: 969495862}
+  time: 0
+  animDuration: 0
+  boatNumber: 
+  boatIndex: 0
+  hasSpawned: 000000
+  spawnIndex: 0
 --- !u!114 &1713551932
 MonoBehaviour:
   m_ObjectHideFlags: 0

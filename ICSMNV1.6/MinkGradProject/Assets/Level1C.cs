@@ -20,15 +20,15 @@ public class Level1C: MonoBehaviour {
     public List<BoatHanlder> m_Boats = new List<BoatHanlder>();
     public int[] siblingIndex;
     public GameObject m_Waves;
-    public bool[] waveLaneTaken;
-    public int[] leftBoat;
     public List<int> rightBoat = new List<int>();
-
+    public float time;
+    public float animDuration;
+    public List<bool> hasSpawned = new List<bool>();
+    public int spawnIndex;
 
     void Start()
     {
         NameData = FindObjectOfType<LevelManager>().gameObject;
-
         UIManager.instance.StartGame();
         UIManager.instance.mode = UIManager.subLevels1.Level1C;
 
@@ -213,286 +213,478 @@ public class Level1C: MonoBehaviour {
     }
 
     #region SetWaves
-    public void SetWaveLane(string boatDir, int boatNumber, string boatName)
+    public void SetWaveLane(int boatDir, int boatNumber, string boatName)
     {
-      //  for (int i = 0; i < m_Boats.Count; i++)
-            //m_Boats[i].transform.parent.SetParent(m_Waves.transform);
+        for (int i = 0; i < m_Boats.Count; i++)
+            m_Boats[i].transform.parent.SetParent(m_Waves.transform);
 
         switch (boatDir)
         {
-            case "Left":
+            case 1:
                 switch (boatNumber)
                 {
                     case 0:
-                        if (waveLaneTaken[0] == false)
-                        {
                             switch (boatName)
                             {
                                 case "Boat1":
-                                    siblingIndex[0] = 1;
-                                    //m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
-                                    leftBoat[0] = boatNumber;
-                                    waveLaneTaken[0] = true;
-                                    break;
+                                switch (m_Boats[0].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[0] = 5;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 2:
+                                        siblingIndex[0] = 5+1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 3:
+                                        siblingIndex[0] = 5+2;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                }                              
+                                break;
+
                                 case "Boat2":
-                                    siblingIndex[1] = 1;
-                                    //m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
-                                    leftBoat[1] = boatNumber;
-                                    waveLaneTaken[0] = true;
-                                    break;
+                                switch (m_Boats[1].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[1] = 5;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 2:
+                                        siblingIndex[1] = 5 + 1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 3:
+                                        siblingIndex[1] = 5 + 2;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                }
+                                break;
+
                                 case "Boat3":
-                                    siblingIndex[2] = 1;
-                                    //m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
-                                    leftBoat[2] = boatNumber;
-                                    waveLaneTaken[0] = true;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (boatName)
-                            {
-                                case "Boat1":
-                                    while (boatNumber == leftBoat[0])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat2":
-                                    while (boatNumber == leftBoat[1])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat3":
-                                    while (boatNumber == leftBoat[2])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                            }
-                        }
+                                switch (m_Boats[2].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[2] = 5;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 2:
+                                        siblingIndex[2] = 5 + 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 3:
+                                        siblingIndex[2] = 5 + 2;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                }
+                                break;
+                            }                        
+                        
                         break;
                     case 1:
-                        if (waveLaneTaken[1] == false)
-                        {
                             switch (boatName)
                             {
                                 case "Boat1":
-                                    siblingIndex[0] = 5;
-                                   // m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
-                                    leftBoat[0] = boatNumber;
-                                    waveLaneTaken[1] = true;
-                                    break;
+                                switch (m_Boats[0].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[0] = 3;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 2:
+                                        siblingIndex[0] = 3 + 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 3:
+                                        siblingIndex[0] = 3 + 2;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                }                               
+                                break;
+
                                 case "Boat2":
-                                    siblingIndex[1] = 5;
-                                    //m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
-                                    leftBoat[1] = boatNumber;
-                                    waveLaneTaken[1] = true;
-                                    break;
+                                switch (m_Boats[1].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[1] = 3;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 2:
+                                        siblingIndex[1] = 3 + 1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 3:
+                                        siblingIndex[1] = 3 + 2;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                }
+                                break;
+
                                 case "Boat3":
-                                    siblingIndex[2] = 5;
-                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
-                                    leftBoat[2] = boatNumber;
-                                    waveLaneTaken[1] = true;
-                                    break;
+                                switch (m_Boats[2].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[2] = 3;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 2:
+                                        siblingIndex[2] = 3 + 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 3:
+                                        siblingIndex[2] = 3 + 2;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                }
+                                break;
                             }
-                        }
-                        else
-                        {
-                            switch (boatName)
-                            {
-                                case "Boat1":
-                                    while (boatNumber == leftBoat[0])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat2":
-                                    while (boatNumber == leftBoat[1])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat3":
-                                    while (boatNumber == leftBoat[2])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                            }
-                        }
+                        
                         break;
                     case 2:
-                        if (waveLaneTaken[2] == false)
-                        {
                             switch (boatName)
                             {
                                 case "Boat1":
-                                    siblingIndex[0] = 7;
-                                   // m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
-                                    leftBoat[0] = boatNumber;
-                                    waveLaneTaken[2] = true;
-                                    break;
+                                switch (m_Boats[0].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[0] = 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 2:
+                                        siblingIndex[0] = 1 + 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 3:
+                                        siblingIndex[0] = 1 + 2;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                }                             
+                                break;
+
                                 case "Boat2":
-                                    siblingIndex[1] = 7;
-                                   // m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
-                                    leftBoat[1] = boatNumber;
-                                    waveLaneTaken[2] = true;
-                                    break;
+                                switch (m_Boats[1].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[1] = 1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 2:
+                                        siblingIndex[1] = 1 + 1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 3:
+                                        siblingIndex[1] = 1 + 2;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                }
+                                break;
+
                                 case "Boat3":
-                                    siblingIndex[2] = 7;
-                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
-                                    leftBoat[2] = boatNumber;
-                                    waveLaneTaken[2] = true;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (boatName)
-                            {
-                                case "Boat1":
-                                    while (boatNumber == leftBoat[0])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat2":
-                                    while (boatNumber == leftBoat[1])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat3":
-                                    while (boatNumber == leftBoat[2])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                            }
-                        }
+                                switch (m_Boats[2].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[2] = 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 2:
+                                        siblingIndex[2] = 1 + 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 3:
+                                        siblingIndex[2] = 1 + 2;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                }
+                                break;
+                            }                        
                         break;
                 }
                 break;
-            case "Right":
+            case 0:
                 switch (boatNumber)
                 {
                     case 0:
-                        if (waveLaneTaken[3] == false)
-                        {
                             switch (boatName)
                             {
                                 case "Boat1":
-                                    siblingIndex[0] = 1;
-                                  //  m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
-                                    rightBoat[0] = boatNumber;
-                                    waveLaneTaken[3] = true;
-                                    break;
+                                switch (m_Boats[0].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[0] = 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 2:
+                                        siblingIndex[0] = 1 + 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 3:
+                                        siblingIndex[0] = 1 + 2;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                }
+                                break;
+
                                 case "Boat2":
-                                    siblingIndex[1] = 1;
-                                    rightBoat[1] = boatNumber;
-                                  //  m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
-                                    waveLaneTaken[3] = true;
-                                    break;
+                                switch (m_Boats[1].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[1] = 1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 2:
+                                        siblingIndex[1] = 1 + 1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 3:
+                                        siblingIndex[1] = 1 + 2;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                }
+                                break;
+
                                 case "Boat3":
-                                    siblingIndex[2] = 1;
-                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
-                                    rightBoat[2] = boatNumber;
-                                    waveLaneTaken[3] = true;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (boatName)
-                            {
-                                case "Boat1":
-                                    while (boatNumber == leftBoat[0])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat2":
-                                    while (boatNumber == leftBoat[1])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat3":
-                                    while (boatNumber == leftBoat[2])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                            }
-                        }
+                                switch (m_Boats[2].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[2] = 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 2:
+                                        siblingIndex[2] = 1 + 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 3:
+                                        siblingIndex[2] = 1 + 2;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                }
+                                break;
+                            }                       
                         break;
                     case 1:
-                        if (waveLaneTaken[4] == false)
-                        {
                             switch (boatName)
                             {
                                 case "Boat1":
-                                    siblingIndex[0] = 5;
-                                    rightBoat[0] = boatNumber;
-                                   // m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
-                                    waveLaneTaken[4] = true;
-                                    break;
+                                switch (m_Boats[0].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[0] = 3;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 2:
+                                        siblingIndex[0] = 3 + 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 3:
+                                        siblingIndex[0] = 3  +2;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                }                           
+                                break;
+
                                 case "Boat2":
-                                    siblingIndex[1] = 5;
-                                  //  m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
-                                    rightBoat[1] = boatNumber;
-                                    waveLaneTaken[4] = true;
-                                    break;
+                                switch (m_Boats[1].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[1] = 3;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 2:
+                                        siblingIndex[1] = 3 + 1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 3:
+                                        siblingIndex[1] = 3 + 2;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                }
+                                break;
+
                                 case "Boat3":
-                                    siblingIndex[2] = 5;
-                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
-                                    rightBoat[2] = boatNumber;
-                                    waveLaneTaken[4] = true;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (boatName)
-                            {
-                                case "Boat1":
-                                    while (boatNumber == leftBoat[0])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat2":
-                                    while (boatNumber == leftBoat[1])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat3":
-                                    while (boatNumber == leftBoat[2])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                            }
-                        }
+                                switch (m_Boats[2].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[2] = 3;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 2:
+                                        siblingIndex[2] = 3 + 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 3:
+                                        siblingIndex[2] = 3 + 2;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                }
+                                break;
+                            }                       
                         break;
                     case 2:
-                        if (waveLaneTaken[5] == false)
-                        {
                             switch (boatName)
                             {
                                 case "Boat1":
-                                    siblingIndex[0] = 7;
-                                 //   m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
-                                    rightBoat[0] = boatNumber;
-                                    waveLaneTaken[5] = true;
-                                    break;
+                                switch (m_Boats[0].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[0] = 6;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 2:
+                                        siblingIndex[0] = 6 + 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                    case 3:
+                                        siblingIndex[0] = 6 + 1;
+                                        m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                        m_Boats[0].siblingIndex = siblingIndex[0];
+                                        break;
+                                }
+                                
+                                break;
+
                                 case "Boat2":
-                                    siblingIndex[1] = 7;
-                                   // m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
-                                    rightBoat[1] = boatNumber;
-                                    waveLaneTaken[5] = true;
-                                    break;
+                                switch (m_Boats[1].boatNumber)
+                                {                       
+                                    case 1:
+                                        siblingIndex[1] = 5;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 2:
+                                        siblingIndex[1] = 5+1;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                    case 3:
+                                        siblingIndex[1] = 5+2;
+                                        m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                        m_Boats[1].siblingIndex = siblingIndex[1];
+                                        break;
+                                }                              
+                                break;
+
                                 case "Boat3":
-                                    siblingIndex[2] = 7;
-                                   // m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
-                                    rightBoat[2] = boatNumber;
-                                    waveLaneTaken[5] = true;
-                                    break;
+                                switch (m_Boats[2].boatNumber)
+                                {
+                                    case 1:
+                                        siblingIndex[2] = 6;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 2:
+                                        siblingIndex[2] = 6 + 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                    case 3:
+                                        siblingIndex[2] = 6 + 1;
+                                        m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                        m_Boats[2].siblingIndex = siblingIndex[2];
+                                        break;
+                                }
+                                break;
                             }
-                        }
-                        else
-                        {
-                            switch (boatName)
-                            {
-                                case "Boat1":
-                                    while (boatNumber == leftBoat[0])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat2":
-                                    while (boatNumber == leftBoat[1])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                                case "Boat3":
-                                    while (boatNumber == leftBoat[2])
-                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
-                                    break;
-                            }
-                        }
+                        
                         break;
                 }
+                break;
+        }
+
+    }
+
+
+    public void SetBoatNumber(string boatName)
+    {
+        switch (boatName)
+        {
+            case "Boat1":
+                if (m_Boats[0].transform.parent.GetSiblingIndex() < m_Boats[1].transform.parent.GetSiblingIndex() && m_Boats[0].transform.parent.GetSiblingIndex() < m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[0].boatNumber = 1;
+
+                if (m_Boats[0].transform.parent.GetSiblingIndex() > m_Boats[1].transform.parent.GetSiblingIndex() && m_Boats[0].transform.parent.GetSiblingIndex() < m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[0].boatNumber = 2;
+
+                if (m_Boats[0].transform.parent.GetSiblingIndex() < m_Boats[1].transform.parent.GetSiblingIndex() && m_Boats[0].transform.parent.GetSiblingIndex() > m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[0].boatNumber = 2;
+
+                if (m_Boats[0].transform.parent.GetSiblingIndex() > m_Boats[1].transform.parent.GetSiblingIndex() && m_Boats[0].transform.parent.GetSiblingIndex() > m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[0].boatNumber = 3;
+                break;
+
+            case "Boat2":
+                if (m_Boats[1].transform.parent.GetSiblingIndex() < m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[1].transform.parent.GetSiblingIndex() < m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[1].boatNumber = 1;
+
+                if (m_Boats[1].transform.parent.GetSiblingIndex() > m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[1].transform.parent.GetSiblingIndex() < m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[1].boatNumber = 2;
+
+                if (m_Boats[1].transform.parent.GetSiblingIndex() < m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[1].transform.parent.GetSiblingIndex() > m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[1].boatNumber = 2;
+
+                if (m_Boats[1].transform.parent.GetSiblingIndex() > m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[1].transform.parent.GetSiblingIndex() > m_Boats[2].transform.parent.GetSiblingIndex())
+                    m_Boats[1].boatNumber = 3;
+                break;
+
+            case "Boat3":
+                if (m_Boats[2].transform.parent.GetSiblingIndex() < m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[2].transform.parent.GetSiblingIndex() < m_Boats[1].transform.parent.GetSiblingIndex())
+                    m_Boats[2].boatNumber = 1;
+
+                if (m_Boats[2].transform.parent.GetSiblingIndex() < m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[2].transform.parent.GetSiblingIndex() > m_Boats[1].transform.parent.GetSiblingIndex())
+                    m_Boats[2].boatNumber = 2;
+
+                if (m_Boats[2].transform.parent.GetSiblingIndex() > m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[2].transform.parent.GetSiblingIndex() < m_Boats[1].transform.parent.GetSiblingIndex())
+                    m_Boats[2].boatNumber = 2;
+
+                if (m_Boats[2].transform.parent.GetSiblingIndex() > m_Boats[0].transform.parent.GetSiblingIndex() && m_Boats[2].transform.parent.GetSiblingIndex() > m_Boats[1].transform.parent.GetSiblingIndex())
+                    m_Boats[2].boatNumber = 3;
                 break;
         }
 
@@ -579,8 +771,66 @@ public class Level1C: MonoBehaviour {
         }
     }
 
+    private bool IsAllSpawningComplete()
+    {
+        for (int i = 0; i < hasSpawned.Count; ++i)
+        {
+            if (hasSpawned[i] == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void NewWave()
+    {
+        if (IsAllSpawningComplete())
+        {
+            for (int i = 0; i < m_Boats.Count; i++)
+                SetWaveLane(m_Boats[i].levelSection, m_Boats[i].rightBoat, m_Boats[i].transform.parent.name);
+
+            for (int i = 0; i < m_Boats.Count; i++)
+            {
+                SetBoatNumber(m_Boats[i].transform.parent.name);
+            }
+
+            for (int i = 0; i < m_Boats.Count; i++)
+                SetWaveLane(m_Boats[i].levelSection, m_Boats[i].rightBoat, m_Boats[i].transform.parent.name);
+
+            for (int i = 0; i < m_Boats.Count; i++)
+            {
+                SetBoatNumber(m_Boats[i].transform.parent.name);
+            }
+
+            for (int i = 0; i < m_Boats.Count; i++)
+                SetWaveLane(m_Boats[i].levelSection, m_Boats[i].rightBoat, m_Boats[i].transform.parent.name);
+
+            for (int i = 0; i < hasSpawned.Count; i++)
+            {
+                hasSpawned[i] = false;
+            }
+
+            spawnIndex = 0;
+        }
+    }
+
     void Update()
     {
+        time += Time.deltaTime;
+        animDuration = m_Boats[1].GetComponent<Animation>().clip.length;
+        animDuration -= time;
+
+        if (animDuration <= 0.0f)
+        {
+            NextLetter();
+            rightBoat.Clear();
+            time = 0;
+
+        }
+
+        NewWave();
 
     }
 

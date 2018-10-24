@@ -13,18 +13,9 @@ public class WaveComplete : MonoBehaviour {
         level1C = FindObjectOfType<Level1C>();
     }
 
+
     private void Update()
     {
-        time += Time.deltaTime;
-        animDuration = gameObject.GetComponent<Animation>().clip.length;
-        animDuration -= time;
 
-            if (animDuration <= 0.0f)
-            {
-                level1C.NextLetter();
-                level1C.rightBoat.Clear();
-                time = 0;
-            }
-            
     }
 }
