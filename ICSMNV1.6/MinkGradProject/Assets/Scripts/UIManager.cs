@@ -356,6 +356,23 @@ public class UIManager : MonoBehaviour {
         LevelManager.instance.CheckAnswer(true, seahorseAnim);
     }
 
+/// <summary>
+/// Specific to levels that have more than 3 Correct Answers
+/// </summary>
+/// <param name="correctAnswer"> Total amount of answers before game is won </param>
+    public void ScorePoints(int correctAnswer)
+    {
+        score += 1;
+        scoreText.text = score.ToString();
+        total++;
+        LevelManager.instance.CheckAnswer(true, seahorseAnim, correctAnswer);
+    }
+
+    public void BonusPoints()
+    {
+        score += 4;
+        scoreText.text = score.ToString();
+    }
     public int BoolToInt(bool value)
     {
         if (value)

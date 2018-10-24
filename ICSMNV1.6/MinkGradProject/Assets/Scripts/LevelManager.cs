@@ -357,6 +357,27 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void CheckAnswer(bool isCorrect, Animator seahorseAnim, int answerAmount)
+    {
+
+
+        if (isCorrect)
+        {
+            SoundManagement.TriggerEvent("PlayCorrect");
+            correctAnswerPoints++;
+            seahorseAnim.SetTrigger("Wink");
+            seahorseAnim.SetTrigger("Idle");
+            if (correctAnswerPoints >= answerAmount)
+                UIManager.instance.WinGame();
+        }
+
+        else
+        {
+            SoundManagement.TriggerEvent("PlayWrongAnswer");
+            VibrateOnHandHeld();
+        }
+    }
+
     public void CheckAnswer(bool isCorrect, bool isTutorial, int heartsQty, Animator seahorseAnim)
     {
 

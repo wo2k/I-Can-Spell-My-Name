@@ -23,8 +23,15 @@ public class Level1C: MonoBehaviour {
     public List<int> rightBoat = new List<int>();
     public float time;
     public float animDuration;
+    public float speedBoatTimer;
     public List<bool> hasSpawned = new List<bool>();
     public int spawnIndex;
+    public Animation speedBoatAnim;
+    public bool playedSpeedBoat = false;
+    public Vector3 speedBoatPos;
+    public GameObject[] speedBoatSpawner;
+    public int speedBoatSection;
+    public GameObject speedBoatText;
 
     void Start()
     {
@@ -85,6 +92,7 @@ public class Level1C: MonoBehaviour {
         }
 
         NextLetter();
+        InvokeRepeating("PlaySpeedBoat", 5.0f, 5.0f);
     }
 
     public void Choice1()
@@ -93,28 +101,32 @@ public class Level1C: MonoBehaviour {
         if (answerButton == 0)
         {
             NextLetter();
-            UIManager.instance.ScorePoints();
+            UIManager.instance.ScorePoints(5);
             rightBoat.Clear();
+            time = 0;
             for (int i = 0; i < m_Boats.Count; i++)
             {
                 m_Boats[i].ReRouteBoat();
                 m_Boats[i].RestartAnimation();
             }
+            NewWave();
         }
         else
         {
           //  Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 3)
+            if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
                 rightBoat.Clear();
+                time = 0;
                 for (int i = 0; i < m_Boats.Count; i++)
                 {
                     m_Boats[i].ReRouteBoat();
                     m_Boats[i].RestartAnimation();
                 }
+                NewWave();
             }
         }
     }
@@ -124,28 +136,32 @@ public class Level1C: MonoBehaviour {
         if (answerButton == 1)
         {
             NextLetter();
-            UIManager.instance.ScorePoints();
+            UIManager.instance.ScorePoints(5);
             rightBoat.Clear();
+            time = 0;
             for (int i = 0; i < m_Boats.Count; i++)
             {
                 m_Boats[i].ReRouteBoat();
                 m_Boats[i].RestartAnimation();
             }
+            NewWave();
         }
         else
         {
             //Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 3)
+            if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
                 rightBoat.Clear();
+                time = 0;
                 for (int i = 0; i < m_Boats.Count; i++)
                 {
                     m_Boats[i].ReRouteBoat();
                     m_Boats[i].RestartAnimation();
                 }
+                NewWave();
             }
         }
     }
@@ -155,28 +171,32 @@ public class Level1C: MonoBehaviour {
         if (answerButton == 2)
         {
             NextLetter();
-            UIManager.instance.ScorePoints();
+            UIManager.instance.ScorePoints(5);
             rightBoat.Clear();
+            time = 0;
             for (int i = 0; i < m_Boats.Count; i++)
             {
                 m_Boats[i].ReRouteBoat();
                 m_Boats[i].RestartAnimation();
             }
+            NewWave();
         }
         else
         {
            // Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 3)
+            if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
                 rightBoat.Clear();
+                time = 0;
                 for (int i = 0; i < m_Boats.Count; i++)
                 {
                     m_Boats[i].ReRouteBoat();
                     m_Boats[i].RestartAnimation();
                 }
+                NewWave();
             }
         }
     }
@@ -185,29 +205,46 @@ public class Level1C: MonoBehaviour {
 
         if (answerButton == 3)
         {
+            
+            //speedBoatPos = speedBoatSpawner[Random.Range(0, 2)].transform.localPosition;
+            speedBoatAnim.transform.parent.localPosition = speedBoatPos;
+            speedBoatAnim.transform.localPosition = Vector3.zero;
+            speedBoatAnim.Stop();
+
             NextLetter();
-            UIManager.instance.ScorePoints();
+            UIManager.instance.ScorePoints(5);
+            UIManager.instance.BonusPoints();
             rightBoat.Clear();
+            time = 0;
             for (int i = 0; i < m_Boats.Count; i++)
             {
                 m_Boats[i].ReRouteBoat();
                 m_Boats[i].RestartAnimation();
             }
+
+            NewWave();
         }
         else
         {
-            //Miss++;
+           
+           // speedBoatPos = speedBoatSpawner[Random.Range(0, 2)].transform.localPosition;
+            speedBoatAnim.transform.parent.localPosition = speedBoatPos;
+            speedBoatAnim.transform.localPosition = Vector3.zero;
+            speedBoatAnim.Stop();
+
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 3)
+            if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
                 rightBoat.Clear();
+                time = 0;
                 for (int i = 0; i < m_Boats.Count; i++)
                 {
                     m_Boats[i].ReRouteBoat();
                     m_Boats[i].RestartAnimation();
                 }
+                NewWave();
             }
         }
     }
@@ -816,6 +853,30 @@ public class Level1C: MonoBehaviour {
         }
     }
 
+    public void PlaySpeedBoat()
+    {
+        speedBoatSection = Random.Range(0, 2);
+
+        if(speedBoatSection == 0)//Right
+        {
+            speedBoatPos = speedBoatSpawner[0].transform.localPosition;
+            speedBoatAnim.transform.parent.localPosition = speedBoatPos;
+            speedBoatAnim.transform.parent.rotation = new Quaternion(0, 0, 0, 0);
+            speedBoatText.transform.localEulerAngles = new Vector3(0, 0, 0);
+            speedBoatAnim.Play();
+        }
+
+        if (speedBoatSection == 1)//Left
+        {
+            speedBoatPos = speedBoatSpawner[1].transform.localPosition;
+            speedBoatAnim.transform.parent.localPosition = speedBoatPos;
+            speedBoatAnim.transform.parent.rotation = new Quaternion(0, -180, 0, 0);
+            speedBoatText.transform.localEulerAngles = new Vector3(0, -180, 0);
+            speedBoatAnim.Play();
+        }
+
+    }
+
     void Update()
     {
         time += Time.deltaTime;
@@ -831,6 +892,9 @@ public class Level1C: MonoBehaviour {
         }
 
         NewWave();
+
+
+            
 
     }
 
