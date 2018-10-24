@@ -135,6 +135,7 @@
     <Compile Include="Assets\TutorialManager.cs" />
     <Compile Include="Assets\TypedLetter.cs" />
     <Compile Include="Assets\UpdateSound.cs" />
+    <Compile Include="Assets\WaveComplete.cs" />
     <Compile Include="Assets\Win.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,6 +17,13 @@ public class Level1C: MonoBehaviour {
 	public Animator ButtonAnim1;
     public List<string> Names;
     public string answer;
+    public List<BoatHanlder> m_Boats = new List<BoatHanlder>();
+    public int[] siblingIndex;
+    public GameObject m_Waves;
+    public bool[] waveLaneTaken;
+    public int[] leftBoat;
+    public List<int> rightBoat = new List<int>();
+
 
     void Start()
     {
@@ -76,6 +83,8 @@ public class Level1C: MonoBehaviour {
             else
                 AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
+
+        NextLetter();
     }
 
     public void Choice1()
@@ -85,8 +94,12 @@ public class Level1C: MonoBehaviour {
         {
             NextLetter();
             UIManager.instance.ScorePoints();
-            for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+            rightBoat.Clear();
+            for (int i = 0; i < m_Boats.Count; i++)
+            {
+                m_Boats[i].ReRouteBoat();
+                m_Boats[i].RestartAnimation();
+            }
         }
         else
         {
@@ -96,8 +109,12 @@ public class Level1C: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 3)
             {
                 NextLetter();
-                for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                    FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+                rightBoat.Clear();
+                for (int i = 0; i < m_Boats.Count; i++)
+                {
+                    m_Boats[i].ReRouteBoat();
+                    m_Boats[i].RestartAnimation();
+                }
             }
         }
     }
@@ -108,8 +125,12 @@ public class Level1C: MonoBehaviour {
         {
             NextLetter();
             UIManager.instance.ScorePoints();
-            for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+            rightBoat.Clear();
+            for (int i = 0; i < m_Boats.Count; i++)
+            {
+                m_Boats[i].ReRouteBoat();
+                m_Boats[i].RestartAnimation();
+            }
         }
         else
         {
@@ -119,8 +140,12 @@ public class Level1C: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 3)
             {
                 NextLetter();
-                for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                    FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+                rightBoat.Clear();
+                for (int i = 0; i < m_Boats.Count; i++)
+                {
+                    m_Boats[i].ReRouteBoat();
+                    m_Boats[i].RestartAnimation();
+                }
             }
         }
     }
@@ -131,8 +156,12 @@ public class Level1C: MonoBehaviour {
         {
             NextLetter();
             UIManager.instance.ScorePoints();
-            for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+            rightBoat.Clear();
+            for (int i = 0; i < m_Boats.Count; i++)
+            {
+                m_Boats[i].ReRouteBoat();
+                m_Boats[i].RestartAnimation();
+            }
         }
         else
         {
@@ -142,8 +171,12 @@ public class Level1C: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 3)
             {
                 NextLetter();
-                for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                    FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+                rightBoat.Clear();
+                for (int i = 0; i < m_Boats.Count; i++)
+                {
+                    m_Boats[i].ReRouteBoat();
+                    m_Boats[i].RestartAnimation();
+                }
             }
         }
     }
@@ -154,8 +187,12 @@ public class Level1C: MonoBehaviour {
         {
             NextLetter();
             UIManager.instance.ScorePoints();
-            for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+            rightBoat.Clear();
+            for (int i = 0; i < m_Boats.Count; i++)
+            {
+                m_Boats[i].ReRouteBoat();
+                m_Boats[i].RestartAnimation();
+            }
         }
         else
         {
@@ -165,32 +202,319 @@ public class Level1C: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 3)
             {
                 NextLetter();
-                for (int i = 0; i < FindObjectsOfType<BoatHanlder>().Length; i++)
-                    FindObjectsOfType<BoatHanlder>()[i].ReRouteBoat();
+                rightBoat.Clear();
+                for (int i = 0; i < m_Boats.Count; i++)
+                {
+                    m_Boats[i].ReRouteBoat();
+                    m_Boats[i].RestartAnimation();
+                }
             }
         }
     }
 
+    #region SetWaves
+    public void SetWaveLane(string boatDir, int boatNumber, string boatName)
+    {
+      //  for (int i = 0; i < m_Boats.Count; i++)
+            //m_Boats[i].transform.parent.SetParent(m_Waves.transform);
+
+        switch (boatDir)
+        {
+            case "Left":
+                switch (boatNumber)
+                {
+                    case 0:
+                        if (waveLaneTaken[0] == false)
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    siblingIndex[0] = 1;
+                                    //m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                    leftBoat[0] = boatNumber;
+                                    waveLaneTaken[0] = true;
+                                    break;
+                                case "Boat2":
+                                    siblingIndex[1] = 1;
+                                    //m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                    leftBoat[1] = boatNumber;
+                                    waveLaneTaken[0] = true;
+                                    break;
+                                case "Boat3":
+                                    siblingIndex[2] = 1;
+                                    //m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                    leftBoat[2] = boatNumber;
+                                    waveLaneTaken[0] = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    while (boatNumber == leftBoat[0])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat2":
+                                    while (boatNumber == leftBoat[1])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat3":
+                                    while (boatNumber == leftBoat[2])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                            }
+                        }
+                        break;
+                    case 1:
+                        if (waveLaneTaken[1] == false)
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    siblingIndex[0] = 5;
+                                   // m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                    leftBoat[0] = boatNumber;
+                                    waveLaneTaken[1] = true;
+                                    break;
+                                case "Boat2":
+                                    siblingIndex[1] = 5;
+                                    //m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                    leftBoat[1] = boatNumber;
+                                    waveLaneTaken[1] = true;
+                                    break;
+                                case "Boat3":
+                                    siblingIndex[2] = 5;
+                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                    leftBoat[2] = boatNumber;
+                                    waveLaneTaken[1] = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    while (boatNumber == leftBoat[0])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat2":
+                                    while (boatNumber == leftBoat[1])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat3":
+                                    while (boatNumber == leftBoat[2])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                            }
+                        }
+                        break;
+                    case 2:
+                        if (waveLaneTaken[2] == false)
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    siblingIndex[0] = 7;
+                                   // m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                    leftBoat[0] = boatNumber;
+                                    waveLaneTaken[2] = true;
+                                    break;
+                                case "Boat2":
+                                    siblingIndex[1] = 7;
+                                   // m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                    leftBoat[1] = boatNumber;
+                                    waveLaneTaken[2] = true;
+                                    break;
+                                case "Boat3":
+                                    siblingIndex[2] = 7;
+                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                    leftBoat[2] = boatNumber;
+                                    waveLaneTaken[2] = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    while (boatNumber == leftBoat[0])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat2":
+                                    while (boatNumber == leftBoat[1])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat3":
+                                    while (boatNumber == leftBoat[2])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                break;
+            case "Right":
+                switch (boatNumber)
+                {
+                    case 0:
+                        if (waveLaneTaken[3] == false)
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    siblingIndex[0] = 1;
+                                  //  m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                    rightBoat[0] = boatNumber;
+                                    waveLaneTaken[3] = true;
+                                    break;
+                                case "Boat2":
+                                    siblingIndex[1] = 1;
+                                    rightBoat[1] = boatNumber;
+                                  //  m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                    waveLaneTaken[3] = true;
+                                    break;
+                                case "Boat3":
+                                    siblingIndex[2] = 1;
+                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                    rightBoat[2] = boatNumber;
+                                    waveLaneTaken[3] = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    while (boatNumber == leftBoat[0])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat2":
+                                    while (boatNumber == leftBoat[1])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat3":
+                                    while (boatNumber == leftBoat[2])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                            }
+                        }
+                        break;
+                    case 1:
+                        if (waveLaneTaken[4] == false)
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    siblingIndex[0] = 5;
+                                    rightBoat[0] = boatNumber;
+                                   // m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                    waveLaneTaken[4] = true;
+                                    break;
+                                case "Boat2":
+                                    siblingIndex[1] = 5;
+                                  //  m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                    rightBoat[1] = boatNumber;
+                                    waveLaneTaken[4] = true;
+                                    break;
+                                case "Boat3":
+                                    siblingIndex[2] = 5;
+                                  //  m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                    rightBoat[2] = boatNumber;
+                                    waveLaneTaken[4] = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    while (boatNumber == leftBoat[0])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat2":
+                                    while (boatNumber == leftBoat[1])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat3":
+                                    while (boatNumber == leftBoat[2])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                            }
+                        }
+                        break;
+                    case 2:
+                        if (waveLaneTaken[5] == false)
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    siblingIndex[0] = 7;
+                                 //   m_Boats[0].transform.parent.SetSiblingIndex(siblingIndex[0]);
+                                    rightBoat[0] = boatNumber;
+                                    waveLaneTaken[5] = true;
+                                    break;
+                                case "Boat2":
+                                    siblingIndex[1] = 7;
+                                   // m_Boats[1].transform.parent.SetSiblingIndex(siblingIndex[1]);
+                                    rightBoat[1] = boatNumber;
+                                    waveLaneTaken[5] = true;
+                                    break;
+                                case "Boat3":
+                                    siblingIndex[2] = 7;
+                                   // m_Boats[2].transform.parent.SetSiblingIndex(siblingIndex[2]);
+                                    rightBoat[2] = boatNumber;
+                                    waveLaneTaken[5] = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (boatName)
+                            {
+                                case "Boat1":
+                                    while (boatNumber == leftBoat[0])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat2":
+                                    while (boatNumber == leftBoat[1])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                                case "Boat3":
+                                    while (boatNumber == leftBoat[2])
+                                        boatNumber = RandomWithExclusion(0, m_Boats.Count, boatNumber);
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                break;
+        }
+
+    }
+    #endregion
+
+    int RandomWithExclusion(int min, int max, int exclusion)
+    {
+        var result = Random.Range(min, max - 1);
+        return (result < exclusion) ? result : result + 1;
+    }
+
     public void NextLetter(){
 		PlaceAnswer ();
-
-	}
+    }
 
 	public void Reset (){
-	//	ScoreText.text = "00000";
-	//	Score = 0;
-		//Multi = 1;
-		//answerIndex = 8;
-      //  timetext.text = "1:00";
+
         AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
-		//	SetOtherButtons ();
-		//Total = 0;
-		//timer = 60.0f;
-		//minutes = 1;
-		//seconds = 0;
-		//Miss = 0;
+
 		PlaceAnswer ();
 	}
 
@@ -253,6 +577,11 @@ public class Level1C: MonoBehaviour {
 
             }
         }
+    }
+
+    void Update()
+    {
+
     }
 
 }
