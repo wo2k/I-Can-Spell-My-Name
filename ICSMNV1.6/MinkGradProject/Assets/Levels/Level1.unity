@@ -253,6 +253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
 --- !u!114 &155432420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +502,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
 --- !u!114 &460541819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +662,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
 --- !u!114 &497699112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,6 +1140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
 --- !u!114 &1722375539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,6 +1389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 1534763241}
+  anim: {fileID: 0}
+  level: 
 --- !u!114 &1822196411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,6 +1538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
 --- !u!114 &2008439458
 MonoBehaviour:
   m_ObjectHideFlags: 0

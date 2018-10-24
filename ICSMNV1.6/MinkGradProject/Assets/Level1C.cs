@@ -92,7 +92,7 @@ public class Level1C: MonoBehaviour {
         }
 
         NextLetter();
-        InvokeRepeating("PlaySpeedBoat", 5.0f, 5.0f);
+        InvokeRepeating("PlaySpeedBoat", 20.0f, 20.0f);
     }
 
     public void Choice1()

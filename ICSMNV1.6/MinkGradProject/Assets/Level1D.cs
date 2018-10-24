@@ -5,262 +5,255 @@ using UnityEngine.UI;
 
 public class Level1D: MonoBehaviour {
 
-	public GameObject StartMenu;
-	public GameObject EndMenu;
-	public Text[] AnswersText;
-	public string[] Names;
+    public GameObject NameData;
+    public Text[] AnswersText;
+    public List<string> Names = new List<string>();
 	public Text AnswerHint;
 	public int answerButton = 0;
 	int answerIndex = 8;
-	public Text timetext;
-	float timer = 60.0f;
-	float minutes = 1;
-	float seconds = 0;
-	int Score = 0;
-	public Text ScoreText;
-	int Multi = 1;
-	int Miss = 0;
-	int Total = 0;
+
 	public GameObject Tutorial;
-	public GameObject MainMenu;
+
 	bool gameStart = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 	public Animator ButtonAnim1;
-	// Use this for initialization
-	public void RestartGame(){
-		EndMenu.SetActive (false);
-		Reset ();
-		gameStart = true;
-	}
+    public string answer;
+    public Slider healthMeter;
 
-	void Start () {
-		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 
+    void Start()
+    {
+        NameData = FindObjectOfType<LevelManager>().gameObject;
+
+        UIManager.instance.StartGame();
         UIManager.instance.mode = UIManager.subLevels1.Level1D;
 
-        switch (LoginNumber){
-		case 1:{
-				AnswerHint.text =  PlayerPrefs.GetString ("firstName");
-				break;
-			}
-		case 2:
-			{
-				AnswerHint.text =  PlayerPrefs.GetString ("secondName");
-				break;
-			}
-		case 3:
-			{
-				AnswerHint.text =  PlayerPrefs.GetString ("thirdName");
-				break;
-			}
-		case 4:
-			{
-				AnswerHint.text =  PlayerPrefs.GetString ("fourthName");
-				break;
-			}
-		}
+        int LoginNumber = PlayerPrefs.GetInt("loginNumber");
+        switch (LoginNumber)
+        {
+            case 1:
+                {
+                    AnswerHint.text = PlayerPrefs.GetString("firstName");
+                    NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("firstName"));
+                    break;
+                }
+            case 2:
+                {
+                    AnswerHint.text = PlayerPrefs.GetString("secondName");
+                    NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("secondName"));
+                    break;
+                }
+            case 3:
+                {
+                    AnswerHint.text = PlayerPrefs.GetString("thirdName");
+                    NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("thirdName"));
+                    break;
+                }
+            case 4:
+                {
+                    AnswerHint.text = PlayerPrefs.GetString("fourthName");
+                    NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("fourthName"));
+                    break;
+                }
+        }
 
-	}
-	public void ScorePoints(){
-		Score += 100 * Multi;
-		ScoreText.text = Score.ToString ();
-		Total++;
-	}
 
-	public void Choice1(){
-		if (answerButton == 0) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
 
-            if (Miss == 3){
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
-		}
-	}
-	public void Choice2(){
-		ButtonAnim1.SetBool ("Clicked", true);
-		if (answerButton == 1) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
+        Names = NameData.GetComponent<NameData>().data;
 
-            if (Miss == 3){
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
+        for (int i = 0; i < Names.Count; i++)
+        {
+            //Names [i] =	Names [i].ToUpper ();
+            if (AnswerHint.text == Names[i])
+            {
+                answerIndex = i;
+                AnswersText[answerButton].text = Names[answerIndex];
+                answer = AnswersText[answerButton].text;
+            }
+        }
 
-		}
-	}
-	public void Choice3(){
-		if (answerButton == 2) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
+        for (int i = 0; i < AnswersText.Length; i++)
+        {
+            if (AnswersText[i].text.Length >= 5)
+                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
+            else
+                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+    }
 
-            if (Miss == 3){
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
-		}
-	}
-	public void Choice4(){
-		if (answerButton == 3) {
-			NextLetter ();
-			ScorePoints ();
-			Multi++;
-		} else {
-			Multi = 1;
-			Miss++;
-            SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
 
-            if (Miss == 3) {
-                UIManager.instance.GameOver();
-                gameStart = false;
-			}
-		}
-	}
+    public void Choice1()
+    {
 
-	public void NextLetter(){
+        if (answerButton == 0)
+        {
+            NextLetter();
+            UIManager.instance.ScorePoints(5);
+            healthMeter.value += .10f;
+        }
+        else
+        {
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 5)
+            {
+                NextLetter();
+                healthMeter.value -= .10f;
+            }
+        }
+    }
+    public void Choice2()
+    {
+
+        if (answerButton == 1)
+        {
+            NextLetter();
+            UIManager.instance.ScorePoints(5);
+            healthMeter.value += .10f;
+        }
+        else
+        {
+            
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 5)
+            {
+                NextLetter();
+                healthMeter.value -= .10f;
+            }
+        }
+    }
+    public void Choice3()
+    {
+
+        if (answerButton == 2)
+        {
+            NextLetter();
+            UIManager.instance.ScorePoints(5);
+            healthMeter.value += .10f;
+        }
+        else
+        {
+            
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 5)
+            {
+                NextLetter();
+                healthMeter.value -= .10f;
+            }
+        }
+    }
+    public void Choice4()
+    {
+
+        if (answerButton == 3)
+        {
+            NextLetter();
+            UIManager.instance.ScorePoints(5);
+            healthMeter.value += .10f;
+        }
+        else
+        {
+            
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            gameStart = false;
+            if (LevelManager.instance.correctAnswerPoints < 5)
+            {
+                NextLetter();
+                healthMeter.value -= .10f;
+            }
+        }
+    }
+
+    public void NextLetter(){
 		PlaceAnswer ();
-		//	RemoveFirst ();
-		//	SetOtherButtons ();
 
 	}
 
-	/* public void SetOtherButtons(){
-		if (answerButton != 0) {
-			int randomletter = Random.Range (0,Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[0].text = Names[randomletter];
-		}
-		if (answerButton != 1) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[1].text = Names[randomletter];
-		}
-		if (answerButton != 2) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[2].text = Names[randomletter];
-		}
-		if (answerButton != 3) {
-			int randomletter = Random.Range (0, Names.Length - 1);
-			while(randomletter == answerIndex)
-				randomletter = Random.Range(0,Names.Length - 1);
-			AnswersText[3].text = Names[randomletter];
-		}
-	}
-	*/
 
 	public void Reset (){
-		ScoreText.text = "00000";
-		Score = 0;
-		Multi = 1;
-		answerIndex = 8;
-        timetext.text = "1:00";
+  
         AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
-		//	SetOtherButtons ();
-		Total = 0;
-		timer = 60.0f;
-		minutes = 1;
-		seconds = 0;
-		Miss = 0;
+
 		PlaceAnswer ();
 	}
-	public void StartGame(){
-		StartMenu.SetActive (false);
-		PlaceAnswer();
-		gameStart = true;
-	}
 
-	public void PlaceAnswer(){
-		NamesChosen = new string[4];
-		answerButton = Random.Range (0, 4);
-		AnswersText[answerButton].text = Names[answerIndex];
-		int ChosenIndex = 0;
-		for (int i = 0; i <= 3; i++) 
-		{
+    public void PlaceAnswer()
+    {
+        NamesChosen = new string[4];
+        answerButton = Random.Range(0, 4);
 
-			if (answerButton == i) 
-			{
-				NamesChosen[ChosenIndex] = Names[answerIndex];
-				ChosenIndex++;
+        AnswersText[answerButton].text = Names[answerIndex];
+        answer = AnswersText[answerButton].text;
 
-			} 
-			else 
-			{
+        for (int i = 0; i < AnswersText.Length; i++)
+        {
+            if (AnswersText[i].text.Length >= 5)
+                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
+            else
+                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        int ChosenIndex = 0;
+        for (int i = 0; i <= 3; i++)
+        {
 
-				bool Used = true;
-				int wrongName = 0;
-				while(Used)
-				{
-					wrongName =	Random.Range (0, 8);
-					Used = false;
-					for (int j = 0; j < NamesChosen.Length - 1; j++) 
-					{
-						if (Names [wrongName] == NamesChosen [j]) {
-							Used = true;
-							break;
-						}
-					}
-					if (Used != true) {
-						NamesChosen[ChosenIndex] = Names[wrongName];
-						AnswersText[i].text = Names[wrongName];
-						ChosenIndex++;
-						break;
-					}
-
-
-
-				}
-
-			}
-		}
-	}
-
-	// Update is called once per frame
-	void Update () {
-		if (UIManager.instance.gameStart) {
-
-			if (timer > 0) {
-				timer -= Time.deltaTime;
-				if (timer <= 0)
-					timer = 0;
-			} else if (timer <= 0) {
-                UIManager.instance.GameOver();
+            if (answerButton == i)
+            {
+                NamesChosen[ChosenIndex] = Names[answerIndex];
+                ChosenIndex++;
 
             }
-			minutes = Mathf.Floor (timer / 60);
-			seconds = timer % 60;
+            else
+            {
 
-			if(Mathf.RoundToInt (seconds) < 10 )
-				timetext.text =  Mathf.RoundToInt (minutes).ToString() + ":0" +  Mathf.RoundToInt (seconds).ToString() ;
-			else
-				timetext.text =  Mathf.RoundToInt (minutes).ToString() + ":" + Mathf.RoundToInt (seconds).ToString();
-		}
+                bool Used = true;
+                int wrongName = 0;
+                while (Used)
+                {
+                    wrongName = Random.Range(0, Names.Count);
+                    //Checks to see if wrong names chosen equals to answer, if it does, choose again
+                    while (Names[wrongName] == answer)
+                        wrongName = Random.Range(0, Names.Count);
+
+                    Used = false;
+                    for (int j = 0; j < NamesChosen.Length; j++)
+                    {
+                        if (Names[wrongName] == NamesChosen[j])
+                        {
+                            Used = true;
+                            break;
+                        }
+                    }
+                    if (Used != true)
+                    {
+                        NamesChosen[ChosenIndex] = Names[wrongName];
+                        AnswersText[i].text = Names[wrongName];
+                        ChosenIndex++;
+                        break;
+                    }
+
+
+
+                }
+
+            }
+        }
+    }
+
+    public void HungerMeter()
+    {
+        int currLife = (int)healthMeter.value;
+        int maxLife = (int)healthMeter.maxValue;
+        float lifeRatio = healthMeter.value / healthMeter.maxValue;
+        healthMeter.value = lifeRatio;
+    }
+
+    // Update is called once per frame
+    void Update () {
+
 	}
 }

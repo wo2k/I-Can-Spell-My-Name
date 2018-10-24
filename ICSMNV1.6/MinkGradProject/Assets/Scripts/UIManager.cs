@@ -98,7 +98,8 @@ public class UIManager : MonoBehaviour {
                 FindObjectOfType<Level1C>().PlaceAnswer();
                 break;
             case "Level1D":
-                FindObjectOfType<Level1D>().PlaceAnswer();
+                Level1D level1DRef = FindObjectOfType<Level1D>();
+                level1DRef.PlaceAnswer();
                 break;
             case "Level1E":
                 FindObjectOfType<Level1E>().PlaceAnswer();
