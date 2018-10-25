@@ -16,6 +16,7 @@ public class FirstPlayButtons : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+       
         PlayerPrefs.SetInt("loginNumber", LoginNumber);
 
      /*   switch (LoginNumber)
@@ -33,12 +34,17 @@ public class FirstPlayButtons : MonoBehaviour {
                 break;
         }*/
     }
+    public void OpenIOSKeyboard()
+    {
+            TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true, true);
+    }
 
-	public void SavePlayer (){
+    public void SavePlayer (){
 		//input.text = input.text.ToUpper ();
 		switch(LoginNumber){
 		case 1:{
 				PlayerPrefs.SetString ("firstName", input.text);
+                
 				break;
 			}
 		case 2:
@@ -77,8 +83,16 @@ public class FirstPlayButtons : MonoBehaviour {
                 SceneManager.LoadScene("MainMenu");
 			
 		}
-	}
-	public void SetLogin2(){
+
+#if UNITY_EDITOR
+        if (UnityEditor.EditorApplication.isRemoteConnected)
+        {
+            LevelManager.instance.m_Console = LevelManager.AppPlatform.iPhone;
+        }
+#endif
+
+    }
+    public void SetLogin2(){
 		LoginNumber = 2;
 		PlayerPrefs.SetInt ("loginNumber", LoginNumber );
 		if (EditToggle) {

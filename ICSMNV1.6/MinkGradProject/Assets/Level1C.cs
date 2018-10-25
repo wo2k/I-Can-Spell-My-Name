@@ -92,6 +92,7 @@ public class Level1C: MonoBehaviour {
         }
 
         NextLetter();
+        //if(UIManager.instance.gameStart)
         InvokeRepeating("PlaySpeedBoat", 20.0f, 20.0f);
     }
 
@@ -743,8 +744,9 @@ public class Level1C: MonoBehaviour {
         AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
 		AnswersText[answerButton].text = Names[answerIndex];
-
-		PlaceAnswer ();
+        rightBoat.Clear();
+        time = 0;
+        PlaceAnswer ();
 	}
 
 	public void PlaceAnswer(){

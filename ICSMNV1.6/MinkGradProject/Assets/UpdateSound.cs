@@ -27,6 +27,9 @@ public class UpdateSound : MonoBehaviour {
         if (LevelManager.instance.m_Console != LevelManager.AppPlatform.iPhone || LevelManager.instance.m_Console != LevelManager.AppPlatform.Andriod)
             LevelManager.instance.toggleVibration.SetActive(false);
 
+         if (LevelManager.instance.m_Console == LevelManager.AppPlatform.iPhone)
+         LevelManager.instance.toggleVibration.SetActive(true);
+
         if (!audioSfx)
             audioSfx = FindObjectOfType<LevelManager>().gameObject.GetComponent<AudioSource>();
         if (!audioMusic)

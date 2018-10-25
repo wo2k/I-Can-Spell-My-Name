@@ -64,6 +64,7 @@ public class LevelManager : MonoBehaviour
             UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready " + i));
 
         hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
+
     }
 
     void ResetPlayerPrefs()
