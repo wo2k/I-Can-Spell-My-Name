@@ -20,7 +20,8 @@ public class Level1D: MonoBehaviour {
 	public Animator ButtonAnim1;
     public string answer;
     public Slider healthMeter;
-
+    public GameObject fishRef;
+    
 
     void Start()
     {
@@ -80,8 +81,18 @@ public class Level1D: MonoBehaviour {
             else
                 AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
+
+        InvokeRepeating("SpawnFish", 0.5f , 6);
     }
 
+
+    void SpawnFish()
+    {
+        for (byte i = 0; i < 4; i++)
+        {
+            GameObject fish = Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform) as GameObject;
+        }
+    }
 
     public void Choice1()
     {
@@ -254,6 +265,6 @@ public class Level1D: MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
-	}
+  
+    }
 }

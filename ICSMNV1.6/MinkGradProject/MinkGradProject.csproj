@@ -94,6 +94,7 @@
     <Compile Include="Assets\FadeScript.cs" />
     <Compile Include="Assets\FileHandler.cs" />
     <Compile Include="Assets\FirstPlayButtons.cs" />
+    <Compile Include="Assets\Fish.cs" />
     <Compile Include="Assets\HealthScript.cs" />
     <Compile Include="Assets\IntroButtonScipt.cs" />
     <Compile Include="Assets\Keyboard.cs" />
