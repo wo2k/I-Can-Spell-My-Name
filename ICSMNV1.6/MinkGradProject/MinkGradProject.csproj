@@ -91,6 +91,8 @@
     <Compile Include="Assets\ColorMe.cs" />
     <Compile Include="Assets\CorrectName.cs" />
     <Compile Include="Assets\CreditScreen.cs" />
+    <Compile Include="Assets\Editor\LevelManagerEditor.cs" />
+    <Compile Include="Assets\Editor\SoundManagementEditor.cs" />
     <Compile Include="Assets\FadeScript.cs" />
     <Compile Include="Assets\FileHandler.cs" />
     <Compile Include="Assets\FirstPlayButtons.cs" />
@@ -109,7 +111,6 @@
     <Compile Include="Assets\Level2A.cs" />
     <Compile Include="Assets\Level2B.cs" />
     <Compile Include="Assets\Level2C.cs" />
-    <Compile Include="Assets\LevelManagerEditor.cs" />
     <Compile Include="Assets\LoginButtons.cs" />
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\ModeFinder.cs" />
@@ -132,7 +133,6 @@
     <Compile Include="Assets\SetCharacter.cs" />
     <Compile Include="Assets\SetEndSubState.cs" />
     <Compile Include="Assets\ShowCorrectVarMenu.cs" />
-    <Compile Include="Assets\SoundManagementEditor.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
     <Compile Include="Assets\TypedLetter.cs" />
     <Compile Include="Assets\UpdateSound.cs" />
@@ -141,10 +141,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\data\dta.txt" />
+    <None Include="Assets\Editor\LevelManagerEditor.cs.meta" />
+    <None Include="Assets\Editor\SoundManagementEditor.cs.meta" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>

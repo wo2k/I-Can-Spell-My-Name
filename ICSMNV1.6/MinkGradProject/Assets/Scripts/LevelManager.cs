@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor;
-using UnityEditor.SceneManagement;
+//using UnityEditor;
+//using UnityEditor.SceneManagement;
 
 
 public class LevelManager : MonoBehaviour
@@ -37,9 +37,9 @@ public class LevelManager : MonoBehaviour
     public int containerSize;
     [HideInInspector]
     public string sceneName;
-    [SerializeField]
-    [HideInInspector]
-    public List<SceneAsset> sceneAssets = new List<SceneAsset>();
+   // [SerializeField]
+   // [HideInInspector]
+   // public List<SceneAsset> sceneAssets = new List<SceneAsset>();
     public enum AppPlatform { MacOS, Windows, iPhone, Andriod };
     public AppPlatform m_Console;
     public enum LevelType { GameMode, Menus };
@@ -261,10 +261,10 @@ public class LevelManager : MonoBehaviour
 
     public void VibrateOnHandHeld()
     {
-        if (Application.isMobilePlatform && toggleVibration.GetComponent<Toggle>().isOn)
-            Handheld.Vibrate();
-        else
-            return;
+       // if (Application.isMobilePlatform && toggleVibration.GetComponent<Toggle>().isOn)
+           // Handheld.Vibrate();
+        //else
+          //  return;
     }
 
     #region CheckAnswer
