@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224191632006650964}
   - component: {fileID: 222106717890122824}
   - component: {fileID: 114258815994832820}
+  - component: {fileID: 114662305222283256}
   m_Layer: 5
   m_Name: Choice1Text
   m_TagString: Untagged
@@ -38,7 +39,6 @@ GameObject:
   - component: {fileID: 224964596451245832}
   - component: {fileID: 222034462488568236}
   - component: {fileID: 114442617974793860}
-  - component: {fileID: 114888200839252550}
   - component: {fileID: 114568137643192912}
   - component: {fileID: 50311322436773512}
   m_Layer: 5
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -148,12 +148,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 89a3fa2b503312049853f499bd5dbcdb, type: 3}
   - {fileID: 21300000, guid: 62e788ecd7e86df46b3d9601123db2c1, type: 3}
   - {fileID: 21300000, guid: b90aff879f236e14ebed9b7f94f915f4, type: 3}
---- !u!114 &114888200839252550
+--- !u!114 &114662305222283256
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1248352872621308}
+  m_GameObject: {fileID: 1167905883609014}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -183,21 +183,10 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114442617974793860}
+  m_TargetGraphic: {fileID: 114258815994832820}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Choice1
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &222034462488568236
@@ -225,10 +214,10 @@ RectTransform:
   m_Father: {fileID: 224964596451245832}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19.81, y: 0}
-  m_SizeDelta: {x: 39.62, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -19.809998, y: 0}
+  m_SizeDelta: {x: 339.62, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224964596451245832
 RectTransform:
@@ -237,7 +226,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1248352872621308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 133.99998}
   m_LocalScale: {x: 0.999998, y: 0.999998, z: 0.999998}
   m_Children:
   - {fileID: 224191632006650964}
@@ -246,6 +235,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.074401}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -699.5, y: -128}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}

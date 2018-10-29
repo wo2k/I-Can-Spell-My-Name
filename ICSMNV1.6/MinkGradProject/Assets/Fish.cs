@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Fish : MonoBehaviour {
 
@@ -15,9 +16,12 @@ public class Fish : MonoBehaviour {
 
     public List<Sprite> fishTypes = new List<Sprite>();
 
+
 	// Use this for initialization
 	void Start () {
 
+        GetComponentInChildren<Button>().onClick.AddListener(delegate { FindObjectOfType<Level1D>().Choice1(gameObject); });
+        
         gameObject.GetComponent<Image>().sprite = fishTypes[Random.Range(0, fishTypes.Count)];
         Vector3 fishPos = new Vector3(Random.Range(-700, 700), Random.Range(-50, -80), -32);
         gameObject.transform.localPosition = fishPos;

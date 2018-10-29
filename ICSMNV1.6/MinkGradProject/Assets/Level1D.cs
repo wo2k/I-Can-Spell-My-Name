@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Level1D: MonoBehaviour {
 
@@ -19,12 +20,27 @@ public class Level1D: MonoBehaviour {
 	public string[] NamesChosen;
 	public Animator ButtonAnim1;
     public string answer;
-    public Slider healthMeter;
+    //public Slider healthMeter;
     public GameObject fishRef;
-    
+
+    public GameObject killZone;
+
+   // public UnityAction RightAnswer;
+
+   // public List<GameObject> fishQueue = new List<GameObject>();
+    public int fishIndex;
 
     void Start()
     {
+
+#if UNITY_EDITOR
+        killZone.SetActive(true);
+#else
+        killZone.SetActive(false);
+#endif
+
+        //RightAnswer = new UnityAction(Choice1);
+
         NameData = FindObjectOfType<LevelManager>().gameObject;
 
         UIManager.instance.StartGame();
@@ -85,23 +101,32 @@ public class Level1D: MonoBehaviour {
         InvokeRepeating("SpawnFish", 0.5f , 6);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+       // Gizmos.DrawLine(startLine, endLine);
+    }
 
     void SpawnFish()
     {
-        for (byte i = 0; i < 4; i++)
-        {
-            Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
-        }
+        GameObject fish = Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
+        fishIndex++;
+        fish.name = "Fish " + fishIndex;
+        AnswersText[0] = fish.GetComponentInChildren<Text>();
+        PlaceAnswer();
     }
 
-    public void Choice1()
+    public void Choice1(GameObject fish)
     {
-
+        
         if (answerButton == 0)
         {
-            NextLetter();
+            GameObject bubbleParticle = Resources.Load("Misc/Bubble") as GameObject;
+          //  bubbleParticle.transform.position = fish.transform.position;
+            Destroy(fish);
+            //NextLetter();
             UIManager.instance.ScorePoints(5);
-            healthMeter.value += .10f;
+          //  healthMeter.value += .10f;
         }
         else
         {
@@ -110,7 +135,7 @@ public class Level1D: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
-                healthMeter.value -= .10f;
+               // healthMeter.value -= .10f;
             }
         }
     }
@@ -121,7 +146,7 @@ public class Level1D: MonoBehaviour {
         {
             NextLetter();
             UIManager.instance.ScorePoints(5);
-            healthMeter.value += .10f;
+            //healthMeter.value += .10f;
         }
         else
         {
@@ -131,7 +156,7 @@ public class Level1D: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
-                healthMeter.value -= .10f;
+               // healthMeter.value -= .10f;
             }
         }
     }
@@ -142,7 +167,7 @@ public class Level1D: MonoBehaviour {
         {
             NextLetter();
             UIManager.instance.ScorePoints(5);
-            healthMeter.value += .10f;
+           // healthMeter.value += .10f;
         }
         else
         {
@@ -152,7 +177,7 @@ public class Level1D: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
-                healthMeter.value -= .10f;
+             //   healthMeter.value -= .10f;
             }
         }
     }
@@ -163,7 +188,7 @@ public class Level1D: MonoBehaviour {
         {
             NextLetter();
             UIManager.instance.ScorePoints(5);
-            healthMeter.value += .10f;
+           // healthMeter.value += .10f;
         }
         else
         {
@@ -173,7 +198,7 @@ public class Level1D: MonoBehaviour {
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
-                healthMeter.value -= .10f;
+//healthMeter.value -= .10f;
             }
         }
     }
@@ -195,8 +220,8 @@ public class Level1D: MonoBehaviour {
 
     public void PlaceAnswer()
     {
-        NamesChosen = new string[4];
-        answerButton = Random.Range(0, 4);
+        NamesChosen = new string[1];
+        answerButton = 0;
 
         AnswersText[answerButton].text = Names[answerIndex];
         answer = AnswersText[answerButton].text;
@@ -208,8 +233,10 @@ public class Level1D: MonoBehaviour {
             else
                 AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
-        int ChosenIndex = 0;
-        for (int i = 0; i <= 3; i++)
+        NamesChosen[0] = Names[answerIndex];
+       // int ChosenIndex = 0;
+
+        /*for (int i = 0; i <= 3; i++)
         {
 
             if (answerButton == i)
@@ -252,16 +279,16 @@ public class Level1D: MonoBehaviour {
                 }
 
             }
-        }
+        }*/
     }
 
-    public void HungerMeter()
+   /* public void HungerMeter()
     {
         int currLife = (int)healthMeter.value;
         int maxLife = (int)healthMeter.maxValue;
         float lifeRatio = healthMeter.value / healthMeter.maxValue;
         healthMeter.value = lifeRatio;
-    }
+    }*/
 
     // Update is called once per frame
     void Update () {
