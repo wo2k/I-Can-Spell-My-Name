@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UpdateSound : MonoBehaviour {
 
 
-	AudioSource audio;
+	AudioSource m_Audio;
 
 	public AudioSource audioRecord;
 	public AudioSource audioMusic;
@@ -58,12 +58,12 @@ public class UpdateSound : MonoBehaviour {
     #endregion Do we need this?
 
     public void OnRecord(){
-		audio = GetComponent<AudioSource> ();
-		audio.clip = Microphone.Start ("Built-in Microphone", true, 5, 44100);
+		m_Audio = GetComponent<AudioSource> ();
+		m_Audio.clip = Microphone.Start ("Built-in Microphone", true, 5, 44100);
 
 	}
 	public void OnPlay(){
-		audio.Play ();
+		m_Audio.Play ();
 	}
 	// Update is called once per frame
 	void Update ()
@@ -104,16 +104,20 @@ public class UpdateSound : MonoBehaviour {
     {
         if (LevelManager.instance.m_Console == LevelManager.AppPlatform.Windows)
         {
-          //  if (Application.platform == RuntimePlatform.WindowsEditor)
-            //    UnityEditor.EditorApplication.isPlaying = false;
+#if UNITY_EDITOR
+            if (Application.platform == RuntimePlatform.WindowsEditor)
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
             if (Application.platform == RuntimePlatform.WindowsPlayer)
                 Application.Quit();
         }
 
         if (LevelManager.instance.m_Console == LevelManager.AppPlatform.MacOS)
         {
-           // if (Application.platform == RuntimePlatform.OSXEditor)
-            //    UnityEditor.EditorApplication.isPlaying = false;
+#if UNITY_EDITOR
+            if (Application.platform == RuntimePlatform.OSXEditor)
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
             if (Application.platform == RuntimePlatform.OSXPlayer)
                 Application.Quit();
         }

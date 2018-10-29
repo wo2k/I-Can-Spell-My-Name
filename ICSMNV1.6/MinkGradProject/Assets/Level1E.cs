@@ -23,16 +23,12 @@ public class Level1E: MonoBehaviour {
 	int Total = 0;
 	public GameObject Tutorial;
 	public GameObject MainMenu;
-	bool gameStart = false;
+	//bool gameStart = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 	public Animator ButtonAnim1;
 	// Use this for initialization
-	public void RestartGame(){
-		EndMenu.SetActive (false);
-		Reset ();
-		gameStart = true;
-	}
+
 
 	void Start () {
 		int LoginNumber = PlayerPrefs.GetInt("loginNumber");
@@ -77,11 +73,11 @@ public class Level1E: MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
+           
 
             if (Miss == 3){
                 UIManager.instance.GameOver();
-                gameStart = false;
+              //  gameStart = false;
 			}
 		}
 	}
@@ -95,11 +91,11 @@ public class Level1E: MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
+
 
             if (Miss == 3){
                 UIManager.instance.GameOver();
-                gameStart = false;
+              //  gameStart = false;
 			}
 
 		}
@@ -113,11 +109,11 @@ public class Level1E: MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
+            
 
             if (Miss == 3){
                 UIManager.instance.GameOver();
-                gameStart = false;
+               // gameStart = false;
 			}
 		}
 	}
@@ -130,11 +126,11 @@ public class Level1E: MonoBehaviour {
 			Multi = 1;
 			Miss++;
             SoundManagement.TriggerEvent("PlayWrongAnswer");
-            LevelManager.instance.VibrateOnHandHeld();
+            
 
             if (Miss == 3) {
                 UIManager.instance.GameOver();
-                gameStart = false;
+              //  gameStart = false;
 			}
 		}
 	}
@@ -194,7 +190,7 @@ public class Level1E: MonoBehaviour {
 	public void StartGame(){
 		StartMenu.SetActive (false);
 		PlaceAnswer();
-		gameStart = true;
+		//gameStart = true;
 	}
 
 	public void PlaceAnswer(){

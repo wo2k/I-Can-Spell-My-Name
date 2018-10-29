@@ -10,11 +10,7 @@ public class TutorialManager : MonoBehaviour {
 	public Text AnswerHint;
 	public int answerButton;
 	public int answerIndex = 0;
-	int Score = 0;
-	public Text ScoreText;
-	int Multi = 1;
-	int Miss = 0;
-	int Total = 0;
+
 	public GameObject Tutorial;
 	public GameObject MainMenu;
 	public List<GameObject> Misses;

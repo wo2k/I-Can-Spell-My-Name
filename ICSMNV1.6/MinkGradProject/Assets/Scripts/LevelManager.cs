@@ -259,13 +259,15 @@ public class LevelManager : MonoBehaviour
         return _Lock;
     }
 
+#if UNITY_IOS || UNITY_ANDROID
     public void VibrateOnHandHeld()
     {
-       // if (Application.isMobilePlatform && toggleVibration.GetComponent<Toggle>().isOn)
-           // Handheld.Vibrate();
-        //else
-          //  return;
+        if (Application.isMobilePlatform && toggleVibration.GetComponent<Toggle>().isOn)
+            Handheld.Vibrate();
+        else
+            return;
     }
+#endif
 
     #region CheckAnswer
     public void CheckAnswer(bool isCorrect, int heartsQty)
@@ -282,7 +284,10 @@ public class LevelManager : MonoBehaviour
         else
         {
             SoundManagement.TriggerEvent("PlayWrongAnswer");
+
+#if UNITY_IOS || UNITY_ANDROID
             VibrateOnHandHeld();
+#endif
             heartsQty--;
             UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
             if (heartsQty <= 0)
@@ -309,7 +314,10 @@ public class LevelManager : MonoBehaviour
         else
         {
             SoundManagement.TriggerEvent("PlayWrongAnswer");
+
+#if UNITY_IOS || UNITY_ANDROID
             VibrateOnHandHeld();
+#endif
             heartsQty--;
             UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
             if (heartsQty <= 0)
@@ -333,7 +341,10 @@ public class LevelManager : MonoBehaviour
         else
         {
             SoundManagement.TriggerEvent("PlayWrongAnswer");
+
+#if UNITY_IOS || UNITY_ANDROID
             VibrateOnHandHeld();
+#endif
         }
     }
 
@@ -354,7 +365,10 @@ public class LevelManager : MonoBehaviour
         else
         {
             SoundManagement.TriggerEvent("PlayWrongAnswer");
+
+#if UNITY_IOS || UNITY_ANDROID
             VibrateOnHandHeld();
+#endif
         }
     }
 
@@ -375,7 +389,10 @@ public class LevelManager : MonoBehaviour
         else
         {
             SoundManagement.TriggerEvent("PlayWrongAnswer");
+
+#if UNITY_IOS || UNITY_ANDROID
             VibrateOnHandHeld();
+#endif
         }
     }
 
@@ -427,11 +444,15 @@ public class LevelManager : MonoBehaviour
             else
             {
                 SoundManagement.TriggerEvent("PlayWrongAnswer");
+
+#if UNITY_IOS || UNITY_ANDROID
                 VibrateOnHandHeld();
+#endif
+
             }
         }
     }
-    #endregion CheckAnswer
+#endregion CheckAnswer
 
 
 }

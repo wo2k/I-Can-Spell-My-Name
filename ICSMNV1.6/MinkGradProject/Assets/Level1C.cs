@@ -11,7 +11,7 @@ public class Level1C: MonoBehaviour {
 	public int answerButton = 0;
 	int answerIndex = 8;
 	public GameObject Tutorial;
-	bool gameStart = false;
+	//bool gameStart = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 	public Animator ButtonAnim1;
@@ -116,7 +116,7 @@ public class Level1C: MonoBehaviour {
         {
           //  Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+           // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -151,7 +151,7 @@ public class Level1C: MonoBehaviour {
         {
             //Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+         //   gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -186,7 +186,7 @@ public class Level1C: MonoBehaviour {
         {
            // Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+           // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -234,7 +234,7 @@ public class Level1C: MonoBehaviour {
             speedBoatAnim.Stop();
 
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+           // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();

@@ -14,7 +14,7 @@ public class Level1D: MonoBehaviour {
 
 	public GameObject Tutorial;
 
-	bool gameStart = false;
+	//bool gameStart = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
 	public Animator ButtonAnim1;
@@ -90,7 +90,7 @@ public class Level1D: MonoBehaviour {
     {
         for (byte i = 0; i < 4; i++)
         {
-            GameObject fish = Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform) as GameObject;
+            Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
         }
     }
 
@@ -106,7 +106,7 @@ public class Level1D: MonoBehaviour {
         else
         {
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+          //  gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -127,7 +127,7 @@ public class Level1D: MonoBehaviour {
         {
             
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+           // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -148,7 +148,7 @@ public class Level1D: MonoBehaviour {
         {
             
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+           // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -169,7 +169,7 @@ public class Level1D: MonoBehaviour {
         {
             
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+           // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();

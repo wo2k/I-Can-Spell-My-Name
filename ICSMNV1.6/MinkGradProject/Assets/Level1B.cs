@@ -17,7 +17,7 @@ public class Level1B : MonoBehaviour {
     public float animTime;
     public GameObject Tutorial;
 
-    bool gameStart;// = false;
+   // bool gameStart;// = false;
 	// NEW STUFF IM WORKING WITH
 	public string[] NamesChosen;
     public List<Animator> anim = new List<Animator>();
@@ -208,7 +208,7 @@ public class Level1B : MonoBehaviour {
         {
             //Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+          //  gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
         }
@@ -229,7 +229,7 @@ public class Level1B : MonoBehaviour {
         {
            // Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+           // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
         }
@@ -249,7 +249,7 @@ public class Level1B : MonoBehaviour {
         {
          //   Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            gameStart = false;
+            //gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
         }
