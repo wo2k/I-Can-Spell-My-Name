@@ -22,7 +22,7 @@ public class Level1D: MonoBehaviour {
     public string answer;
     //public Slider healthMeter;
     public GameObject fishRef;
-
+    public GameObject bubbleRef;
     public GameObject killZone;
 
    // public UnityAction RightAnswer;
@@ -121,9 +121,10 @@ public class Level1D: MonoBehaviour {
         
         if (answerButton == 0)
         {
-            GameObject bubbleParticle = Resources.Load("Misc/Bubble") as GameObject;
-          //  bubbleParticle.transform.position = fish.transform.position;
+            GameObject bubbleParticle = Instantiate(bubbleRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);     
+            bubbleParticle.transform.position = fish.transform.position;
             Destroy(fish);
+
             //NextLetter();
             UIManager.instance.ScorePoints(5);
           //  healthMeter.value += .10f;

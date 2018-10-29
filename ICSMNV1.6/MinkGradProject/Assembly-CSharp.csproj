@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BoatHanlder.cs" />
+    <Compile Include="Assets\BubbleParticle.cs" />
     <Compile Include="Assets\Case_Control.cs" />
     <Compile Include="Assets\CharacterCreation.cs" />
     <Compile Include="Assets\CharacterSelection.cs" />
@@ -70,8 +71,6 @@
     <Compile Include="Assets\ColorMe.cs" />
     <Compile Include="Assets\CorrectName.cs" />
     <Compile Include="Assets\CreditScreen.cs" />
-    <Compile Include="Assets\Editor\LevelManagerEditor.cs" />
-    <Compile Include="Assets\Editor\SoundManagementEditor.cs" />
     <Compile Include="Assets\FadeScript.cs" />
     <Compile Include="Assets\FileHandler.cs" />
     <Compile Include="Assets\FirstPlayButtons.cs" />
@@ -119,8 +118,6 @@
     <Compile Include="Assets\WaveComplete.cs" />
     <Compile Include="Assets\Win.cs" />
     <None Include="Assets\data\dta.txt" />
-    <None Include="Assets\Editor\LevelManagerEditor.cs.meta" />
-    <None Include="Assets\Editor\SoundManagementEditor.cs.meta" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Anthony/Documents/GitHub/I-Can-Spell-My-Name/ICSMNV1.6/MinkGradProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -359,7 +356,6 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
