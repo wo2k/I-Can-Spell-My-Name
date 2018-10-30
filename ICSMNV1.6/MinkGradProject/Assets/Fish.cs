@@ -14,6 +14,9 @@ public class Fish : MonoBehaviour {
     public enum FishDirection { Left, Right };
     public FishDirection fish;
 
+    public enum FishMood { Good, Bad };
+    public FishMood mood;
+
     public List<Sprite> fishTypes = new List<Sprite>();
 
 
@@ -23,6 +26,9 @@ public class Fish : MonoBehaviour {
         GetComponentInChildren<Button>().onClick.AddListener(delegate { FindObjectOfType<Level1D>().Choice1(gameObject); });
         
         gameObject.GetComponent<Image>().sprite = fishTypes[Random.Range(0, fishTypes.Count)];
+
+        CheckMood();
+     
         Vector3 fishPos = new Vector3(Random.Range(-700, 700), Random.Range(-50, -80), -32);
         gameObject.transform.localPosition = fishPos;
 
@@ -46,6 +52,8 @@ public class Fish : MonoBehaviour {
             throwForce = new Vector3(xForce, yForce, 0);
         }
         gameObject.GetComponent<Rigidbody2D>().AddForce(throwForce, ForceMode2D.Impulse);
+
+     
     }
 	
 	// Update is called once per frame
@@ -67,6 +75,17 @@ public class Fish : MonoBehaviour {
             gameObject.GetComponent<Rigidbody2D>().AddTorque(-torque);
         }
 
+    }
 
+    void CheckMood()
+    {
+        switch (mood)
+        {
+            case FishMood.Good:
+                break;
+            case FishMood.Bad:
+                GetComponent<Image>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+                break;
+        }
     }
 }

@@ -12,7 +12,7 @@ public class BubbleParticle : MonoBehaviour {
     
     void Start()
     {
-        randomAlpha = new Color(1, 1, 1, Random.Range(0.3f, 0.5f));
+        randomAlpha = new Color(1, 1, 1, Random.Range(0.75f, 1.0f));
         ranTorque = Random.Range(0, 2) == 0 ? -torque : torque;
         gameObject.GetComponent<Image>().color = randomAlpha;
         InvokeRepeating("ReduceAlpha", 0.3f, 0.5f);

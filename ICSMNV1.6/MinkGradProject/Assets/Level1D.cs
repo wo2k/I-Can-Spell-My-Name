@@ -11,7 +11,7 @@ public class Level1D: MonoBehaviour {
     public List<string> Names = new List<string>();
 	public Text AnswerHint;
 	public int answerButton = 0;
-	int answerIndex = 8;
+	int answerIndex, wrongIndex;
 
 	public GameObject Tutorial;
 
@@ -21,14 +21,14 @@ public class Level1D: MonoBehaviour {
 	public Animator ButtonAnim1;
     public string answer;
     //public Slider healthMeter;
-    public GameObject fishRef;
+    public GameObject fishRef, badFishRef;
     public GameObject bubbleRef;
     public GameObject killZone;
 
    // public UnityAction RightAnswer;
 
    // public List<GameObject> fishQueue = new List<GameObject>();
-    public int fishIndex;
+    public int fishIndex, badFishIndex;
 
     void Start()
     {
@@ -85,20 +85,15 @@ public class Level1D: MonoBehaviour {
             if (AnswerHint.text == Names[i])
             {
                 answerIndex = i;
-                AnswersText[answerButton].text = Names[answerIndex];
-                answer = AnswersText[answerButton].text;
+               // AnswersText[answerButton].text = Names[answerIndex];
+              //  answer = AnswersText[answerButton].text;
             }
         }
 
-        for (int i = 0; i < AnswersText.Length; i++)
-        {
-            if (AnswersText[i].text.Length >= 5)
-                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
-            else
-                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        }
+     
 
-        InvokeRepeating("SpawnFish", 0.5f , 6);
+        //InvokeRepeating("SpawnFish", 0.5f , 6);
+        InvokeRepeating("SpawnBadFish", 0.5f, 6);
     }
 
     private void OnDrawGizmos()
@@ -112,14 +107,25 @@ public class Level1D: MonoBehaviour {
         GameObject fish = Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
         fishIndex++;
         fish.name = "Fish " + fishIndex;
+        fish.GetComponent<Fish>().mood = Fish.FishMood.Good;
         AnswersText[0] = fish.GetComponentInChildren<Text>();
         PlaceAnswer();
+    }
+
+    void SpawnBadFish()
+    {
+        GameObject badFish = Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
+        badFishIndex++;
+        badFish.name = "Bad Fish " + fishIndex;
+        badFish.GetComponent<Fish>().mood = Fish.FishMood.Bad;
+        AnswersText[0] = badFish.GetComponentInChildren<Text>();
+        PlaceWrongAnswer();
     }
 
     public void Choice1(GameObject fish)
     {
         
-        if (answerButton == 0)
+        if (AnswersText[answerIndex].text == answer)
         {
             GameObject bubbleParticle = Instantiate(bubbleRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);     
             bubbleParticle.transform.position = fish.transform.position;
@@ -132,11 +138,14 @@ public class Level1D: MonoBehaviour {
         else
         {
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-          //  gameStart = false;
+            GameObject bubbleParticle = Instantiate(bubbleRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
+            bubbleParticle.transform.position = fish.transform.position;
+            Destroy(fish);
+            //  gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
-                NextLetter();
-               // healthMeter.value -= .10f;
+                //  NextLetter();
+                // healthMeter.value -= .10f;
             }
         }
     }
@@ -219,35 +228,21 @@ public class Level1D: MonoBehaviour {
 		PlaceAnswer ();
 	}
 
-    public void PlaceAnswer()
+    public void PlaceWrongAnswer()
     {
-        NamesChosen = new string[1];
-        answerButton = 0;
+         int ChosenIndex = 0;
+       
+       // for (int i = 0; i <= 3; i++)
+      //  {
 
-        AnswersText[answerButton].text = Names[answerIndex];
-        answer = AnswersText[answerButton].text;
+          //  if (answerButton == i)
+          //  {
+          //      NamesChosen[ChosenIndex] = Names[answerIndex];
+          //      ChosenIndex++;
 
-        for (int i = 0; i < AnswersText.Length; i++)
-        {
-            if (AnswersText[i].text.Length >= 5)
-                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
-            else
-                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        }
-        NamesChosen[0] = Names[answerIndex];
-       // int ChosenIndex = 0;
-
-        /*for (int i = 0; i <= 3; i++)
-        {
-
-            if (answerButton == i)
-            {
-                NamesChosen[ChosenIndex] = Names[answerIndex];
-                ChosenIndex++;
-
-            }
-            else
-            {
+           // }
+           // else
+           // {
 
                 bool Used = true;
                 int wrongName = 0;
@@ -270,17 +265,38 @@ public class Level1D: MonoBehaviour {
                     if (Used != true)
                     {
                         NamesChosen[ChosenIndex] = Names[wrongName];
-                        AnswersText[i].text = Names[wrongName];
+                        AnswersText[wrongIndex].text = Names[wrongName];
                         ChosenIndex++;
-                        break;
+                wrongIndex++;
+                break;
                     }
 
 
 
                 }
 
-            }
-        }*/
+            //}
+       // }
+    }
+
+    public void PlaceAnswer()
+    {
+        answerIndex++;
+        NamesChosen = new string[1];
+        answerButton = 0;
+
+        AnswersText[answerIndex].text = Names[answerIndex];
+        answer = AnswersText[answerIndex].text;
+
+        for (int i = 0; i < AnswersText.Length; i++)
+        {
+            if (AnswersText[i].text.Length >= 5)
+                AnswersText[i].transform.localScale = new Vector3(.80f, .80f, 1.0f);
+            else
+                AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        NamesChosen[0] = Names[answerIndex];
+
     }
 
    /* public void HungerMeter()
