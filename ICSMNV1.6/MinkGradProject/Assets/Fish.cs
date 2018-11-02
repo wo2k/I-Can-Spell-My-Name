@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class Fish : MonoBehaviour {
+    public Level1D level1D;
 
     [Header("Fish Physics")]
     public float torque;
@@ -19,9 +20,16 @@ public class Fish : MonoBehaviour {
 
     public List<Sprite> fishTypes = new List<Sprite>();
 
+    
 
-	// Use this for initialization
-	void Start () {
+
+
+    public bool isFalling = false;
+    public bool hasChanged = false;
+
+    // Use this for initialization
+    void Start () {
+        level1D = FindObjectOfType<Level1D>();
 
         GetComponentInChildren<Button>().onClick.AddListener(delegate { FindObjectOfType<Level1D>().Choice1(gameObject); });
         
@@ -32,15 +40,7 @@ public class Fish : MonoBehaviour {
         Vector3 fishPos = new Vector3(Random.Range(-700, 700), Random.Range(-50, -80), -32);
         gameObject.transform.localPosition = fishPos;
 
-        float verticalFlip = Random.Range(0, 2) == 0 ? -180 : 0; //Sets if the fish will spawn facing right or left
-        if (verticalFlip == -180)
-            fish = FishDirection.Right;
-        else
-            fish = FishDirection.Left;
-
-        Vector3 fishRot = new Vector3(0, verticalFlip, Random.Range(-30, 30));      
-        gameObject.transform.localEulerAngles = fishRot;
-        gameObject.transform.GetChild(0).transform.localEulerAngles = new Vector3(0, verticalFlip, 0); //Aligns Text child to match fish verticle flip
+        SetWaves();
 
         Vector3 throwForce;
         if (fish == FishDirection.Left)
@@ -58,10 +58,15 @@ public class Fish : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameObject.transform.position.y <= 200)
+        if (gameObject.transform.position.y <= -150)
         {
             Destroy(gameObject);
         }
+
+        if (gameObject.GetComponent<Rigidbody2D>().velocity.y <= 0 && !hasChanged)
+            isFalling = true;
+
+        ChangeLane();
     }
 
     private void FixedUpdate()
@@ -86,6 +91,44 @@ public class Fish : MonoBehaviour {
             case FishMood.Bad:
                 GetComponent<Image>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
                 break;
+        }
+    }
+
+    void ChangeLane()
+    {
+        if (isFalling)
+        {
+            transform.SetSiblingIndex(Random.Range(1, 6));
+            isFalling = false;
+            hasChanged = true;
+        }
+    }
+
+    void SetWaves()
+    {
+
+        float verticalFlip = Random.Range(0, 2) == 0 ? -180 : 0; //Sets if the fish will spawn facing right or left
+        if (verticalFlip == -180)
+            fish = FishDirection.Right;
+        else
+            fish = FishDirection.Left;
+
+        Vector3 fishRot = new Vector3(0, verticalFlip, Random.Range(-30, 30));
+        gameObject.transform.localEulerAngles = fishRot;
+        gameObject.transform.GetChild(0).transform.localEulerAngles = new Vector3(0, verticalFlip, 0); //Aligns Text child to match fish verticle flip
+
+
+        if (fish == FishDirection.Right)
+        {
+            transform.SetParent(level1D.m_Waves.transform);
+            transform.SetSiblingIndex(Random.Range(1, 6));
+        }
+
+        if (fish == FishDirection.Left)
+        {
+            transform.SetParent(level1D.m_Waves.transform);
+            transform.SetSiblingIndex(Random.Range(1, 6));
+
         }
     }
 }

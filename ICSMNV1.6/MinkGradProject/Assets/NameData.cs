@@ -21,8 +21,19 @@ public class NameData : MonoBehaviour {
 
 		data.Add (name);
 	}
-	// Update is called once per frame
-	void Update () {
+    public string GetName(string name)
+    {
+        if (data.Contains(name))
+            return name;
+        else
+        {
+            Debug.LogError("Tried retrieving a name that is not in name file");
+            return null;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
