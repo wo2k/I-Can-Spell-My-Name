@@ -211,24 +211,7 @@ public class UIManager : MonoBehaviour {
     public void RestartGame()
     {
         LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
-        switch (levelName)
-        {
-            case "Level1A":
-                SceneManager.LoadScene(levelName);
-                break;
-            case "Level1B":
-                SceneManager.LoadScene(levelName);
-                break;
-            case "Level1C":
-                SceneManager.LoadScene(levelName);
-                break;
-            case "Level1D":
-                SceneManager.LoadScene(levelName);
-                break;
-            case "Level1E":
-                FindObjectOfType<Level1E>().Reset();
-                break;
-        }
+        SceneManager.LoadScene(levelName);
         ResetGameStats();
      
     }

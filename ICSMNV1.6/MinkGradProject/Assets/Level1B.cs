@@ -148,8 +148,8 @@ public class Level1B : MonoBehaviour {
         yield return new WaitForSeconds(1);
         for (int i = 0; i < waterSprout.Length; i++)
             waterSprout[i].SetActive(true);
-
-        for(int i = 0; i < m_Dolphins.Length; i++)
+        NextLetter();
+        for (int i = 0; i < m_Dolphins.Length; i++)
         dolphinIdlePos[i] = m_Dolphins[i].transform.position;
 
         isSprouting = true;
@@ -201,7 +201,7 @@ public class Level1B : MonoBehaviour {
         choiceNames[0].GetComponent<Button>().interactable = false;
         if (answerButton == 0)
         {
-            NextLetter();
+            
             UIManager.instance.ScorePoints();
         }
         else
@@ -209,8 +209,8 @@ public class Level1B : MonoBehaviour {
             //Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
           //  gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 3)
-                NextLetter();
+          //  if (LevelManager.instance.correctAnswerPoints < 3)
+              //  NextLetter();
         }
     }
 
@@ -222,7 +222,7 @@ public class Level1B : MonoBehaviour {
 
         if (answerButton == 1)
         {
-            NextLetter();
+         //   NextLetter();
             UIManager.instance.ScorePoints();
         }
         else
@@ -230,8 +230,8 @@ public class Level1B : MonoBehaviour {
            // Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
            // gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 3)
-                NextLetter();
+           // if (LevelManager.instance.correctAnswerPoints < 3)
+              //  NextLetter();
         }
     }
 
@@ -242,7 +242,7 @@ public class Level1B : MonoBehaviour {
 
         if (answerButton == 2)
         {
-            NextLetter();
+           // NextLetter();
             UIManager.instance.ScorePoints();
         }
         else
@@ -250,8 +250,8 @@ public class Level1B : MonoBehaviour {
          //   Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             //gameStart = false;
-            if (LevelManager.instance.correctAnswerPoints < 3)
-                NextLetter();
+           // if (LevelManager.instance.correctAnswerPoints < 3)
+              //  NextLetter();
         }
     }
 

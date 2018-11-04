@@ -38,6 +38,7 @@ public class LockState : MonoBehaviour {
                 LevelManager.instance.lockLevel = null;
                 Destroy(gameObject);
                 SetButtonsInteractable(true);
+                if(LevelManager.instance.subLevelPassed1 < 4)
                 LevelManager.instance.lockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.levelParent.transform);
 
                 LevelManager.instance.CheckLevelState(true);

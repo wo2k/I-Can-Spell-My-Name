@@ -92,7 +92,23 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.CheckLevelState(true);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
                         break;
+                    case 4:// All Unlocked!                      
 
+                        if (!LevelManager.instance.hasLockedBefore)
+                        {
+                            if (!LevelManager.instance.lockLevel)
+                                previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+
+                            if (LevelManager.instance.locked)
+                                LevelManager.instance.locked = false;
+
+                            LevelManager.instance.hasLockedBefore = true;
+
+                            PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(LevelManager.instance.hasLockedBefore));
+
+                        }                       
+                        LevelManager.instance.CheckLevelState(true);                     
+                        break;
                 }                                              
 
                 

@@ -133,7 +133,7 @@ public class Level1D: MonoBehaviour {
 
             Destroy(fish);
 
-            UIManager.instance.ScorePoints(7);
+            UIManager.instance.ScorePoints(5);
           //  healthMeter.value += .10f;
         }
         else
@@ -143,7 +143,7 @@ public class Level1D: MonoBehaviour {
             bubbleParticle.transform.position = fish.transform.position;
             Destroy(fish);
 
-            if (LevelManager.instance.correctAnswerPoints < 7)
+            if (LevelManager.instance.correctAnswerPoints < 5)
             {
          
                 // healthMeter.value -= .10f;
