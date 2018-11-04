@@ -23,20 +23,21 @@ public class Level1D: MonoBehaviour {
     //public Slider healthMeter;
     public GameObject fishRef, badFishRef;
     public GameObject bubbleRef;
-    public GameObject killZone;
+   // public GameObject killZone;
 
+    public List<GameObject> activeFish = new List<GameObject>();
     public GameObject m_Waves;
-
+    public List<GameObject> m_Lanes = new List<GameObject>(); 
     public int fishIndex = -1 , badFishIndex = -1;
 
     void Start()
     {
 
-#if UNITY_EDITOR
-        killZone.SetActive(true);
-#else
-        killZone.SetActive(false);
-#endif
+//#if UNITY_EDITOR
+//        killZone.SetActive(true);
+//#else
+//        killZone.SetActive(false);
+//#endif
 
         //RightAnswer = new UnityAction(Choice1);
 
@@ -90,8 +91,8 @@ public class Level1D: MonoBehaviour {
 
         answer = NameData.GetComponentInParent<NameData>().GetName(PlayerPrefs.GetString("firstName"));
 
-        InvokeRepeating("SpawnFish", Random.Range(0.5f, 5.0f), Random.Range(2.5f, 5.0f));
-        InvokeRepeating("SpawnBadFish", Random.Range(0.5f, 5.0f), Random.Range(2.5f, 5.0f));
+        InvokeRepeating("SpawnFish", Random.Range(1.0f, 10.0f), Random.Range(6.0f, 12.0f));
+        InvokeRepeating("SpawnBadFish", Random.Range(5.0f, 10.0f), Random.Range(10.0f, 14.0f));
     }
 
     private void OnDrawGizmos()
@@ -103,12 +104,12 @@ public class Level1D: MonoBehaviour {
     void SpawnFish()
     {
         GameObject fish = Instantiate(fishRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
-       // AnswersText[fishIndex] = fish.GetComponentInChildren<Text>();
         AnswersText.Add(fish.GetComponentInChildren<Text>());
         fish.GetComponent<Fish>().mood = Fish.FishMood.Good;
         fishIndex++;
         PlaceAnswer();
         fish.name = "Fish " + (fishIndex + 1);
+        activeFish.Add(fish);
     }
 
     void SpawnBadFish()
@@ -119,6 +120,7 @@ public class Level1D: MonoBehaviour {
         fishIndex++;
         PlaceWrongAnswer();       
         badFish.name = "Bad Fish " + fishIndex;
+        activeFish.Add(badFish);
     }
 
     public void Choice1(GameObject fish)
@@ -131,7 +133,7 @@ public class Level1D: MonoBehaviour {
 
             Destroy(fish);
 
-            UIManager.instance.ScorePoints(5);
+            UIManager.instance.ScorePoints(7);
           //  healthMeter.value += .10f;
         }
         else
@@ -141,7 +143,7 @@ public class Level1D: MonoBehaviour {
             bubbleParticle.transform.position = fish.transform.position;
             Destroy(fish);
 
-            if (LevelManager.instance.correctAnswerPoints < 5)
+            if (LevelManager.instance.correctAnswerPoints < 7)
             {
          
                 // healthMeter.value -= .10f;
@@ -151,11 +153,13 @@ public class Level1D: MonoBehaviour {
 
 	public void Reset (){
   
-        AnswerHint.text = Names[answerIndex];
-		answerButton = Random.Range (0, 4);
-		AnswersText[answerButton].text = Names[answerIndex];
+      //  AnswerHint.text = Names[answerIndex];
+       // answerButton = 0;
+	//	AnswersText[answerButton].text = Names[answerIndex];
+        
+		//PlaceAnswer ();
 
-		PlaceAnswer ();
+        
 	}
 
     public void PlaceWrongAnswer()

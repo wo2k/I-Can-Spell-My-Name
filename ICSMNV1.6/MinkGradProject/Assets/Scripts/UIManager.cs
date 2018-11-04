@@ -214,16 +214,16 @@ public class UIManager : MonoBehaviour {
         switch (levelName)
         {
             case "Level1A":
-                FindObjectOfType<Level1A>().Reset();
+                SceneManager.LoadScene(levelName);
                 break;
             case "Level1B":
-                FindObjectOfType<Level1B>().Reset();
+                SceneManager.LoadScene(levelName);
                 break;
             case "Level1C":
-                FindObjectOfType<Level1C>().Reset();
+                SceneManager.LoadScene(levelName);
                 break;
             case "Level1D":
-                FindObjectOfType<Level1D>().Reset();
+                SceneManager.LoadScene(levelName);
                 break;
             case "Level1E":
                 FindObjectOfType<Level1E>().Reset();

@@ -20,15 +20,16 @@ public class Fish : MonoBehaviour {
 
     public List<Sprite> fishTypes = new List<Sprite>();
 
-    
 
 
+    public int siblingIndex;
 
     public bool isFalling = false;
     public bool hasChanged = false;
 
     // Use this for initialization
     void Start () {
+
         level1D = FindObjectOfType<Level1D>();
 
         GetComponentInChildren<Button>().onClick.AddListener(delegate { FindObjectOfType<Level1D>().Choice1(gameObject); });
@@ -53,7 +54,6 @@ public class Fish : MonoBehaviour {
         }
         gameObject.GetComponent<Rigidbody2D>().AddForce(throwForce, ForceMode2D.Impulse);
 
-     
     }
 	
 	// Update is called once per frame
@@ -82,11 +82,17 @@ public class Fish : MonoBehaviour {
 
     }
 
+    private void OnDestroy()
+    {
+        level1D.activeFish.Remove(gameObject);
+    }
+
     void CheckMood()
     {
         switch (mood)
         {
             case FishMood.Good:
+                GetComponent<Image>().color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
                 break;
             case FishMood.Bad:
                 GetComponent<Image>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
@@ -94,11 +100,38 @@ public class Fish : MonoBehaviour {
         }
     }
 
+    void InitialLane()
+    {
+
+    }
+
+    void DetectLane(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                index = level1D.m_Lanes[index - 1].transform.GetSiblingIndex();
+                break;
+            case 2:
+                index = level1D.m_Lanes[index - 1].transform.GetSiblingIndex();
+                break;
+            case 3:
+                index = level1D.m_Lanes[index - 1].transform.GetSiblingIndex();
+                break;
+            case 4:
+                index = level1D.m_Lanes[index - 1].transform.GetSiblingIndex();
+                break;
+        }
+
+        transform.SetSiblingIndex(index);
+    }
+
     void ChangeLane()
     {
         if (isFalling)
         {
-            transform.SetSiblingIndex(Random.Range(1, 6));
+            siblingIndex = Random.Range(1, 5);
+            DetectLane(siblingIndex); 
             isFalling = false;
             hasChanged = true;
         }
@@ -121,14 +154,18 @@ public class Fish : MonoBehaviour {
         if (fish == FishDirection.Right)
         {
             transform.SetParent(level1D.m_Waves.transform);
-            transform.SetSiblingIndex(Random.Range(1, 6));
+            
+            siblingIndex = Random.Range(1, 5);
+            transform.SetSiblingIndex(siblingIndex);
         }
 
         if (fish == FishDirection.Left)
         {
             transform.SetParent(level1D.m_Waves.transform);
-            transform.SetSiblingIndex(Random.Range(1, 6));
+            siblingIndex = Random.Range(1, 5);
+            transform.SetSiblingIndex(siblingIndex);
 
         }
     }
+
 }

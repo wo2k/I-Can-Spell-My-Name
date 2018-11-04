@@ -420,6 +420,26 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e330a59bfe867a4a97b5273ff097340, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &494536830 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1553235866819726, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 494536828}
+--- !u!1 &494536831 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1048386902331820, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 494536828}
+--- !u!1 &494536832 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1924645457909624, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 494536828}
+--- !u!1 &494536833 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1217834760606668, guid: 5e330a59bfe867a4a97b5273ff097340,
+    type: 2}
+  m_PrefabInternal: {fileID: 494536828}
 --- !u!1001 &593492700
 Prefab:
   m_ObjectHideFlags: 0
@@ -1389,7 +1409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1812862694
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1659,7 +1679,13 @@ MonoBehaviour:
   badFishRef: {fileID: 1327475982107786, guid: 12df2190f5aac3c47bec0ca7bcbfce98, type: 2}
   bubbleRef: {fileID: 1092347691694618, guid: e741b87ea78edd74cbf105fe477fdfa3, type: 2}
   killZone: {fileID: 1812862693}
+  activeFish: []
   m_Waves: {fileID: 1852902968}
+  m_Lanes:
+  - {fileID: 494536833}
+  - {fileID: 494536832}
+  - {fileID: 494536831}
+  - {fileID: 494536830}
   fishIndex: -1
   badFishIndex: -1
 --- !u!114 &1981384904
