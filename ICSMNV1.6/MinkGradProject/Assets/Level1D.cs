@@ -11,7 +11,6 @@ public class Level1D: MonoBehaviour {
     public List<string> Names = new List<string>();
 	public Text AnswerHint;
 	public int answerButton = 0;
-	int answerIndex, wrongIndex;
 
 	public GameObject Tutorial;
 
@@ -79,15 +78,6 @@ public class Level1D: MonoBehaviour {
 
         Names = NameData.GetComponent<NameData>().data;
 
-        for (int i = 0; i < Names.Count; i++)
-        {
-
-            if (AnswerHint.text == Names[i])
-            {
-                answerIndex = i;
-
-            }
-        }
 
         answer = NameData.GetComponentInParent<NameData>().GetName(PlayerPrefs.GetString("firstName"));
 

@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Assets\BoatHanlder.cs" />
     <Compile Include="Assets\BubbleParticle.cs" />
+    <Compile Include="Assets\CannonBall.cs" />
     <Compile Include="Assets\Case_Control.cs" />
     <Compile Include="Assets\CharacterCreation.cs" />
     <Compile Include="Assets\CharacterSelection.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\ColorMe.cs" />
     <Compile Include="Assets\CorrectName.cs" />
     <Compile Include="Assets\CreditScreen.cs" />
+    <Compile Include="Assets\EnemyBoat.cs" />
     <Compile Include="Assets\FadeScript.cs" />
     <Compile Include="Assets\FileHandler.cs" />
     <Compile Include="Assets\FirstPlayButtons.cs" />

@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour {
              //   level1DRef.PlaceAnswer();
                 break;
             case "Level1E":
-                FindObjectOfType<Level1E>().PlaceAnswer();
+              //  FindObjectOfType<Level1E>().PlaceAnswer();
                 break;
         }
         ResetGameStats();
