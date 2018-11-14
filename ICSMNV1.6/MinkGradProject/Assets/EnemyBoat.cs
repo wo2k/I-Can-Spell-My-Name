@@ -55,8 +55,10 @@ public class EnemyBoat : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collider)
     {
         if (collider.gameObject.name == "PlayerBoat")
+        {
             Destroy(gameObject);
-        Debug.LogError("Hit");
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+        }
     }
 
     private void OnDestroy()

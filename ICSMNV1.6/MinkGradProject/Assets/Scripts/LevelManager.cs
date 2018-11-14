@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEditor;
-using UnityEditor.SceneManagement;
+//using UnityEditor.SceneManagement;
 
 
 public class LevelManager : MonoBehaviour
@@ -37,9 +37,13 @@ public class LevelManager : MonoBehaviour
     public int containerSize;
     [HideInInspector]
     public string sceneName;
+
+#if UNITY_EDITOR
     [SerializeField]
     [HideInInspector]
     public List<SceneAsset> sceneAssets = new List<SceneAsset>();
+#endif
+
     public enum AppPlatform { MacOS, Windows, iPhone, Andriod };
     public AppPlatform m_Console;
     public enum LevelType { GameMode, Menus };
