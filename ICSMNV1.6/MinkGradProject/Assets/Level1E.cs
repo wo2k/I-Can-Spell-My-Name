@@ -22,6 +22,7 @@ public class Level1E: MonoBehaviour {
     public List<GameObject> m_Lanes = new List<GameObject>();
 
     public Transform muzzlePos;
+    public GameObject muzzleFlashRef;
     public GameObject cannonBallRef;
     public GameObject pathParent;
     public GameObject m_Cannon;
@@ -106,12 +107,11 @@ public class Level1E: MonoBehaviour {
         GameObject cannonBall = Instantiate(cannonBallRef, muzzlePos.position, Quaternion.identity, gameObject.transform);
         cannonBall.name = "CannonBall";
 
-        
-        //   Debug.Log("Firing at " + point + " velocity " + velocity);
+        GameObject muzzleFlash = Instantiate(muzzleFlashRef, muzzlePos.position, Quaternion.identity, m_Cannon.transform);
+        muzzleFlash.name = "MuzzleFlash";
+        muzzleFlash.transform.localEulerAngles = new Vector3(0, 0, 543);
 
-       // cannonBall.GetComponent<CannonBall>().physics.transform.position = transform.position;
-       // cannonBall.GetComponent<CannonBall>().physics.velocity = velocity;
-
+        SoundManagement.TriggerEvent("PlayCannonShot");
     }
 
     void setTrajectoryPoints(Vector3 pStartPosition, Vector3 pVelocity)
@@ -141,7 +141,7 @@ public class Level1E: MonoBehaviour {
         if (answerButton == 0)
         {
          //   NextLetter();
-            UIManager.instance.ScorePoints();
+            //UIManager.instance.ScorePoints(5);
         }
         else
         {
@@ -259,24 +259,23 @@ public class Level1E: MonoBehaviour {
         }
 
     }
-  
 
-    private Vector2 GetForceFrom(Vector3 fromPos, Vector3 toPos)
+
+    private Vector2 GetForceFrom(Vector3 fromPos, Vector3 toPos, Vector3 speed)
     {
-      //  Vector2 a = new Vector2(fromPos.x, fromPos.y);
-      //  Vector2 b = new Vector2(toPos.x, toPos.y);
-       // return Vector2.Distance(a, b);
-        return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * 5;
+        return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y) - new Vector2(speed.x, speed.y));
     }
+
     // Update is called once per frame
     void Update () {
 
-        velocity = GetForceFrom(muzzlePos.localPosition, FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).gameObject.transform.position);
+        velocity = GetForceFrom(muzzlePos.localPosition, FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).gameObject.transform.position, new Vector3(750, -300, 0));
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+        angle /= 2.5f;
         m_Cannon.transform.localEulerAngles = new Vector3(0, 0, angle);
-        pathParent.transform.localEulerAngles = m_Cannon.transform.localEulerAngles;
+       // pathParent.transform.localEulerAngles = m_Cannon.transform.localEulerAngles;
       //  muzzlePos.localEulerAngles = new Vector3(0, 0, angle);
-        setTrajectoryPoints(muzzlePos.localPosition, velocity / 20);
+      //  setTrajectoryPoints(muzzlePos.localPosition, velocity);
        // setTrajectoryPoints(muzzlePos.position, velocity);
        
     }

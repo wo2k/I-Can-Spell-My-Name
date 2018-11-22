@@ -8,6 +8,8 @@ public class EnemyBoat : MonoBehaviour {
     public Level1E level1E;
     Animation anim;
     public Collider2D boatCollider;
+    public Vector3 boatPos;
+    public bool animate = false;
 
 	// Use this for initialization
 	void Start() {
@@ -21,7 +23,7 @@ public class EnemyBoat : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        boatCollider.offset = new Vector2(transform.GetChild(0).localPosition.x, 0);
+        boatCollider.offset = new Vector2(transform.GetChild(0).localPosition.x, -118.7f);
 	}
 
     void SetWaves()
@@ -59,11 +61,27 @@ public class EnemyBoat : MonoBehaviour {
             Destroy(gameObject);
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
         }
+
+        if(collider.gameObject.name == "CannonBall")
+        {
+            SoundManagement.TriggerEvent("PlayCannonHit");
+            boatPos = transform.GetChild(0).localPosition;
+            animate = true;
+            anim.Play("Boat-Down");
+            Destroy(collider.gameObject);
+            
+        }
     }
 
     private void OnDestroy()
     {
-        
+        UIManager.instance.ScorePoints(5);
+    }
+
+    private void LateUpdate()
+    {
+        if(animate)
+            transform.GetChild(0).localPosition += boatPos;
     }
 
 }

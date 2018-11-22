@@ -37,7 +37,7 @@ public class SFXListener : MonoBehaviour {
 	private UnityAction BellAmb;
 	private UnityAction BoatCreek;
 	private UnityAction CannonShot;
-	private UnityAction CannonHit;
+	private UnityAction CannonMiss;
 	private UnityAction ChestClose;
 	private UnityAction ChestCloser;
 	private UnityAction ChestOpen;
@@ -57,6 +57,7 @@ public class SFXListener : MonoBehaviour {
     private UnityAction LoudClock;
     private UnityAction TimeRunningOut;
     private UnityAction Bubbles01;
+    private UnityAction CannonHit;
 
 	public List<AudioClip> A_Sounds;
 	public List<AudioClip> B_Sounds;
@@ -123,7 +124,8 @@ public class SFXListener : MonoBehaviour {
 		BellAmb = new UnityAction (PlayEffect1);
 		BoatCreek = new UnityAction (PlayEffect2);
 		CannonShot = new UnityAction (PlayEffect3);
-		CannonHit= new UnityAction (PlayEffect4);
+		CannonMiss= new UnityAction (PlayEffect4);
+        CannonHit = new UnityAction(PlayEffect24);
 		ChestClose= new UnityAction (PlayEffect5);
 		ChestCloser = new UnityAction (PlayEffect6);
 		ChestOpen = new UnityAction (PlayEffect7);
@@ -178,8 +180,9 @@ public class SFXListener : MonoBehaviour {
 		SoundManagement.Startlistening ("PlayBellAmb", BellAmb);
 		SoundManagement.Startlistening ("PlayBoatCreek", BoatCreek);
 		SoundManagement.Startlistening ("PlayCannonShot", CannonShot);
-		SoundManagement.Startlistening ("PlayCannonHit", CannonHit);
-		SoundManagement.Startlistening ("PlayChestClose", ChestClose);
+		SoundManagement.Startlistening ("PlayCannonMiss", CannonMiss);
+        SoundManagement.Startlistening("PlayCannonHit", CannonHit);
+        SoundManagement.Startlistening ("PlayChestClose", ChestClose);
 		SoundManagement.Startlistening ("PlayChestCloser", ChestCloser);
 		SoundManagement.Startlistening ("PlayChestOpen", ChestOpen);
 		SoundManagement.Startlistening ("PlayDolphinCry", DolphinCry);
@@ -232,8 +235,9 @@ public class SFXListener : MonoBehaviour {
 		SoundManagement.Stoplistening ("PlayBellAmb", BellAmb);
 		SoundManagement.Stoplistening ("PlayBoatCreek", BoatCreek);
 		SoundManagement.Stoplistening ("PlayCannonShot", CannonShot);
-		SoundManagement.Stoplistening ("PlayCannonHit", CannonHit);
-		SoundManagement.Stoplistening ("PlayChestClose", ChestClose);
+		SoundManagement.Stoplistening ("PlayCannonMiss", CannonMiss);
+        SoundManagement.Stoplistening("PlayCannonHit", CannonHit);
+        SoundManagement.Stoplistening ("PlayChestClose", ChestClose);
 		SoundManagement.Stoplistening ("PlayChestCloser", ChestCloser);
 		SoundManagement.Stoplistening ("PlayChestOpen", ChestOpen);
 		SoundManagement.Stoplistening ("PlayDolphinCry", DolphinCry);
@@ -493,6 +497,10 @@ public class SFXListener : MonoBehaviour {
     void PlayEffect23()
     {
         MyAudio.PlayOneShot(Effects[23]);
+    }
+    void PlayEffect24()
+    {
+        MyAudio.PlayOneShot(Effects[24]);
     }
 }
 

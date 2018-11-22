@@ -95,6 +95,7 @@
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\ModeFinder.cs" />
     <Compile Include="Assets\MusicListener.cs" />
+    <Compile Include="Assets\MuzzleFlash.cs" />
     <Compile Include="Assets\NameData.cs" />
     <Compile Include="Assets\OnClick.cs" />
     <Compile Include="Assets\PlaySound.cs" />
