@@ -30,6 +30,9 @@ public class Level1E: MonoBehaviour {
     private List<GameObject> trajectoryPoints = new List<GameObject>();
     public Vector3 velocity;
 
+    //Miss
+    public List<Transform> targetMiss = new List<Transform>();
+    public bool AnswerCorrect;
     
     void Start()
     {
@@ -43,31 +46,41 @@ public class Level1E: MonoBehaviour {
         {
             case 1:
                 {
-                 //   AnswerHint.text = PlayerPrefs.GetString("firstName");
+                    AnswerHint.text = PlayerPrefs.GetString("firstName");
                     NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("firstName"));
                     break;
                 }
             case 2:
                 {
-                  //  AnswerHint.text = PlayerPrefs.GetString("secondName");
+                    AnswerHint.text = PlayerPrefs.GetString("secondName");
                     NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("secondName"));
                     break;
                 }
             case 3:
                 {
-                   // AnswerHint.text = PlayerPrefs.GetString("thirdName");
+                    AnswerHint.text = PlayerPrefs.GetString("thirdName");
                     NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("thirdName"));
                     break;
                 }
             case 4:
                 {
-                  //  AnswerHint.text = PlayerPrefs.GetString("fourthName");
+                    AnswerHint.text = PlayerPrefs.GetString("fourthName");
                     NameData.GetComponentInParent<NameData>().AddName(PlayerPrefs.GetString("fourthName"));
                     break;
                 }
         }
 
-        Names = NameData.GetComponent<NameData>().data; 
+        Names = NameData.GetComponent<NameData>().data;
+
+        for (int i = 0; i < Names.Count; i++)
+        {
+            if (AnswerHint.text == Names[i])
+            {
+                answerIndex = i;
+                AnswersText[answerButton].text = Names[answerIndex];
+                answer = AnswersText[answerButton].text;
+            }
+        }
 
         for (int i = 0; i < AnswersText.Length; i++)
         {
@@ -79,16 +92,16 @@ public class Level1E: MonoBehaviour {
 
         SpawnEnemyBoat();
 
-        pathParent.transform.position = m_Cannon.transform.position;
+       // pathParent.transform.position = m_Cannon.transform.position;
       //  pathParent.transform.position = new Vector3(pathParent.transform.position.x + 30, pathParent.transform.position.y, pathParent.transform.position.z);
 
-        for (int i = 0; i < numOfTrajectoryPoints; i++)
+      /*  for (int i = 0; i < numOfTrajectoryPoints; i++)
         {
             GameObject dot = Instantiate(Resources.Load<GameObject>("Prefabs/TrajectoryPath"), new Vector3(0, 0, 0), Quaternion.identity, pathParent.transform);
             dot.name = "Dot";
 
             trajectoryPoints.Insert(i, dot);
-        }
+        }*/
 
         
     }
@@ -97,9 +110,8 @@ public class Level1E: MonoBehaviour {
     {
         GameObject enemyBoat = Instantiate(enemyRef, new Vector3(1200, 0, 0), Quaternion.identity, m_Waves.transform);
         enemyIndex++;
-     //   PlaceAnswer();
+        PlaceAnswer();
         enemyBoat.name = "Enemy Boat " + enemyIndex;
-      //  activeFish.Add(fish);
     }
 
     void SpawnCannonBall()
@@ -136,54 +148,58 @@ public class Level1E: MonoBehaviour {
     public void Choice1()
     {
         FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Stop();
-        SpawnCannonBall();
+        
         
         if (answerButton == 0)
         {
-         //   NextLetter();
-            //UIManager.instance.ScorePoints(5);
+            AnswerCorrect = true;
+            SpawnCannonBall();
         }
         else
-        {
-         
+        {        
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-          
-           // if (LevelManager.instance.correctAnswerPoints < 3)
-              //  NextLetter();
+            AnswerCorrect = false;
+            SpawnCannonBall();
+            // if (LevelManager.instance.correctAnswerPoints < 3)
+            //  NextLetter();
         }
     }
     public void Choice2()
     {
-
+        FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Stop();
+        
         if (answerButton == 1)
         {
-           // NextLetter();
-            UIManager.instance.ScorePoints();
+            AnswerCorrect = true;
+            SpawnCannonBall();
         }
         else
         {
          
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-
+            AnswerCorrect = false;
+            SpawnCannonBall();
             //if (LevelManager.instance.correctAnswerPoints < 3)
-               // NextLetter();
+            // NextLetter();
         }
     }
     public void Choice3()
     {
-
+        FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Stop();
+        
         if (answerButton == 2)
         {
-          //  NextLetter();
-            UIManager.instance.ScorePoints();
+            AnswerCorrect = true;
+            SpawnCannonBall();
         }
         else
         {
            
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-           
+            AnswerCorrect = false;
+            SpawnCannonBall();
             //if (LevelManager.instance.correctAnswerPoints < 3)
-               // NextLetter();
+            // NextLetter();
         }
     }
 
@@ -199,8 +215,8 @@ public class Level1E: MonoBehaviour {
 
     public void PlaceAnswer()
     {
-        NamesChosen = new string[4];
-        answerButton = Random.Range(0, 4);
+        NamesChosen = new string[3];
+        answerButton = Random.Range(0, 3);
 
         AnswersText[answerButton].text = Names[answerIndex];
         answer = AnswersText[answerButton].text;
@@ -213,7 +229,7 @@ public class Level1E: MonoBehaviour {
                 AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
         int ChosenIndex = 0;
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= 2; i++)
         {
 
             if (answerButton == i)

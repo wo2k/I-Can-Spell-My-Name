@@ -62,12 +62,13 @@ public class EnemyBoat : MonoBehaviour {
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
         }
 
-        if(collider.gameObject.name == "CannonBall")
+        if(collider.gameObject.name == "CannonBall" && level1E.AnswerCorrect)
         {
             SoundManagement.TriggerEvent("PlayCannonHit");
             boatPos = transform.GetChild(0).localPosition;
             animate = true;
             anim.Play("Boat-Down");
+            UIManager.instance.gameStart = false; // Pause Timer
             Destroy(collider.gameObject);
             
         }
@@ -76,6 +77,7 @@ public class EnemyBoat : MonoBehaviour {
     private void OnDestroy()
     {
         UIManager.instance.ScorePoints(5);
+        UIManager.instance.gameStart = true; // Un Pause Timer
     }
 
     private void LateUpdate()

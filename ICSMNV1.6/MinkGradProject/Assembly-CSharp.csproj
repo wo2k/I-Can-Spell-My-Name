@@ -115,6 +115,7 @@
     <Compile Include="Assets\SetEndSubState.cs" />
     <Compile Include="Assets\SetSortingLayer.cs" />
     <Compile Include="Assets\ShowCorrectVarMenu.cs" />
+    <Compile Include="Assets\TargetMiss.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
     <Compile Include="Assets\TypedLetter.cs" />
     <Compile Include="Assets\UpdateSound.cs" />

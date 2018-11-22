@@ -28,9 +28,17 @@ public class CannonBall : MonoBehaviour {
         level1E = FindObjectOfType<Level1E>();
         projectile = GetComponent<Rigidbody2D>();
         physics = GetComponent<Rigidbody2D>();
-        target = FindObjectOfType<EnemyBoat>().transform.GetChild(0).gameObject;
-        targetPos = target.transform.position;
 
+        if (level1E.AnswerCorrect)
+        {
+            target = FindObjectOfType<EnemyBoat>().transform.GetChild(0).gameObject;
+            targetPos = target.transform.position;
+        }
+        else
+        {
+            target = level1E.targetMiss[Random.Range(0, level1E.targetMiss.Count)].gameObject;
+            targetPos = target.transform.localPosition;
+        }
 
     }
 
