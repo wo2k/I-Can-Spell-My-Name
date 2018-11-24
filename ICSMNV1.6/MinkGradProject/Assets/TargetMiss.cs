@@ -21,8 +21,8 @@ public class TargetMiss : MonoBehaviour {
         if (collider.gameObject.name == "CannonBall" && !level1E.AnswerCorrect)
         {
             SoundManagement.TriggerEvent("PlayCannonMiss");
-         //   UIManager.instance.gameStart = false; // Pause Timer
             Destroy(collider.gameObject);
+            FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Play();
 
         }
     }

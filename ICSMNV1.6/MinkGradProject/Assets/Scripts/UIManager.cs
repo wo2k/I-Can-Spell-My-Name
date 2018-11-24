@@ -234,7 +234,7 @@ public class UIManager : MonoBehaviour {
                 FindObjectOfType<Level1D>().Reset();
                 break;
             case "Level1E":
-                FindObjectOfType<Level1E>().Reset();
+               // FindObjectOfType<Level1E>().Reset();
                 break;
         }
         ResetGameStats();
