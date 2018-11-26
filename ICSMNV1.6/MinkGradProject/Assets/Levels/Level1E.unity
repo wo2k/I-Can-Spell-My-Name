@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 141281903}
   - component: {fileID: 141281902}
   - component: {fileID: 141281901}
+  - component: {fileID: 141281904}
   m_Layer: 5
   m_Name: Choice 3
   m_TagString: Untagged
@@ -330,6 +331,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 141281899}
+--- !u!114 &141281904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 141281899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.26904178, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &186003878
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +457,7 @@ GameObject:
   - component: {fileID: 274698226}
   - component: {fileID: 274698225}
   - component: {fileID: 274698224}
+  - component: {fileID: 274698227}
   m_Layer: 5
   m_Name: Choice 1
   m_TagString: Untagged
@@ -555,6 +570,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 274698222}
+--- !u!114 &274698227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 274698222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.26904178, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &280751424
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +846,10 @@ MonoBehaviour:
   speed: 0
   canShoot: 0
   LoadingBars: []
+  currentWaveIndex: 0
+  MaxWaveIndex: 3
+  boatsInWave: []
+  boatIDNum: 
 --- !u!114 &635743708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1033,6 +1065,18 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217834760606668, guid: 5e330a59bfe867a4a97b5273ff097340, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924645457909624, guid: 5e330a59bfe867a4a97b5273ff097340, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1048386902331820, guid: 5e330a59bfe867a4a97b5273ff097340, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 111287891023363522, guid: 5e330a59bfe867a4a97b5273ff097340, type: 2}
@@ -1791,6 +1835,7 @@ GameObject:
   - component: {fileID: 1792958559}
   - component: {fileID: 1792958558}
   - component: {fileID: 1792958557}
+  - component: {fileID: 1792958560}
   m_Layer: 5
   m_Name: Choice 2
   m_TagString: Untagged
@@ -1903,6 +1948,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1792958555}
+--- !u!114 &1792958560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1792958555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.26904178, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &1952972436
 Prefab:
   m_ObjectHideFlags: 0
@@ -2322,7 +2380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.66, y: -85.7}
+  m_AnchoredPosition: {x: 1.66, y: -169.46}
   m_SizeDelta: {x: 93.65, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &2137142698

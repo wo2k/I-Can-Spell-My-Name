@@ -34,12 +34,20 @@ public class Level1E: MonoBehaviour {
     public List<Transform> targetMiss = new List<Transform>();
     public bool AnswerCorrect;
     public bool lockedOntoBoat;
+    int fireMissTimer;
+    public enum randomOpperand { Add, Subtract};
 
     //Cannonball Loading
     float currentValue;
     public float speed;
     public bool canShoot;
     public ReloadCannonAmmo[] LoadingBars;
+
+    //Waves
+    public int currentWaveIndex = 0;
+    public int MaxWaveIndex = 3;
+    public List<GameObject> boatsInWave = new List<GameObject>();
+    public List<int> boatIDNum = new List<int>();
 
     void Start()
     {
@@ -96,20 +104,49 @@ public class Level1E: MonoBehaviour {
             else
                 AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
-
-        SpawnEnemyBoat();
-        lockedOntoBoat = true;
+        StartCoroutine(SpawnEnemyWaves());
+     
 
         LoadingBars = FindObjectsOfType<ReloadCannonAmmo>();
     
     }
 
-    void SpawnEnemyBoat()
+    IEnumerator SpawnEnemyWaves()
     {
-        GameObject enemyBoat = Instantiate(enemyRef, new Vector3(1200, 0, 0), Quaternion.identity, m_Waves.transform);
-        enemyIndex++;
-        PlaceAnswer();
-        enemyBoat.name = "Enemy Boat " + enemyIndex;
+        for (; currentWaveIndex < MaxWaveIndex; currentWaveIndex++)
+        {
+            switch(currentWaveIndex)
+            {
+                case 0:
+                    StartCoroutine(SpawnEnemyBoat(1));
+                    break;
+                case 1:
+                    StartCoroutine(SpawnEnemyBoat(2));
+                    break;
+                case 2:
+                    StartCoroutine(SpawnEnemyBoat(3));
+                    break;
+            }
+
+            yield return new WaitUntil(() => boatsInWave.Count <= 0);
+            boatIDNum.Clear();
+        }
+    }
+
+    IEnumerator SpawnEnemyBoat(int enemyQty)
+    {
+        for (int i = 0; i < enemyQty; i++)
+        {
+            GameObject enemyBoat = Instantiate(enemyRef, new Vector3(1200, 0, 0), Quaternion.identity, m_Waves.transform);
+            enemyIndex++;
+            PlaceAnswer();
+            enemyBoat.name = "Enemy Boat " + enemyIndex;
+            boatsInWave.Add(enemyBoat);
+            float duration = Random.Range(0f, 5f);
+
+            yield return new WaitForSeconds(duration);
+        }
+        lockedOntoBoat = true;
     }
 
     void SpawnCannonBall()
@@ -145,8 +182,11 @@ public class Level1E: MonoBehaviour {
 
     public void Choice1()
     {
-        FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Stop();
-        
+        foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+        {
+            item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0;
+        }
+
         for(int i = 0; i < LoadingBars.Length; i++)
         {
             LoadingBars[i].currentValue = 100;
@@ -161,18 +201,17 @@ public class Level1E: MonoBehaviour {
         else
         {
             lockedOntoBoat = false;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             AnswerCorrect = false;
             StartCoroutine("AnimateCannon");
-            SpawnCannonBall();
             
-            // if (LevelManager.instance.correctAnswerPoints < 3)
-            //  NextLetter();
         }
     }
     public void Choice2()
     {
-        FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Stop();
+        foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+        {
+            item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0;
+        }
 
         for (int i = 0; i < LoadingBars.Length; i++)
         {
@@ -188,17 +227,16 @@ public class Level1E: MonoBehaviour {
         else
         {
             lockedOntoBoat = false;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             AnswerCorrect = false;
             StartCoroutine("AnimateCannon");
-            SpawnCannonBall();
-            //if (LevelManager.instance.correctAnswerPoints < 3)
-            // NextLetter();
         }
     }
     public void Choice3()
     {
-        FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Stop();
+        foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+        {
+            item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0;
+        }
 
 
         for (int i = 0; i < LoadingBars.Length; i++)
@@ -210,17 +248,15 @@ public class Level1E: MonoBehaviour {
         if (answerButton == 2)
         {
             AnswerCorrect = true;
-            StartCoroutine("AnimateCannon");
+            
             SpawnCannonBall();
         }
         else
         {
             lockedOntoBoat = false;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            
             AnswerCorrect = false;
-            SpawnCannonBall();
-            //if (LevelManager.instance.correctAnswerPoints < 3)
-            // NextLetter();
+            StartCoroutine("AnimateCannon");
         }
     }
 
@@ -298,16 +334,30 @@ public class Level1E: MonoBehaviour {
         return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y) - new Vector2(speed.x, speed.y));
     }
 
+    private Vector3 GetRandomOpperand(Vector2 a, Vector2 b, randomOpperand opperand)
+    {
+        if (opperand == randomOpperand.Add) return a + b;
+        if (opperand == randomOpperand.Subtract) return b - a;
+        throw new System.NotImplementedException();
+    }
+
     public IEnumerator AnimateCannon()
     {
-        if (!lockedOntoBoat)
+        Vector3 targetPos = targetMiss[Random.Range(0, targetMiss.Count)].transform.position;
+       // var calculate = Random.Range(0, 2) == 0 ? randomOpperand.Add : randomOpperand.Subtract;
+
+        while (!lockedOntoBoat)
         {
-            velocity = GetForceFrom(muzzlePos.localPosition, targetMiss[Random.Range(0, targetMiss.Count)].transform.position, new Vector3(750, -300, 0));
+            fireMissTimer++;
+            velocity = new Vector2(velocity.x, velocity.y) + GetForceFrom(muzzlePos.localPosition, targetPos, new Vector3(750, -300, 0));
             float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
             angle /= 2.5f;
             m_Cannon.transform.localEulerAngles = new Vector3(0, 0, angle);
-            lockedOntoBoat = true;
+            yield return new WaitForSeconds(0.1f);
+            if(fireMissTimer >= 2)
+              lockedOntoBoat = true;
         }
+        SpawnCannonBall();
         yield return null;
     }
 

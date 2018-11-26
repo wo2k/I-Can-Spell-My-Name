@@ -69,9 +69,11 @@
     <Compile Include="Assets\ChestCheck.cs" />
     <Compile Include="Assets\ChoiceBlock.cs" />
     <Compile Include="Assets\ChoseColor.cs" />
+    <Compile Include="Assets\ColorAnswer.cs" />
     <Compile Include="Assets\ColorMe.cs" />
     <Compile Include="Assets\CorrectName.cs" />
     <Compile Include="Assets\CreditScreen.cs" />
+    <Compile Include="Assets\DestroyItem.cs" />
     <Compile Include="Assets\EnemyBoat.cs" />
     <Compile Include="Assets\FadeScript.cs" />
     <Compile Include="Assets\FileHandler.cs" />

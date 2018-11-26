@@ -16,17 +16,15 @@ public class CannonBall : MonoBehaviour {
     private int numOfTrajectoryPoints = 30;
     private List<GameObject> trajectoryPoints = new List<GameObject>();
 
-   // public Transform target;
-    public Rigidbody2D projectile;
-    public float gravity = 9.81f;
-    public float force = 100;
     bool hasFired = false;
+
+
+    public int lane;
 
     // Use this for initialization
     void Start () {
 
         level1E = FindObjectOfType<Level1E>();
-        projectile = GetComponent<Rigidbody2D>();
         physics = GetComponent<Rigidbody2D>();
 
         if (level1E.AnswerCorrect)
@@ -36,16 +34,36 @@ public class CannonBall : MonoBehaviour {
         }
         else
         {
-            target = level1E.targetMiss[Random.Range(0, level1E.targetMiss.Count)].gameObject;
+            lane = Random.Range(0, level1E.targetMiss.Count);
+            target = level1E.targetMiss[lane].gameObject;
+            SetWaves(lane);
             targetPos = target.transform.localPosition;
         }
 
     }
 
+    void SetWaves(int lane)
+    {
+        transform.SetParent(level1E.m_Waves.transform);
+
+        switch (lane)
+        {
+            case 0:// Top
+                transform.SetSiblingIndex(level1E.m_Lanes[0].transform.GetSiblingIndex() + 1);
+                break;
+            case 1:// Middle
+                transform.SetSiblingIndex(level1E.m_Lanes[1].transform.GetSiblingIndex() + 1);
+                break;
+            case 2:// Bottom
+                transform.SetSiblingIndex(level1E.m_Lanes[2].transform.GetSiblingIndex() + 1);
+                break;
+        }
+
+    }
 
     void FireAtWill()
     {
-       physics.AddForce(GetForceFrom(transform.localPosition, targetPos, new Vector3(750, -300, 0)), ForceMode2D.Impulse);     
+       physics.AddForce(GetForceFrom(transform.localPosition, targetPos, new Vector3(750, -275, 0)), ForceMode2D.Impulse);     
         hasFired = true;
     }
 

@@ -21,8 +21,15 @@ public class TargetMiss : MonoBehaviour {
         if (collider.gameObject.name == "CannonBall" && !level1E.AnswerCorrect)
         {
             SoundManagement.TriggerEvent("PlayCannonMiss");
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            //level1E.lockedOntoBoat = true;
             Destroy(collider.gameObject);
-            FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).GetComponent<Animation>().Play();
+
+            foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+            {
+                item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0.2f;
+            }
+        
 
         }
     }
