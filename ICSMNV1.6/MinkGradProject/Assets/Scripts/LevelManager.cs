@@ -44,10 +44,16 @@ public class LevelManager : MonoBehaviour
     public List<SceneAsset> sceneAssets = new List<SceneAsset>();
 #endif
 
+    //App Platforms
     public enum AppPlatform { MacOS, Windows, iPhone, Andriod };
     public AppPlatform m_Console;
+    //Type of Level in Unity
     public enum LevelType { GameMode, Menus };
     public LevelType m_Mode;
+    //Type of difficulty of Level
+    public enum Difficulty { Easy, Normal, Hard, Genius };
+    public Difficulty m_Difficulty;
+  //  public Dropdown m_Dropdown;
 
     void Awake()
     {
@@ -106,6 +112,8 @@ public class LevelManager : MonoBehaviour
     {
         LoadPlayerPrefs();
 
+        m_Difficulty = Difficulty.Easy;
+
         switch (Application.platform)
         {
             case RuntimePlatform.WindowsEditor:
@@ -128,6 +136,8 @@ public class LevelManager : MonoBehaviour
                 break;
         }
     }
+
+    
 
     #region Set Level State
     public void CheckLevelState(bool disableLevelBtns)

@@ -15,7 +15,9 @@ public class LevelManagerEditor : Editor {
     SerializedObject m_Target;
     Scene m_Scene;
 
-    //Toolbar button names
+    //Main toolbar button names
+    public string[] mainToolbarNames = new string[] { "Level Creation", "Level Editing" }; 
+    //Level Creation button names
     public string[] toolbarButtonNames = new string[] { "Create New Scene", "Add Scene", "Add to Build Settings" };
 
     //Allows you to show LevelManager Script properties
@@ -27,8 +29,12 @@ public class LevelManagerEditor : Editor {
     GUIStyle defGUIStyle;
     float labelWidth;
     float fieldWidth;
+    //Level Creation Toolbar
     GUISkin toolBarSkin;
     GUIStyle tabStyle;
+    //Level Editing Toolbar
+    GUISkin mainToolbarSkin;
+    GUIStyle mainStyle;
 
     //Saved Preferences
     private SerializedProperty sceneNameCapture;
@@ -42,7 +48,11 @@ public class LevelManagerEditor : Editor {
         UIManager = FindObjectOfType<UIManager>();
         m_Target = new SerializedObject(target);
 
-        //Retrieve custom GUISkin for Toolbar
+        //Retrieve custom GUISkin for main toolbar
+        mainToolbarSkin = Resources.Load("GUISkin/MainToolbar") as GUISkin;
+        mainStyle = mainToolbarSkin.GetStyle("Tab");
+
+        //Retrieve custom GUISkin for Toolbar for Level Creation
         toolBarSkin = Resources.Load("GUISkin/Toolbar") as GUISkin;
         tabStyle = toolBarSkin.GetStyle("Tab");
 

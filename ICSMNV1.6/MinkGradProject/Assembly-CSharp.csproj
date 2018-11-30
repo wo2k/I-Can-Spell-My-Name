@@ -93,6 +93,7 @@
     <Compile Include="Assets\Level2A.cs" />
     <Compile Include="Assets\Level2B.cs" />
     <Compile Include="Assets\Level2C.cs" />
+    <Compile Include="Assets\LevelDescription.cs" />
     <Compile Include="Assets\LoginButtons.cs" />
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\ModeFinder.cs" />
