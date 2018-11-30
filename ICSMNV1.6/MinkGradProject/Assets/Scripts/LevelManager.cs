@@ -32,6 +32,8 @@ public class LevelManager : MonoBehaviour
     //LevelManager Editor Variables
     [HideInInspector]
     public int currentTab;
+    [HideInInspector]
+    public int mainTBCurrentTab;
     [SerializeField]
     [HideInInspector]
     public int containerSize;

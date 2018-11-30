@@ -87,8 +87,12 @@ public class LevelManagerEditor : Editor {
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.Space();
+        GUI.skin = mainToolbarSkin;
+        EditorGUILayout.Space();
+        levelManager.mainTBCurrentTab = GUILayout.Toolbar(levelManager.mainTBCurrentTab, mainToolbarNames, mainStyle);
+
+        EditorGUILayout.Space();
         GUI.skin = toolBarSkin;
-           
         EditorGUILayout.Space();
 
         levelManager.currentTab = GUILayout.Toolbar(levelManager.currentTab, toolbarButtonNames, tabStyle);
