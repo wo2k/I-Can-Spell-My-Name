@@ -4,8 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEngine.Video;
 //using UnityEditor.SceneManagement;
 
+/*[System.Serializable]
+public class LevelSettings : MonoBehaviour
+{
+    string levelName;
+    string levelDescription;
+    Image levelIcon;
+    float highScore;
+}*/
 
 public class LevelManager : MonoBehaviour
 {
@@ -40,6 +49,25 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public string sceneName;
 
+    [System.Serializable]
+    public struct LevelSettings
+    {
+        public string levelName;
+        [TextArea]
+        public string levelDescription;
+        public Sprite levelIcon;
+        public Texture videoTexture;
+        public VideoClip videoFile;
+        public float highScore;
+
+    }
+
+    public LevelSettings level1A;
+    public LevelSettings level1B;
+    public LevelSettings level1C;
+    public LevelSettings level1D;
+    public LevelSettings level1E; 
+
 #if UNITY_EDITOR
     [SerializeField]
     [HideInInspector]
@@ -55,8 +83,7 @@ public class LevelManager : MonoBehaviour
     //Type of difficulty of Level
     public enum Difficulty { Easy, Normal, Hard, Genius };
     public Difficulty m_Difficulty;
-  //  public Dropdown m_Dropdown;
-
+    
     void Awake()
     {
         if (instance == null)
@@ -76,7 +103,7 @@ public class LevelManager : MonoBehaviour
             UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready " + i));
 
         hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
-
+       
     }
 
     void ResetPlayerPrefs()
@@ -113,7 +140,6 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         LoadPlayerPrefs();
-
         m_Difficulty = Difficulty.Easy;
 
         switch (Application.platform)

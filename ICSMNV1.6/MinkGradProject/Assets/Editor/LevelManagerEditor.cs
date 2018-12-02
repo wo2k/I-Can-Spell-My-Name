@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine.Video;
 
 [CustomEditor(typeof(LevelManager))]
 [CanEditMultipleObjects]
@@ -16,7 +17,7 @@ public class LevelManagerEditor : Editor {
     Scene m_Scene;
 
     //Main toolbar button names
-    public string[] mainToolbarNames = new string[] { "Level Creation", "Level Editing" }; 
+    public string[] mainToolbarNames = new string[] { "Creation", "Settings" }; 
     //Level Creation button names
     public string[] toolbarButtonNames = new string[] { "Create New Scene", "Add Scene", "Add to Build Settings" };
 
@@ -36,11 +37,15 @@ public class LevelManagerEditor : Editor {
     GUISkin mainToolbarSkin;
     GUIStyle mainStyle;
 
-    //Saved Preferences
+    //Saved Preferences for Creation
     private SerializedProperty sceneNameCapture;
     private SerializedProperty sceneAssetCapture;
     private SerializedProperty containerSizeCapture;
     List<string> buildSettingSceneNames;
+    //Saved Preferences for Settings
+    private SerializedProperty levelName;
+
+
 
     void OnEnable()
     {
@@ -62,6 +67,9 @@ public class LevelManagerEditor : Editor {
         containerSizeCapture = m_Target.FindProperty("containerSize");
 
         buildSettingSceneNames = new List<string>();
+
+        //Settings
+        //levelName = m_Target.FindProperty(levelManager.level1A.levelName.ToString());
     }
 
     public override void OnInspectorGUI()
@@ -89,17 +97,19 @@ public class LevelManagerEditor : Editor {
         EditorGUILayout.Space();
         GUI.skin = mainToolbarSkin;
         EditorGUILayout.Space();
-        levelManager.mainTBCurrentTab = GUILayout.Toolbar(levelManager.mainTBCurrentTab, mainToolbarNames, mainStyle);
+        levelManager.mainTBCurrentTab = GUILayout.Toolbar(levelManager.mainTBCurrentTab, mainToolbarNames, mainStyle);  
 
-        EditorGUILayout.Space();
-        GUI.skin = toolBarSkin;
-        EditorGUILayout.Space();
-
-        levelManager.currentTab = GUILayout.Toolbar(levelManager.currentTab, toolbarButtonNames, tabStyle);
-      
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();      
+        switch(levelManager.mainTBCurrentTab)
+        {
+            case 0:
+                ShowCreation();
+                levelManager.currentTab = 0;
+                break;
+            case 1:
+                ShowSettings();
+                levelManager.currentTab = 3;//Set Default state so help box doesn't show up
+                break;
+        }
 
         switch (levelManager.currentTab)
         {
@@ -120,6 +130,9 @@ public class LevelManagerEditor : Editor {
                 CaptureBuildContainer();
                 AddScenesToEditorBuild();
                 break;
+
+            default:
+                break;
         }
 
         GUI.skin = defGUISkin;
@@ -134,6 +147,59 @@ public class LevelManagerEditor : Editor {
 
     }
 
+    #region Settings
+
+    public void ShowCreation()
+    {
+        EditorGUILayout.Space();
+        GUI.skin = toolBarSkin;
+        EditorGUILayout.Space();
+
+        levelManager.currentTab = GUILayout.Toolbar(levelManager.currentTab, toolbarButtonNames, tabStyle);
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+    }
+
+    public void ShowSettings()
+    {
+        GUI.skin = defGUISkin;
+        Heading(MessageType.Info, "Change the settings of each level here that appear in the level overview. Select a level and edit away.", Color.cyan, true);
+
+        EditorGUILayout.BeginVertical("Box");
+
+        EditorGUILayout.LabelField("Level Icon", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+
+        EditorGUILayout.BeginHorizontal("Box");
+       
+        
+        levelManager.level1A.levelIcon = (Sprite)EditorGUILayout.ObjectField(levelManager.level1A.levelIcon, typeof(Sprite), false, GUILayout.Width(100), GUILayout.Height(100));
+     //   EditorGUILayout.BeginVertical();
+        //EditorGUILayout.LabelField("Highscore: " + levelManager.level1A.highScore, Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+       // EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical("Box");
+        EditorGUILayout.LabelField("Level Name", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+        levelManager.level1A.levelName = GUILayout.TextField(levelManager.level1A.levelName, GUILayout.Width(200), GUILayout.Height(15));
+        EditorGUILayout.LabelField("Level Description", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+        levelManager.level1A.levelDescription = GUILayout.TextArea(levelManager.level1A.levelDescription, 500, GUILayout.Width(300), GUILayout.Height(50));
+        
+
+        EditorGUILayout.LabelField("Video Texture", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+        levelManager.level1A.videoTexture = (Texture)EditorGUILayout.ObjectField(levelManager.level1A.videoTexture, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
+
+        EditorGUILayout.LabelField("Video File", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+        levelManager.level1A.videoFile = (VideoClip)EditorGUILayout.ObjectField(levelManager.level1A.videoFile, typeof(VideoClip), false, GUILayout.Width(200), GUILayout.Height(15));
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
+        EditorGUILayout.EndVertical();
+
+    }
+
+    #endregion
+
+    #region Creation
     public void AddScenesToEditorBuild()
     {
         if (GUILayout.Button("Generate Scenes to Build"))
@@ -152,6 +218,7 @@ public class LevelManagerEditor : Editor {
         }
     }
 
+    
     public void MakeScene()
     {
         Heading(MessageType.Info, "Create your scene here. First type the name of the scene you want it to be called. Then hit Create and go to Add Scene.", Color.cyan, true);
@@ -215,6 +282,7 @@ public class LevelManagerEditor : Editor {
             EditorGUILayout.EndHorizontal();
         }
     }
+    #endregion
 
 
     #region Custom GUI Settings
