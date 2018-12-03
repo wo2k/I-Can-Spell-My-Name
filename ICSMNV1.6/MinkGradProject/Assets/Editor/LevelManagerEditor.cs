@@ -42,8 +42,17 @@ public class LevelManagerEditor : Editor {
     private SerializedProperty sceneAssetCapture;
     private SerializedProperty containerSizeCapture;
     List<string> buildSettingSceneNames;
+
     //Saved Preferences for Settings
-    private SerializedProperty levelName;
+
+        //Level1A
+    private SerializedProperty level1A;
+    private SerializedProperty level1AName;
+    private SerializedProperty level1ADescription;
+    private SerializedProperty level1AIcon;
+    private SerializedProperty level1AVideoTexture;
+    private SerializedProperty level1AVideoFile;
+    private SerializedProperty level1AHighscore;
 
 
 
@@ -68,8 +77,14 @@ public class LevelManagerEditor : Editor {
 
         buildSettingSceneNames = new List<string>();
 
-        //Settings
-        //levelName = m_Target.FindProperty(levelManager.level1A.levelName.ToString());
+        //Settings for Level1A
+        level1A = m_Target.FindProperty("level1A");
+        level1AName = AssignRelativeProperty(level1A, "levelName");
+        level1ADescription = AssignRelativeProperty(level1A, "levelDescription");
+        level1AIcon = AssignRelativeProperty(level1A, "levelIcon");
+        level1AVideoTexture = AssignRelativeProperty(level1A, "videoTexture");
+        level1AVideoFile = AssignRelativeProperty(level1A, "videoFile");
+        level1AHighscore = AssignRelativeProperty(level1A, "highScore");
     }
 
     public override void OnInspectorGUI()
@@ -147,6 +162,21 @@ public class LevelManagerEditor : Editor {
 
     }
 
+    // Get child property of parent serializedProperty
+    SerializedProperty AssignRelativeProperty(SerializedProperty serializedProperty, string propertyName)
+    {
+        if (serializedProperty.FindPropertyRelative(propertyName) == null)
+        {
+            Debug.LogError("No child property found by name. Please make sure child property is created or is spelled correctly as it is case sensitive.");
+            return null;
+        }
+        else
+        {
+            SerializedProperty property = serializedProperty.FindPropertyRelative(propertyName);
+            return property;
+        }     
+    }
+
     #region Settings
 
     public void ShowCreation()
@@ -167,33 +197,34 @@ public class LevelManagerEditor : Editor {
         GUI.skin = defGUISkin;
         Heading(MessageType.Info, "Change the settings of each level here that appear in the level overview. Select a level and edit away.", Color.cyan, true);
 
-        EditorGUILayout.BeginVertical("Box");
+     //   EditorGUILayout.BeginVertical("Box");//-------------------------------------------------------------1
 
-        EditorGUILayout.LabelField("Level Icon", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-
-        EditorGUILayout.BeginHorizontal("Box");
+        EditorGUILayout.LabelField("Level 1A", Label(EditorStyles.largeLabel, Color.gray, 12, FontStyle.Bold));
        
-        
-        levelManager.level1A.levelIcon = (Sprite)EditorGUILayout.ObjectField(levelManager.level1A.levelIcon, typeof(Sprite), false, GUILayout.Width(100), GUILayout.Height(100));
-     //   EditorGUILayout.BeginVertical();
-        //EditorGUILayout.LabelField("Highscore: " + levelManager.level1A.highScore, Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-       // EditorGUILayout.EndVertical();
+        EditorGUILayout.BeginHorizontal("Box");//-------------------------------------------------------------2
+        EditorGUILayout.BeginVertical();//-------------------------------------------------------------3
+        EditorGUILayout.LabelField("Level Icon", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold), GUILayout.Width(75));
+        level1AIcon.objectReferenceValue = (Sprite)EditorGUILayout.ObjectField(level1AIcon.objectReferenceValue, typeof(Sprite), false, GUILayout.Width(100), GUILayout.Height(100));
+        EditorGUILayout.LabelField("Highscore: " + level1AHighscore.floatValue, Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+        EditorGUILayout.EndVertical();//-------------------------------------------------------------3
 
-        EditorGUILayout.BeginVertical("Box");
+
+        EditorGUILayout.BeginVertical("Box");//-------------------------------------------------------------4
         EditorGUILayout.LabelField("Level Name", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-        levelManager.level1A.levelName = GUILayout.TextField(levelManager.level1A.levelName, GUILayout.Width(200), GUILayout.Height(15));
+        level1AName.stringValue = GUILayout.TextField(level1AName.stringValue, GUILayout.Width(200), GUILayout.Height(15));
         EditorGUILayout.LabelField("Level Description", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-        levelManager.level1A.levelDescription = GUILayout.TextArea(levelManager.level1A.levelDescription, 500, GUILayout.Width(300), GUILayout.Height(50));
+        level1ADescription.stringValue = GUILayout.TextArea(level1ADescription.stringValue, 500, GUILayout.Width(300), GUILayout.Height(50));
         
 
         EditorGUILayout.LabelField("Video Texture", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-        levelManager.level1A.videoTexture = (Texture)EditorGUILayout.ObjectField(levelManager.level1A.videoTexture, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
+        level1AVideoTexture.objectReferenceValue = (Texture)EditorGUILayout.ObjectField(level1AVideoTexture.objectReferenceValue, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
 
         EditorGUILayout.LabelField("Video File", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-        levelManager.level1A.videoFile = (VideoClip)EditorGUILayout.ObjectField(levelManager.level1A.videoFile, typeof(VideoClip), false, GUILayout.Width(200), GUILayout.Height(15));
-        EditorGUILayout.EndHorizontal();
-        EditorGUILayout.EndVertical();
-        EditorGUILayout.EndVertical();
+        level1AVideoFile.objectReferenceValue = (VideoClip)EditorGUILayout.ObjectField(level1AVideoFile.objectReferenceValue, typeof(VideoClip), false, GUILayout.Width(200), GUILayout.Height(15));
+        EditorGUILayout.EndVertical();//-------------------------------------------------------------4
+        EditorGUILayout.EndHorizontal();//-------------------------------------------------------------2
+
+      //  EditorGUILayout.EndVertical();//-------------------------------------------------------------1
 
     }
 

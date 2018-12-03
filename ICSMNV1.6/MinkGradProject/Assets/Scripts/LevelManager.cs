@@ -7,14 +7,17 @@ using UnityEditor;
 using UnityEngine.Video;
 //using UnityEditor.SceneManagement;
 
-/*[System.Serializable]
-public class LevelSettings : MonoBehaviour
+[System.Serializable]
+public class LevelSettings
 {
-    string levelName;
-    string levelDescription;
-    Image levelIcon;
-    float highScore;
-}*/
+    public string levelName;
+    [TextArea]
+    public string levelDescription;
+    public Sprite levelIcon;
+    public Texture videoTexture;
+    public VideoClip videoFile;
+    public float highScore;
+}
 
 public class LevelManager : MonoBehaviour
 {
@@ -49,7 +52,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public string sceneName;
 
-    [System.Serializable]
+    /*[System.Serializable]
     public struct LevelSettings
     {
         public string levelName;
@@ -60,8 +63,8 @@ public class LevelManager : MonoBehaviour
         public VideoClip videoFile;
         public float highScore;
 
-    }
-
+    }*/
+    [SerializeField]
     public LevelSettings level1A;
     public LevelSettings level1B;
     public LevelSettings level1C;

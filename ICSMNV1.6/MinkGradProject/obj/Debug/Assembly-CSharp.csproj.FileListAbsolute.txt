@@ -291,3 +291,4 @@ C:\Users\Anthony\Documents\GitHub\I-Can-Spell-My-Name\ICSMNV1.6\MinkGradProject\
 C:\Users\Anthony\Documents\GitHub\I-Can-Spell-My-Name\ICSMNV1.6\MinkGradProject\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
 C:\Users\Anthony\Documents\GitHub\I-Can-Spell-My-Name\ICSMNV1.6\MinkGradProject\obj\Debug\Assembly-CSharp.dll
 C:\Users\Anthony\Documents\GitHub\I-Can-Spell-My-Name\ICSMNV1.6\MinkGradProject\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Anthony\Documents\GitHub\I-Can-Spell-My-Name\ICSMNV1.6\MinkGradProject\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache

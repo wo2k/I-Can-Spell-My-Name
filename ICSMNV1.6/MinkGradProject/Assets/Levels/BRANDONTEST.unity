@@ -12232,7 +12232,7 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: currentTab
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -12375,6 +12375,39 @@ Prefab:
       propertyPath: Effects.Array.data[24]
       value: 
       objectReference: {fileID: 8300000, guid: ffc8da3eddbe25f48b438af8d0a4924c, type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: mainTBCurrentTab
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.levelName
+      value: Warm Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.levelDescription
+      value: Correctly answer your name in the given amount of time. Clicking a fish
+        will select your answer. Be aware as the fishes are moving.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.videoFile
+      value: 
+      objectReference: {fileID: 32900000, guid: d4e6fd6af2fe60645a04d980c2ef0707,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 6acd5397ceee4014a8e68a2ee3a5956b,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}
   m_IsPrefabParent: 0
