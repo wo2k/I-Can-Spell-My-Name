@@ -35,6 +35,29 @@ public class ModeFinder : MonoBehaviour
     {
          LevelManager.instance.m_Mode = m_ButtonToMode;
     }
+
+    public void SetLevel(string levelName)
+    {
+        switch(levelName)
+        {
+            case "level1A":
+                UIManager.instance.mode = UIManager.subLevels1.Level1A;
+                break;
+            case "level1B":
+                UIManager.instance.mode = UIManager.subLevels1.Level1B;
+                break;
+            case "level1C":
+                UIManager.instance.mode = UIManager.subLevels1.Level1C;
+                break;
+            case "level1D":
+                UIManager.instance.mode = UIManager.subLevels1.Level1D;
+                break;
+            case "level1E":
+                UIManager.instance.mode = UIManager.subLevels1.Level1E;
+                break;
+        }
+        
+    }
 }
 	
 

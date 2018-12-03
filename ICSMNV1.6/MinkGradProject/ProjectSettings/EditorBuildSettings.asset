@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Levels/BRANDONTEST.unity
     guid: 08af2ecb57cc89446896316ae9919ae4
   - enabled: 1
-    path: Assets/Levels/MainMenu.unity
-    guid: 34c8aa2960893f8409678c0695493ba7
-  - enabled: 1
     path: Assets/Levels/Campaign.unity
     guid: f62c9e8ed4f1d424093da5e3b2fbfd0a
   - enabled: 1
@@ -21,17 +18,8 @@ EditorBuildSettings:
     path: Assets/Levels/Credits.unity
     guid: 09b8c8fec72d413458ed83a6e152e412
   - enabled: 1
-    path: Assets/Levels/Options.unity
-    guid: 0c2f7a3f99a112c46ac8c660f9486696
-  - enabled: 1
     path: Assets/Levels/Level1.unity
     guid: 4efbda6bb96ec074c9903919d0455d4a
-  - enabled: 1
-    path: Assets/Levels/Level2.unity
-    guid: 282ee63e1d4f78c4a86607aafd8f65ce
-  - enabled: 1
-    path: Assets/Levels/Level3.unity
-    guid: 82b20e745d0778047a51e7b3415f3fe2
   - enabled: 1
     path: Assets/Levels/Level1A.unity
     guid: 7e8e5251aa7bcd84e8dd8fcc2d0a54b4
@@ -47,6 +35,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level1E.unity
     guid: b125fff12f8ebad4c9dd489b9c3d78c4
+  - enabled: 1
+    path: Assets/Levels/Level2.unity
+    guid: 282ee63e1d4f78c4a86607aafd8f65ce
+  - enabled: 1
+    path: Assets/Levels/Level3.unity
+    guid: 82b20e745d0778047a51e7b3415f3fe2
+  - enabled: 1
+    path: Assets/Levels/MainMenu.unity
+    guid: 34c8aa2960893f8409678c0695493ba7
   - enabled: 1
     path: Assets/Levels/Level2A.unity
     guid: 9d9516737f630d54386787d369551c62
@@ -68,4 +65,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level3A.unity
     guid: 8f55c24bce97efb419e2d99af06b2b19
+  - enabled: 1
+    path: Assets/Levels/Options.unity
+    guid: 0c2f7a3f99a112c46ac8c660f9486696
+  - enabled: 1
+    path: Assets/Levels/LevelDescription.unity
+    guid: 507d83ac4016625429d7dd7785736fdd
   m_configObjects: {}
