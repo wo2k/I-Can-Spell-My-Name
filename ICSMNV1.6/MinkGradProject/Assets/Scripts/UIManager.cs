@@ -143,6 +143,8 @@ public class UIManager : MonoBehaviour {
         gameStart = false;
         hasWonIndex = (int)mode;
         Time.timeScale = 0;
+        LevelManager.instance.SetNewHighScore(mode, LevelManager.instance.m_Difficulty);
+
         switch (mode)
         {
             case subLevels1.Level1A:

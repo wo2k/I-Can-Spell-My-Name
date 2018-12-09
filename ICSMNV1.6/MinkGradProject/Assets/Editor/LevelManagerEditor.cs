@@ -47,6 +47,7 @@ public class LevelManagerEditor : Editor {
 
     //Level1A
     private SerializedProperty level1Capture;
+    private SerializedProperty[,] level1HSCapture = new SerializedProperty[5, 4];
     private SerializedProperty level1A;
     private SerializedProperty level1B;
     private SerializedProperty level1C;
@@ -59,7 +60,7 @@ public class LevelManagerEditor : Editor {
     private SerializedProperty[] level1Icon = new SerializedProperty[5];
     private SerializedProperty[] level1VideoTexture = new SerializedProperty[5];
     private SerializedProperty[] level1VideoFile = new SerializedProperty[5];
-    private SerializedProperty[] level1Highscore = new SerializedProperty[5];
+    private SerializedProperty[,] level1Highscore = new SerializedProperty[5,4];
 
 
     //GUILayouts
@@ -125,7 +126,9 @@ public class LevelManagerEditor : Editor {
             level1Icon[i] = AssignRelativeProperty(level1Capture, "levelIcon");
             level1VideoTexture[i] = AssignRelativeProperty(level1Capture, "videoTexture");
             level1VideoFile[i] = AssignRelativeProperty(level1Capture, "videoFile");
-            level1Highscore[i] = AssignRelativeProperty(level1Capture, "highScore");
+
+           // for (int j = 0; j < 4; j++)
+              //  level1Highscore[i,j] = AssignRelativeProperty(level1HSCapture[i,j], "highScore");       
         }
 
         InitTextures();
@@ -142,10 +145,10 @@ public class LevelManagerEditor : Editor {
     void InitTextures()
     {
         headerTexture = new Texture2D(Screen.width, 75);
-        levelBoxTexture = new Texture2D(Screen.width+30, 295);
-        levelSettingsTexture = new Texture2D(Screen.width, 390);
-        ChangeTheColor(levelSettingsTexture, CustomColors.salmon, Screen.width,390);
-        ChangeTheColor(levelBoxTexture, CustomColors.medium_aqua_marine, Screen.width+30, 295);
+        levelBoxTexture = new Texture2D(Screen.width+45, 355);
+        levelSettingsTexture = new Texture2D(Screen.width+10, 390);
+        ChangeTheColor(levelSettingsTexture, CustomColors.salmon, Screen.width+10,390);
+        ChangeTheColor(levelBoxTexture, CustomColors.medium_aqua_marine, Screen.width+45, 355);
         ChangeTheColor(headerTexture, Color.red, Screen.width, 75);
     }
 
@@ -179,6 +182,7 @@ public class LevelManagerEditor : Editor {
         EditorGUILayout.LabelField("Console: " + levelManager.m_Console.ToString());
         EditorGUILayout.LabelField("Level Type: " + levelManager.m_Mode.ToString());
         EditorGUILayout.LabelField("Level Playing: " + UIManager.mode.ToString());
+        EditorGUILayout.LabelField("Level Difficulty: " + levelManager.m_Difficulty.ToString());
 
         EditorGUILayout.EndVertical();
 
@@ -277,18 +281,23 @@ public class LevelManagerEditor : Editor {
             {
                 case 0:
                     levelName = "Level 1A";
+                    levelManager.level1Capture = levelManager.level1A;
                     break;
                 case 1:
                     levelName = "Level 1B";
+                    levelManager.level1Capture = levelManager.level1B;
                     break;
                 case 2:
                     levelName = "Level 1C";
+                    levelManager.level1Capture = levelManager.level1C;
                     break;
                 case 3:
                     levelName = "Level 1D";
+                    levelManager.level1Capture = levelManager.level1D;
                     break;
                 case 4:
                     levelName = "Level 1E";
+                    levelManager.level1Capture = levelManager.level1E;
                     break;
             }
 
@@ -299,11 +308,29 @@ public class LevelManagerEditor : Editor {
             EditorGUILayout.BeginVertical();//-------------------------------------------------------------3
             EditorGUILayout.LabelField("Level Icon", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold), GUILayout.Width(75));
             level1Icon[i].objectReferenceValue = (Sprite)EditorGUILayout.ObjectField(level1Icon[i].objectReferenceValue, typeof(Sprite), false, GUILayout.Width(100), GUILayout.Height(100));
-            EditorGUILayout.LabelField("Highscore: " + level1Highscore[i].floatValue, Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+            EditorGUILayout.LabelField("Highscore", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold), GUILayout.Width(75));
+            for (int j = 0; j < 4; j++)
+            {
+                switch (j)
+                {
+                    case 0:
+                        EditorGUILayout.LabelField("Easy: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                    case 1:
+                        EditorGUILayout.LabelField("Normal: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                    case 2:
+                        EditorGUILayout.LabelField("Hard: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                    case 3:
+                        EditorGUILayout.LabelField("Genius: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                }
+            }
             EditorGUILayout.EndVertical();//-------------------------------------------------------------3
 
-
-            GUILayout.BeginVertical(levelSettingsTexture, "");//-------------------------------------------------------------4
+            EditorGUILayout.Space();
+            GUILayout.BeginVertical(levelSettingsTexture, GUIStyle.none);//-------------------------------------------------------------4
             EditorGUILayout.LabelField("Level Name", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
             level1Name[i].stringValue = GUILayout.TextField(level1Name[i].stringValue, GUILayout.Width(200), GUILayout.Height(15));
             EditorGUILayout.LabelField("Level Description", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));

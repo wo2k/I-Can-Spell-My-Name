@@ -11,6 +11,7 @@ public class LevelDescription : MonoBehaviour {
     public GameObject levelIcon;
     public Text levelName;
     public VideoPlayer videoFile;
+    public Text highscore;
 
 	// Use this for initialization
 	void Start () {
@@ -90,6 +91,7 @@ public class LevelDescription : MonoBehaviour {
                 break;
 
         }
+        LevelManager.instance.GetHighScore(UIManager.instance.mode, LevelManager.instance.m_Difficulty, highscore);
     }
 
 
