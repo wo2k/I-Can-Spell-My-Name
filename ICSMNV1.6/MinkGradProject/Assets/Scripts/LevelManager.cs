@@ -257,24 +257,8 @@ public class LevelManager : MonoBehaviour
                     break;
             }
             for (int mode = 0; mode < 4; mode++)
-            {
-                switch (mode)
-                {
-                    case 0:
-                        m_DifficultyCapture = Difficulty.Easy;
-                        break;
-                    case 1:
-                        m_DifficultyCapture = Difficulty.Normal;
-                        break;
-                    case 2:
-                        m_DifficultyCapture = Difficulty.Hard;
-                        break;
-                    case 3:
-                        m_DifficultyCapture = Difficulty.Genius;
-                        break;
-                }
                 level1Capture.highScore[i,mode] = 0;
-            }              
+                          
         }
 
         SavePlayerPrefs();
@@ -285,7 +269,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             if (level != (UIManager.subLevels1)i)
-                return;
+                break;
             else
             {
                 switch (i)
@@ -309,13 +293,13 @@ public class LevelManager : MonoBehaviour
                 for (int mode = 0; mode < 4; mode++)
                 {
                     if (levelDifficulty != (Difficulty)mode)
-                        return;
+                        break;
                     else
                     {
                         if (UIManager.instance.score > level1Capture.highScore[i, mode])
                         {
                             level1Capture.highScore[i, mode] = UIManager.instance.score;
-                            PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore " + i, level1Capture.highScore[i, mode]);
+                            PlayerPrefs.SetFloat(levelDifficulty + " HighScore " + i, level1Capture.highScore[i, mode]);
                         }
                     }
                 }
@@ -328,7 +312,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             if (level != (UIManager.subLevels1)i)
-                return;
+                break;
             else
             {
                 switch (i)
@@ -352,12 +336,15 @@ public class LevelManager : MonoBehaviour
                 for (int mode = 0; mode < 4; mode++)
                 {
                     if (levelDifficulty != (Difficulty)mode)
-                        return;
+                    {
+                       // highscore.text = "0";
+                        break;
+                    }
                     else
                     {
-                        PlayerPrefs.GetFloat(m_DifficultyCapture + " HighScore " + i, level1Capture.highScore[i, mode]);
+                        level1Capture.highScore[i, mode] = PlayerPrefs.GetFloat(levelDifficulty + " HighScore " + i);
                         highscore.text = level1Capture.highScore[i, mode].ToString();
-                    }
+                    }         
                 }                            
             }
         }
@@ -473,6 +460,49 @@ public class LevelManager : MonoBehaviour
 
     public void ResetProgression()
     {
+        for (int i = 0; i < 5; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    level1Capture = level1A;
+                    break;
+                case 1:
+                    level1Capture = level1B;
+                    break;
+                case 2:
+                    level1Capture = level1C;
+                    break;
+                case 3:
+                    level1Capture = level1D;
+                    break;
+                case 4:
+                    level1Capture = level1E;
+                    break;
+            }
+            for (int mode = 0; mode < 4; mode++)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        m_DifficultyCapture = Difficulty.Easy;
+                        break;
+                    case 1:
+                        m_DifficultyCapture = Difficulty.Normal;
+                        break;
+                    case 2:
+                        m_DifficultyCapture = Difficulty.Hard;
+                        break;
+                    case 3:
+                        m_DifficultyCapture = Difficulty.Genius;
+                        break;
+                }
+                level1Capture.highScore[i, mode] = 0;
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore " + i))
+                    PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore " + i, level1Capture.highScore[i, mode]);
+            }                
+        }
+
         subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
         levelPassed = 0; PlayerPrefs.SetInt("LevelPassed", levelPassed);
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)

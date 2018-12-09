@@ -17,6 +17,7 @@ public class LevelDescription : MonoBehaviour {
 	void Start () {
 
         PrepareCompleted(videoFile);
+        SetDifficulty("Easy");
 
         switch (UIManager.instance.mode)
         {
@@ -73,6 +74,7 @@ public class LevelDescription : MonoBehaviour {
     {
             vp.Play();
     }
+
     public void SetDifficulty(string mode)
     {
         switch (mode)
@@ -89,15 +91,8 @@ public class LevelDescription : MonoBehaviour {
             case "Genius":
                 LevelManager.instance.m_Difficulty = LevelManager.Difficulty.Genius;
                 break;
-
         }
         LevelManager.instance.GetHighScore(UIManager.instance.mode, LevelManager.instance.m_Difficulty, highscore);
     }
 
-
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
