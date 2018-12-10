@@ -35,6 +35,32 @@ public class Level1C: MonoBehaviour {
 
     void Start()
     {
+        for (int i = 0; i < 4; i++)
+        {
+            if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        AnswersText[0].GetComponentInParent<Image>().sprite = AnswersText[1].GetComponentInParent<Image>().sprite;
+                        AnswersText[2].GetComponentInParent<Image>().sprite = AnswersText[1].GetComponentInParent<Image>().sprite;
+                        break;
+                    case 1:
+                        // variable[i] = castTo[i];
+                        break;
+                    case 2:
+                        //variable[i] = castTo[i];
+                        break;
+                    case 3:
+                        //variable[i] = castTo[i];
+                        break;
+                    case 4:
+                        //variable[i] = castTo[i];
+                        break;
+                }
+            }
+        }
+
         NameData = FindObjectOfType<LevelManager>().gameObject;
         UIManager.instance.StartGame();
         UIManager.instance.mode = UIManager.subLevels1.Level1C;

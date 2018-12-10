@@ -125,14 +125,16 @@ public class Level1B : MonoBehaviour {
         dolphinAnim[i].Play("Dolphin-Idle");
         
         StartCoroutine(DolphinIdle());
-        
-        for(int i = 0; i < waterSprout.Length; i++)
-        waterSprout[i].SetActive(false);
 
+        for (int i = 0; i < waterSprout.Length; i++)
+        {
+            waterSprout[i].GetComponent<Image>().enabled = false;
+            waterSprout[i].GetComponent<Animator>().enabled = false;
+        }
         isSprouting = false;
 
-        for(int i = 0; i < choiceNames.Length; i++)
-        choiceNames[i].interactable = true;
+       // for(int i = 0; i < choiceNames.Length; i++)
+        //choiceNames[i].interactable = true;
 
         yield return null;
     }
@@ -147,7 +149,13 @@ public class Level1B : MonoBehaviour {
         
         yield return new WaitForSeconds(1);
         for (int i = 0; i < waterSprout.Length; i++)
-            waterSprout[i].SetActive(true);
+        {
+            waterSprout[i].GetComponent<Image>().enabled = true;
+            waterSprout[i].GetComponent<Animator>().enabled = true;
+            waterSprout[i].GetComponent<Animator>().Play("WaterSrpout");
+        }
+        //  for (int i = 0; i < waterSprout.Length; i++)
+        //    waterSprout[i].SetActive(true);
         NextLetter();
         for (int i = 0; i < m_Dolphins.Length; i++)
         dolphinIdlePos[i] = m_Dolphins[i].transform.position;
@@ -159,7 +167,11 @@ public class Level1B : MonoBehaviour {
         anim[i].SetTrigger("Idle");
 
         for (int i = 0; i < choiceNames.Length; i++)
-            choiceNames[i].gameObject.SetActive(true);
+        {
+            choiceNames[i].interactable = true;
+            choiceNames[i].GetComponentInChildren<Text>().enabled = true;
+        }
+           // choiceNames[i].gameObject.SetActive(true);
     
     }
 
@@ -176,7 +188,12 @@ public class Level1B : MonoBehaviour {
         isSprouting = false;
 
         for (int i = 0; i < waterSprout.Length; i++)
-            waterSprout[i].SetActive(false);
+        {
+            waterSprout[i].GetComponent<Image>().enabled = false;
+            waterSprout[i].GetComponent<Animator>().enabled = false;
+        }
+        // for (int i = 0; i < waterSprout.Length; i++)
+        // waterSprout[i].SetActive(false);
 
         yield return new WaitForSeconds(.20f);      
 
@@ -198,7 +215,11 @@ public class Level1B : MonoBehaviour {
     public void Choice1()
     {
         StartCoroutine(DolphinDown());
-        choiceNames[0].GetComponent<Button>().interactable = false;
+        for (int i = 0; i < choiceNames.Length; i++)
+        {
+            choiceNames[i].GetComponent<Button>().interactable = false;
+            choiceNames[i].GetComponentInChildren<Text>().enabled = false;
+        }
         if (answerButton == 0)
         {
             
@@ -218,8 +239,11 @@ public class Level1B : MonoBehaviour {
     {
     
         StartCoroutine(DolphinDown());
-        choiceNames[1].GetComponent<Button>().interactable = false;
-
+        for (int i = 0; i < choiceNames.Length; i++)
+        {
+            choiceNames[i].GetComponent<Button>().interactable = false;
+            choiceNames[i].GetComponentInChildren<Text>().enabled = false;
+        }
         if (answerButton == 1)
         {
          //   NextLetter();
@@ -238,8 +262,11 @@ public class Level1B : MonoBehaviour {
 	public void Choice3()
     {
         StartCoroutine(DolphinDown());
-        choiceNames[2].GetComponent<Button>().interactable = false;
-
+        for (int i = 0; i < choiceNames.Length; i++)
+        {
+            choiceNames[i].GetComponent<Button>().interactable = false;
+            choiceNames[i].GetComponentInChildren<Text>().enabled = false;
+        }
         if (answerButton == 2)
         {
            // NextLetter();

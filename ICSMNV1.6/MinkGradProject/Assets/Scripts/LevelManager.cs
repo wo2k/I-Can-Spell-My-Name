@@ -366,11 +366,6 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
-        for (int i = 0; i < level1A.highScore.Length; i++)
-        {
-            level1A.level[i].difficulty[i] = level1A.highScore[i, i];
-           // level1A.level[i] = level1A.highScore[i, 0];
-        }
     }
 
     

@@ -519,6 +519,7 @@ GameObject:
   - component: {fileID: 430038006}
   - component: {fileID: 430038009}
   - component: {fileID: 430038008}
+  - component: {fileID: 430038007}
   m_Layer: 5
   m_Name: Dolphin 2
   m_TagString: Untagged
@@ -544,6 +545,20 @@ RectTransform:
   m_AnchoredPosition: {x: 167.47096, y: -47.17492}
   m_SizeDelta: {x: 400, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &430038007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 430038005}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.27058825, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 0}
 --- !u!114 &430038008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,7 +711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &545665952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -977,7 +992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1045663637
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1323,6 +1338,7 @@ GameObject:
   - component: {fileID: 1163533306}
   - component: {fileID: 1163533305}
   - component: {fileID: 1163533304}
+  - component: {fileID: 1163533307}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1368,7 +1384,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1163533302}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1401,6 +1417,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1163533302}
+--- !u!114 &1163533307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1163533302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.27058825, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 1452310691}
 --- !u!1 &1281273640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,6 +1529,7 @@ GameObject:
   - component: {fileID: 1452310689}
   - component: {fileID: 1452310692}
   - component: {fileID: 1452310691}
+  - component: {fileID: 1452310690}
   m_Layer: 5
   m_Name: Dolphin 1
   m_TagString: Untagged
@@ -1524,6 +1555,20 @@ RectTransform:
   m_AnchoredPosition: {x: 167.47096, y: -47.17492}
   m_SizeDelta: {x: 400, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1452310690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1452310688}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.27058825, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 0}
 --- !u!114 &1452310691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1568,6 +1613,7 @@ GameObject:
   - component: {fileID: 1486890542}
   - component: {fileID: 1486890541}
   - component: {fileID: 1486890540}
+  - component: {fileID: 1486890543}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1613,7 +1659,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1486890538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1646,6 +1692,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1486890538}
+--- !u!114 &1486890543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1486890538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.27058825, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 430038008}
 --- !u!1001 &1600501666
 Prefab:
   m_ObjectHideFlags: 0
@@ -1761,12 +1821,12 @@ Prefab:
     - target: {fileID: 224875721911642818, guid: 5e330a59bfe867a4a97b5273ff097340,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 224162801302193048, guid: 5e330a59bfe867a4a97b5273ff097340,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224045632123426768, guid: 5e330a59bfe867a4a97b5273ff097340,
         type: 2}
@@ -1985,6 +2045,7 @@ GameObject:
   - component: {fileID: 1806357676}
   - component: {fileID: 1806357675}
   - component: {fileID: 1806357674}
+  - component: {fileID: 1806357673}
   m_Layer: 5
   m_Name: Dolphin 3
   m_TagString: Untagged
@@ -2010,6 +2071,20 @@ RectTransform:
   m_AnchoredPosition: {x: 167.47096, y: -47.17492}
   m_SizeDelta: {x: 400, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1806357673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1806357671}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.27058825, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 0}
 --- !u!114 &1806357674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2106,6 +2181,7 @@ GameObject:
   - component: {fileID: 2004262025}
   - component: {fileID: 2004262024}
   - component: {fileID: 2004262026}
+  - component: {fileID: 2004262027}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2137,7 +2213,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2004262022}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -2184,6 +2260,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
+--- !u!114 &2004262027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2004262022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4208b6e523546f4c8535b0ec619621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {r: 0, g: 1, b: 0.27058825, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 1806357675}
 --- !u!1 &2019415602
 GameObject:
   m_ObjectHideFlags: 0
@@ -2201,7 +2291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2019415603
 RectTransform:
   m_ObjectHideFlags: 0

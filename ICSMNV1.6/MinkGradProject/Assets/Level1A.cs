@@ -28,6 +28,33 @@ public class Level1A : MonoBehaviour {
 
 
 	void Start () {
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        AnswersText[3].GetComponentInParent<Image>().sprite = AnswersText[0].GetComponentInParent<Image>().sprite;
+                        AnswersText[1].GetComponentInParent<Image>().sprite = AnswersText[2].GetComponentInParent<Image>().sprite;
+                        break;
+                    case 1:
+                       // variable[i] = castTo[i];
+                        break;
+                    case 2:
+                        //variable[i] = castTo[i];
+                        break;
+                    case 3:
+                        //variable[i] = castTo[i];
+                        break;
+                    case 4:
+                        //variable[i] = castTo[i];
+                        break;
+                }
+            }
+        }
+
         NameData = FindObjectOfType<LevelManager>().gameObject;
 
         UIManager.instance.StartGame();
@@ -184,9 +211,9 @@ public class Level1A : MonoBehaviour {
 		Miss = 0;
 		PlaceAnswer ();
 	
-			Misses [0].SetActive (false);
-			Misses [1].SetActive (false);
-			Misses [2].SetActive (false);
+	 //		Misses [0].SetActive (false);
+		//	Misses [1].SetActive (false);
+			//Misses [2].SetActive (false);
 	}
 		
 	public void PlaceAnswer(){
