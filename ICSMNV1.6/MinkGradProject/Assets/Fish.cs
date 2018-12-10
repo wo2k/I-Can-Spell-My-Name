@@ -34,10 +34,12 @@ public class Fish : MonoBehaviour {
 
         GetComponentInChildren<Button>().onClick.AddListener(delegate { FindObjectOfType<Level1D>().Choice1(gameObject); });
         
-        gameObject.GetComponent<Image>().sprite = fishTypes[Random.Range(0, fishTypes.Count)];
+        if(LevelManager.instance.m_Difficulty == LevelManager.Difficulty.Easy)
+            gameObject.GetComponent<Image>().sprite = fishTypes[Random.Range(0, 2)];
+        else
+            gameObject.GetComponent<Image>().sprite = fishTypes[Random.Range(0, fishTypes.Count)];
+        //  CheckMood();
 
-        CheckMood();
-     
         Vector3 fishPos = new Vector3(Random.Range(-700, 700), Random.Range(-50, -80), -32);
         gameObject.transform.localPosition = fishPos;
 

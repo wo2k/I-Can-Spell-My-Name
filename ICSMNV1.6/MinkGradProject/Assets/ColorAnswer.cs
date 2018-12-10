@@ -21,19 +21,6 @@ public class ColorAnswer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-        /*level[0] = level1A;
-        level[1] = level1B;
-        level[2] = level1C;
-        level[3] = level1D;
-        level[4] = level1E;
-        castToLevel[0] = FindObjectOfType<Level1A>();
-        castToLevel[1] = FindObjectOfType<Level1B>();
-        castToLevel[2] = FindObjectOfType<Level1C>();
-        castToLevel[3] = FindObjectOfType<Level1D>();
-        castToLevel[4] = FindObjectOfType<Level1E>();
-
-        AssignOnMode(level, castToLevel);*/
            for (int i = 0; i < 5; i++)
            {
                if (UIManager.instance.mode == (UIManager.subLevels1)i)
@@ -58,7 +45,6 @@ public class ColorAnswer : MonoBehaviour {
                    }
                }
            }
-
     }
 
     void AssignOnMode(object[] variable, object[] castTo )
