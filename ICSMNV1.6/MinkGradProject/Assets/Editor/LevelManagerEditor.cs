@@ -302,7 +302,7 @@ public class LevelManagerEditor : Editor {
             }
 
             EditorGUILayout.LabelField(levelName, Label(EditorStyles.largeLabel, CustomColors.teal, 12, FontStyle.Bold));
-
+            
 
             GUILayout.BeginHorizontal(levelBoxTexture, "Box");//-------------------------------------------------------------2
             EditorGUILayout.BeginVertical();//-------------------------------------------------------------3
@@ -314,16 +314,16 @@ public class LevelManagerEditor : Editor {
                 switch (j)
                 {
                     case 0:
-                        EditorGUILayout.LabelField("Easy: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Easy: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                     case 1:
-                        EditorGUILayout.LabelField("Normal: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Normal: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                     case 2:
-                        EditorGUILayout.LabelField("Hard: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Hard: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                     case 3:
-                        EditorGUILayout.LabelField("Genius: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Genius: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                 }
             }

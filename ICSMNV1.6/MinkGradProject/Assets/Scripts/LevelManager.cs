@@ -268,9 +268,7 @@ public class LevelManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            if (level != (UIManager.subLevels1)i)
-                break;
-            else
+           if(level == (UIManager.subLevels1)i)
             {
                 switch (i)
                 {
@@ -292,9 +290,7 @@ public class LevelManager : MonoBehaviour
                 }
                 for (int mode = 0; mode < 4; mode++)
                 {
-                    if (levelDifficulty != (Difficulty)mode)
-                        break;
-                    else
+                   if(levelDifficulty == (Difficulty)mode)
                     {
                         if (UIManager.instance.score > level1Capture.highScore[i, mode])
                         {
@@ -311,9 +307,7 @@ public class LevelManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            if (level != (UIManager.subLevels1)i)
-                break;
-            else
+            if (level == (UIManager.subLevels1)i)
             {
                 switch (i)
                 {
@@ -335,12 +329,7 @@ public class LevelManager : MonoBehaviour
                 }
                 for (int mode = 0; mode < 4; mode++)
                 {
-                    if (levelDifficulty != (Difficulty)mode)
-                    {
-                       // highscore.text = "0";
-                        break;
-                    }
-                    else
+                    if (levelDifficulty == (Difficulty)mode)
                     {
                         level1Capture.highScore[i, mode] = PlayerPrefs.GetFloat(levelDifficulty + " HighScore " + i);
                         highscore.text = level1Capture.highScore[i, mode].ToString();
@@ -375,6 +364,12 @@ public class LevelManager : MonoBehaviour
             case RuntimePlatform.Android:
                 m_Console = AppPlatform.Andriod;
                 break;
+        }
+
+        for (int i = 0; i < level1A.highScore.Length; i++)
+        {
+            level1A.level[i].difficulty[i] = level1A.highScore[i, i];
+           // level1A.level[i] = level1A.highScore[i, 0];
         }
     }
 

@@ -142,8 +142,8 @@ public class UIManager : MonoBehaviour {
         winScreen.SetActive(true);
         gameStart = false;
         hasWonIndex = (int)mode;
-        Time.timeScale = 0;
         LevelManager.instance.SetNewHighScore(mode, LevelManager.instance.m_Difficulty);
+        Time.timeScale = 0;      
 
         switch (mode)
         {
