@@ -295,9 +295,11 @@ public class UIManager : MonoBehaviour {
                 if (healthBar)
                     Destroy(healthBar);
 
-                healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform);
+                healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform, heartsAmount);
 
-                for (int i = 0; i < hearts.Length; i++)
+                hearts = new GameObject[heartsAmount];
+
+                for (int i = 0; i < heartsAmount; i++)
                 {
                     hearts[i] = healthBar.transform.GetChild(i).gameObject;
                 }
@@ -380,11 +382,26 @@ public class UIManager : MonoBehaviour {
             return false;
     }
 
-    public GameObject InstantiatePlayerHealth(Transform hpPlacement)
+    public GameObject InstantiatePlayerHealth(Transform hpPlacement, int heartAmount)
     {
         GameObject hpHolder = Instantiate(Resources.Load("Prefabs/PlayerHealth"), hpPlacement) as GameObject;
         hpHolder.transform.SetSiblingIndex(0);
+        for (int i = 0; i < heartAmount; i++)
+        {
+            GameObject heart = Instantiate(Resources.Load("Prefabs/Heart"), hpHolder.transform) as GameObject;
+            heart.transform.localPosition = Vector3.zero;
+            heart.transform.localPosition = new Vector3(heart.transform.localPosition.x + 112 * i+1, heart.transform.localPosition.y);
+        }
         return hpHolder;
+    }
+
+    public void DeductTime(float deduction)
+    {
+        timer -= deduction;
+    }
+    public void AddTime(float addition)
+    {
+        timer += addition;
     }
 
     // Update is called once per frame

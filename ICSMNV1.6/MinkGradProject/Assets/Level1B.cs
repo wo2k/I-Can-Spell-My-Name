@@ -36,6 +36,26 @@ public class Level1B : MonoBehaviour {
     public Vector3[] dolphinIdlePos;
 
 	void Start () {
+
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.heartsAmount = 5;
+                break;
+
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.heartsAmount = 5;
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.heartsAmount = 3;
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.heartsAmount = 3;
+                break;
+        }
+
         m_Dolphin = DolphinState.Up;
         NameData = FindObjectOfType<LevelManager>().gameObject;
         UIManager.instance.StartGame();
@@ -91,13 +111,6 @@ public class Level1B : MonoBehaviour {
                 AnswersText[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
     }
-
-
-	public void ScorePoints(){
-		//Score += 100 * Multi;
-		//ScoreText.text = Score.ToString ();
-		//Total++;
-	}
 
 
     IEnumerator DolphinStates()
@@ -222,16 +235,30 @@ public class Level1B : MonoBehaviour {
         }
         if (answerButton == 0)
         {
-            
-            UIManager.instance.ScorePoints();
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(2);
+                    break;
+            }
+            ScorePoints();
         }
         else
         {
-            //Miss++;
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Normal:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
+            }
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-          //  gameStart = false;
-          //  if (LevelManager.instance.correctAnswerPoints < 3)
-              //  NextLetter();
+
         }
     }
 
@@ -246,16 +273,31 @@ public class Level1B : MonoBehaviour {
         }
         if (answerButton == 1)
         {
-         //   NextLetter();
-            UIManager.instance.ScorePoints();
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(2);
+                    break;
+            }
+            ScorePoints();
         }
+            
         else
         {
-           // Miss++;
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Normal:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
+            }
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-           // gameStart = false;
-           // if (LevelManager.instance.correctAnswerPoints < 3)
-              //  NextLetter();
+     
         }
     }
 
@@ -269,16 +311,29 @@ public class Level1B : MonoBehaviour {
         }
         if (answerButton == 2)
         {
-           // NextLetter();
-            UIManager.instance.ScorePoints();
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(2);
+                    break;
+            }
+            ScorePoints();
         }
         else
         {
-         //   Miss++;
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Normal:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
+            }
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            //gameStart = false;
-           // if (LevelManager.instance.correctAnswerPoints < 3)
-              //  NextLetter();
         }
     }
 
@@ -287,7 +342,29 @@ public class Level1B : MonoBehaviour {
 		PlaceAnswer ();
 	}
 
-	public void Reset ()
+    void ScorePoints()
+    {
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.ScorePoints();
+                break;
+
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.ScorePoints();
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.ScorePoints(5);
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.ScorePoints(5);
+                break;
+        }
+    }
+
+    public void Reset ()
     {	
 		//answerIndex = 8;      
         AnswerHint.text = Names[answerIndex];
@@ -349,6 +426,18 @@ public class Level1B : MonoBehaviour {
                         NamesChosen[ChosenIndex] = Names[wrongName];
                         AnswersText[i].text = Names[wrongName];
                         ChosenIndex++;
+
+                        switch (LevelManager.instance.m_Difficulty)
+                        {
+                            case LevelManager.Difficulty.Hard:
+                                int activate = Random.Range(0, 2);
+                                if (activate == 0)
+                                    AnswersText[i].text = LevelManager.instance.ShuffleCharInName(answer);
+                                break;
+                            case LevelManager.Difficulty.Genius:
+                                break;
+                        }
+
                         break;
                     }
 

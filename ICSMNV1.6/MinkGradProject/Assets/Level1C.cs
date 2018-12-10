@@ -44,18 +44,16 @@ public class Level1C: MonoBehaviour {
                     case 0:
                         AnswersText[0].GetComponentInParent<Image>().sprite = AnswersText[1].GetComponentInParent<Image>().sprite;
                         AnswersText[2].GetComponentInParent<Image>().sprite = AnswersText[1].GetComponentInParent<Image>().sprite;
+                        UIManager.instance.heartsAmount = 5;
                         break;
                     case 1:
-                        // variable[i] = castTo[i];
+                        UIManager.instance.heartsAmount = 3;
                         break;
                     case 2:
-                        //variable[i] = castTo[i];
+                        UIManager.instance.heartsAmount = 3;
                         break;
                     case 3:
-                        //variable[i] = castTo[i];
-                        break;
-                    case 4:
-                        //variable[i] = castTo[i];
+                        UIManager.instance.heartsAmount = 3;
                         break;
                 }
             }
@@ -127,8 +125,17 @@ public class Level1C: MonoBehaviour {
 
         if (answerButton == 0)
         {
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.AddTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(5);
+                    break;
+            }
             NextLetter();
-            UIManager.instance.ScorePoints(5);
+            ScorePoints();
             rightBoat.Clear();
             time = 0;
             for (int i = 0; i < m_Boats.Count; i++)
@@ -140,9 +147,9 @@ public class Level1C: MonoBehaviour {
         }
         else
         {
-          //  Miss++;
+        
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-           // gameStart = false;
+           
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -161,9 +168,20 @@ public class Level1C: MonoBehaviour {
     {
 
         if (answerButton == 1)
+
         {
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.AddTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(5);
+                    break;
+            }
+
             NextLetter();
-            UIManager.instance.ScorePoints(5);
+            ScorePoints();
             rightBoat.Clear();
             time = 0;
             for (int i = 0; i < m_Boats.Count; i++)
@@ -175,9 +193,9 @@ public class Level1C: MonoBehaviour {
         }
         else
         {
-            //Miss++;
+          
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-         //   gameStart = false;
+    
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
                 NextLetter();
@@ -197,8 +215,18 @@ public class Level1C: MonoBehaviour {
 
         if (answerButton == 2)
         {
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.AddTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(5);
+                    break;
+            }
+
             NextLetter();
-            UIManager.instance.ScorePoints(5);
+            ScorePoints();
             rightBoat.Clear();
             time = 0;
             for (int i = 0; i < m_Boats.Count; i++)
@@ -232,14 +260,23 @@ public class Level1C: MonoBehaviour {
 
         if (answerButton == 3)
         {
-            
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.AddTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(5);
+                    break;
+            }
+
             //speedBoatPos = speedBoatSpawner[Random.Range(0, 2)].transform.localPosition;
             speedBoatAnim.transform.parent.localPosition = speedBoatPos;
             speedBoatAnim.transform.localPosition = Vector3.zero;
             speedBoatAnim.Stop();
 
             NextLetter();
-            UIManager.instance.ScorePoints(5);
+            ScorePoints();
             UIManager.instance.BonusPoints();
             rightBoat.Clear();
             time = 0;
@@ -765,7 +802,29 @@ public class Level1C: MonoBehaviour {
 		PlaceAnswer ();
     }
 
-	public void Reset (){
+    void ScorePoints()
+    {
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.ScorePoints(5);
+                break;
+
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.ScorePoints(7);
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.ScorePoints(7);
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.ScorePoints(10);
+                break;
+        }
+    }
+
+    public void Reset (){
 
         AnswerHint.text = Names[answerIndex];
 		answerButton = Random.Range (0, 4);
@@ -825,6 +884,18 @@ public class Level1C: MonoBehaviour {
                         NamesChosen[ChosenIndex] = Names[wrongName];
                         AnswersText[i].text = Names[wrongName];
                         ChosenIndex++;
+
+                        switch (LevelManager.instance.m_Difficulty)
+                        {
+                            case LevelManager.Difficulty.Hard:
+                                int activate = Random.Range(0, 2);
+                                if (activate == 0)
+                                    AnswersText[i].text = LevelManager.instance.ShuffleCharInName(answer);
+                                break;
+                            case LevelManager.Difficulty.Genius:
+                                break;
+                        }
+
                         break;
                     }
 

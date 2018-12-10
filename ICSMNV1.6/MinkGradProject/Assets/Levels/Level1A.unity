@@ -336,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   green: {r: 0, g: 1, b: 0.27058825, a: 1}
   red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 0}
 --- !u!1 &404021372
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   green: {r: 0, g: 1, b: 0.27058825, a: 1}
   red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 0}
 --- !u!1 &1235561871
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   green: {r: 0, g: 1, b: 0.27058825, a: 1}
   red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 0}
 --- !u!1 &1342466736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,6 +1312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   green: {r: 0, g: 1, b: 0.27058825, a: 1}
   red: {r: 1, g: 0, b: 0, a: 1}
+  imageToColor: {fileID: 0}
 --- !u!1 &1907486364
 GameObject:
   m_ObjectHideFlags: 0

@@ -83,6 +83,8 @@ public class LevelManager : MonoBehaviour
     //Type of difficulty of Level
     public enum Difficulty { Easy, Normal, Hard, Genius };
     public Difficulty m_Difficulty;
+
+    string alphabet = "abcdefghijklmnopqrstuvwxyz";
     
     void Awake()
     {
@@ -547,6 +549,19 @@ public class LevelManager : MonoBehaviour
         return _Lock;
     }
 
+    public string ShuffleCharInName(string name)
+    {
+        int charIndex = Random.Range(0, name.Length);       
+        int letter = Random.Range(0, alphabet.Length);  
+        name = name.Remove(charIndex, 1);
+        int activate = Random.Range(0, 2);
+
+        if (activate == 0)
+          name = name.Insert(charIndex, alphabet[letter].ToString());
+
+        return name;
+    }
+
 #if UNITY_IOS || UNITY_ANDROID
     public void VibrateOnHandHeld()
     {
@@ -683,6 +698,7 @@ public class LevelManager : MonoBehaviour
 #endif
         }
     }
+
 
     public void CheckAnswer(bool isCorrect, bool isTutorial, int heartsQty, Animator seahorseAnim)
     {

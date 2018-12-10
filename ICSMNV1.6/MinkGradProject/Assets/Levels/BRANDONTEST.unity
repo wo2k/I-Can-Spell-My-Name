@@ -9940,10 +9940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f29db6c664d5044d9a46b824b53872c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  hearts: []
   healthBar: {fileID: 0}
   heartsAmount: 3
   HUD: {fileID: 2099204003}

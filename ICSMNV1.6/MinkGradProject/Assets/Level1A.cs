@@ -40,16 +40,13 @@ public class Level1A : MonoBehaviour {
                         AnswersText[1].GetComponentInParent<Image>().sprite = AnswersText[2].GetComponentInParent<Image>().sprite;
                         break;
                     case 1:
-                       // variable[i] = castTo[i];
+                       
                         break;
                     case 2:
-                        //variable[i] = castTo[i];
+                       
                         break;
                     case 3:
-                        //variable[i] = castTo[i];
-                        break;
-                    case 4:
-                        //variable[i] = castTo[i];
+                   
                         break;
                 }
             }
@@ -129,10 +126,20 @@ public class Level1A : MonoBehaviour {
         if (answerButton == 0)
         {
             NextLetter();
-            UIManager.instance.ScorePoints();
+            ScorePoints();
         }
         else
         {
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
+            }
+            
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
@@ -145,10 +152,19 @@ public class Level1A : MonoBehaviour {
         if (answerButton == 1)
         {
             NextLetter();
-            UIManager.instance.ScorePoints();
+            ScorePoints();
         }
         else
         {
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
+            }
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
@@ -161,10 +177,19 @@ public class Level1A : MonoBehaviour {
         if (answerButton == 2)
         {
             NextLetter();
-            UIManager.instance.ScorePoints();
+            ScorePoints();
         }
         else
         {
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
+            }
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
@@ -177,10 +202,19 @@ public class Level1A : MonoBehaviour {
         if (answerButton == 3)
         {
             NextLetter();
-            UIManager.instance.ScorePoints();
+            ScorePoints();
         }
         else
         {
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
+            }
             Miss++;
             LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             gameStart = false;
@@ -193,6 +227,28 @@ public class Level1A : MonoBehaviour {
     {
 		PlaceAnswer ();
 	}
+
+    void ScorePoints()
+    {
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.ScorePoints();
+                break;
+
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.ScorePoints();
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.ScorePoints(5);
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.ScorePoints(5);
+                break;
+        }
+    }
 
 	public void Reset ()
     {
@@ -266,6 +322,18 @@ public class Level1A : MonoBehaviour {
                             NamesChosen[ChosenIndex] = Names[wrongName];
                             AnswersText[i].text = Names[wrongName];
                             ChosenIndex++;
+                            
+                            switch(LevelManager.instance.m_Difficulty)
+                        {
+                            case LevelManager.Difficulty.Hard:
+                                int activate = Random.Range(0, 2);
+                                if (activate == 0)
+                                    AnswersText[i].text = LevelManager.instance.ShuffleCharInName(answer);
+                                break;
+                            case LevelManager.Difficulty.Genius:
+                                break;
+                        }
+
 						break;
 					}
 						

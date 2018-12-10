@@ -51,6 +51,25 @@ public class Level1E: MonoBehaviour {
 
     void Start()
     {
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.heartsAmount = 5;
+                break;
+
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.heartsAmount = 4;
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.heartsAmount = 3;
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.heartsAmount = 2;
+                break;
+        }
+
         NameData = FindObjectOfType<LevelManager>().gameObject;
 
         UIManager.instance.StartGame();
@@ -265,6 +284,28 @@ public class Level1E: MonoBehaviour {
         PlaceAnswer();
     }
 
+    void ScorePoints()
+    {
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.ScorePoints(3);
+                break;
+
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.ScorePoints(3);
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.ScorePoints(3);
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.ScorePoints(3);
+                break;
+        }
+    }
+
     public void PlaceAnswer()
     {
         NamesChosen = new string[3];
@@ -316,6 +357,18 @@ public class Level1E: MonoBehaviour {
                         NamesChosen[ChosenIndex] = Names[wrongName];
                         AnswersText[i].text = Names[wrongName];
                         ChosenIndex++;
+
+                        switch (LevelManager.instance.m_Difficulty)
+                        {
+                            case LevelManager.Difficulty.Hard:
+                                int activate = Random.Range(0, 2);
+                                if (activate == 0)
+                                    AnswersText[i].text = LevelManager.instance.ShuffleCharInName(answer);
+                                break;
+                            case LevelManager.Difficulty.Genius:
+                                break;
+                        }
+
                         break;
                     }
 

@@ -31,12 +31,30 @@ public class Level1D: MonoBehaviour {
 
     void Start()
     {
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.heartsAmount = 5;
+                break;
 
-//#if UNITY_EDITOR
-//        killZone.SetActive(true);
-//#else
-//        killZone.SetActive(false);
-//#endif
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.heartsAmount = 4;
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.heartsAmount = 3;
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.heartsAmount = 2;
+                break;
+        }
+
+        //#if UNITY_EDITOR
+        //        killZone.SetActive(true);
+        //#else
+        //        killZone.SetActive(false);
+        //#endif
 
         //RightAnswer = new UnityAction(Choice1);
 
@@ -123,8 +141,18 @@ public class Level1D: MonoBehaviour {
 
             Destroy(fish);
 
-            UIManager.instance.ScorePoints(5);
-          //  healthMeter.value += .10f;
+            switch (LevelManager.instance.m_Difficulty)
+            {
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.AddTime(5);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.AddTime(5);
+                    break;
+            }
+       
+            ScorePoints();
+          
         }
         else
         {
@@ -133,24 +161,45 @@ public class Level1D: MonoBehaviour {
             bubbleParticle.transform.position = fish.transform.position;
             Destroy(fish);
 
-            if (LevelManager.instance.correctAnswerPoints < 5)
+            switch (LevelManager.instance.m_Difficulty)
             {
-         
-                // healthMeter.value -= .10f;
+                case LevelManager.Difficulty.Normal:
+                    UIManager.instance.DeductTime(2);
+                    break;
+                case LevelManager.Difficulty.Hard:
+                    UIManager.instance.DeductTime(3);
+                    break;
+                case LevelManager.Difficulty.Genius:
+                    UIManager.instance.DeductTime(5);
+                    break;
             }
         }
     }
 
-	public void Reset (){
-  
-      //  AnswerHint.text = Names[answerIndex];
-       // answerButton = 0;
-	//	AnswersText[answerButton].text = Names[answerIndex];
-        
-		//PlaceAnswer ();
-
-        
+	public void Reset (){        
 	}
+
+    void ScorePoints()
+    {
+        switch (LevelManager.instance.m_Difficulty)
+        {
+            case LevelManager.Difficulty.Easy:
+                UIManager.instance.ScorePoints(7);
+                break;
+
+            case LevelManager.Difficulty.Normal:
+                UIManager.instance.ScorePoints(7);
+                break;
+
+            case LevelManager.Difficulty.Hard:
+                UIManager.instance.ScorePoints(10);
+                break;
+
+            case LevelManager.Difficulty.Genius:
+                UIManager.instance.ScorePoints(10);
+                break;
+        }
+    }
 
     public void PlaceWrongAnswer()
     {
@@ -180,6 +229,18 @@ public class Level1D: MonoBehaviour {
                         NamesChosen.Add(Names[wrongName]);
                         AnswersText[fishIndex].text = Names[wrongName];
                         ChosenIndex++;
+
+                switch (LevelManager.instance.m_Difficulty)
+                {
+                    case LevelManager.Difficulty.Hard:
+                        int activate = Random.Range(0, 2);
+                        if (activate == 0)
+                            AnswersText[fishIndex].text = LevelManager.instance.ShuffleCharInName(answer);
+                        break;
+                    case LevelManager.Difficulty.Genius:
+                        break;
+                }
+
 
                 break;
                     }
