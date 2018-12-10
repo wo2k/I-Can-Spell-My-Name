@@ -20,6 +20,8 @@ public class LevelManagerEditor : Editor {
     public string[] mainToolbarNames = new string[] { "Creation", "Settings" }; 
     //Level Creation button names
     public string[] toolbarButtonNames = new string[] { "Create New Scene", "Add Scene", "Add to Build Settings" };
+    //Difficulty button names
+    public string[] difficultyButtonNames = new string[] {"Easy", "Normal", "Hard", "Genius"};
 
     //Allows you to show LevelManager Script properties
     public bool showInheritedVars = false;
@@ -36,6 +38,9 @@ public class LevelManagerEditor : Editor {
     //Level Editing Toolbar
     GUISkin mainToolbarSkin;
     GUIStyle mainStyle;
+    //Difficulty Toolbar
+    GUISkin diffToolbarSkin;// = new GUISkin[5];
+    GUIStyle diffStyle;
 
     //Saved Preferences for Creation
     private SerializedProperty sceneNameCapture;
@@ -47,7 +52,6 @@ public class LevelManagerEditor : Editor {
 
     //Level1A
     private SerializedProperty level1Capture;
-    private SerializedProperty[,] level1HSCapture = new SerializedProperty[5, 4];
     private SerializedProperty level1A;
     private SerializedProperty level1B;
     private SerializedProperty level1C;
@@ -60,15 +64,13 @@ public class LevelManagerEditor : Editor {
     private SerializedProperty[] level1Icon = new SerializedProperty[5];
     private SerializedProperty[] level1VideoTexture = new SerializedProperty[5];
     private SerializedProperty[] level1VideoFile = new SerializedProperty[5];
-    private SerializedProperty[,] level1Highscore = new SerializedProperty[5,4];
 
 
     //GUILayouts
     Texture2D headerTexture;
     Texture2D levelBoxTexture;
     Texture2D levelSettingsTexture;
-    Color headerColor = new Color(13f/255f, 32f/255f, 44f/255f, 1f);
-    Rect headerSection;
+
 
 
     void OnEnable()
@@ -85,6 +87,13 @@ public class LevelManagerEditor : Editor {
         toolBarSkin = Resources.Load("GUISkin/Toolbar") as GUISkin;
         tabStyle = toolBarSkin.GetStyle("Tab");
 
+        //Retrieve custom GUISkin for Toolbar for Level Creation
+      //  for (int i = 0; i < diffToolbarSkin.Length; i++)
+      //  {
+            diffToolbarSkin = defGUISkin;
+      //      
+      //  }
+        diffStyle = defGUIStyle;
         //Captures saved variable in LevelManager by the name of sceneName 
         sceneNameCapture = m_Target.FindProperty("sceneName");
         this.sceneAssetCapture = this.m_Target.FindProperty("sceneAssets");
@@ -126,9 +135,7 @@ public class LevelManagerEditor : Editor {
             level1Icon[i] = AssignRelativeProperty(level1Capture, "levelIcon");
             level1VideoTexture[i] = AssignRelativeProperty(level1Capture, "videoTexture");
             level1VideoFile[i] = AssignRelativeProperty(level1Capture, "videoFile");
-
-           // for (int j = 0; j < 4; j++)
-              //  level1Highscore[i,j] = AssignRelativeProperty(level1HSCapture[i,j], "highScore");       
+  
         }
 
         InitTextures();
@@ -145,22 +152,13 @@ public class LevelManagerEditor : Editor {
     void InitTextures()
     {
         headerTexture = new Texture2D(Screen.width, 75);
-        levelBoxTexture = new Texture2D(Screen.width+45, 355);
-        levelSettingsTexture = new Texture2D(Screen.width+10, 390);
-        ChangeTheColor(levelSettingsTexture, CustomColors.salmon, Screen.width+10,390);
-        ChangeTheColor(levelBoxTexture, CustomColors.medium_aqua_marine, Screen.width+45, 355);
+        levelBoxTexture = new Texture2D(Screen.width+200, 355);
+        levelSettingsTexture = new Texture2D(Screen.width+150, 390);
+        ChangeTheColor(levelSettingsTexture, CustomColors.salmon, Screen.width+150,390);
+        ChangeTheColor(levelBoxTexture, CustomColors.medium_aqua_marine, Screen.width+200, 355);
         ChangeTheColor(headerTexture, Color.red, Screen.width, 75);
     }
 
-    void DrawLayouts()
-    {
-       // headerSection.x = 0;
-     //   headerSection.y = 0;
-        headerSection.width = Screen.width;
-        headerSection.height = 50;
- //       GUILayout.Label(headerTexture);
-       // GUI.DrawTexture(headerSection, headerTexture);
-    }
 
     public override void OnInspectorGUI()
     {
@@ -302,7 +300,7 @@ public class LevelManagerEditor : Editor {
             }
 
             EditorGUILayout.LabelField(levelName, Label(EditorStyles.largeLabel, CustomColors.teal, 12, FontStyle.Bold));
-            
+            levelManager.diffCurrentTab = GUILayout.Toolbar(levelManager.diffCurrentTab, difficultyButtonNames, diffStyle);
 
             GUILayout.BeginHorizontal(levelBoxTexture, "Box");//-------------------------------------------------------------2
             EditorGUILayout.BeginVertical();//-------------------------------------------------------------3

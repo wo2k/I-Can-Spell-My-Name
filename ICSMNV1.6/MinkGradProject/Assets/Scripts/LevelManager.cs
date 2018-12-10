@@ -53,6 +53,8 @@ public class LevelManager : MonoBehaviour
     public int currentTab;
     [HideInInspector]
     public int mainTBCurrentTab;
+    [HideInInspector]
+    public int diffCurrentTab;
     [SerializeField]
     [HideInInspector]
     public int containerSize;

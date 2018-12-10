@@ -12,8 +12,6 @@ public class ColorAnswer : MonoBehaviour {
     Level1D level1D;
     Level1E level1E;
     
-    object[] level = new object[5];
-    object[] castToLevel = new object[5];
     public Color green;
     public Color red;
     bool setColor;
@@ -45,36 +43,6 @@ public class ColorAnswer : MonoBehaviour {
                    }
                }
            }
-    }
-
-    void AssignOnMode(object[] variable, object[] castTo )
-    {
-        variable = new object[5];
-        castTo = new object[5];
-        for (int i = 0; i < 5; i++)
-        {
-            if (UIManager.instance.mode == (UIManager.subLevels1)i)
-            {
-                switch (i)
-                {
-                    case 0:
-                        variable[i] = castTo[i];
-                        break;
-                    case 1:
-                        variable[i] = castTo[i];
-                        break;
-                    case 2:
-                        variable[i] = castTo[i];
-                        break;
-                    case 3:
-                        variable[i] = castTo[i];
-                        break;
-                    case 4:
-                        variable[i] = castTo[i];
-                        break;
-                }
-            }
-        }
     }
 	
 	// Update is called once per frame
