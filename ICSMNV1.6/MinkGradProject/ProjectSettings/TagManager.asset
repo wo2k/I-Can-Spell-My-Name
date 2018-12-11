@@ -8,6 +8,10 @@ TagManager:
   - Level1C
   - Level1D
   - Level1E
+  - Easy
+  - Normal
+  - Hard
+  - Genius
   layers:
   - Default
   - TransparentFX

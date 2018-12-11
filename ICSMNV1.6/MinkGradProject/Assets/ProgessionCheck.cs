@@ -120,6 +120,97 @@ public class ProgessionCheck : MonoBehaviour {
             case "Level3":
 
                 break;
+
+            case "LevelDescription":
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (UIManager.instance.mode == (UIManager.subLevels1)i)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                                break;
+                            case 1:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                                break;
+                            case 2:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                                break;
+                            case 3:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                                break;
+                            case 4:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                                break;
+                        }
+
+                        LevelManager.instance.level1Capture.Easy = GameObject.Find("Easy").GetComponent<Button>();
+                        LevelManager.instance.level1Capture.Normal = GameObject.Find("Normal").GetComponent<Button>();
+                        LevelManager.instance.level1Capture.Hard = GameObject.Find("Hard").GetComponent<Button>();
+                        LevelManager.instance.level1Capture.Genius = GameObject.Find("Genius").GetComponent<Button>();
+                        LevelManager.instance.level1Capture.Normal.interactable = false; LevelManager.instance.level1Capture.Hard.interactable = false; LevelManager.instance.level1Capture.Genius.interactable = false;
+
+                        switch (LevelManager.instance.level1Capture.modePassed)
+                        {
+                            case 0://Normal
+                                LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Normal").gameObject;
+                                LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
+                                SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
+                                break;
+                            case 1://Hard
+                                if (!LevelManager.instance.level1Capture.lockMode)
+                                    previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+
+                                if (!LevelManager.instance.level1Capture.hasLockedBefore)
+                                {
+                                    if (LevelManager.instance.level1Capture.locked)
+                                        LevelManager.instance.level1Capture.locked = false;
+                                    LevelManager.instance.level1Capture.hasLockedBefore = true;
+                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
+                                }
+
+                                LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Hard").gameObject;
+                               // LevelManager.instance.CheckLevelState(true);
+                                SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
+                                break;
+                            case 2://Genius
+                                if (!LevelManager.instance.level1Capture.lockMode)
+                                    previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+
+                                if (!LevelManager.instance.level1Capture.hasLockedBefore)
+                                {
+                                    if (LevelManager.instance.level1Capture.locked)
+                                        LevelManager.instance.level1Capture.locked = false;
+                                    LevelManager.instance.level1Capture.hasLockedBefore = true;
+                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Genius + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
+                                }
+
+                                LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Genius").gameObject;
+                                // LevelManager.instance.CheckLevelState(true);
+                                SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
+                                break;
+                            case 3://All Unlocked!
+                                if (!LevelManager.instance.level1Capture.hasLockedBefore)
+                                {
+                                    if (!LevelManager.instance.level1Capture.lockMode)
+                                        previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+
+                                    if (LevelManager.instance.level1Capture.locked)
+                                        LevelManager.instance.level1Capture.locked = false;
+
+                                    LevelManager.instance.level1Capture.hasLockedBefore = true;
+
+                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
+
+                                }
+                               // LevelManager.instance.CheckLevelState(true);
+                                break;
+                        }
+                    }
+                }              
+                break;
         }
     }
 	
@@ -129,7 +220,13 @@ public class ProgessionCheck : MonoBehaviour {
         parentY = PlayerPrefs.GetFloat("ParentY");
         parentZ = PlayerPrefs.GetFloat("ParentZ");
         previousParent.position = new Vector3(parentX, parentY, parentZ);
-        previousParent.SetParent(GameObject.Find("Level1").transform);
+
+        if(GameObject.Find("Level1"))
+            previousParent.SetParent(GameObject.Find("Level1").transform);
+
+        if(UIManager.instance.levelName == "LevelDescription")
+            previousParent.SetParent(GameObject.Find("Container").transform);
+
         previousParent.localScale = Vector3.one;
         
     }

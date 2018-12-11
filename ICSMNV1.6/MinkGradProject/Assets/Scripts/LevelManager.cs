@@ -24,6 +24,12 @@ public class LevelSettings
     public VideoClip videoFile;
     public MultiDimensionalArray[] level = new MultiDimensionalArray[5];
     public float[,] highScore = new float[5,4];
+    public int modePassed;
+    public Button Easy, Normal, Hard, Genius;
+    public GameObject levelParent;
+    public GameObject lockMode;
+    public bool locked = true;
+    public bool hasLockedBefore = false;
 }
 
 public class LevelManager : MonoBehaviour
@@ -98,11 +104,6 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(instance);
     }
 
-    void SetLevel()
-    {
-
-    }
-
     void LoadPlayerPrefs()
     {
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
@@ -134,7 +135,6 @@ public class LevelManager : MonoBehaviour
                     level1Capture = level1E;
                     break;
             }
-
             for(int mode = 0; mode < 4; mode++)
             {
                 switch (mode)
@@ -154,6 +154,12 @@ public class LevelManager : MonoBehaviour
                 }
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore " + i))
                     level1Capture.highScore[i,mode] = PlayerPrefs.GetFloat(m_DifficultyCapture + " HighScore " + i);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " ModePassed " + i))
+                    level1Capture.modePassed = PlayerPrefs.GetInt(m_DifficultyCapture + " ModePassed " + i);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasLockedBefore " + i))
+                    level1Capture.hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasLockedBefore " + i));
             }           
         }
     }
@@ -201,6 +207,12 @@ public class LevelManager : MonoBehaviour
                 }
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore " + i))
                     PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore " + i, level1Capture.highScore[i,mode]);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " ModePassed " + i))
+                    PlayerPrefs.SetInt(m_DifficultyCapture + " ModePassed " + i, level1Capture.modePassed);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasLockedBefore " + i))
+                    PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore " + i, UIManager.instance.BoolToInt(level1Capture.hasLockedBefore));
             }              
         }
 
@@ -260,9 +272,12 @@ public class LevelManager : MonoBehaviour
                     level1Capture = level1E;
                     break;
             }
+            level1Capture.modePassed = 0;
+            level1Capture.hasLockedBefore = false;
+
             for (int mode = 0; mode < 4; mode++)
-                level1Capture.highScore[i,mode] = 0;
-                          
+                level1Capture.highScore[i, mode] = 0;
+                         
         }
 
         SavePlayerPrefs();
@@ -372,7 +387,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    
+
 
     #region Set Level State
     public void CheckLevelState(bool disableLevelBtns)
@@ -437,6 +452,77 @@ public class LevelManager : MonoBehaviour
                 level2.interactable = true;
                 level3.interactable = true;
                 break;
+        }
+
+        if (UIManager.instance.levelName == "LevelDescription")
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (UIManager.instance.mode == (UIManager.subLevels1)i)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            level1Capture = level1A;
+                            break;
+                        case 1:
+                            level1Capture = level1B;
+                            break;
+                        case 2:
+                            level1Capture = level1C;
+                            break;
+                        case 3:
+                            level1Capture = level1D;
+                            break;
+                        case 4:
+                            level1Capture = level1E;
+                            break;
+                    }
+                    switch (level1Capture.modePassed)
+                    {
+                        case 0://Normal
+                            level1Capture.Easy.interactable = true;
+                            level1Capture.Normal.interactable = true;
+
+                            if (level1Capture.lockMode)
+                                level1Capture.lockMode.GetComponent<Animator>().enabled = true;
+
+                            if (disableLevelBtns)
+                            {
+                                level1Capture.Hard.interactable = false;
+                                level1Capture.Genius.interactable = false;
+                            }
+
+                            break;
+
+                        case 1://Hard
+                            level1Capture.Easy.interactable = true;
+                            level1Capture.Normal.interactable = true;
+                            level1Capture.Hard.interactable = true;
+
+                            if (level1Capture.lockMode)
+                                level1Capture.lockMode.GetComponent<Animator>().enabled = true;
+
+                            if (disableLevelBtns)
+                                level1Capture.Genius.interactable = false;
+                            break;
+
+                        case 2://Genius
+                            level1Capture.Easy.interactable = true;
+                            level1Capture.Normal.interactable = true;
+                            level1Capture.Hard.interactable = true;
+                            level1Capture.Genius.interactable = true;
+
+                            if (level1Capture.lockMode)
+                                level1Capture.lockMode.GetComponent<Animator>().enabled = true;
+                            break;
+
+                        case 3:// All Unlocked!
+
+                            break;
+                    }
+                }
+            }
         }
     }
 
