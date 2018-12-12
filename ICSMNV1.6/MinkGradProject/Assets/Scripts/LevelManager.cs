@@ -634,6 +634,10 @@ public class LevelManager : MonoBehaviour
         GameObject _Lock = Instantiate((GameObject)Resources.Load("Prefabs/UnlockLevel"), ButtonPos);
         //_Lock.transform.position = ButtonPos.position;
         _Lock.transform.localPosition = Vector3.zero;
+
+        if (UIManager.instance.levelName == "LevelDescription")
+            _Lock.transform.localScale = new Vector3(_Lock.transform.localScale.x/2, _Lock.transform.localScale.y/2);
+
         return _Lock;
     }
 

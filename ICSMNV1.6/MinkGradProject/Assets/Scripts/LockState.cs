@@ -15,12 +15,41 @@ public class LockState : MonoBehaviour {
     {
         anim = GetComponent<Animator>();       
 	}
-	
-	
 
-	void Update ()
+
+
+    void Update()
     {
-        SetState(LevelManager.instance.locked);
+        if (UIManager.instance.levelName == "Level1")
+            SetState(LevelManager.instance.locked);
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (UIManager.instance.mode == (UIManager.subLevels1)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        break;
+                    case 1:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        break;
+                    case 2:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        break;
+                    case 3:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        break;
+                    case 4:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        break;
+                }
+                if (UIManager.instance.levelName == "LevelDescription")
+                    SetState(LevelManager.instance.level1Capture.locked);
+            }
+        } 
+           
 
         animClip = anim.GetCurrentAnimatorClipInfo(0);
         animState = anim.GetCurrentAnimatorStateInfo(0);
