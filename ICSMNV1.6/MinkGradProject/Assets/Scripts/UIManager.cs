@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour {
     public subLevels1 mode;
     public bool[] hasWonAlready = { false, false, false, false, false };
     public int hasWonIndex;
+    public int hasWonDifficultyIndex;
     [HideInInspector]
     public bool gameStart = false;
     [HideInInspector]
@@ -142,10 +143,78 @@ public class UIManager : MonoBehaviour {
         winScreen.SetActive(true);
         gameStart = false;
         hasWonIndex = (int)mode;
+        hasWonDifficultyIndex = (int)LevelManager.instance.m_Difficulty;
         LevelManager.instance.SetNewHighScore(mode, LevelManager.instance.m_Difficulty);
-        Time.timeScale = 0;      
+        Time.timeScale = 0;
 
-        switch (mode)
+        for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
+        {
+            if (mode == (subLevels1)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        break;
+                    case 1:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        break;
+                    case 2:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        break;
+                    case 3:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        break;
+                    case 4:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        break;
+                }
+
+                for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; mode++)
+                {
+                    if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)mode)
+                    {
+                        switch (mode)
+                        {
+                            case 0:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
+                                break;
+                            case 1:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
+                                break;
+                            case 2:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
+                                if (!hasWonAlready[hasWonIndex])
+                                {
+                                    hasWonAlready[hasWonIndex] = true;
+                                    LevelManager.instance.subLevelPassed1++;
+                                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
+                                    PlayerPrefs.SetInt("HasWonAlready " + i, BoolToInt(hasWonAlready[hasWonIndex]));
+                                    LevelManager.instance.hasLockedBefore = false;
+                                }
+                          //      else
+                                //    return;
+                                break;
+                            case 3:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
+                                break;
+                        }
+
+                        if (!LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex,hasWonDifficultyIndex])
+                        {
+                            LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex,hasWonDifficultyIndex] = true;
+                            LevelManager.instance.level1Capture.modePassed++;
+                            PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " ModePassed " + i, LevelManager.instance.level1Capture.modePassed);
+                            PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex,hasWonDifficultyIndex]));
+                            LevelManager.instance.level1Capture.hasLockedBefore = false;
+                        }
+                        else
+                            return;
+                    }
+                }
+            }
+        }
+       /* switch (mode)
         {
             case subLevels1.Level1A:
                 if (!hasWonAlready[hasWonIndex])
@@ -206,7 +275,7 @@ public class UIManager : MonoBehaviour {
                 else
                     return;
                 break;
-        }
+        }*/
        
     }
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ProgessionCheck : MonoBehaviour {
 
     public Transform previousParent;
+    public Transform previousParentMode;
     public GameObject previousLock;
     public float parentX;
     public float parentY;
@@ -15,6 +16,7 @@ public class ProgessionCheck : MonoBehaviour {
     {
         previousLock = new GameObject("PreviousLockLocation");
         previousParent = previousLock.transform;
+        previousParentMode = previousLock.transform;
         GetParentID();
       
         switch (UIManager.instance.levelName)
@@ -161,7 +163,7 @@ public class ProgessionCheck : MonoBehaviour {
                                 break;
                             case 1://Hard
                                 if (!LevelManager.instance.level1Capture.lockMode)
-                                    previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+                                    previousLock = LevelManager.instance.InstantiateLock(previousParentMode.transform);
 
                                 if (!LevelManager.instance.level1Capture.hasLockedBefore)
                                 {
@@ -172,12 +174,12 @@ public class ProgessionCheck : MonoBehaviour {
                                 }
 
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Hard").gameObject;
-                               // LevelManager.instance.CheckLevelState(true);
+                                LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
                                 break;
                             case 2://Genius
                                 if (!LevelManager.instance.level1Capture.lockMode)
-                                    previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+                                    previousLock = LevelManager.instance.InstantiateLock(previousParentMode.transform);
 
                                 if (!LevelManager.instance.level1Capture.hasLockedBefore)
                                 {
@@ -188,14 +190,14 @@ public class ProgessionCheck : MonoBehaviour {
                                 }
 
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Genius").gameObject;
-                                // LevelManager.instance.CheckLevelState(true);
+                                 LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
                                 break;
                             case 3://All Unlocked!
                                 if (!LevelManager.instance.level1Capture.hasLockedBefore)
                                 {
                                     if (!LevelManager.instance.level1Capture.lockMode)
-                                        previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+                                        previousLock = LevelManager.instance.InstantiateLock(previousParentMode.transform);
 
                                     if (LevelManager.instance.level1Capture.locked)
                                         LevelManager.instance.level1Capture.locked = false;
@@ -205,7 +207,7 @@ public class ProgessionCheck : MonoBehaviour {
                                     PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
 
                                 }
-                               // LevelManager.instance.CheckLevelState(true);
+                                LevelManager.instance.CheckLevelState(true);
                                 break;
                         }
                     }
@@ -216,25 +218,52 @@ public class ProgessionCheck : MonoBehaviour {
 	
 	public void GetParentID()
     {
-        parentX = PlayerPrefs.GetFloat("ParentX");
-        parentY = PlayerPrefs.GetFloat("ParentY");
-        parentZ = PlayerPrefs.GetFloat("ParentZ");
-        previousParent.position = new Vector3(parentX, parentY, parentZ);
+        switch(UIManager.instance.levelName)
+        {
+            case "Level1":
+                parentX = PlayerPrefs.GetFloat("ParentX");
+                parentY = PlayerPrefs.GetFloat("ParentY");
+                parentZ = PlayerPrefs.GetFloat("ParentZ");
+                previousParent.position = new Vector3(parentX, parentY, parentZ);
 
-        if(GameObject.Find("Level1"))
-            previousParent.SetParent(GameObject.Find("Level1").transform);
+                if (GameObject.Find("Level1"))
+                    previousParent.SetParent(GameObject.Find("Level1").transform);
 
-        if(UIManager.instance.levelName == "LevelDescription")
-            previousParent.SetParent(GameObject.Find("Container").transform);
+                previousParent.localScale = Vector3.one;
+                break;
 
-        previousParent.localScale = Vector3.one;
+            case "LevelDescription":
+                parentX = PlayerPrefs.GetFloat("ParentXMode");
+                parentY = PlayerPrefs.GetFloat("ParentYMode");
+                parentZ = PlayerPrefs.GetFloat("ParentZMode");
+                previousParent.position = new Vector3(parentX, parentY, parentZ);
+
+                if (UIManager.instance.levelName == "LevelDescription")
+                    previousParent.SetParent(GameObject.Find("Container").transform);
+
+                previousParent.localScale = Vector3.one;
+                break;
+        }
+
         
     }
+ 
     public void SetParentID(float x, float y, float z)
     {
-        parentX = x; PlayerPrefs.SetFloat("ParentX", parentX);
-        parentY = y; PlayerPrefs.SetFloat("ParentY", parentY);
-        parentZ = z; PlayerPrefs.SetFloat("ParentZ", parentZ);
+        switch (UIManager.instance.levelName)
+        {
+            case "Level1":
+                parentX = x; PlayerPrefs.SetFloat("ParentX", parentX);
+                parentY = y; PlayerPrefs.SetFloat("ParentY", parentY);
+                parentZ = z; PlayerPrefs.SetFloat("ParentZ", parentZ);
+                break;
+            case "LevelDescription":
+                parentX = x; PlayerPrefs.SetFloat("ParentXMode", parentX);
+                parentY = y; PlayerPrefs.SetFloat("ParentYMode", parentY);
+                parentZ = z; PlayerPrefs.SetFloat("ParentZMode", parentZ);
+                break;
+        }
+      
     }
 
     // Update is called once per frame

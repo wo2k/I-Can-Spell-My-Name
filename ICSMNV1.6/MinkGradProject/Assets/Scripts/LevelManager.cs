@@ -30,6 +30,7 @@ public class LevelSettings
     public GameObject lockMode;
     public bool locked = true;
     public bool hasLockedBefore = false;
+    public bool[,] hasWonAlready = { { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false } }; //Easy-Hard for Level1A-E
 }
 
 public class LevelManager : MonoBehaviour
@@ -160,6 +161,9 @@ public class LevelManager : MonoBehaviour
 
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasLockedBefore " + i))
                     level1Capture.hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasLockedBefore " + i));
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasWonAlready " + i))
+                    level1Capture.hasWonAlready[i,mode] = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasWonAlready " + i));
             }           
         }
     }
@@ -213,6 +217,9 @@ public class LevelManager : MonoBehaviour
 
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasLockedBefore " + i))
                     PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore " + i, UIManager.instance.BoolToInt(level1Capture.hasLockedBefore));
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasWonAlready " + i))
+                    PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready " + i, UIManager.instance.BoolToInt(level1Capture.hasWonAlready[i,mode]));
             }              
         }
 
@@ -276,8 +283,10 @@ public class LevelManager : MonoBehaviour
             level1Capture.hasLockedBefore = false;
 
             for (int mode = 0; mode < 4; mode++)
+            {
                 level1Capture.highScore[i, mode] = 0;
-                         
+                level1Capture.hasWonAlready[i,mode] = false;
+            }           
         }
 
         SavePlayerPrefs();
@@ -392,138 +401,141 @@ public class LevelManager : MonoBehaviour
     #region Set Level State
     public void CheckLevelState(bool disableLevelBtns)
     {
-        switch (subLevelPassed1)
+        switch (UIManager.instance.levelName)
         {
-            case 1: //Lock B
-                level1_B.interactable = true;
-                //locked = false;
-
-                if (lockLevel)
-                    lockLevel.GetComponent<Animator>().enabled = true;
-
-                if (disableLevelBtns)
+            case "Campaign":
+                switch (levelPassed)
                 {
-                    level1_C.interactable = false;
-                    level1_D.interactable = false;
-                    level1_E.interactable = false;
+                    case 1:
+                        level2.interactable = true;
+                        break;
+                    case 2:
+                        level2.interactable = true;
+                        level3.interactable = true;
+                        break;
                 }
-
                 break;
-            case 2: //Lock C
-                level1_B.interactable = true;
-                level1_C.interactable = true;
-                if (lockLevel)
-                    lockLevel.GetComponent<Animator>().enabled = true;
 
-                if (disableLevelBtns)
+            case "Level1":
+                switch (subLevelPassed1)
                 {
-                    level1_D.interactable = false;
-                    level1_E.interactable = false;
+                    case 1: //Lock B
+                        level1_B.interactable = true;
+                        //locked = false;
+
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+
+                        if (disableLevelBtns)
+                        {
+                            level1_C.interactable = false;
+                            level1_D.interactable = false;
+                            level1_E.interactable = false;
+                        }
+
+                        break;
+                    case 2: //Lock C
+                        level1_B.interactable = true;
+                        level1_C.interactable = true;
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+
+                        if (disableLevelBtns)
+                        {
+                            level1_D.interactable = false;
+                            level1_E.interactable = false;
+                        }
+
+                        break;
+                    case 3: //Lock D
+                        level1_B.interactable = true;
+                        level1_C.interactable = true;
+                        level1_D.interactable = true;
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+
+                        if (disableLevelBtns)
+                            level1_E.interactable = false;
+
+                        break;
+                    case 4: //Lock E
+                        level1_B.interactable = true;
+                        level1_C.interactable = true;
+                        level1_D.interactable = true;
+                        level1_E.interactable = true;
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+                        break;
                 }
-
                 break;
-            case 3: //Lock D
-                level1_B.interactable = true;
-                level1_C.interactable = true;
-                level1_D.interactable = true;
-                if (lockLevel)
-                    lockLevel.GetComponent<Animator>().enabled = true;
 
-                if (disableLevelBtns)
-                    level1_E.interactable = false;
-
-                break;
-            case 4: //Lock E
-                level1_B.interactable = true;
-                level1_C.interactable = true;
-                level1_D.interactable = true;
-                level1_E.interactable = true;
-                if (lockLevel)
-                    lockLevel.GetComponent<Animator>().enabled = true;
-                break;
-        }
-
-        switch (levelPassed)
-        {
-            case 1:
-                level2.interactable = true;
-                break;
-            case 2:
-                level2.interactable = true;
-                level3.interactable = true;
-                break;
-        }
-
-        if (UIManager.instance.levelName == "LevelDescription")
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                if (UIManager.instance.mode == (UIManager.subLevels1)i)
+            case "LevelDescription":
+                for (int i = 0; i < 5; i++)
                 {
-                    switch (i)
+                    if (UIManager.instance.mode == (UIManager.subLevels1)i)
                     {
-                        case 0:
-                            level1Capture = level1A;
-                            break;
-                        case 1:
-                            level1Capture = level1B;
-                            break;
-                        case 2:
-                            level1Capture = level1C;
-                            break;
-                        case 3:
-                            level1Capture = level1D;
-                            break;
-                        case 4:
-                            level1Capture = level1E;
-                            break;
-                    }
-                    switch (level1Capture.modePassed)
-                    {
-                        case 0://Normal
-                            level1Capture.Easy.interactable = true;
-                            level1Capture.Normal.interactable = true;
+                        switch (i)
+                        {
+                            case 0:
+                                level1Capture = level1A;
+                                break;
+                            case 1:
+                                level1Capture = level1B;
+                                break;
+                            case 2:
+                                level1Capture = level1C;
+                                break;
+                            case 3:
+                                level1Capture = level1D;
+                                break;
+                            case 4:
+                                level1Capture = level1E;
+                                break;
+                        }
+                        switch (level1Capture.modePassed)
+                        {
+                            case 1://Normal
+                                level1Capture.Easy.interactable = true;
+                                level1Capture.Normal.interactable = true;
 
-                            if (level1Capture.lockMode)
-                                level1Capture.lockMode.GetComponent<Animator>().enabled = true;
+                                if (level1Capture.lockMode)
+                                    level1Capture.lockMode.GetComponent<Animator>().enabled = true;
 
-                            if (disableLevelBtns)
-                            {
-                                level1Capture.Hard.interactable = false;
-                                level1Capture.Genius.interactable = false;
-                            }
+                                if (disableLevelBtns)
+                                {
+                                    level1Capture.Hard.interactable = false;
+                                    level1Capture.Genius.interactable = false;
+                                }
 
-                            break;
+                                break;
 
-                        case 1://Hard
-                            level1Capture.Easy.interactable = true;
-                            level1Capture.Normal.interactable = true;
-                            level1Capture.Hard.interactable = true;
+                            case 2://Hard
+                                level1Capture.Easy.interactable = true;
+                                level1Capture.Normal.interactable = true;
+                                level1Capture.Hard.interactable = true;
 
-                            if (level1Capture.lockMode)
-                                level1Capture.lockMode.GetComponent<Animator>().enabled = true;
+                                if (level1Capture.lockMode)
+                                    level1Capture.lockMode.GetComponent<Animator>().enabled = true;
 
-                            if (disableLevelBtns)
-                                level1Capture.Genius.interactable = false;
-                            break;
+                                if (disableLevelBtns)
+                                    level1Capture.Genius.interactable = false;
+                                break;
 
-                        case 2://Genius
-                            level1Capture.Easy.interactable = true;
-                            level1Capture.Normal.interactable = true;
-                            level1Capture.Hard.interactable = true;
-                            level1Capture.Genius.interactable = true;
+                            case 3://Genius
+                                level1Capture.Easy.interactable = true;
+                                level1Capture.Normal.interactable = true;
+                                level1Capture.Hard.interactable = true;
+                                level1Capture.Genius.interactable = true;
 
-                            if (level1Capture.lockMode)
-                                level1Capture.lockMode.GetComponent<Animator>().enabled = true;
-                            break;
-
-                        case 3:// All Unlocked!
-
-                            break;
+                                if (level1Capture.lockMode)
+                                    level1Capture.lockMode.GetComponent<Animator>().enabled = true;
+                                break;
+                        }
                     }
                 }
-            }
+                break;
         }
+        
     }
 
     public void AllLevelsLockState(bool isLocked)
@@ -577,6 +589,10 @@ public class LevelManager : MonoBehaviour
                         m_DifficultyCapture = Difficulty.Genius;
                         break;
                 }
+                level1Capture.modePassed = 0; PlayerPrefs.SetInt(m_DifficultyCapture + " ModePassed " + i, level1Capture.modePassed);
+                level1Capture.hasLockedBefore = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore " + i, UIManager.instance.BoolToInt(level1Capture.hasLockedBefore));
+                level1Capture.hasWonAlready[i,mode] = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready " + i, UIManager.instance.BoolToInt(level1Capture.hasWonAlready[i,mode]));
+                level1Capture.locked = true;
                 level1Capture.highScore[i, mode] = 0;
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore " + i))
                     PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore " + i, level1Capture.highScore[i, mode]);

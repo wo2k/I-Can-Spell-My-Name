@@ -368,7 +368,7 @@ public class Level1B : MonoBehaviour {
     {	
 		//answerIndex = 8;      
         AnswerHint.text = Names[answerIndex];
-		answerButton = Random.Range (0, 4);
+		answerButton = Random.Range (0, 3);
 		AnswersText[answerButton].text = Names[answerIndex];
 		//	SetOtherButtons ();		
 		PlaceAnswer ();

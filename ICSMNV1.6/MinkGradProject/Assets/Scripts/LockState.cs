@@ -23,30 +23,33 @@ public class LockState : MonoBehaviour {
         if (UIManager.instance.levelName == "Level1")
             SetState(LevelManager.instance.locked);
 
-        for (int i = 0; i < 5; i++)
+        if (UIManager.instance.levelName == "LevelDescription")
         {
-            if (UIManager.instance.mode == (UIManager.subLevels1)i)
+            for (int i = 0; i < 5; i++)
             {
-                switch (i)
+                if (UIManager.instance.mode == (UIManager.subLevels1)i)
                 {
-                    case 0:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                        break;
-                    case 1:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                        break;
-                    case 2:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                        break;
-                    case 3:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                        break;
-                    case 4:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
-                        break;
-                }
-                if (UIManager.instance.levelName == "LevelDescription")
+                    switch (i)
+                    {
+                        case 0:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                            break;
+                        case 1:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                            break;
+                        case 2:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                            break;
+                        case 3:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                            break;
+                        case 4:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                            break;
+                    }
+
                     SetState(LevelManager.instance.level1Capture.locked);
+                }
             }
         } 
            
@@ -64,14 +67,52 @@ public class LockState : MonoBehaviour {
             SetButtonsInteractable(false);
             if (animTime >= 3.0f)
             {
-                LevelManager.instance.lockLevel = null;
-                Destroy(gameObject);
-                SetButtonsInteractable(true);
-                if(LevelManager.instance.subLevelPassed1 < 4)
-                LevelManager.instance.lockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.levelParent.transform);
+                if (UIManager.instance.levelName == "Level1")
+                {
+                    LevelManager.instance.lockLevel = null;
+                    Destroy(gameObject);
+                    SetButtonsInteractable(true);
+                    if (LevelManager.instance.subLevelPassed1 < 4)
+                        LevelManager.instance.lockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.levelParent.transform);
 
-                LevelManager.instance.CheckLevelState(true);
-                LevelManager.instance.locked = true;
+                    LevelManager.instance.CheckLevelState(true);
+                    LevelManager.instance.locked = true;
+                }
+                if (UIManager.instance.levelName == "LevelDescription")
+                {
+                    for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels1)).Length; i++)
+                    {
+                        if (UIManager.instance.mode == (UIManager.subLevels1)i)
+                        {
+                            switch (i)
+                            {
+                                case 0:
+                                    LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                                    break;
+                                case 1:
+                                    LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                                    break;
+                                case 2:
+                                    LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                                    break;
+                                case 3:
+                                    LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                                    break;
+                                case 4:
+                                    LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                                    break;
+                            }
+                            LevelManager.instance.level1Capture.lockMode = null;
+                            Destroy(gameObject);
+                            SetButtonsInteractable(true);
+                            if (LevelManager.instance.level1Capture.modePassed < 3)
+                                LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
+
+                            LevelManager.instance.CheckLevelState(true);
+                            LevelManager.instance.level1Capture.locked = true;
+                        }
+                    }
+                }
             }
         }
         else
