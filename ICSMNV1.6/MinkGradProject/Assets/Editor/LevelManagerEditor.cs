@@ -6,6 +6,46 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.Video;
 
+public static class SerializePropertyExtension
+{
+    public static void SetObjectValue(SerializedProperty prop, System.Object toValue)
+    {
+        switch (prop.propertyType)
+        {
+            case SerializedPropertyType.Boolean:
+                prop.boolValue = (bool)toValue;
+                break;
+            case SerializedPropertyType.Bounds:
+                prop.boundsValue = (Bounds)toValue;
+                break;
+            case SerializedPropertyType.Color:
+                prop.colorValue = (Color)toValue;
+                break;
+            case SerializedPropertyType.Float:
+                prop.floatValue = (float)toValue;
+                break;
+            case SerializedPropertyType.Integer:
+                prop.intValue = (int)toValue;
+                break;
+            case SerializedPropertyType.ObjectReference:
+                prop.objectReferenceValue = toValue as UnityEngine.Object;
+                break;
+            case SerializedPropertyType.Rect:
+                prop.rectValue = (Rect)toValue;
+                break;
+            case SerializedPropertyType.String:
+                prop.stringValue = (string)toValue;
+                break;
+            case SerializedPropertyType.Vector2:
+                prop.vector2Value = (Vector2)toValue;
+                break;
+            case SerializedPropertyType.Vector3:
+                prop.vector3Value = (Vector3)toValue;
+                break;
+        }
+    }
+}
+
 [CustomEditor(typeof(LevelManager))]
 [CanEditMultipleObjects]
 public class LevelManagerEditor : Editor {
@@ -60,11 +100,13 @@ public class LevelManagerEditor : Editor {
 
 
     private SerializedProperty[] level1Name = new SerializedProperty[5];
-    private SerializedProperty[] level1Description = new SerializedProperty[5];
+    private SerializedProperty[,] level1Description = new SerializedProperty[5,4];
     private SerializedProperty[] level1Icon = new SerializedProperty[5];
     private SerializedProperty[] level1VideoTexture = new SerializedProperty[5];
     private SerializedProperty[] level1VideoFile = new SerializedProperty[5];
 
+    private SerializedProperty level1Description2;
+    private List<SerializedProperty> levelDescriptionCapture = new List<SerializedProperty>();
 
     //GUILayouts
     Texture2D headerTexture;
@@ -88,11 +130,7 @@ public class LevelManagerEditor : Editor {
         tabStyle = toolBarSkin.GetStyle("Tab");
 
         //Retrieve custom GUISkin for Toolbar for Level Creation
-      //  for (int i = 0; i < diffToolbarSkin.Length; i++)
-      //  {
-            diffToolbarSkin = defGUISkin;
-      //      
-      //  }
+        diffToolbarSkin = defGUISkin;    
         diffStyle = defGUIStyle;
         //Captures saved variable in LevelManager by the name of sceneName 
         sceneNameCapture = m_Target.FindProperty("sceneName");
@@ -107,7 +145,7 @@ public class LevelManagerEditor : Editor {
         level1C = m_Target.FindProperty("level1C");
         level1D = m_Target.FindProperty("level1D");
         level1E = m_Target.FindProperty("level1E");
-
+       
         for (int i = 0; i < 5; i++)
         {
             
@@ -131,13 +169,19 @@ public class LevelManagerEditor : Editor {
             }
             
             level1Name[i] = AssignRelativeProperty(level1Capture, "levelName");
-            level1Description[i] = AssignRelativeProperty(level1Capture, "levelDescription");
+         
             level1Icon[i] = AssignRelativeProperty(level1Capture, "levelIcon");
             level1VideoTexture[i] = AssignRelativeProperty(level1Capture, "videoTexture");
             level1VideoFile[i] = AssignRelativeProperty(level1Capture, "videoFile");
-  
-        }
+            level1Description2 = AssignRelativeProperty(level1Capture, "level");
+            levelDescriptionCapture.Add(AssignRelativeProperty(level1Description2.GetArrayElementAtIndex(i), "levelDescription"));
+            // = AssignRelativeProperty(level1Capture, "level");
 
+            //  levelDescriptionCapture = AssignRelativeProperty(level1Description2[i], "levelDescription");
+            //for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; mode++)
+            //        level1Description[0,0] = AssignRelativeProperty(level1Capture, "levelDescription");
+        }
+        
         InitTextures();
     }
 
@@ -312,18 +356,20 @@ public class LevelManagerEditor : Editor {
                 switch (j)
                 {
                     case 0:
-                        EditorGUILayout.LabelField("Easy: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Easy: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                     case 1:
-                        EditorGUILayout.LabelField("Normal: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Normal: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                     case 2:
-                        EditorGUILayout.LabelField("Hard: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Hard: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                     case 3:
-                        EditorGUILayout.LabelField("Genius: " + levelManager.level1A.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        EditorGUILayout.LabelField("Genius: " + levelManager.level1Capture.highScore[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
                         break;
                 }
+
+                
             }
             EditorGUILayout.EndVertical();//-------------------------------------------------------------3
 
@@ -331,10 +377,48 @@ public class LevelManagerEditor : Editor {
             GUILayout.BeginVertical(levelSettingsTexture, GUIStyle.none);//-------------------------------------------------------------4
             EditorGUILayout.LabelField("Level Name", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
             level1Name[i].stringValue = GUILayout.TextField(level1Name[i].stringValue, GUILayout.Width(200), GUILayout.Height(15));
-            EditorGUILayout.LabelField("Level Description", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-            level1Description[i].stringValue = GUILayout.TextArea(level1Description[i].stringValue, 500, GUILayout.Width(300), GUILayout.Height(50));
 
+            EditorGUILayout.LabelField("Level Description", Label(EditorStyles.miniLabel, Color.black, 11, FontStyle.BoldAndItalic));
+            for (int mode = 0; mode < 4; mode++)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        EditorGUILayout.LabelField("Easy", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                    case 1:
+                        EditorGUILayout.LabelField("Normal", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                    case 2:
+                        EditorGUILayout.LabelField("Hard", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                    case 3:
+                        EditorGUILayout.LabelField("Genius", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                }
+                levelDescriptionCapture[i].GetArrayElementAtIndex(mode).stringValue = EditorGUILayout.TextArea(levelDescriptionCapture[i].GetArrayElementAtIndex(mode).stringValue, GUILayout.Width(300), GUILayout.Height(50));
+            }
+            //  if (PlayerPrefs.HasKey(mode + " levelDescription " + i))
+            // levelManager.level1Capture.levelDescription[i, mode] = PlayerPrefs.GetString(mode + " levelDescription " + i);
 
+            //   level1Description[0,0].stringValue = GUILayout.TextArea(level1Description[0,0].stringValue, 500, GUILayout.Width(300), GUILayout.Height(50));
+            //  PlayerPrefs.SetString(mode + " levelDescription " + i, levelManager.level1Capture.levelDescription[i, mode]);
+            //  PlayerPrefs.Save();
+            //  }
+            //  while(level1Description2[i].)
+
+            // for (int mode = 0; mode < level1Description2.Count-1; mode++)
+            //  {
+            //    EditorGUILayout.LabelField("Level Description 2.0", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+            ////    if (level1Description2[i].name == "levelDescription")
+            //   {
+            ///       SerializedProperty property = level1Description2[i];
+            //       property.stringValue = GUILayout.TextArea(property.stringValue, 500, GUILayout.Width(300), GUILayout.Height(50));
+            //      level1Description2[i].stringValue = property.stringValue;
+            //    }
+            //   SerializePropertyExtension.SetObjectValue(property, "rgjfgjfj");
+            // } 
+            // }
             EditorGUILayout.LabelField("Video Texture", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
             level1VideoTexture[i].objectReferenceValue = (Texture)EditorGUILayout.ObjectField(level1VideoTexture[i].objectReferenceValue, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
 
@@ -532,6 +616,7 @@ public class LevelManagerEditor : Editor {
 
         return style;
     }
+
 
     public class CustomColors
     {

@@ -10,7 +10,7 @@ using UnityEngine.Video;
 [System.Serializable]
 public class MultiDimensionalArray
 {
-    public float[] difficulty = new float[4];
+    public string[] levelDescription = { "", "", "", "" };//new string[4];
 }
 
 [System.Serializable]
@@ -18,7 +18,7 @@ public class LevelSettings
 {
     public string levelName;
     [TextArea]
-    public string levelDescription;
+    public string[,] levelDescription = { { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" } }; //new string[5,4];
     public Sprite levelIcon;
     public Texture videoTexture;
     public VideoClip videoFile;
@@ -115,7 +115,6 @@ public class LevelManager : MonoBehaviour
 
         hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
 
-
         for (int i = 0; i < 5; i++)
         {
             switch (i)
@@ -164,6 +163,9 @@ public class LevelManager : MonoBehaviour
 
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasWonAlready " + i))
                     level1Capture.hasWonAlready[i,mode] = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasWonAlready " + i));
+
+                if (PlayerPrefs.HasKey(mode + " levelDescription " + i))
+                    level1Capture.levelDescription[i, mode] = PlayerPrefs.GetString(mode + " levelDescription " + i);
             }           
         }
     }

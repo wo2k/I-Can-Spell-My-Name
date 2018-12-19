@@ -192,8 +192,6 @@ public class UIManager : MonoBehaviour {
                                     PlayerPrefs.SetInt("HasWonAlready " + i, BoolToInt(hasWonAlready[hasWonIndex]));
                                     LevelManager.instance.hasLockedBefore = false;
                                 }
-                          //      else
-                                //    return;
                                 break;
                             case 3:
                                 LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
@@ -213,70 +211,7 @@ public class UIManager : MonoBehaviour {
                     }
                 }
             }
-        }
-       /* switch (mode)
-        {
-            case subLevels1.Level1A:
-                if (!hasWonAlready[hasWonIndex])
-                {
-                    hasWonAlready[hasWonIndex] = true;
-                    LevelManager.instance.subLevelPassed1++;
-                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
-                    PlayerPrefs.SetInt("HasWonAlready 0", BoolToInt(hasWonAlready[hasWonIndex]));
-                }
-                else
-                    return;
-                break;
-            case subLevels1.Level1B:
-                if (!hasWonAlready[hasWonIndex])
-                {
-                    hasWonAlready[hasWonIndex] = true;
-                    LevelManager.instance.subLevelPassed1++;
-                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
-                    PlayerPrefs.SetInt("HasWonAlready 1", BoolToInt(hasWonAlready[hasWonIndex]));
-                    LevelManager.instance.hasLockedBefore = false;
-                }
-                else
-                    return;
-                break;
-            case subLevels1.Level1C:
-                if (!hasWonAlready[hasWonIndex])
-                {
-                    hasWonAlready[hasWonIndex] = true;
-                    LevelManager.instance.subLevelPassed1++;
-                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
-                    PlayerPrefs.SetInt("HasWonAlready 2", BoolToInt(hasWonAlready[hasWonIndex]));
-                    LevelManager.instance.hasLockedBefore = false;
-                }
-                else
-                    return;
-                break;
-            case subLevels1.Level1D:
-                if (!hasWonAlready[hasWonIndex])
-                {
-                    hasWonAlready[hasWonIndex] = true;
-                    LevelManager.instance.subLevelPassed1++;
-                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
-                    PlayerPrefs.SetInt("HasWonAlready 3", BoolToInt(hasWonAlready[hasWonIndex]));
-                    LevelManager.instance.hasLockedBefore = false;
-                }
-                else
-                    return;
-                break;
-            case subLevels1.Level1E:
-                if (!hasWonAlready[hasWonIndex])
-                {
-                    hasWonAlready[hasWonIndex] = true;
-                    LevelManager.instance.subLevelPassed1++;
-                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
-                    PlayerPrefs.SetInt("HasWonAlready 4", BoolToInt(hasWonAlready[hasWonIndex]));
-                    LevelManager.instance.hasLockedBefore = false;
-                }
-                else
-                    return;
-                break;
-        }*/
-       
+        }       
     }
 
     public void RestartGame()

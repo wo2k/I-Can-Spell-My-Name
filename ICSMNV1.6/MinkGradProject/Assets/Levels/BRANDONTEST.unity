@@ -9962,6 +9962,7 @@ MonoBehaviour:
   mode: 0
   hasWonAlready: 0000000000
   hasWonIndex: 0
+  hasWonDifficultyIndex: 0
   gameStart: 0
   inGame: 0
 --- !u!114 &832350548
@@ -12229,7 +12230,7 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: currentTab
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -12375,7 +12376,7 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: mainTBCurrentTab
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -12525,6 +12526,78 @@ Prefab:
       value: 
       objectReference: {fileID: 102900000, guid: 507d83ac4016625429d7dd7785736fdd,
         type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[0]
+      value: hththfggHelloo WQorkd,fphgrhg
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.levelName
+      value: Cannonball
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: b30290c15b4c7df4faf481fb9ee66f3d,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.videoFile
+      value: 
+      objectReference: {fileID: 32900000, guid: c1376b6fa51bb824b91087689b80ed3f,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[0]
+      value: fdbdbfdhthth
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.level.Array.data[2].levelDescription.Array.data[0]
+      value: gdgdgfdgdfg
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.level.Array.data[3].levelDescription.Array.data[0]
+      value: dfgfdgfdgdf
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[1]
+      value: dlkrow olleh
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[2]
+      value: he,loqwefjprgj hi lol
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[3]
+      value: fffdhdf
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[1]
+      value: lolol
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[2]
+      value: hello wporl
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[3]
+      value: ggfgfg
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}
   m_IsPrefabParent: 0
