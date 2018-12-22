@@ -398,27 +398,7 @@ public class LevelManagerEditor : Editor {
                 }
                 levelDescriptionCapture[i].GetArrayElementAtIndex(mode).stringValue = EditorGUILayout.TextArea(levelDescriptionCapture[i].GetArrayElementAtIndex(mode).stringValue, GUILayout.Width(300), GUILayout.Height(50));
             }
-            //  if (PlayerPrefs.HasKey(mode + " levelDescription " + i))
-            // levelManager.level1Capture.levelDescription[i, mode] = PlayerPrefs.GetString(mode + " levelDescription " + i);
 
-            //   level1Description[0,0].stringValue = GUILayout.TextArea(level1Description[0,0].stringValue, 500, GUILayout.Width(300), GUILayout.Height(50));
-            //  PlayerPrefs.SetString(mode + " levelDescription " + i, levelManager.level1Capture.levelDescription[i, mode]);
-            //  PlayerPrefs.Save();
-            //  }
-            //  while(level1Description2[i].)
-
-            // for (int mode = 0; mode < level1Description2.Count-1; mode++)
-            //  {
-            //    EditorGUILayout.LabelField("Level Description 2.0", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-            ////    if (level1Description2[i].name == "levelDescription")
-            //   {
-            ///       SerializedProperty property = level1Description2[i];
-            //       property.stringValue = GUILayout.TextArea(property.stringValue, 500, GUILayout.Width(300), GUILayout.Height(50));
-            //      level1Description2[i].stringValue = property.stringValue;
-            //    }
-            //   SerializePropertyExtension.SetObjectValue(property, "rgjfgjfj");
-            // } 
-            // }
             EditorGUILayout.LabelField("Video Texture", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
             level1VideoTexture[i].objectReferenceValue = (Texture)EditorGUILayout.ObjectField(level1VideoTexture[i].objectReferenceValue, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
 

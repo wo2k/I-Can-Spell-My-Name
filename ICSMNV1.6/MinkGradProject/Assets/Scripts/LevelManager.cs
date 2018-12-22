@@ -10,6 +10,7 @@ using UnityEngine.Video;
 [System.Serializable]
 public class MultiDimensionalArray
 {
+    [TextArea]
     public string[] levelDescription = { "", "", "", "" };//new string[4];
 }
 

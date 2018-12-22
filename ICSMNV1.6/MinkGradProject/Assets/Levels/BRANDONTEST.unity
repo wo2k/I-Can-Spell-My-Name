@@ -12474,7 +12474,7 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1D.levelName
-      value: Avoid the Seagulls
+      value: Fish Bait
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -12529,7 +12529,9 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[0]
-      value: hththfggHelloo WQorkd,fphgrhg
+      value: Correctly recognize your name by clicking the right fish! To make it
+        easy for you, find the green fish but be aware of the red ones. Get the answer
+        right three times and you'll win!
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -12556,27 +12558,38 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[0]
-      value: fdbdbfdhthth
+      value: It's Dolphin season! Wait for the Dolphin's to come up as they spray
+        names out. Correctly recognize your name three times to win. I'll help it
+        make it easy for you too. Look for the green dolphins and not the red.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1C.level.Array.data[2].levelDescription.Array.data[0]
-      value: gdgdgfdgdfg
+      value: Touch the boats with your name on it! Boats will be passing by from both
+        directions. Correctly recognize your name five times to win. Let's make this
+        easy for you, find the boats that are marked green but avoid the red ones.
+        You get bonus points if you get a speed boat with your name on it.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1D.level.Array.data[3].levelDescription.Array.data[0]
-      value: dfgfdgfdgdf
+      value: Two types of fishes will be jumping in and out of the water with your
+        name on it. Correctly recognize your name or spot the green fish seven times
+        to win. Be aware of the red fishes though!
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[1]
-      value: dlkrow olleh
+      value: Let's make it more challenging now that you got the hang of it. Correctly
+        recognize your name by clicking the right fish. This time, the fishes are
+        showing their true colors. Answer correctly three times and you'll win.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[2]
-      value: he,loqwefjprgj hi lol
+      value: You're getting the hang of this. Correctly recognize your name five times
+        now. Be careful as some fishes will spell your name wrong. Pressing the wrong
+        fish will deduct time away from you as well
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -12586,17 +12599,58 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[1]
-      value: lolol
+      value: The Dolphins are no longer providing us hints for your name. Correctly
+        recognize your name three times to win. Answering it incorrectly will deduct
+        time from us.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[2]
-      value: hello wporl
+      value: Be careful! Seems like our Dolphin friends are spraying out your name
+        spelled incorrectly. Try and see if you can spot the Dolphin that sprays out
+        the right spelling of your name five times. Time will be deducted away from
+        you if you get the wrong name.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[3]
       value: ggfgfg
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.level.Array.data[2].levelDescription.Array.data[1]
+      value: Seems like our friends want to help us know our name. This time correctly
+        recognize your name seven times to win. The boats have different colors now!
+        Try and see if you can spot a speed boat with your name on it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.level.Array.data[2].levelDescription.Array.data[2]
+      value: Phew! This is going to be a tricky one. The boats are passing by with
+        your name spelled incorrectly. Try and see if you can find the boat with your
+        right name seven times. I'll help you out, every right answer will add time
+        for us.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.level.Array.data[3].levelDescription.Array.data[1]
+      value: Our friends are trying to bait us! Seems like they're more than two types
+        of fish in the sea. Our friends are not going to give us hints here. Correctly
+        recoginize your name seven times to win. Answering incorrectly will deduct
+        time from us.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.level.Array.data[3].levelDescription.Array.data[2]
+      value: Be cautious! Our fish friends are jumping out of the water with your
+        name spelled incorrectly. See if you can find the fish with your name spelled
+        correctly ten times to win. I'll help you out by adding time for every answer
+        you get correctly.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: diffCurrentTab
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}

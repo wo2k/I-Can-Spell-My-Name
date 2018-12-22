@@ -129,7 +129,7 @@ public class LevelDescription : MonoBehaviour {
                     if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)modes)
                     {
                         LevelManager.instance.GetHighScore(UIManager.instance.mode, LevelManager.instance.m_Difficulty, highscore);
-                        modeText.text = LevelManager.instance.level1Capture.levelDescription[i, modes];
+                        modeText.text = LevelManager.instance.level1Capture.level[i].levelDescription[modes].ToString();
                     }
                 }
             }
