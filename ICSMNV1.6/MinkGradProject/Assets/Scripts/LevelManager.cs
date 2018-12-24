@@ -11,7 +11,8 @@ using UnityEngine.Video;
 public class MultiDimensionalArray
 {
     [TextArea]
-    public string[] levelDescription = { "", "", "", "" };//new string[4];
+    public string[] levelDescription = { "", "", "", "" };
+    public VideoClip[] videoFile = new VideoClip[4];
 }
 
 [System.Serializable]

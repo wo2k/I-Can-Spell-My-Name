@@ -18,56 +18,6 @@ public class LevelDescription : MonoBehaviour {
 
         PrepareCompleted(videoFile);
         SetDifficulty("Easy");
-
-        /* switch (UIManager.instance.mode)
-         {
-             case UIManager.subLevels1.Level1A:
-
-                 levelName.text = LevelManager.instance.level1A.levelName;
-                 levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level1A.levelIcon;
-                 for(int i = 0; i < levelModes.transform.childCount; i++)
-                     levelModes.transform.GetChild(i).GetComponent<Image>().sprite = LevelManager.instance.level1A.levelIcon;
-                 modeText.text = LevelManager.instance.level1A.levelDescription;
-                 videoFile.clip = LevelManager.instance.level1A.videoFile;
-
-                 break;
-             case UIManager.subLevels1.Level1B:
-
-                 levelName.text = LevelManager.instance.level1B.levelName;
-                 levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level1B.levelIcon;
-                 for (int i = 0; i < levelModes.transform.childCount; i++)
-                     levelModes.transform.GetChild(i).GetComponent<Image>().sprite = LevelManager.instance.level1B.levelIcon;
-                 modeText.text = LevelManager.instance.level1B.levelDescription;
-                 videoFile.clip = LevelManager.instance.level1B.videoFile;
-                 break;
-             case UIManager.subLevels1.Level1C:
-
-                 levelName.text = LevelManager.instance.level1C.levelName;
-                 levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level1C.levelIcon;
-                 for (int i = 0; i < levelModes.transform.childCount; i++)
-                     levelModes.transform.GetChild(i).GetComponent<Image>().sprite = LevelManager.instance.level1C.levelIcon;
-                 modeText.text = LevelManager.instance.level1C.levelDescription;
-                 videoFile.clip = LevelManager.instance.level1C.videoFile;
-                 break;
-             case UIManager.subLevels1.Level1D:
-
-                 levelName.text = LevelManager.instance.level1D.levelName;
-                 levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level1D.levelIcon;
-                 for (int i = 0; i < levelModes.transform.childCount; i++)
-                     levelModes.transform.GetChild(i).GetComponent<Image>().sprite = LevelManager.instance.level1D.levelIcon;
-                 modeText.text = LevelManager.instance.level1D.levelDescription;
-                 videoFile.clip = LevelManager.instance.level1D.videoFile;
-                 break;
-             case UIManager.subLevels1.Level1E:
-
-                 levelName.text = LevelManager.instance.level1E.levelName;
-                 levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level1E.levelIcon;
-                 for (int i = 0; i < levelModes.transform.childCount; i++)
-                     levelModes.transform.GetChild(i).GetComponent<Image>().sprite = LevelManager.instance.level1E.levelIcon;
-                 modeText.text = LevelManager.instance.level1E.levelDescription;
-                 videoFile.clip = LevelManager.instance.level1E.videoFile;
-                 break;
-         }*/
     }
 
     void PrepareCompleted(VideoPlayer vp)
@@ -121,8 +71,7 @@ public class LevelDescription : MonoBehaviour {
 
                 for (int j = 0; j < levelModes.transform.childCount; j++)
                     levelModes.transform.GetChild(j).GetComponent<Image>().sprite = LevelManager.instance.level1Capture.levelIcon;
-
-                videoFile.clip = LevelManager.instance.level1Capture.videoFile;
+              
 
                 for (int modes = 0; modes < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; modes++)
                 {
@@ -130,6 +79,8 @@ public class LevelDescription : MonoBehaviour {
                     {
                         LevelManager.instance.GetHighScore(UIManager.instance.mode, LevelManager.instance.m_Difficulty, highscore);
                         modeText.text = LevelManager.instance.level1Capture.level[i].levelDescription[modes].ToString();
+
+                        videoFile.clip = LevelManager.instance.level1Capture.level[i].videoFile[modes];
                     }
                 }
             }

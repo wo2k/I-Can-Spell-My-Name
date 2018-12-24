@@ -107,6 +107,7 @@ public class LevelManagerEditor : Editor {
 
     private SerializedProperty level1Description2;
     private List<SerializedProperty> levelDescriptionCapture = new List<SerializedProperty>();
+    private List<SerializedProperty> levelVideoCapture = new List<SerializedProperty>();
 
     //GUILayouts
     Texture2D headerTexture;
@@ -172,14 +173,13 @@ public class LevelManagerEditor : Editor {
          
             level1Icon[i] = AssignRelativeProperty(level1Capture, "levelIcon");
             level1VideoTexture[i] = AssignRelativeProperty(level1Capture, "videoTexture");
+
             level1VideoFile[i] = AssignRelativeProperty(level1Capture, "videoFile");
+
             level1Description2 = AssignRelativeProperty(level1Capture, "level");
             levelDescriptionCapture.Add(AssignRelativeProperty(level1Description2.GetArrayElementAtIndex(i), "levelDescription"));
-            // = AssignRelativeProperty(level1Capture, "level");
+            levelVideoCapture.Add(AssignRelativeProperty(level1Description2.GetArrayElementAtIndex(i), "videoFile"));
 
-            //  levelDescriptionCapture = AssignRelativeProperty(level1Description2[i], "levelDescription");
-            //for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; mode++)
-            //        level1Description[0,0] = AssignRelativeProperty(level1Capture, "levelDescription");
         }
         
         InitTextures();
@@ -397,13 +397,14 @@ public class LevelManagerEditor : Editor {
                         break;
                 }
                 levelDescriptionCapture[i].GetArrayElementAtIndex(mode).stringValue = EditorGUILayout.TextArea(levelDescriptionCapture[i].GetArrayElementAtIndex(mode).stringValue, GUILayout.Width(300), GUILayout.Height(50));
+
+                EditorGUILayout.LabelField("Video File", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                levelVideoCapture[i].GetArrayElementAtIndex(mode).objectReferenceValue = (VideoClip)EditorGUILayout.ObjectField(levelVideoCapture[i].GetArrayElementAtIndex(mode).objectReferenceValue, typeof(VideoClip), false, GUILayout.Width(200), GUILayout.Height(15));
             }
 
             EditorGUILayout.LabelField("Video Texture", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
             level1VideoTexture[i].objectReferenceValue = (Texture)EditorGUILayout.ObjectField(level1VideoTexture[i].objectReferenceValue, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
 
-            EditorGUILayout.LabelField("Video File", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
-            level1VideoFile[i].objectReferenceValue = (VideoClip)EditorGUILayout.ObjectField(level1VideoFile[i].objectReferenceValue, typeof(VideoClip), false, GUILayout.Width(200), GUILayout.Height(15));
             EditorGUILayout.EndVertical();//-------------------------------------------------------------4
             EditorGUILayout.EndHorizontal();//-------------------------------------------------------------2
 

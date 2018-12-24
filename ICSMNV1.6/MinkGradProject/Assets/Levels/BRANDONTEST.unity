@@ -12652,6 +12652,78 @@ Prefab:
       propertyPath: diffCurrentTab
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.level.Array.data[0].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 075d3075fd129bc4fa9d330451761089,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.level.Array.data[0].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: d4e6fd6af2fe60645a04d980c2ef0707,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.level.Array.data[0].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: 9013b6e9e6420c9418763ca3dd337917,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.level.Array.data[1].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 1506e6021b4e5c34d8f9c4a89bff91a1,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.level.Array.data[1].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: bb22782eb09248047b51eda5b35bab03,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.level.Array.data[1].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: 6e1d3baf9a8f2994b998ed2c6e3cb47e,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.level.Array.data[2].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 70a305a586120704e9adfac745cef497,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.level.Array.data[2].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 32cbedd3e078c5d46b24a6685cdc20c3,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.level.Array.data[2].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: ab84f5837a5203848a3cd6e056fc4c3e,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.level.Array.data[3].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 73aadf0513615564ea16365d0ea61272,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.level.Array.data[3].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: ee1bbfcf8320575439d9541af308ab87,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.level.Array.data[3].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: a04b6c260a65c96488fe06dcd346d8c7,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}
   m_IsPrefabParent: 0
