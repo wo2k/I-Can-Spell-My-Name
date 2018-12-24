@@ -694,6 +694,9 @@ public class LevelManager : MonoBehaviour
 
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
+
+            else
+                UIManager.instance.InstantiateBubble(isCorrect);
         }
 
         else
@@ -707,6 +710,8 @@ public class LevelManager : MonoBehaviour
             UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
             if (heartsQty <= 0)
                 UIManager.instance.GameOver();
+            else
+                UIManager.instance.InstantiateBubble(isCorrect);
         }
 
         UIManager.instance.heartsAmount = heartsQty;
@@ -718,12 +723,15 @@ public class LevelManager : MonoBehaviour
 
         if (isCorrect)
         {
+          //  UIManager.instance.InstantiateBubble(isCorrect);
             SoundManagement.TriggerEvent("PlayCorrect");
             correctAnswerPoints++;
             seahorseAnim.SetTrigger("Wink");
             seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
+            else
+                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));//.InstantiateBubble(isCorrect);
         }
 
         else
@@ -737,6 +745,8 @@ public class LevelManager : MonoBehaviour
             UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
             if (heartsQty <= 0)
                 UIManager.instance.GameOver();
+            else
+                UIManager.instance.InstantiateBubble(isCorrect);
         }
 
         UIManager.instance.heartsAmount = heartsQty;
@@ -751,6 +761,8 @@ public class LevelManager : MonoBehaviour
 
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
+            else
+                UIManager.instance.InstantiateBubble(isCorrect);
         }
 
         else
@@ -775,6 +787,8 @@ public class LevelManager : MonoBehaviour
             seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
+            else
+                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));
         }
 
         else
@@ -799,6 +813,8 @@ public class LevelManager : MonoBehaviour
             seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= answerAmount)
                 UIManager.instance.WinGame();
+            else
+                UIManager.instance.InstantiateBubble(isCorrect);
         }
 
         else

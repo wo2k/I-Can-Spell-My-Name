@@ -196,10 +196,10 @@ public class LevelManagerEditor : Editor {
     void InitTextures()
     {
         headerTexture = new Texture2D(Screen.width, 75);
-        levelBoxTexture = new Texture2D(Screen.width+200, 355);
-        levelSettingsTexture = new Texture2D(Screen.width+150, 390);
-        ChangeTheColor(levelSettingsTexture, CustomColors.salmon, Screen.width+150,390);
-        ChangeTheColor(levelBoxTexture, CustomColors.medium_aqua_marine, Screen.width+200, 355);
+        levelBoxTexture = new Texture2D(Screen.width+200, Screen.height+600);
+        levelSettingsTexture = new Texture2D(Screen.width+150, Screen.height + 920);
+        ChangeTheColor(levelSettingsTexture, CustomColors.salmon, Screen.width+150, Screen.height + 920);
+        ChangeTheColor(levelBoxTexture, CustomColors.medium_aqua_marine, Screen.width+200, Screen.height+600);
         ChangeTheColor(headerTexture, Color.red, Screen.width, 75);
     }
 

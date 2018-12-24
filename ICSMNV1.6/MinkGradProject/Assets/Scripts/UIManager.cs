@@ -31,16 +31,26 @@ public class UIManager : MonoBehaviour {
     public GameObject startMenu;
     public GameObject endMenu;
     public GameObject pauseMenu;
-   // public GameObject mainMenu;
+   
     public GameObject confirmSubMenu;
     public GameObject pauseButton;
     public GameObject winScreen;
 
     [Space]
 
+    [Header("Seahorse Settings")]
+    public GameObject m_Bubble;
+    public Animation bubbleAnim;
+    public Text bubbleText;
+    public string[] positiveResponse;
+    public string[] negativeResponse;
+    public Image bubbleType;
+
+    [Space]
+
     [Header("Stats")]
     public string levelName;
-    // public GameObject[] subLevels;
+    
     public enum subLevels1 { Level1A, Level1B, Level1C, Level1D, Level1E, None };
     public subLevels1 mode;
     public bool[] hasWonAlready = { false, false, false, false, false };
@@ -397,6 +407,21 @@ public class UIManager : MonoBehaviour {
             heart.transform.localPosition = new Vector3(heart.transform.localPosition.x + 112 * i+1, heart.transform.localPosition.y);
         }
         return hpHolder;
+    }
+
+    public IEnumerator InstantiateBubble(bool isCorrect)
+    {
+        m_Bubble.GetComponent<Image>().enabled = true;
+
+        if (isCorrect)
+            bubbleText.text = Random.Range(0, positiveResponse.Length).ToString();
+        else
+            bubbleText.text = Random.Range(0, negativeResponse.Length).ToString();
+        bubbleAnim.Play();
+
+        yield return new WaitForSeconds(bubbleAnim.clip.length);
+
+        m_Bubble.GetComponent<Image>().enabled = false;
     }
 
     public void DeductTime(float deduction)
