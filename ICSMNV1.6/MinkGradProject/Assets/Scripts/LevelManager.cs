@@ -20,6 +20,8 @@ public class LevelSettings
 {
     public string levelName;
     [TextArea]
+    public string levelStory;
+    [TextArea]
     public string[,] levelDescription = { { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" } }; //new string[5,4];
     public Sprite levelIcon;
     public Texture videoTexture;
@@ -45,6 +47,8 @@ public class LevelManager : MonoBehaviour
     [Space]
     [Header("Sub Level Buttons")]
     public Button level1_B, level1_C, level1_D, level1_E;
+ //   public Text level1_B_Text, level1_C_Text, level1_D_Text, level1_E_Text;
+   // public 
 
     public int levelPassed, subLevelPassed1;
 
@@ -400,7 +404,30 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public void SetIconOpacity(Button levelBtn, float alpha, bool interactable)
+    {
+        levelBtn.interactable = interactable;
 
+        foreach (Image item in levelBtn.GetComponentsInChildren<Image>())
+            item.color = new Color(item.color.r, item.color.g, item.color.b, alpha);
+
+        Color txtColor = levelBtn.GetComponentInChildren<Text>().color;
+        levelBtn.GetComponentInChildren<Text>().color = new Color(txtColor.r, txtColor.g, txtColor.b, alpha);
+    }
+
+    public void SetIconOpacity(List<Button> levelBtns, float alpha, bool interactable)
+    {
+        for (int i = 0; i < levelBtns.Count; i++)
+        {
+            levelBtns[i].interactable = interactable;
+
+            foreach (Image item in levelBtns[i].GetComponentsInChildren<Image>())
+                item.color = new Color(item.color.r, item.color.g, item.color.b, alpha);
+
+            Color txtColor = levelBtns[i].GetComponentInChildren<Text>().color;
+            levelBtns[i].GetComponentInChildren<Text>().color = new Color(txtColor.r, txtColor.g, txtColor.b, alpha);
+        }
+    }
 
     #region Set Level State
     public void CheckLevelState(bool disableLevelBtns)
@@ -424,7 +451,7 @@ public class LevelManager : MonoBehaviour
                 switch (subLevelPassed1)
                 {
                     case 1: //Lock B
-                        level1_B.interactable = true;
+                        SetIconOpacity(level1_B, 1f, true);
                         //locked = false;
 
                         if (lockLevel)
@@ -432,41 +459,44 @@ public class LevelManager : MonoBehaviour
 
                         if (disableLevelBtns)
                         {
-                            level1_C.interactable = false;
-                            level1_D.interactable = false;
-                            level1_E.interactable = false;
+                            SetIconOpacity(level1_C, 0.5f, false);
+                            SetIconOpacity(level1_D, 0.5f, false);
+                            SetIconOpacity(level1_E, 0.5f, false);
                         }
 
                         break;
                     case 2: //Lock C
-                        level1_B.interactable = true;
-                        level1_C.interactable = true;
+                        SetIconOpacity(level1_B, 1f, true);
+                        SetIconOpacity(level1_C, 1f, true);
+
                         if (lockLevel)
                             lockLevel.GetComponent<Animator>().enabled = true;
 
                         if (disableLevelBtns)
                         {
-                            level1_D.interactable = false;
-                            level1_E.interactable = false;
+                            SetIconOpacity(level1_D, 0.5f, false);
+                            SetIconOpacity(level1_E, 0.5f, false);
                         }
 
                         break;
                     case 3: //Lock D
-                        level1_B.interactable = true;
-                        level1_C.interactable = true;
-                        level1_D.interactable = true;
+                        SetIconOpacity(level1_B, 1f, true);
+                        SetIconOpacity(level1_C, 1f, true);
+                        SetIconOpacity(level1_D, 1f, true);
+
                         if (lockLevel)
                             lockLevel.GetComponent<Animator>().enabled = true;
 
                         if (disableLevelBtns)
-                            level1_E.interactable = false;
+                            SetIconOpacity(level1_E, 0.5f, false);
 
                         break;
                     case 4: //Lock E
-                        level1_B.interactable = true;
-                        level1_C.interactable = true;
-                        level1_D.interactable = true;
-                        level1_E.interactable = true;
+                        SetIconOpacity(level1_B, 1f, true);
+                        SetIconOpacity(level1_C, 1f, true);
+                        SetIconOpacity(level1_D, 1f, true);
+                        SetIconOpacity(level1_E, 1f, true);
+
                         if (lockLevel)
                             lockLevel.GetComponent<Animator>().enabled = true;
                         break;
@@ -723,15 +753,14 @@ public class LevelManager : MonoBehaviour
 
         if (isCorrect)
         {
-          //  UIManager.instance.InstantiateBubble(isCorrect);
             SoundManagement.TriggerEvent("PlayCorrect");
             correctAnswerPoints++;
-            //   seahorseAnim.SetTrigger("Wink");
-            //     seahorseAnim.SetTrigger("Idle");
+            seahorseAnim.SetTrigger("Wink");
+            seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
             else
-                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(true));
+                UIManager.instance.InstantiateBubble(true);
         }
 
         else
@@ -746,7 +775,7 @@ public class LevelManager : MonoBehaviour
             if (heartsQty <= 0)
                 UIManager.instance.GameOver();
             else
-               UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(false));
+               UIManager.instance.InstantiateBubble(false);
         }
 
         UIManager.instance.heartsAmount = heartsQty;
@@ -762,7 +791,7 @@ public class LevelManager : MonoBehaviour
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
             else
-                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));
+                UIManager.instance.InstantiateBubble(isCorrect);
         }
 
         else
@@ -783,12 +812,12 @@ public class LevelManager : MonoBehaviour
         {
             SoundManagement.TriggerEvent("PlayCorrect");
             correctAnswerPoints++;
-           // seahorseAnim.SetTrigger("Wink");
-          //  seahorseAnim.SetTrigger("Idle");
+            seahorseAnim.SetTrigger("Wink");
+            seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
             else
-              UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));
+              UIManager.instance.InstantiateBubble(isCorrect);
         }
 
         else

@@ -12,6 +12,8 @@ public class ProgessionCheck : MonoBehaviour {
     public float parentY;
     public float parentZ;
 
+    public List<Button> levelIcons = new List<Button>();
+
     void Start ()
     {
         previousLock = new GameObject("PreviousLockLocation");
@@ -30,11 +32,11 @@ public class ProgessionCheck : MonoBehaviour {
                 LevelManager.instance.level2.interactable = false;
                 break;
             case "Level1":
-                LevelManager.instance.level1_B = GameObject.Find("Level2Button").GetComponent<Button>();
-                LevelManager.instance.level1_C = GameObject.Find("Level3Button").GetComponent<Button>();
-                LevelManager.instance.level1_D = GameObject.Find("Level4Button").GetComponent<Button>();
-                LevelManager.instance.level1_E = GameObject.Find("Level5Button").GetComponent<Button>();
-                LevelManager.instance.level1_B.interactable = false; LevelManager.instance.level1_C.interactable = false; LevelManager.instance.level1_D.interactable = false; LevelManager.instance.level1_E.interactable = false;
+                LevelManager.instance.level1_B = GameObject.Find("Level2Button").GetComponent<Button>(); levelIcons.Add(LevelManager.instance.level1_B);
+                LevelManager.instance.level1_C = GameObject.Find("Level3Button").GetComponent<Button>(); levelIcons.Add(LevelManager.instance.level1_C);
+                LevelManager.instance.level1_D = GameObject.Find("Level4Button").GetComponent<Button>(); levelIcons.Add(LevelManager.instance.level1_D);
+                LevelManager.instance.level1_E = GameObject.Find("Level5Button").GetComponent<Button>(); levelIcons.Add(LevelManager.instance.level1_E);
+                LevelManager.instance.SetIconOpacity(levelIcons, 0.5f, false);
 
                 switch (LevelManager.instance.subLevelPassed1)
                 {
@@ -266,8 +268,10 @@ public class ProgessionCheck : MonoBehaviour {
       
     }
 
+ 
+
     // Update is called once per frame
-	void Update ()
+    void Update ()
     {
         
     }

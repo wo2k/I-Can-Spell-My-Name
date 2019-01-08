@@ -4,6 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public static class GameObjectExtensions
+{
+    /// <summary>
+    /// Checks if a GameObject has been destroyed.
+    /// </summary>
+    /// <param name="gameObject">GameObject reference to check for destructedness</param>
+    /// <returns>If the game object has been marked as destroyed by UnityEngine</returns>
+    public static bool IsDestroyed(this GameObject gameObject)
+    {
+        // UnityEngine overloads the == opeator for the GameObject type
+        // and returns null when the object has been destroyed, but 
+        // actually the object is still there but has not been cleaned up yet
+        // if we test both we can determine if the object has been destroyed.
+        return gameObject == null && !ReferenceEquals(gameObject, null);
+    }
+}
+
 public class UIManager : MonoBehaviour {
 
     [Header("HUD")]
@@ -39,6 +56,7 @@ public class UIManager : MonoBehaviour {
     [Space]
 
     [Header("Seahorse Settings")]
+    [HideInInspector]
     public GameObject m_Bubble;
     public GameObject m_SeaHorse;
     public Transform bubblePos;
@@ -326,10 +344,7 @@ public class UIManager : MonoBehaviour {
                     heartsAmount = 3;
 
                 for (int i = 0; i < bubbleQueue.Count; i++)
-                {
-                    bubbleQueue[i].GetComponent<Animation>().Stop();
                     Destroy(bubbleQueue[i]);
-                }
                 bubbleQueue.Clear();
 
                 LevelManager.instance.correctAnswerPoints = 0;
@@ -420,22 +435,18 @@ public class UIManager : MonoBehaviour {
         return hpHolder;
     }
 
-    public IEnumerator InstantiateBubble(bool isCorrect)
+    public void InstantiateBubble(bool isCorrect)
     {
         //Checks to see if there are any existing speech bubbles in scene, if so remove them before creating a new one
         for (int i = 0; i < bubbleQueue.Count; i++)
-        {
-            bubbleQueue[i].GetComponent<Animation>().Stop();
             Destroy(bubbleQueue[i]);
-        }
         bubbleQueue.Clear();
         //Checks to see if there are any existing speech bubbles in scene, if so remove them before creating a new one
-        
 
+        m_Bubble = Resources.Load("Prefabs/SpeechBubble") as GameObject;
         GameObject speechBubble =  Instantiate(m_Bubble, bubblePos.position, bubblePos.rotation, m_SeaHorse.transform);
         bubbleQueue.Add(speechBubble);
    
-        bubbleAnim = speechBubble.GetComponent<Animation>();
         bubbleText = speechBubble.GetComponentInChildren<Text>();
 
         //If answer is correct, select a random positive response
@@ -444,31 +455,6 @@ public class UIManager : MonoBehaviour {
         else
             bubbleText.text = negativeResponse[Random.Range(0, negativeResponse.Length)];
         //If answer is false, select a random negative response
-
-        bubbleAnim.Play();
-
-        if (!speechBubble.activeInHierarchy)
-            yield return null;
-    
-        yield return new WaitForSeconds(2.5f);
-
-        if (!speechBubble.activeInHierarchy)
-            yield return null;
-
-        //Reverse animation
-        bubbleAnim["Sea-Horse-Bubble"].time = bubbleAnim["Sea-Horse-Bubble"].length;
-        bubbleAnim["Sea-Horse-Bubble"].speed = -1;   
-        bubbleAnim.Play();
-        //Reverse animation
-
-        yield return new WaitForSeconds(2.5f);
-
-        if (!speechBubble.activeInHierarchy)
-            yield return null;
-
-        //Deletes current instance of speech bubble after completing reverse animation
-        Destroy(speechBubble);
-        bubbleQueue.Clear();
     }
 
     public void DeductTime(float deduction)
