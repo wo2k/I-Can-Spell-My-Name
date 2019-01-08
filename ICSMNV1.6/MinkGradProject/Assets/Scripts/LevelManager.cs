@@ -726,12 +726,12 @@ public class LevelManager : MonoBehaviour
           //  UIManager.instance.InstantiateBubble(isCorrect);
             SoundManagement.TriggerEvent("PlayCorrect");
             correctAnswerPoints++;
-            seahorseAnim.SetTrigger("Wink");
-            seahorseAnim.SetTrigger("Idle");
+            //   seahorseAnim.SetTrigger("Wink");
+            //     seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
             else
-                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));//.InstantiateBubble(isCorrect);
+                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(true));
         }
 
         else
@@ -746,7 +746,7 @@ public class LevelManager : MonoBehaviour
             if (heartsQty <= 0)
                 UIManager.instance.GameOver();
             else
-                UIManager.instance.InstantiateBubble(isCorrect);
+               UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(false));
         }
 
         UIManager.instance.heartsAmount = heartsQty;
@@ -762,7 +762,7 @@ public class LevelManager : MonoBehaviour
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
             else
-                UIManager.instance.InstantiateBubble(isCorrect);
+                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));
         }
 
         else
@@ -783,12 +783,12 @@ public class LevelManager : MonoBehaviour
         {
             SoundManagement.TriggerEvent("PlayCorrect");
             correctAnswerPoints++;
-            seahorseAnim.SetTrigger("Wink");
-            seahorseAnim.SetTrigger("Idle");
+           // seahorseAnim.SetTrigger("Wink");
+          //  seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
             else
-                UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));
+              UIManager.instance.StartCoroutine(UIManager.instance.InstantiateBubble(isCorrect));
         }
 
         else

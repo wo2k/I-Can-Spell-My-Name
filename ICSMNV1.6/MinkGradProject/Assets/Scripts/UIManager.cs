@@ -40,11 +40,15 @@ public class UIManager : MonoBehaviour {
 
     [Header("Seahorse Settings")]
     public GameObject m_Bubble;
+    public GameObject m_SeaHorse;
+    public Transform bubblePos;
     public Animation bubbleAnim;
+    [HideInInspector]
     public Text bubbleText;
     public string[] positiveResponse;
     public string[] negativeResponse;
     public Image bubbleType;
+    public List<GameObject> bubbleQueue;
 
     [Space]
 
@@ -321,6 +325,13 @@ public class UIManager : MonoBehaviour {
                 if (heartsAmount != 3)
                     heartsAmount = 3;
 
+                for (int i = 0; i < bubbleQueue.Count; i++)
+                {
+                    bubbleQueue[i].GetComponent<Animation>().Stop();
+                    Destroy(bubbleQueue[i]);
+                }
+                bubbleQueue.Clear();
+
                 LevelManager.instance.correctAnswerPoints = 0;
                 timer = 60.0f;
                 minutes = 1;
@@ -411,17 +422,53 @@ public class UIManager : MonoBehaviour {
 
     public IEnumerator InstantiateBubble(bool isCorrect)
     {
-        m_Bubble.GetComponent<Image>().enabled = true;
+        //Checks to see if there are any existing speech bubbles in scene, if so remove them before creating a new one
+        for (int i = 0; i < bubbleQueue.Count; i++)
+        {
+            bubbleQueue[i].GetComponent<Animation>().Stop();
+            Destroy(bubbleQueue[i]);
+        }
+        bubbleQueue.Clear();
+        //Checks to see if there are any existing speech bubbles in scene, if so remove them before creating a new one
+        
 
+        GameObject speechBubble =  Instantiate(m_Bubble, bubblePos.position, bubblePos.rotation, m_SeaHorse.transform);
+        bubbleQueue.Add(speechBubble);
+   
+        bubbleAnim = speechBubble.GetComponent<Animation>();
+        bubbleText = speechBubble.GetComponentInChildren<Text>();
+
+        //If answer is correct, select a random positive response
         if (isCorrect)
-            bubbleText.text = Random.Range(0, positiveResponse.Length).ToString();
+            bubbleText.text = positiveResponse[Random.Range(0, positiveResponse.Length)];
         else
-            bubbleText.text = Random.Range(0, negativeResponse.Length).ToString();
+            bubbleText.text = negativeResponse[Random.Range(0, negativeResponse.Length)];
+        //If answer is false, select a random negative response
+
         bubbleAnim.Play();
 
-        yield return new WaitForSeconds(bubbleAnim.clip.length);
+        if (!speechBubble.activeInHierarchy)
+            yield return null;
+    
+        yield return new WaitForSeconds(2.5f);
 
-        m_Bubble.GetComponent<Image>().enabled = false;
+        if (!speechBubble.activeInHierarchy)
+            yield return null;
+
+        //Reverse animation
+        bubbleAnim["Sea-Horse-Bubble"].time = bubbleAnim["Sea-Horse-Bubble"].length;
+        bubbleAnim["Sea-Horse-Bubble"].speed = -1;   
+        bubbleAnim.Play();
+        //Reverse animation
+
+        yield return new WaitForSeconds(2.5f);
+
+        if (!speechBubble.activeInHierarchy)
+            yield return null;
+
+        //Deletes current instance of speech bubble after completing reverse animation
+        Destroy(speechBubble);
+        bubbleQueue.Clear();
     }
 
     public void DeductTime(float deduction)

@@ -8,6 +8,8 @@ public class DestroyItem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        if(FindObjectOfType<Level1E>())
         level1E = FindObjectOfType<Level1E>();	
 	}
 	
@@ -20,5 +22,10 @@ public class DestroyItem : MonoBehaviour {
     {
         level1E.boatsInWave.Remove(gameObject.transform.parent.gameObject);
         Destroy(gameObject.transform.parent.gameObject);
+    }
+
+    public void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 }
