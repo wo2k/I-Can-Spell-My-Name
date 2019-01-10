@@ -20,7 +20,10 @@ public class LevelSettings
 {
     public string levelName;
     [TextArea]
-    public string levelStory;
+    public string levelIntro;
+    [TextArea]
+    public string levelOutro;
+
     [TextArea]
     public string[,] levelDescription = { { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" } }; //new string[5,4];
     public Sprite levelIcon;

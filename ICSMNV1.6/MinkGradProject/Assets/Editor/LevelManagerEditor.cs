@@ -104,7 +104,8 @@ public class LevelManagerEditor : Editor {
     private SerializedProperty[] level1Icon = new SerializedProperty[5];
     private SerializedProperty[] level1VideoTexture = new SerializedProperty[5];
     private SerializedProperty[] level1VideoFile = new SerializedProperty[5];
-    private SerializedProperty[] level1Story = new SerializedProperty[5];
+    private SerializedProperty[] level1Intro = new SerializedProperty[5];
+    private SerializedProperty[] level1Outro = new SerializedProperty[5];
     private SerializedProperty level1Description2;
     private List<SerializedProperty> levelDescriptionCapture = new List<SerializedProperty>();
     private List<SerializedProperty> levelVideoCapture = new List<SerializedProperty>();
@@ -170,7 +171,8 @@ public class LevelManagerEditor : Editor {
             }
             
             level1Name[i] = AssignRelativeProperty(level1Capture, "levelName");
-            level1Story[i] = AssignRelativeProperty(level1Capture, "levelStory");
+            level1Intro[i] = AssignRelativeProperty(level1Capture, "levelIntro");
+            level1Outro[i] = AssignRelativeProperty(level1Capture, "levelOutro");
             level1Icon[i] = AssignRelativeProperty(level1Capture, "levelIcon");
             level1VideoTexture[i] = AssignRelativeProperty(level1Capture, "videoTexture");
 
@@ -378,10 +380,15 @@ public class LevelManagerEditor : Editor {
             EditorGUILayout.LabelField("Level Name", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
             level1Name[i].stringValue = GUILayout.TextField(level1Name[i].stringValue, GUILayout.Width(200), GUILayout.Height(15));
 
-            EditorGUILayout.LabelField(levelName + " Story", Label(EditorStyles.miniLabel, Color.black, 11, FontStyle.BoldAndItalic));
-            level1Story[i].stringValue = GUILayout.TextArea(level1Story[i].stringValue, GUILayout.Width(300), GUILayout.Height(50));
+            EditorGUILayout.LabelField(levelName + " Story", Label(EditorStyles.label, CustomColors.dark_slate_gray, 13, FontStyle.BoldAndItalic));
 
-            EditorGUILayout.LabelField("Level Description", Label(EditorStyles.miniLabel, Color.black, 11, FontStyle.BoldAndItalic));
+            EditorGUILayout.LabelField("Intro", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+            level1Intro[i].stringValue = GUILayout.TextArea(level1Intro[i].stringValue, GUILayout.Width(300), GUILayout.Height(50));
+
+            EditorGUILayout.LabelField("Outro", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+            level1Outro[i].stringValue = GUILayout.TextArea(level1Outro[i].stringValue, GUILayout.Width(300), GUILayout.Height(50));
+
+            EditorGUILayout.LabelField("Level Description", Label(EditorStyles.label, CustomColors.dark_slate_gray, 13, FontStyle.BoldAndItalic));
             for (int mode = 0; mode < 4; mode++)
             {
                 switch (mode)

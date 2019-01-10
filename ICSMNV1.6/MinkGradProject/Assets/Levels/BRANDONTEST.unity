@@ -12719,6 +12719,60 @@ Prefab:
         friends are doing flips! Let's go play with them. Maybe they can help you
         recognize your name even more.
       objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.levelIntro
+      value: I will teach you how to spell your name so you can defeat the Big Bad
+        Pirate! But before you can spell it, you have to know what your name looks
+        like.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.levelIntro
+      value: This game is just like the last one. All you have to do is recognize
+        your name again. With the help of our Dolphin friends you'll be able to recognize
+        your name in no time. Oh and here they are now! Good luck!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.levelIntro
+      value: It's starting to get dark outside. Seems like these boats are sailing
+        back home. Let's take this opportunity to work on how fast you can recognize
+        your name with another game. Win this and I'll give you a new reward.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.levelIntro
+      value: I'm glad you took the time to rest. It's nice and sunny out again and
+        we just made it just in time for the party. Wow did you see that!? Our fishy
+        friends are doing flips! Let's go play with them. Maybe they can help you
+        recognize your name even more.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1A.levelOutro
+      value: Yay! You can recognize your name now! Let's play another game. I'll go
+        call the Dolphins!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1B.levelOutro
+      value: Yay! We got it! We'll be able to beat the Big Bad Pirate in no time if
+        we keep this up. Bye! Thanks Dolphin friends!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.levelOutro
+      value: You did it! You're really good at recognizing your name! Let's maybe
+        get some time to rest now. Oh! I almost forgot. Here ya go!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1D.levelOutro
+      value: Oh no silly me! I think we swam to far in the ocean. These aren't our
+        fish friends we met from the beginning, we've been fish bait! Look closely,
+        these are pirate fish
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}
   m_IsPrefabParent: 0
