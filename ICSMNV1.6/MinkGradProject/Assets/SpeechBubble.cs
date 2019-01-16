@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class SpeechBubble : MonoBehaviour {
 
-    Animation bubbleAnim;
+    public Animation bubbleAnim;
+    public bool turnPage;
+    public string animationName;
+    public float animationTime;
+    public float animationTimeOut;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         StartCoroutine(InstantiateBubble());
 	}
 	
@@ -18,35 +22,47 @@ public class SpeechBubble : MonoBehaviour {
 
     public IEnumerator InstantiateBubble()
     {
-
+        
         bubbleAnim = GetComponent<Animation>();
+        bubbleAnim.Rewind();
 
         bubbleAnim.Play();
 
-        // if (!speechBubble.activeSelf)
+        foreach (AnimationState state in bubbleAnim)
+            animationName = state.name;
+
+      
         if (gameObject == null)
         {
             yield return new WaitUntil(() => GameObjectExtensions.IsDestroyed(gameObject));
             yield return null;
         }
-        yield return new WaitForSeconds(2.5f);
 
-        // if (!speechBubble.activeSelf)
+        if (UIManager.instance.levelName == "Level1")
+            yield return new WaitUntil(() => turnPage);
+        else
+            yield return new WaitForSeconds(animationTime);
+
+        
         if (gameObject == null)
         {
             yield return new WaitUntil(() => GameObjectExtensions.IsDestroyed(gameObject));
             yield return null;
         }
 
+        if (UIManager.instance.levelName == "Level1")
+            yield return new WaitUntil(() => turnPage);
+
         //Reverse animation
-        bubbleAnim["Sea-Horse-Bubble"].time = bubbleAnim["Sea-Horse-Bubble"].length;
-        bubbleAnim["Sea-Horse-Bubble"].speed = -1;
+        bubbleAnim[animationName].time = bubbleAnim[animationName].length;
+        bubbleAnim[animationName].speed = -1;
         bubbleAnim.Play();
         //Reverse animation
 
-        yield return new WaitForSeconds(2.5f);
+     
+        yield return new WaitForSeconds(animationTimeOut);
 
-        //if (!speechBubble.activeSelf)
+      
         if (gameObject == null)
         {
             yield return new WaitUntil(() => GameObjectExtensions.IsDestroyed(gameObject));
@@ -54,7 +70,18 @@ public class SpeechBubble : MonoBehaviour {
         }
 
         //Deletes current instance of speech bubble after completing reverse animation
-        Destroy(gameObject);
+        if (UIManager.instance.levelName == "Level1")
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+            FindObjectOfType<ProgessionCheck>().turnPage = false;
+            if (gameObject == null)
+            {
+                yield return new WaitUntil(() => GameObjectExtensions.IsDestroyed(gameObject));
+                yield return null;
+            }
+        }
+        else
+            Destroy(gameObject);
        // bubbleQueue.Clear();
     }
 }

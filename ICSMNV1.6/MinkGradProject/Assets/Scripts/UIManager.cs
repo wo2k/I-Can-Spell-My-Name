@@ -435,6 +435,10 @@ public class UIManager : MonoBehaviour {
         return hpHolder;
     }
 
+    /// <summary>
+    /// Creates a speech bubble that gives positive and negative feedback to the player when choosing a answer in game.
+    /// </summary>
+    /// <param name="isCorrect"> Is answer of choice chosen correct?</param>
     public void InstantiateBubble(bool isCorrect)
     {
         //Checks to see if there are any existing speech bubbles in scene, if so remove them before creating a new one
@@ -456,6 +460,7 @@ public class UIManager : MonoBehaviour {
             bubbleText.text = negativeResponse[Random.Range(0, negativeResponse.Length)];
         //If answer is false, select a random negative response
     }
+   
 
     public void DeductTime(float deduction)
     {

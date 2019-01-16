@@ -7,12 +7,19 @@ public class ProgessionCheck : MonoBehaviour {
 
     public Transform previousParent;
     public Transform previousParentMode;
+    public Transform bubblePos;
+    public GameObject m_Seahorse;
     public GameObject previousLock;
     public float parentX;
     public float parentY;
     public float parentZ;
 
     public List<Button> levelIcons = new List<Button>();
+
+    public bool turnPage;
+    public GameObject uiOverlay;
+    public GameObject floatingBubbles;
+    public List<GameObject> bubbleQueue;
 
     void Start ()
     {
@@ -44,6 +51,7 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1B").gameObject;
                         LevelManager.instance.lockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.levelParent.transform);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
+                        StartCoroutine("InstantiateStory");//InstantiateBubble(LevelManager.instance.level1A.levelIntro);
                         break;
 
                     case 1:// Lock C
@@ -268,7 +276,61 @@ public class ProgessionCheck : MonoBehaviour {
       
     }
 
- 
+    /// <summary>
+    /// Creates a speech bubble that is for the story
+    /// </summary>
+    /// <param name="storyTxt"></param>
+    public GameObject InstantiateBubble(string storyTxt)
+    {
+        for (int i = 0; i < bubbleQueue.Count; i++)
+        {
+            bubbleQueue[i].GetComponentInChildren<Animation>().Stop();
+            bubbleQueue[i].GetComponentInChildren<Animation>().Rewind();
+            Destroy(bubbleQueue[i]);
+        }
+        bubbleQueue.Clear();
+        turnPage = false;
+        GameObject speechBubble = Instantiate(Resources.Load("Prefabs/StoryBubble") as GameObject, bubblePos.position, bubblePos.rotation, m_Seahorse.transform);
+        bubbleQueue.Add(speechBubble);
+    
+        speechBubble.GetComponentInChildren<Text>().text = storyTxt;
+        speechBubble.GetComponentInChildren<SpeechBubble>().animationTime = 5;
+        return speechBubble;
+    }
+
+    IEnumerator InstantiateStory()
+    {
+        GameObject speechBubble = InstantiateBubble(LevelManager.instance.level1A.levelIntro);
+        yield return new WaitUntil(() => turnPage);
+        speechBubble.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
+        yield return new WaitForSeconds(2);
+
+        GameObject speechBubble2 = InstantiateBubble(LevelManager.instance.level1A.levelOutro);
+        speechBubble2.name = "Hello World";
+        yield return new WaitUntil(() => turnPage);
+        speechBubble2.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
+        yield return new WaitForSeconds(2);
+
+        floatingBubbles.SetActive(true);
+        m_Seahorse.GetComponent<Animation>().Play();
+        yield return new WaitForSeconds(m_Seahorse.GetComponent<Animation>().clip.length);
+
+        for (float i = 0; i < uiOverlay.GetComponent<Image>().color.a; i += 0.01f)
+        {
+            uiOverlay.GetComponent<Image>().color = new Color(0, 0, 0, uiOverlay.GetComponent<Image>().color.a - i);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        uiOverlay.SetActive(false);
+        floatingBubbles.SetActive(false);
+        m_Seahorse.SetActive(false);
+    }
+
+    public void NextPage()
+    {
+        turnPage = true;
+       // turnPage = false;
+    }
 
     // Update is called once per frame
     void Update ()

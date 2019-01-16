@@ -89,6 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7a5c3ea8b43f94e8645aa9b03f580f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleAnim: {fileID: 0}
+  turnPage: 0
+  animationName: 
+  animationTime: 2.5
+  animationTimeOut: 2.5
 --- !u!114 &114394164740158162
 MonoBehaviour:
   m_ObjectHideFlags: 1
