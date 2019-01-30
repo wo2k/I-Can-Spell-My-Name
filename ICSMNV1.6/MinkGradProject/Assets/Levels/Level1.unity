@@ -791,17 +791,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1636870159309256, guid: d446e82b41167aa4b89179dedd3c684d, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224280226576787882, guid: d446e82b41167aa4b89179dedd3c684d,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 146
+      value: 145.17
       objectReference: {fileID: 0}
     - target: {fileID: 224280226576787882, guid: d446e82b41167aa4b89179dedd3c684d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -47.1
+      value: -74.83
       objectReference: {fileID: 0}
     - target: {fileID: 224280226576787882, guid: d446e82b41167aa4b89179dedd3c684d,
         type: 2}
@@ -1064,7 +1064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &419565342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2858,6 +2858,7 @@ MonoBehaviour:
   turnPage: 0
   uiOverlay: {fileID: 419565341}
   floatingBubbles: {fileID: 392501505}
+  bubbleQueue: []
 --- !u!114 &1534763249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3752,6 +3753,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1719305954909436, guid: d0eff6bb9b8a7484f88df20bee259865, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224688863889773166, guid: d0eff6bb9b8a7484f88df20bee259865,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224688863889773166, guid: d0eff6bb9b8a7484f88df20bee259865,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -25,7 +25,7 @@ public class LevelSettings
     public string levelOutro;
 
     [TextArea]
-    public string[,] levelDescription = { { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" } }; //new string[5,4];
+    public string[,] levelDescription = { { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" } };
     public Sprite levelIcon;
     public Texture videoTexture;
     public VideoClip videoFile;
@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
     public Button level3;
     [Space]
     [Header("Sub Level Buttons")]
-    public Button level1_B, level1_C, level1_D, level1_E;
+    public Button level1_A, level1_B, level1_C, level1_D, level1_E;
  //   public Text level1_B_Text, level1_C_Text, level1_D_Text, level1_E_Text;
    // public 
 
@@ -60,6 +60,7 @@ public class LevelManager : MonoBehaviour
 
     public bool locked = true;
     public bool hasLockedBefore = false;
+    public bool hasShownStoryAlready = false;
 
     public GameObject toggleVibration;
     public static LevelManager instance;
@@ -101,6 +102,9 @@ public class LevelManager : MonoBehaviour
     //Type of difficulty of Level
     public enum Difficulty { Easy, Normal, Hard, Genius };
     public Difficulty m_Difficulty;
+    //Current Level Player needs to beat
+    public enum LevelToBeat { Level1A, Level1B, Level1C, Level1D, Level1E, Level2A, Level2B, Level2C, Level2D, Level2E, Level2F, Level3A, None };
+    public LevelToBeat m_LevelToBeat;
 
     string alphabet = "abcdefghijklmnopqrstuvwxyz";
     
@@ -123,6 +127,7 @@ public class LevelManager : MonoBehaviour
             UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready " + i));
 
         hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
+        hasShownStoryAlready = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasShownStoryAlready"));
 
         for (int i = 0; i < 5; i++)
         {
@@ -239,6 +244,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
             if (PlayerPrefs.HasKey("HasWonAlready " + i)) PlayerPrefs.SetInt("HasWonAlready " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
         if (PlayerPrefs.HasKey("HasLockedBefore")) PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
+        if (PlayerPrefs.HasKey("HasShownStoryAlready")) PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(hasShownStoryAlready));
 
         PlayerPrefs.Save();
     }
@@ -251,7 +257,8 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
             UIManager.instance.hasWonAlready[i] = false;            
 
-        hasLockedBefore = false; 
+        hasLockedBefore = false;
+        hasShownStoryAlready = false;
 
         PlayerPrefs.SetString("firstName", "Add Player");
         PlayerPrefs.SetString("secondName", "Add Player");
@@ -644,6 +651,7 @@ public class LevelManager : MonoBehaviour
             PlayerPrefs.SetInt("HasWonAlready " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
         }
         hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
+        hasShownStoryAlready = false; PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(hasShownStoryAlready));
 
         UIManager.instance.heartsAmount = 3;
 

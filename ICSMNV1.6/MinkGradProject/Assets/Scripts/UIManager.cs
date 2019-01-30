@@ -223,6 +223,8 @@ public class UIManager : MonoBehaviour {
                                     PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
                                     PlayerPrefs.SetInt("HasWonAlready " + i, BoolToInt(hasWonAlready[hasWonIndex]));
                                     LevelManager.instance.hasLockedBefore = false;
+                                    LevelManager.instance.hasShownStoryAlready = false;
+                                    PlayerPrefs.SetInt("HasShownStoryAlready", BoolToInt(LevelManager.instance.hasShownStoryAlready));
                                 }
                                 break;
                             case 3:

@@ -77,6 +77,12 @@ public class LockState : MonoBehaviour {
 
                     LevelManager.instance.CheckLevelState(true);
                     LevelManager.instance.locked = true;
+
+                    if (!LevelManager.instance.hasShownStoryAlready)
+                        FindObjectOfType<ProgessionCheck>().StartCoroutine("InstantiateStory");
+                    else
+                        FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false);
+
                 }
                 if (UIManager.instance.levelName == "LevelDescription")
                 {

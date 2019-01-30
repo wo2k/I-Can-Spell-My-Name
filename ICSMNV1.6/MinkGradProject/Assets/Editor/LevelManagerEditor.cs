@@ -226,6 +226,7 @@ public class LevelManagerEditor : Editor {
         EditorGUILayout.LabelField("Console: " + levelManager.m_Console.ToString());
         EditorGUILayout.LabelField("Level Type: " + levelManager.m_Mode.ToString());
         EditorGUILayout.LabelField("Level Playing: " + UIManager.mode.ToString());
+        EditorGUILayout.LabelField("Level to Beat: " + levelManager.m_LevelToBeat.ToString());
         EditorGUILayout.LabelField("Level Difficulty: " + levelManager.m_Difficulty.ToString());
 
         EditorGUILayout.EndVertical();

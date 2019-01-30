@@ -27,7 +27,8 @@ public class ProgessionCheck : MonoBehaviour {
         previousParent = previousLock.transform;
         previousParentMode = previousLock.transform;
         GetParentID();
-      
+        LevelManager.instance.m_LevelToBeat = (LevelManager.LevelToBeat)LevelManager.instance.subLevelPassed1;
+
         switch (UIManager.instance.levelName)
         {
             case "MainMenu":
@@ -39,6 +40,7 @@ public class ProgessionCheck : MonoBehaviour {
                 LevelManager.instance.level2.interactable = false;
                 break;
             case "Level1":
+                LevelManager.instance.level1_A = GameObject.Find("Level1Button").GetComponent<Button>();
                 LevelManager.instance.level1_B = GameObject.Find("Level2Button").GetComponent<Button>(); levelIcons.Add(LevelManager.instance.level1_B);
                 LevelManager.instance.level1_C = GameObject.Find("Level3Button").GetComponent<Button>(); levelIcons.Add(LevelManager.instance.level1_C);
                 LevelManager.instance.level1_D = GameObject.Find("Level4Button").GetComponent<Button>(); levelIcons.Add(LevelManager.instance.level1_D);
@@ -51,7 +53,13 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1B").gameObject;
                         LevelManager.instance.lockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.levelParent.transform);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
-                        StartCoroutine("InstantiateStory");//InstantiateBubble(LevelManager.instance.level1A.levelIntro);
+                        if (!LevelManager.instance.hasShownStoryAlready)
+                        {
+                            ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+                            StartCoroutine("InstantiateStory");
+                        }
+                        else
+                            ToggleStoryAssets(false);
                         break;
 
                     case 1:// Lock C
@@ -69,6 +77,7 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1C").gameObject;
                         LevelManager.instance.CheckLevelState(true);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
+                        ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
                         break;
 
                     case 2:// Lock D
@@ -86,6 +95,7 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1D").gameObject;
                         LevelManager.instance.CheckLevelState(true);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
+                        ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
                         break;
 
                     case 3:// Lock E
@@ -103,6 +113,7 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1E").gameObject;
                         LevelManager.instance.CheckLevelState(true);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
+                        ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
                         break;
                     case 4:// All Unlocked!                      
 
@@ -300,16 +311,55 @@ public class ProgessionCheck : MonoBehaviour {
 
     IEnumerator InstantiateStory()
     {
-        GameObject speechBubble = InstantiateBubble(LevelManager.instance.level1A.levelIntro);
-        yield return new WaitUntil(() => turnPage);
-        speechBubble.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
-        yield return new WaitForSeconds(2);
+        
 
-        GameObject speechBubble2 = InstantiateBubble(LevelManager.instance.level1A.levelOutro);
-        speechBubble2.name = "Hello World";
-        yield return new WaitUntil(() => turnPage);
-        speechBubble2.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
-        yield return new WaitForSeconds(2);
+        var sentences = new List<string>();
+        int position = 0;
+        int start = 0;
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(LevelManager.LevelToBeat)).Length; i++)
+        {
+            if (LevelManager.instance.m_LevelToBeat == (LevelManager.LevelToBeat)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        break;
+                    case 1:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        break;
+                    case 2:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        break;
+                    case 3:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        break;
+                    case 4:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        break;
+                }
+            }
+        }
+
+        do
+        {
+            position = LevelManager.instance.level1Capture.levelIntro.IndexOf('.', start);
+            if (position >= 0)
+            {
+                sentences.Add(LevelManager.instance.level1Capture.levelIntro.Substring(start, position - start + 1).Trim());
+                start = position + 1;
+            }
+        }
+        while (position > 0);
+
+        foreach(string sentence in sentences)
+        {
+            GameObject speechBubble = InstantiateBubble(sentence);
+            yield return new WaitUntil(() => turnPage);
+            speechBubble.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
+            yield return new WaitForSeconds(2);
+        }
 
         floatingBubbles.SetActive(true);
         m_Seahorse.GetComponent<Animation>().Play();
@@ -324,12 +374,60 @@ public class ProgessionCheck : MonoBehaviour {
         uiOverlay.SetActive(false);
         floatingBubbles.SetActive(false);
         m_Seahorse.SetActive(false);
+        LevelManager.instance.hasShownStoryAlready = true;
+        PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(LevelManager.instance.hasShownStoryAlready));
     }
 
     public void NextPage()
     {
         turnPage = true;
        // turnPage = false;
+    }
+
+    public void ToggleStoryAssets(bool show)
+    {
+        m_Seahorse.SetActive(show);
+        uiOverlay.SetActive(show);
+    }
+    /// <summary>
+    /// Toggle Story Assets on screen
+    /// </summary>
+    /// <param name="show"></param>
+    /// <param name="childIndex"> Set UI Overlay child index to set focus on current level </param>
+    public void ToggleStoryAssets(bool show, int childIndex)
+    {
+        m_Seahorse.SetActive(show);
+        uiOverlay.SetActive(show);
+
+        switch(LevelManager.instance.m_LevelToBeat)
+        {
+            case LevelManager.LevelToBeat.Level1A:
+                uiOverlay.transform.SetSiblingIndex(childIndex);
+                break;
+            case LevelManager.LevelToBeat.Level1B:
+                uiOverlay.transform.SetSiblingIndex(childIndex);
+                LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 1);
+                break;
+            case LevelManager.LevelToBeat.Level1C:
+                uiOverlay.transform.SetSiblingIndex(childIndex);
+                LevelManager.instance.level1_B.transform.SetSiblingIndex(childIndex - 1);
+                LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 2);
+                break;
+            case LevelManager.LevelToBeat.Level1D:
+                uiOverlay.transform.SetSiblingIndex(childIndex);
+                LevelManager.instance.level1_C.transform.SetSiblingIndex(childIndex - 1);
+                LevelManager.instance.level1_B.transform.SetSiblingIndex(childIndex - 2);
+                LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 3);
+                break;
+            case LevelManager.LevelToBeat.Level1E:
+                uiOverlay.transform.SetSiblingIndex(childIndex);
+                LevelManager.instance.level1_D.transform.SetSiblingIndex(childIndex - 1);
+                LevelManager.instance.level1_C.transform.SetSiblingIndex(childIndex - 2);
+                LevelManager.instance.level1_B.transform.SetSiblingIndex(childIndex - 3);
+                LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 4);
+                break;
+        }
+        
     }
 
     // Update is called once per frame
