@@ -83,6 +83,11 @@ public class LockState : MonoBehaviour {
                     else
                         FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false);
 
+                 //   float outlineSize;
+                   // outlineSize = LevelManager.instance.level1_B.GetComponent<Image>().material.GetFloat("Outline Size");
+                    //outlineSize = 1;
+                    //LevelManager.instance.level1_B.GetComponent<Image>().material.GetFloat("Outline Size") = outlineSize;
+
                 }
                 if (UIManager.instance.levelName == "LevelDescription")
                 {

@@ -77,7 +77,12 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1C").gameObject;
                         LevelManager.instance.CheckLevelState(true);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
-                        ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+
+                        if (!LevelManager.instance.hasShownStoryAlready)
+                            ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+                        else
+                            ToggleStoryAssets(false);
+
                         break;
 
                     case 2:// Lock D
@@ -95,7 +100,11 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1D").gameObject;
                         LevelManager.instance.CheckLevelState(true);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
-                        ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+
+                        if (!LevelManager.instance.hasShownStoryAlready)
+                            ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+                        else
+                            ToggleStoryAssets(false);
                         break;
 
                     case 3:// Lock E
@@ -113,8 +122,13 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.levelParent = GameObject.FindGameObjectWithTag("Level1E").gameObject;
                         LevelManager.instance.CheckLevelState(true);
                         SetParentID(LevelManager.instance.levelParent.transform.position.x, LevelManager.instance.levelParent.transform.position.y, LevelManager.instance.levelParent.transform.position.z);
-                        ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+
+                        if (!LevelManager.instance.hasShownStoryAlready)
+                            ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+                        else
+                            ToggleStoryAssets(false);
                         break;
+
                     case 4:// All Unlocked!                      
 
                         if (!LevelManager.instance.hasLockedBefore)
@@ -325,18 +339,28 @@ public class ProgessionCheck : MonoBehaviour {
                 {
                     case 0:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        LevelManager.instance.level1_A.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                        LevelManager.instance.level1_A.gameObject.AddComponent<GlowSprite>();
                         break;
                     case 1:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        LevelManager.instance.level1_B.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                        LevelManager.instance.level1_B.gameObject.AddComponent<GlowSprite>();
                         break;
                     case 2:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        LevelManager.instance.level1_C.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                        LevelManager.instance.level1_C.gameObject.AddComponent<GlowSprite>();
                         break;
                     case 3:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        LevelManager.instance.level1_D.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                        LevelManager.instance.level1_D.gameObject.AddComponent<GlowSprite>();
                         break;
                     case 4:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        LevelManager.instance.level1_E.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                        LevelManager.instance.level1_E.gameObject.AddComponent<GlowSprite>();
                         break;
                 }
             }
@@ -388,6 +412,34 @@ public class ProgessionCheck : MonoBehaviour {
     {
         m_Seahorse.SetActive(show);
         uiOverlay.SetActive(show);
+
+        switch (LevelManager.instance.m_LevelToBeat)
+        {
+            case LevelManager.LevelToBeat.Level1A:
+                LevelManager.instance.level1_A.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                LevelManager.instance.level1_A.gameObject.AddComponent<GlowSprite>();
+                break;
+
+            case LevelManager.LevelToBeat.Level1B:
+                LevelManager.instance.level1_B.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                LevelManager.instance.level1_B.gameObject.AddComponent<GlowSprite>();
+                break;
+
+            case LevelManager.LevelToBeat.Level1C:
+                LevelManager.instance.level1_C.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                LevelManager.instance.level1_C.gameObject.AddComponent<GlowSprite>();
+                break;
+
+            case LevelManager.LevelToBeat.Level1D:
+                LevelManager.instance.level1_D.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                LevelManager.instance.level1_D.gameObject.AddComponent<GlowSprite>();
+                break;
+
+            case LevelManager.LevelToBeat.Level1E:
+                LevelManager.instance.level1_E.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                LevelManager.instance.level1_E.gameObject.AddComponent<GlowSprite>();
+                break;
+        }
     }
     /// <summary>
     /// Toggle Story Assets on screen
@@ -403,21 +455,30 @@ public class ProgessionCheck : MonoBehaviour {
         {
             case LevelManager.LevelToBeat.Level1A:
                 uiOverlay.transform.SetSiblingIndex(childIndex);
+
+ 
                 break;
             case LevelManager.LevelToBeat.Level1B:
                 uiOverlay.transform.SetSiblingIndex(childIndex);
                 LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 1);
+
+
                 break;
             case LevelManager.LevelToBeat.Level1C:
                 uiOverlay.transform.SetSiblingIndex(childIndex);
                 LevelManager.instance.level1_B.transform.SetSiblingIndex(childIndex - 1);
                 LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 2);
+
+
                 break;
             case LevelManager.LevelToBeat.Level1D:
                 uiOverlay.transform.SetSiblingIndex(childIndex);
                 LevelManager.instance.level1_C.transform.SetSiblingIndex(childIndex - 1);
                 LevelManager.instance.level1_B.transform.SetSiblingIndex(childIndex - 2);
                 LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 3);
+
+
+
                 break;
             case LevelManager.LevelToBeat.Level1E:
                 uiOverlay.transform.SetSiblingIndex(childIndex);
@@ -425,6 +486,8 @@ public class ProgessionCheck : MonoBehaviour {
                 LevelManager.instance.level1_C.transform.SetSiblingIndex(childIndex - 2);
                 LevelManager.instance.level1_B.transform.SetSiblingIndex(childIndex - 3);
                 LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 4);
+
+
                 break;
         }
         

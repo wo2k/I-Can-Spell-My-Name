@@ -73,12 +73,14 @@
     <Compile Include="Assets\ColorMe.cs" />
     <Compile Include="Assets\CorrectName.cs" />
     <Compile Include="Assets\CreditScreen.cs" />
+    <Compile Include="Assets\CustomOutline.cs" />
     <Compile Include="Assets\DestroyItem.cs" />
     <Compile Include="Assets\EnemyBoat.cs" />
     <Compile Include="Assets\FadeScript.cs" />
     <Compile Include="Assets\FileHandler.cs" />
     <Compile Include="Assets\FirstPlayButtons.cs" />
     <Compile Include="Assets\Fish.cs" />
+    <Compile Include="Assets\GlowSprite.cs" />
     <Compile Include="Assets\HealthScript.cs" />
     <Compile Include="Assets\IntroButtonScipt.cs" />
     <Compile Include="Assets\Keyboard.cs" />
@@ -120,12 +122,14 @@
     <Compile Include="Assets\SetSortingLayer.cs" />
     <Compile Include="Assets\ShowCorrectVarMenu.cs" />
     <Compile Include="Assets\SpeechBubble.cs" />
+    <Compile Include="Assets\SpriteOutline.cs" />
     <Compile Include="Assets\TargetMiss.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
     <Compile Include="Assets\TypedLetter.cs" />
     <Compile Include="Assets\UpdateSound.cs" />
     <Compile Include="Assets\WaveComplete.cs" />
     <Compile Include="Assets\Win.cs" />
+    <None Include="Assets\Resources\Shaders\SpriteOutline.shader" />
     <None Include="Assets\data\dta.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Anthony/Documents/GitHub/I-Can-Spell-My-Name/ICSMNV1.6/MinkGradProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
