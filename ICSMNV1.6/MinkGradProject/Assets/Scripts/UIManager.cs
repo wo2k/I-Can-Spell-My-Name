@@ -83,6 +83,8 @@ public class UIManager : MonoBehaviour {
     [HideInInspector]
     public bool inGame = false;
 
+   // public Image spriteToGlow;
+
     public static UIManager instance;
     
     void Awake()
@@ -461,6 +463,18 @@ public class UIManager : MonoBehaviour {
         else
             bubbleText.text = negativeResponse[Random.Range(0, negativeResponse.Length)];
         //If answer is false, select a random negative response
+    }
+
+    public Image MakeSpriteGlow(Image sprite)
+    {
+        sprite.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+        sprite.gameObject.AddComponent<GlowSprite>();
+        return sprite;
+    }
+
+    public void MakeButtonsGlow()
+    {
+
     }
    
 

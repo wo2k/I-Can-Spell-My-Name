@@ -195,7 +195,10 @@ public class ProgessionCheck : MonoBehaviour {
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Normal").gameObject;
                                 LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
+
+                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Easy.GetComponent<Image>());
                                 break;
+
                             case 1://Hard
                                 if (!LevelManager.instance.level1Capture.lockMode)
                                     previousLock = LevelManager.instance.InstantiateLock(previousParentMode.transform);
@@ -211,7 +214,10 @@ public class ProgessionCheck : MonoBehaviour {
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Hard").gameObject;
                                 LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
+
+                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Normal.GetComponent<Image>());
                                 break;
+
                             case 2://Genius
                                 if (!LevelManager.instance.level1Capture.lockMode)
                                     previousLock = LevelManager.instance.InstantiateLock(previousParentMode.transform);
@@ -227,7 +233,10 @@ public class ProgessionCheck : MonoBehaviour {
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Genius").gameObject;
                                  LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
+
+                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Hard.GetComponent<Image>());
                                 break;
+
                             case 3://All Unlocked!
                                 if (!LevelManager.instance.level1Capture.hasLockedBefore)
                                 {
@@ -242,6 +251,8 @@ public class ProgessionCheck : MonoBehaviour {
                                     PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
 
                                 }
+
+                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Genius.GetComponent<Image>());
                                 LevelManager.instance.CheckLevelState(true);
                                 break;
                         }
@@ -326,7 +337,6 @@ public class ProgessionCheck : MonoBehaviour {
     IEnumerator InstantiateStory()
     {
         
-
         var sentences = new List<string>();
         int position = 0;
         int start = 0;

@@ -50,8 +50,7 @@ public class LevelManager : MonoBehaviour
     [Space]
     [Header("Sub Level Buttons")]
     public Button level1_A, level1_B, level1_C, level1_D, level1_E;
- //   public Text level1_B_Text, level1_C_Text, level1_D_Text, level1_E_Text;
-   // public 
+
 
     public int levelPassed, subLevelPassed1;
 
