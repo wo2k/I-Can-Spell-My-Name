@@ -191,15 +191,17 @@ public class ProgessionCheck : MonoBehaviour {
 
                         switch (LevelManager.instance.level1Capture.modePassed)
                         {
-                            case 0://Normal
+                            case 0://Easy
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Normal").gameObject;
                                 LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
 
+                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Easy;
+
                                 UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Easy.GetComponent<Image>());
                                 break;
 
-                            case 1://Hard
+                            case 1://Normal
                                 if (!LevelManager.instance.level1Capture.lockMode)
                                     previousLock = LevelManager.instance.InstantiateLock(previousParentMode.transform);
 
@@ -211,14 +213,18 @@ public class ProgessionCheck : MonoBehaviour {
                                     PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
                                 }
 
+                                else
+                                    UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Normal.GetComponent<Image>());
+
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Hard").gameObject;
                                 LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
 
-                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Normal.GetComponent<Image>());
+                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Normal;
+                                //  UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Normal.GetComponent<Image>());
                                 break;
 
-                            case 2://Genius
+                            case 2://Hard
                                 if (!LevelManager.instance.level1Capture.lockMode)
                                     previousLock = LevelManager.instance.InstantiateLock(previousParentMode.transform);
 
@@ -230,14 +236,18 @@ public class ProgessionCheck : MonoBehaviour {
                                     PlayerPrefs.SetInt(LevelManager.Difficulty.Genius + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
                                 }
 
+                                else
+                                    UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Hard.GetComponent<Image>());
+
                                 LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Genius").gameObject;
                                  LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
 
-                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Hard.GetComponent<Image>());
+                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Hard;
+                                //  UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Hard.GetComponent<Image>());
                                 break;
 
-                            case 3://All Unlocked!
+                            case 3://Genius
                                 if (!LevelManager.instance.level1Capture.hasLockedBefore)
                                 {
                                     if (!LevelManager.instance.level1Capture.lockMode)
@@ -252,7 +262,11 @@ public class ProgessionCheck : MonoBehaviour {
 
                                 }
 
-                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Genius.GetComponent<Image>());
+                                else
+                                    UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Genius.GetComponent<Image>());
+
+                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Genius;
+                                //  UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Genius.GetComponent<Image>());
                                 LevelManager.instance.CheckLevelState(true);
                                 break;
                         }
@@ -351,26 +365,31 @@ public class ProgessionCheck : MonoBehaviour {
                         LevelManager.instance.level1Capture = LevelManager.instance.level1A;
                         LevelManager.instance.level1_A.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
                         LevelManager.instance.level1_A.gameObject.AddComponent<GlowSprite>();
+                        LevelManager.instance.level1_A.enabled = false;
                         break;
                     case 1:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1B;
                         LevelManager.instance.level1_B.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
                         LevelManager.instance.level1_B.gameObject.AddComponent<GlowSprite>();
+                        LevelManager.instance.level1_B.enabled = false;
                         break;
                     case 2:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1C;
                         LevelManager.instance.level1_C.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
                         LevelManager.instance.level1_C.gameObject.AddComponent<GlowSprite>();
+                        LevelManager.instance.level1_C.enabled = false;
                         break;
                     case 3:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1D;
                         LevelManager.instance.level1_D.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
                         LevelManager.instance.level1_D.gameObject.AddComponent<GlowSprite>();
+                        LevelManager.instance.level1_D.enabled = false;
                         break;
                     case 4:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1E;
                         LevelManager.instance.level1_E.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
                         LevelManager.instance.level1_E.gameObject.AddComponent<GlowSprite>();
+                        LevelManager.instance.level1_E.enabled = false;
                         break;
                 }
             }
@@ -410,6 +429,31 @@ public class ProgessionCheck : MonoBehaviour {
         m_Seahorse.SetActive(false);
         LevelManager.instance.hasShownStoryAlready = true;
         PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(LevelManager.instance.hasShownStoryAlready));
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(LevelManager.LevelToBeat)).Length; i++)
+        {
+            if (LevelManager.instance.m_LevelToBeat == (LevelManager.LevelToBeat)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level1_A.enabled = true;
+                        break;
+                    case 1:
+                        LevelManager.instance.level1_B.enabled = true;
+                        break;
+                    case 2:
+                        LevelManager.instance.level1_C.enabled = true;
+                        break;
+                    case 3:
+                        LevelManager.instance.level1_D.enabled = true;
+                        break;
+                    case 4:
+                        LevelManager.instance.level1_E.enabled = true;
+                        break;
+                }
+            }
+        }
     }
 
     public void NextPage()

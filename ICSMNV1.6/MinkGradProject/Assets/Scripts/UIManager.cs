@@ -472,11 +472,111 @@ public class UIManager : MonoBehaviour {
         return sprite;
     }
 
-    public void MakeButtonsGlow()
+    public void MakeDifficultyButtonGlow()
     {
+        for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
+        {
+            if (mode == (subLevels1)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                        break;
+                    case 1:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                        break;
+                    case 2:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                        break;
+                    case 3:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                        break;
+                    case 4:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                        break;
+                }
+                
+                for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelSettings.DifficultyToBeat)).Length; mode++)
+                {
+                    if (LevelManager.instance.level1Capture.m_DifficultyToBeat == (LevelSettings.DifficultyToBeat)mode)
+                    {
+                        switch (mode)
+                        {
+                            case 0:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
 
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                break;
+
+                            case 1:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
+
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                break;
+
+                            case 2:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
+
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                break;
+
+                            case 3:
+                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
+
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                break;
+
+                        }
+
+                        MakeSpriteGlow(LevelManager.instance.level1Capture.difficultyBtns[mode].GetComponent<Image>());
+                    }
+                }
+            }
+        }
     }
-   
+
+    public void SetButtonsInteractable(bool interactable)
+    {
+        Button[] btnObjs;
+
+        if (interactable)
+        {
+            btnObjs = FindObjectsOfType<Button>();
+
+            foreach (Button button in btnObjs)
+            {
+                button.interactable = true;
+            }
+        }
+        else
+        {
+            btnObjs = FindObjectsOfType<Button>();
+
+            foreach (Button button in btnObjs)
+            {
+                button.interactable = false;
+            }
+        }
+    }
+
 
     public void DeductTime(float deduction)
     {

@@ -116,6 +116,8 @@ public class LockState : MonoBehaviour {
 
                             LevelManager.instance.CheckLevelState(true);
                             LevelManager.instance.level1Capture.locked = true;
+
+                            UIManager.instance.MakeDifficultyButtonGlow();
                         }
                     }
                 }

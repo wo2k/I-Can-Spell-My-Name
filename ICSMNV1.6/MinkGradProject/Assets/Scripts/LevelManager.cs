@@ -33,11 +33,16 @@ public class LevelSettings
     public float[,] highScore = new float[5,4];
     public int modePassed;
     public Button Easy, Normal, Hard, Genius;
+    public List<Button> difficultyBtns = new List<Button>();
     public GameObject levelParent;
     public GameObject lockMode;
     public bool locked = true;
     public bool hasLockedBefore = false;
     public bool[,] hasWonAlready = { { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false } }; //Easy-Hard for Level1A-E
+
+    //Current difficulty Player needs to beat
+    public enum DifficultyToBeat { Easy, Normal, Hard, Genius };
+    public DifficultyToBeat m_DifficultyToBeat;
 }
 
 public class LevelManager : MonoBehaviour
@@ -104,6 +109,7 @@ public class LevelManager : MonoBehaviour
     //Current Level Player needs to beat
     public enum LevelToBeat { Level1A, Level1B, Level1C, Level1D, Level1E, Level2A, Level2B, Level2C, Level2D, Level2E, Level2F, Level3A, None };
     public LevelToBeat m_LevelToBeat;
+
 
     string alphabet = "abcdefghijklmnopqrstuvwxyz";
     
