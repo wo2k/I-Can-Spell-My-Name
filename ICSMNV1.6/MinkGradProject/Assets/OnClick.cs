@@ -10,16 +10,27 @@ public class OnClick : MonoBehaviour {
     public Animator anim;
     [HideInInspector]
     public string level;
-	// Use this for initialization
-	void Start () {
+    public bool isBackButton;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	public void PlayPop(){
 		SoundManagement.TriggerEvent ("PlayPop");
 	}
 	public void CLICKY(){
+
 		SoundManagement.TriggerEvent ("PlayPop");
-		MenuToGoTo.SetActive (true);
+
+        if (!LevelManager.instance.abovePreK)
+            MenuToGoTo.SetActive(true);
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+            LevelManager.instance.correctAnswerPoints = 0;
+            UIManager.instance.HUD.SetActive(false);
+            UIManager.instance.HUD.transform.GetChild(1).gameObject.SetActive(true);
+        }
 		CurrentMenu.SetActive(false);
         LevelManager.instance.CheckLevelState(false);
     } 
@@ -29,6 +40,13 @@ public class OnClick : MonoBehaviour {
         SoundManagement.TriggerEvent("PlayPop");
         SceneManager.LoadScene(LevelName);
         UIManager.instance.levelName = LevelName;
+
+        if(isBackButton)
+        {
+            UIManager.instance.mode = UIManager.subLevels1.None;
+            LevelManager.instance.levelCaptureEditor.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.PleaseSelectLevelToView;
+            LevelManager.instance.m_Difficulty = LevelManager.Difficulty.None;
+        }
     }
 
     public void GoToGameMode()

@@ -41,33 +41,46 @@ public class LevelSettings
     public bool[,] hasWonAlready = { { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false } }; //Easy-Hard for Level1A-E
 
     //Current difficulty Player needs to beat
-    public enum DifficultyToBeat { Easy, Normal, Hard, Genius };
+    public enum DifficultyToBeat { Easy, Normal, Hard, Genius, None, PleaseSelectLevelToView };
     public DifficultyToBeat m_DifficultyToBeat;
 }
 
 public class LevelManager : MonoBehaviour
 {
-
-    public int correctAnswerPoints = 0;
-    [Header("Main Buttons")]
+    //Main Level
+    [Header("Main Level Settings")]
+    public Button level1;
     public Button level2;
     public Button level3;
+    public GameObject mainLevelParent;
+    public GameObject mainLockLevel;
+    public bool mainLocked = true;
+    public bool mainHasLockedBefore = false;
     [Space]
-    [Header("Sub Level Buttons")]
+    //Main Level
+
+    //Sub Levels
+    [Header("Sub Level Settings")]
     public Button level1_A, level1_B, level1_C, level1_D, level1_E;
-
-
-    public int levelPassed, subLevelPassed1;
-
+    [SerializeField]
+    public LevelSettings level1A;
+    public LevelSettings level1B;
+    public LevelSettings level1C;
+    public LevelSettings level1D;
+    public LevelSettings level1E;
+    public LevelSettings level1Capture;
+    /// <summary>
+    /// Utilize to capture level difficulty to beat and place resultant to editor
+    /// </summary>
+    public LevelSettings levelCaptureEditor;
+    public Difficulty m_DifficultyCapture;
     public GameObject levelParent;
     public GameObject lockLevel;
-
+    public int levelPassed, subLevelPassed1;
     public bool locked = true;
     public bool hasLockedBefore = false;
     public bool hasShownStoryAlready = false;
-
-    public GameObject toggleVibration;
-    public static LevelManager instance;
+    //Sub Levels 
 
     //LevelManager Editor Variables
     [HideInInspector]
@@ -81,15 +94,7 @@ public class LevelManager : MonoBehaviour
     public int containerSize;
     [HideInInspector]
     public string sceneName;
-   
-    [SerializeField]
-    public LevelSettings level1A;
-    public LevelSettings level1B;
-    public LevelSettings level1C;
-    public LevelSettings level1D;
-    public LevelSettings level1E;
-    public LevelSettings level1Capture;
-    public Difficulty m_DifficultyCapture;
+    //LevelManager Editor Variables
 
 #if UNITY_EDITOR
     [SerializeField]
@@ -97,6 +102,7 @@ public class LevelManager : MonoBehaviour
     public List<SceneAsset> sceneAssets = new List<SceneAsset>();
 #endif
 
+    //LevelManager Editor Viewable Settings
     //App Platforms
     public enum AppPlatform { MacOS, Windows, iPhone, Andriod };
     public AppPlatform m_Console;
@@ -104,15 +110,22 @@ public class LevelManager : MonoBehaviour
     public enum LevelType { GameMode, Menus };
     public LevelType m_Mode;
     //Type of difficulty of Level
-    public enum Difficulty { Easy, Normal, Hard, Genius };
+    public enum Difficulty { Easy, Normal, Hard, Genius, None };
     public Difficulty m_Difficulty;
-    //Current Level Player needs to beat
+    //Current Sub Level Player needs to beat
     public enum LevelToBeat { Level1A, Level1B, Level1C, Level1D, Level1E, Level2A, Level2B, Level2C, Level2D, Level2E, Level2F, Level3A, None };
     public LevelToBeat m_LevelToBeat;
-
+    //Current Main Level Player needs to beat
+    public enum MainLevelToBeat { Level1, Level2, Level3 };
+    public MainLevelToBeat m_MainLevelToBeat;
+    //LevelManager Editor Viewable Settings
 
     string alphabet = "abcdefghijklmnopqrstuvwxyz";
-    
+    public int correctAnswerPoints = 0;
+    public GameObject toggleVibration;
+    public bool abovePreK = false;
+    public static LevelManager instance;
+
     void Awake()
     {
         if (instance == null)
@@ -452,12 +465,28 @@ public class LevelManager : MonoBehaviour
             case "Campaign":
                 switch (levelPassed)
                 {
+                    case 0:
+                        SetIconOpacity(level1, 1f, true);
+
+                        if (disableLevelBtns)
+                        {
+                            SetIconOpacity(level2, 0.5f, false);
+                            SetIconOpacity(level3, 0.5f, false);
+                        }
+
+                        break;
                     case 1:
-                        level2.interactable = true;
+                        SetIconOpacity(level1, 1f, true);
+                        SetIconOpacity(level2, 1f, true);
+
+                        if (disableLevelBtns)
+                            SetIconOpacity(level3, 0.5f, false);
+
                         break;
                     case 2:
-                        level2.interactable = true;
-                        level3.interactable = true;
+                        SetIconOpacity(level1, 1f, true);
+                        SetIconOpacity(level2, 1f, true);
+                        SetIconOpacity(level3, 1f, true);
                         break;
                 }
                 break;

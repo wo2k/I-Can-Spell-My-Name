@@ -16,8 +16,9 @@ public class LevelDescription : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        PrepareCompleted(videoFile);
+        LevelManager.instance.levelCaptureEditor.m_DifficultyToBeat = (LevelSettings.DifficultyToBeat)LevelManager.instance.levelCaptureEditor.modePassed;
         SetDifficulty("Easy");
+        PrepareCompleted(videoFile);
     }
 
     void PrepareCompleted(VideoPlayer vp)

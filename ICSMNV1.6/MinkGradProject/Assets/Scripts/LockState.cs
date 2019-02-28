@@ -20,6 +20,9 @@ public class LockState : MonoBehaviour {
 
     void Update()
     {
+        if (UIManager.instance.levelName == "Campaign")
+            SetState(LevelManager.instance.mainLocked);
+
         if (UIManager.instance.levelName == "Level1")
             SetState(LevelManager.instance.locked);
 
@@ -67,6 +70,18 @@ public class LockState : MonoBehaviour {
             SetButtonsInteractable(false);
             if (animTime >= 3.0f)
             {
+                if (UIManager.instance.levelName == "Campaign")
+                {
+                    LevelManager.instance.mainLockLevel = null;
+                    Destroy(gameObject);
+                    SetButtonsInteractable(true);
+                    if (LevelManager.instance.levelPassed < 2)
+                        LevelManager.instance.mainLockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.mainLevelParent.transform);
+
+                    LevelManager.instance.CheckLevelState(true);
+                    LevelManager.instance.mainLocked = true;
+                }
+
                 if (UIManager.instance.levelName == "Level1")
                 {
                     LevelManager.instance.lockLevel = null;
@@ -79,7 +94,7 @@ public class LockState : MonoBehaviour {
                     LevelManager.instance.locked = true;
 
                     if (!LevelManager.instance.hasShownStoryAlready)
-                        FindObjectOfType<ProgessionCheck>().StartCoroutine("InstantiateStory");
+                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false));
                     else
                         FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false);
 

@@ -65,13 +65,13 @@ public class ColorAnswer : MonoBehaviour {
                         {
                             if (GetComponentInParent<Text>())
                                 GetComponentInParent<Text>().color = green;
-                            imageToColor.color = green;
+                        //    imageToColor.color = green;
                         }
                         else
                         {
                             if (GetComponentInParent<Text>())
                                 GetComponentInParent<Text>().color = red;
-                            imageToColor.color = red;
+                          //  imageToColor.color = red;
                         }
                         break;
                     case 2:

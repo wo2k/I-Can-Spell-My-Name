@@ -19,6 +19,13 @@ public class IntroButtonScipt : MonoBehaviour {
 
 	}
 
+    public void AbovePreK()
+    {
+        ThisMessage.SetActive(false);
+        NextMessage.SetActive(true);
+        LevelManager.instance.abovePreK = true;
+
+    }
     public void LoadLevel()
     {
         SceneManager.LoadScene("MainMenu");

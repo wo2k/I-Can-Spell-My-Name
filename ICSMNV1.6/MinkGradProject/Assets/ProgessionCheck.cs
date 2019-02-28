@@ -9,6 +9,7 @@ public class ProgessionCheck : MonoBehaviour {
     public Transform previousParentMode;
     public Transform bubblePos;
     public GameObject m_Seahorse;
+    public Transform seahorsePos;
     public GameObject previousLock;
     public float parentX;
     public float parentY;
@@ -18,6 +19,8 @@ public class ProgessionCheck : MonoBehaviour {
 
     public bool turnPage;
     public GameObject uiOverlay;
+    public GameObject skipButton;
+    public GameObject infoButton;
     public GameObject floatingBubbles;
     public List<GameObject> bubbleQueue;
 
@@ -27,6 +30,7 @@ public class ProgessionCheck : MonoBehaviour {
         previousParent = previousLock.transform;
         previousParentMode = previousLock.transform;
         GetParentID();
+        LevelManager.instance.m_MainLevelToBeat = (LevelManager.MainLevelToBeat)LevelManager.instance.levelPassed;
         LevelManager.instance.m_LevelToBeat = (LevelManager.LevelToBeat)LevelManager.instance.subLevelPassed1;
 
         switch (UIManager.instance.levelName)
@@ -34,10 +38,70 @@ public class ProgessionCheck : MonoBehaviour {
             case "MainMenu":
                 break;
             case "Campaign":
+                
+                LevelManager.instance.level1 = GameObject.Find("Level1").GetComponent<Button>();
                 LevelManager.instance.level2 = GameObject.Find("Level2").GetComponent<Button>();
                 LevelManager.instance.level3 = GameObject.Find("Level3").GetComponent<Button>();
-                LevelManager.instance.level3.interactable = false;
-                LevelManager.instance.level2.interactable = false;
+
+                for (int i = 0; i < System.Enum.GetValues(typeof(LevelManager.MainLevelToBeat)).Length; i++)
+                {
+                    if (LevelManager.instance.m_MainLevelToBeat == (LevelManager.MainLevelToBeat)i)
+                    {
+                        switch(i)
+                        {
+                            case 0://Level 1
+                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1.GetComponent<Image>());
+                                LevelManager.instance.CheckLevelState(true);
+
+                                LevelManager.instance.mainLevelParent = LevelManager.instance.level2.gameObject;
+                                LevelManager.instance.mainLockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.mainLevelParent.transform);
+                                SetParentID(LevelManager.instance.mainLevelParent.transform.position.x, LevelManager.instance.mainLevelParent.transform.position.y, LevelManager.instance.mainLevelParent.transform.position.z);
+
+                                break;
+                            case 1://Level 2
+                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level2.GetComponent<Image>());
+                                LevelManager.instance.CheckLevelState(true);
+
+                                if (!LevelManager.instance.mainLockLevel)
+                                    previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+
+                                if (!LevelManager.instance.mainHasLockedBefore)
+                                {
+                                    if (LevelManager.instance.mainLocked)
+                                        LevelManager.instance.mainLocked = false;
+                                    LevelManager.instance.mainHasLockedBefore = true;
+                                    PlayerPrefs.SetInt("MainHasLockedBefore", UIManager.instance.BoolToInt(LevelManager.instance.mainHasLockedBefore));
+                                }
+
+                                LevelManager.instance.mainLevelParent = LevelManager.instance.level3.gameObject;
+                             //   LevelManager.instance.CheckLevelState(true);
+                                SetParentID(LevelManager.instance.mainLevelParent.transform.position.x, LevelManager.instance.mainLevelParent.transform.position.y, LevelManager.instance.mainLevelParent.transform.position.z);
+
+                                break;
+                            case 2://Level 3
+                                UIManager.instance.MakeSpriteGlow(LevelManager.instance.level3.GetComponent<Image>());
+                                LevelManager.instance.CheckLevelState(true);
+
+                                if (!LevelManager.instance.mainHasLockedBefore)
+                                {
+                                    if (!LevelManager.instance.mainLockLevel)
+                                        previousLock = LevelManager.instance.InstantiateLock(previousParent.transform);
+
+                                    if (LevelManager.instance.mainLocked)
+                                        LevelManager.instance.mainLocked = false;
+                                    LevelManager.instance.mainHasLockedBefore = true;
+                                    PlayerPrefs.SetInt("MainHasLockedBefore", UIManager.instance.BoolToInt(LevelManager.instance.mainHasLockedBefore));
+                                }
+
+                             //   LevelManager.instance.mainLevelParent = LevelManager.instance.level3.gameObject;
+                                //   LevelManager.instance.CheckLevelState(true);
+                             //   SetParentID(LevelManager.instance.mainLevelParent.transform.position.x, LevelManager.instance.mainLevelParent.transform.position.y, LevelManager.instance.mainLevelParent.transform.position.z);
+                                break;
+                        }
+                    }
+                }
+                
+
                 break;
             case "Level1":
                 LevelManager.instance.level1_A = GameObject.Find("Level1Button").GetComponent<Button>();
@@ -56,7 +120,7 @@ public class ProgessionCheck : MonoBehaviour {
                         if (!LevelManager.instance.hasShownStoryAlready)
                         {
                             ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
-                            StartCoroutine("InstantiateStory");
+                            StartCoroutine(InstantiateStory(false));
                         }
                         else
                             ToggleStoryAssets(false);
@@ -196,7 +260,7 @@ public class ProgessionCheck : MonoBehaviour {
                                 LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
 
-                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Easy;
+                                //LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Easy;
 
                                 UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Easy.GetComponent<Image>());
                                 break;
@@ -220,7 +284,7 @@ public class ProgessionCheck : MonoBehaviour {
                                 LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
 
-                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Normal;
+                               // LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Normal;
                                 //  UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Normal.GetComponent<Image>());
                                 break;
 
@@ -243,7 +307,7 @@ public class ProgessionCheck : MonoBehaviour {
                                  LevelManager.instance.CheckLevelState(true);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
 
-                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Hard;
+                               // LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Hard;
                                 //  UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Hard.GetComponent<Image>());
                                 break;
 
@@ -265,7 +329,7 @@ public class ProgessionCheck : MonoBehaviour {
                                 else
                                     UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Genius.GetComponent<Image>());
 
-                                LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Genius;
+                               // LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Genius;
                                 //  UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Genius.GetComponent<Image>());
                                 LevelManager.instance.CheckLevelState(true);
                                 break;
@@ -280,6 +344,18 @@ public class ProgessionCheck : MonoBehaviour {
     {
         switch(UIManager.instance.levelName)
         {
+            case "Campaign":
+                parentX = PlayerPrefs.GetFloat("ParentXMain");
+                parentY = PlayerPrefs.GetFloat("ParentYMain");
+                parentZ = PlayerPrefs.GetFloat("ParentZMain");
+                previousParent.position = new Vector3(parentX, parentY, parentZ);
+
+                if (GameObject.Find("CampaignMenu"))
+                    previousParent.SetParent(GameObject.Find("CampaignMenu").transform);
+
+                previousParent.localScale = Vector3.one;
+                break;
+
             case "Level1":
                 parentX = PlayerPrefs.GetFloat("ParentX");
                 parentY = PlayerPrefs.GetFloat("ParentY");
@@ -298,7 +374,7 @@ public class ProgessionCheck : MonoBehaviour {
                 parentZ = PlayerPrefs.GetFloat("ParentZMode");
                 previousParent.position = new Vector3(parentX, parentY, parentZ);
 
-                if (UIManager.instance.levelName == "LevelDescription")
+                if (UIManager.instance.levelName == "LevelDescription")//Remove this line
                     previousParent.SetParent(GameObject.Find("Container").transform);
 
                 previousParent.localScale = Vector3.one;
@@ -312,6 +388,11 @@ public class ProgessionCheck : MonoBehaviour {
     {
         switch (UIManager.instance.levelName)
         {
+            case "Campaign":
+                parentX = x; PlayerPrefs.SetFloat("ParentXMain", parentX);
+                parentY = y; PlayerPrefs.SetFloat("ParentYMain", parentY);
+                parentZ = z; PlayerPrefs.SetFloat("ParentZMain", parentZ);
+                break;
             case "Level1":
                 parentX = x; PlayerPrefs.SetFloat("ParentX", parentX);
                 parentY = y; PlayerPrefs.SetFloat("ParentY", parentY);
@@ -334,9 +415,12 @@ public class ProgessionCheck : MonoBehaviour {
     {
         for (int i = 0; i < bubbleQueue.Count; i++)
         {
-            bubbleQueue[i].GetComponentInChildren<Animation>().Stop();
-            bubbleQueue[i].GetComponentInChildren<Animation>().Rewind();
-            Destroy(bubbleQueue[i]);
+            if (bubbleQueue[i])
+            {
+                bubbleQueue[i].GetComponentInChildren<Animation>().Stop();
+                bubbleQueue[i].GetComponentInChildren<Animation>().Rewind();
+                Destroy(bubbleQueue[i]);
+            }
         }
         bubbleQueue.Clear();
         turnPage = false;
@@ -348,7 +432,7 @@ public class ProgessionCheck : MonoBehaviour {
         return speechBubble;
     }
 
-    IEnumerator InstantiateStory()
+   public IEnumerator InstantiateStory(bool skipGlowEffect)
     {
         
         var sentences = new List<string>();
@@ -363,32 +447,47 @@ public class ProgessionCheck : MonoBehaviour {
                 {
                     case 0:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                        LevelManager.instance.level1_A.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
-                        LevelManager.instance.level1_A.gameObject.AddComponent<GlowSprite>();
+                        if (!skipGlowEffect)
+                        {
+                            LevelManager.instance.level1_A.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                            LevelManager.instance.level1_A.gameObject.AddComponent<GlowSprite>();
+                        }
                         LevelManager.instance.level1_A.enabled = false;
                         break;
                     case 1:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                        LevelManager.instance.level1_B.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
-                        LevelManager.instance.level1_B.gameObject.AddComponent<GlowSprite>();
+                        if (!skipGlowEffect)
+                        {
+                            LevelManager.instance.level1_B.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                            LevelManager.instance.level1_B.gameObject.AddComponent<GlowSprite>();
+                        }
                         LevelManager.instance.level1_B.enabled = false;
                         break;
                     case 2:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                        LevelManager.instance.level1_C.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
-                        LevelManager.instance.level1_C.gameObject.AddComponent<GlowSprite>();
+                        if (!skipGlowEffect)
+                        {
+                            LevelManager.instance.level1_C.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                            LevelManager.instance.level1_C.gameObject.AddComponent<GlowSprite>();
+                        }
                         LevelManager.instance.level1_C.enabled = false;
                         break;
                     case 3:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                        LevelManager.instance.level1_D.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
-                        LevelManager.instance.level1_D.gameObject.AddComponent<GlowSprite>();
+                        if (!skipGlowEffect)
+                        {
+                            LevelManager.instance.level1_D.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                            LevelManager.instance.level1_D.gameObject.AddComponent<GlowSprite>();
+                        }
                         LevelManager.instance.level1_D.enabled = false;
                         break;
                     case 4:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1E;
-                        LevelManager.instance.level1_E.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
-                        LevelManager.instance.level1_E.gameObject.AddComponent<GlowSprite>();
+                        if (!skipGlowEffect)
+                        {
+                            LevelManager.instance.level1_E.GetComponent<Image>().material = Resources.Load<Material>("Shaders/SpriteOutline");
+                            LevelManager.instance.level1_E.gameObject.AddComponent<GlowSprite>();
+                        }
                         LevelManager.instance.level1_E.enabled = false;
                         break;
                 }
@@ -414,6 +513,32 @@ public class ProgessionCheck : MonoBehaviour {
             yield return new WaitForSeconds(2);
         }
 
+        StartCoroutine(AnimateSeahorseOffScreen());
+    }
+
+    public void PlayStory()
+    {
+        turnPage = false;
+        ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+        m_Seahorse.transform.localPosition = seahorsePos.localPosition;
+        StartCoroutine(InstantiateStory(true));
+    }
+
+    public void SkipStory()
+    {
+        for (int i = 0; i < bubbleQueue.Count; i++)
+        {
+            if(bubbleQueue[i])
+            Destroy(bubbleQueue[i]);  
+        }
+
+        bubbleQueue.Clear();
+
+        StartCoroutine(AnimateSeahorseOffScreen());
+    }
+
+    IEnumerator AnimateSeahorseOffScreen()
+    {
         floatingBubbles.SetActive(true);
         m_Seahorse.GetComponent<Animation>().Play();
         yield return new WaitForSeconds(m_Seahorse.GetComponent<Animation>().clip.length);
@@ -427,6 +552,9 @@ public class ProgessionCheck : MonoBehaviour {
         uiOverlay.SetActive(false);
         floatingBubbles.SetActive(false);
         m_Seahorse.SetActive(false);
+        skipButton.SetActive(false);
+        infoButton.SetActive(true);
+
         LevelManager.instance.hasShownStoryAlready = true;
         PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(LevelManager.instance.hasShownStoryAlready));
 
@@ -466,6 +594,8 @@ public class ProgessionCheck : MonoBehaviour {
     {
         m_Seahorse.SetActive(show);
         uiOverlay.SetActive(show);
+        skipButton.SetActive(show);
+        infoButton.SetActive(!show);
 
         switch (LevelManager.instance.m_LevelToBeat)
         {
@@ -504,8 +634,10 @@ public class ProgessionCheck : MonoBehaviour {
     {
         m_Seahorse.SetActive(show);
         uiOverlay.SetActive(show);
+        skipButton.SetActive(show);
+        infoButton.SetActive(!show);
 
-        switch(LevelManager.instance.m_LevelToBeat)
+        switch (LevelManager.instance.m_LevelToBeat)
         {
             case LevelManager.LevelToBeat.Level1A:
                 uiOverlay.transform.SetSiblingIndex(childIndex);

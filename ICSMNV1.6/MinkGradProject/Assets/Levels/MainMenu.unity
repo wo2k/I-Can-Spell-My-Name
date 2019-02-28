@@ -6991,6 +6991,7 @@ GameObject:
   - component: {fileID: 1652541884}
   - component: {fileID: 1652541883}
   - component: {fileID: 1652541882}
+  - component: {fileID: 1652541886}
   m_Layer: 5
   m_Name: Campaign
   m_TagString: Untagged
@@ -7100,7 +7101,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 1510fef720f53a441a28e975e152a4f7, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -7123,6 +7124,24 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652541880}
+--- !u!114 &1652541886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1652541880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6922268b25a2acb439686bab2eda4612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  timeTakenDuringLerp: 1
+  startColor: {r: 1, g: 1, b: 0, a: 1}
+  endColor: {r: 1, g: 1, b: 0, a: 0.3}
+  glowEffect: {r: 0, g: 0, b: 0, a: 0}
+  repeatable: 1
+  alpha: 0
 --- !u!1 &1666090498
 GameObject:
   m_ObjectHideFlags: 0

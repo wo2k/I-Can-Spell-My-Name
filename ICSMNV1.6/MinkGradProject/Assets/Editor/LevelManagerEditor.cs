@@ -225,9 +225,9 @@ public class LevelManagerEditor : Editor {
         EditorGUILayout.LabelField("Game Statistics", Label(GUI.skin.textField, Color.black, 12, FontStyle.Bold));
         EditorGUILayout.LabelField("Console: " + levelManager.m_Console.ToString());
         EditorGUILayout.LabelField("Level Type: " + levelManager.m_Mode.ToString());
-        EditorGUILayout.LabelField("Level Playing: " + UIManager.mode.ToString());
+        EditorGUILayout.LabelField("Level Selected: " + UIManager.mode.ToString());
         EditorGUILayout.LabelField("Level to Beat: " + levelManager.m_LevelToBeat.ToString());
-        EditorGUILayout.LabelField("Difficulty to Beat: " + levelManager.level1Capture.m_DifficultyToBeat.ToString());
+        EditorGUILayout.LabelField("Difficulty to Beat: " + levelManager.levelCaptureEditor.m_DifficultyToBeat.ToString());
         EditorGUILayout.LabelField("Difficulty Selected: " + levelManager.m_Difficulty.ToString());
 
         EditorGUILayout.EndVertical();

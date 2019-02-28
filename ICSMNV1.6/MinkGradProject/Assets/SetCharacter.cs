@@ -85,7 +85,7 @@ public class SetCharacter : MonoBehaviour {
 		}
 
 		switch (chara) {
-		case 1:
+		case 0:
 			{
 				switch (vari) {
 				case 1:
@@ -123,7 +123,7 @@ public class SetCharacter : MonoBehaviour {
 
 				break;
 			}
-		case 2:
+		case 1:
 			{
 				switch (vari) {
 				case 1:
@@ -161,7 +161,7 @@ public class SetCharacter : MonoBehaviour {
 
 				break;
 			}
-		case 3:
+		case 2:
 			{
 				switch (vari) {
 				case 1:
@@ -199,7 +199,7 @@ public class SetCharacter : MonoBehaviour {
 
 				break;
 			}
-		case 4:
+		case 3:
 			{
 				switch (vari) {
 				case 1:
@@ -237,7 +237,7 @@ public class SetCharacter : MonoBehaviour {
 
 				break;
 			}
-		case 5:
+		case 4:
 			{
 				switch (vari) {
 				case 1:
@@ -275,7 +275,7 @@ public class SetCharacter : MonoBehaviour {
 
 				break;
 			}
-            case 6:
+            case 5:
                 {
                     switch (vari)
                     {
@@ -314,7 +314,7 @@ public class SetCharacter : MonoBehaviour {
 
                     break;
                 }
-            case 7:
+            case 6:
                 {
                     switch (vari)
                     {

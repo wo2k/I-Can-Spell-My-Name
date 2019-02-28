@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour {
     [HideInInspector]
     public int total = 0;
     public Animator seahorseAnim;
+    public Text answerHint;
 
     [Space]
 
@@ -124,6 +125,7 @@ public class UIManager : MonoBehaviour {
     public void StartGame()
     {
         LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
+        answerHint.text = PlayerPrefs.GetString("firstName");
         switch (levelName)
         {
             case "Level1A":
@@ -241,6 +243,7 @@ public class UIManager : MonoBehaviour {
                             PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " ModePassed " + i, LevelManager.instance.level1Capture.modePassed);
                             PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex,hasWonDifficultyIndex]));
                             LevelManager.instance.level1Capture.hasLockedBefore = false;
+                            LevelManager.instance.level1Capture.m_DifficultyToBeat = (LevelSettings.DifficultyToBeat)LevelManager.instance.level1Capture.modePassed;
                         }
                         else
                             return;
@@ -286,98 +289,160 @@ public class UIManager : MonoBehaviour {
     public void NextLevel()
     {
         SoundManagement.TriggerEvent("PlayPop");
-        LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
-        switch (mode)
-        {
-            case subLevels1.Level1A:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
-                break;
-            case subLevels1.Level1B:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
-                break;
-            case subLevels1.Level1C:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
-                break;
-            case subLevels1.Level1D:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
-                break;
-            case subLevels1.Level1E:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                levelName = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).ToString();
-                break;
-        }
-        ResetGameStats();
         
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
+        {
+            if (mode == (subLevels1)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        break;
+                    case 1:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        break;
+                    case 2:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        break;
+                    case 3:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        break;
+                    case 4:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        break;
+                }
+
+                if (LevelManager.instance.level1Capture.m_DifficultyToBeat <= LevelSettings.DifficultyToBeat.Hard && LevelManager.instance.level1Capture.m_DifficultyToBeat >= LevelSettings.DifficultyToBeat.Easy)
+                {
+                    levelName = "LevelDescription";
+                    SceneManager.LoadScene(levelName);
+                    LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
+                }
+                else
+                {
+                    levelName = "Level1";
+                    SceneManager.LoadScene(levelName);
+                    LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
+                }
+                
+            }
+        }
+        ResetGameStats();      
     }
+
     public void ResetGameStats()
     {
         Time.timeScale = 1;
         switch (LevelManager.instance.m_Mode)
         {
             case LevelManager.LevelType.GameMode:
-                               
-                inGame = true;
-                gameStart = true;
-                                
-                pauseButton.SetActive(true);
-                HUD.SetActive(true);
 
-                if (startMenu)
-                    startMenu.SetActive(false);
-                if (endMenu)
-                    endMenu.SetActive(false);
-                if (winScreen)
-                    winScreen.SetActive(false);
-                if (healthBar)
-                    Destroy(healthBar);
-
-                healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform, heartsAmount);
-
-                hearts = new GameObject[heartsAmount];
-
-                for (int i = 0; i < heartsAmount; i++)
+                if (levelName == "LevelDescription")
                 {
-                    hearts[i] = healthBar.transform.GetChild(i).gameObject;
+                    pauseButton.SetActive(false);
+                    confirmSubMenu.SetActive(false);
+
+                    inGame = false;
+
+                    if (endMenu)
+                        endMenu.SetActive(false);
+                    if (winScreen)
+                        winScreen.SetActive(false);
+                    if (healthBar)
+                        Destroy(healthBar);
+                    if (heartsAmount != 3)
+                        heartsAmount = 3;
+                    if (HUD)
+                        HUD.SetActive(false);
                 }
+                else
+                {
+                    inGame = true;
+                    gameStart = true;
 
-                if (heartsAmount != 3)
-                    heartsAmount = 3;
+                    pauseButton.SetActive(true);
+                    HUD.SetActive(true);
 
-                for (int i = 0; i < bubbleQueue.Count; i++)
-                    Destroy(bubbleQueue[i]);
-                bubbleQueue.Clear();
+                    if (startMenu)
+                        startMenu.SetActive(false);
+                    if (endMenu)
+                        endMenu.SetActive(false);
+                    if (winScreen)
+                        winScreen.SetActive(false);
+                    if (healthBar)
+                        Destroy(healthBar);
 
-                LevelManager.instance.correctAnswerPoints = 0;
-                timer = 60.0f;
-                minutes = 1;
-                seconds = 0;
-                scoreText.text = "0";
-                score = 0;
-                timetext.text = "1:00";
-                total = 0;
+                    healthBar = InstantiatePlayerHealth(FindObjectOfType<UIManager>().transform, heartsAmount);
+
+                    hearts = new GameObject[heartsAmount];
+
+                    for (int i = 0; i < heartsAmount; i++)
+                    {
+                        hearts[i] = healthBar.transform.GetChild(i).gameObject;
+                    }
+
+                    if (heartsAmount != 3)
+                        heartsAmount = 3;
+
+                    for (int i = 0; i < bubbleQueue.Count; i++)
+                        Destroy(bubbleQueue[i]);
+                    bubbleQueue.Clear();
+
+                    LevelManager.instance.correctAnswerPoints = 0;
+                    timer = 60.0f;
+                    minutes = 1;
+                    seconds = 0;
+                    scoreText.text = "0";
+                    score = 0;
+                    timetext.text = "1:00";
+                    total = 0;
+                }
                 break;
                 
             case LevelManager.LevelType.Menus:
 
-                pauseButton.SetActive(false);
-                confirmSubMenu.SetActive(false);
+                mode = subLevels1.None;
+                LevelManager.instance.levelCaptureEditor.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.PleaseSelectLevelToView;
+                LevelManager.instance.m_Difficulty = LevelManager.Difficulty.None;
 
-                inGame = false;
-                SceneManager.LoadScene("MainMenu");
-                if (endMenu)
-                    endMenu.SetActive(false);
-                if (winScreen)
-                    winScreen.SetActive(false);
-                if (healthBar)
-                    Destroy(healthBar);
-                if (heartsAmount != 3)
-                    heartsAmount = 3;
-                if (HUD)
-                    HUD.SetActive(false);
+                if (levelName == "Level1")
+                {
+                    pauseButton.SetActive(false);
+                    confirmSubMenu.SetActive(false);
+
+                    inGame = false;
+                    if (endMenu)
+                        endMenu.SetActive(false);
+                    if (winScreen)
+                        winScreen.SetActive(false);
+                    if (healthBar)
+                        Destroy(healthBar);
+                    if (heartsAmount != 3)
+                        heartsAmount = 3;
+                    if (HUD)
+                        HUD.SetActive(false);
+                }
+                else
+                {
+                    pauseButton.SetActive(false);
+                    confirmSubMenu.SetActive(false);
+
+                    inGame = false;
+                    SceneManager.LoadScene("MainMenu");
+                    if (endMenu)
+                        endMenu.SetActive(false);
+                    if (winScreen)
+                        winScreen.SetActive(false);
+                    if (healthBar)
+                        Destroy(healthBar);
+                    if (heartsAmount != 3)
+                        heartsAmount = 3;
+                    if (HUD)
+                        HUD.SetActive(false);
+                }
+                
                 break;
         }
     }

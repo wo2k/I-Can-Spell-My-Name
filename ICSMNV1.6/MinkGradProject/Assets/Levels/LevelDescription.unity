@@ -1841,6 +1841,7 @@ MonoBehaviour:
   CurrentMenu: {fileID: 0}
   anim: {fileID: 0}
   level: 
+  isBackButton: 0
 --- !u!1 &1206495754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2361,6 +2362,7 @@ MonoBehaviour:
   CurrentMenu: {fileID: 1598903814}
   anim: {fileID: 0}
   level: 
+  isBackButton: 1
 --- !u!114 &1548000643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2678,10 +2680,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previousParent: {fileID: 0}
   previousParentMode: {fileID: 0}
+  bubblePos: {fileID: 0}
+  m_Seahorse: {fileID: 0}
   previousLock: {fileID: 0}
   parentX: 0
   parentY: 0
   parentZ: 0
+  levelIcons: []
+  turnPage: 0
+  uiOverlay: {fileID: 0}
+  floatingBubbles: {fileID: 0}
+  bubbleQueue: []
 --- !u!1 &1607128607
 GameObject:
   m_ObjectHideFlags: 0

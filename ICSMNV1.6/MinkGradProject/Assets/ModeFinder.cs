@@ -42,18 +42,23 @@ public class ModeFinder : MonoBehaviour
         {
             case "level1A":
                 UIManager.instance.mode = UIManager.subLevels1.Level1A;
+                LevelManager.instance.levelCaptureEditor = LevelManager.instance.level1A;
                 break;
             case "level1B":
                 UIManager.instance.mode = UIManager.subLevels1.Level1B;
+                LevelManager.instance.levelCaptureEditor = LevelManager.instance.level1B;
                 break;
             case "level1C":
                 UIManager.instance.mode = UIManager.subLevels1.Level1C;
+                LevelManager.instance.levelCaptureEditor = LevelManager.instance.level1C;
                 break;
             case "level1D":
                 UIManager.instance.mode = UIManager.subLevels1.Level1D;
+                LevelManager.instance.levelCaptureEditor = LevelManager.instance.level1D;
                 break;
             case "level1E":
                 UIManager.instance.mode = UIManager.subLevels1.Level1E;
+                LevelManager.instance.levelCaptureEditor = LevelManager.instance.level1E;
                 break;
         }
         
