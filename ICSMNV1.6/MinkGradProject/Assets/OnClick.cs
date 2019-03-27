@@ -23,9 +23,34 @@ public class OnClick : MonoBehaviour {
 		SoundManagement.TriggerEvent ("PlayPop");
 
         if (!LevelManager.instance.abovePreK)
-            MenuToGoTo.SetActive(true);
+            SceneManager.LoadScene("MainMenu");
+            // MenuToGoTo.SetActive(true);
         else
         {
+            int LoginNumber = PlayerPrefs.GetInt("loginNumber");
+            switch (LoginNumber)
+            {
+                case 1:
+                    {
+                        PlayerPrefs.SetInt("firstPlay1", 1);
+                        break;
+                    }
+                case 2:
+                    {
+                        PlayerPrefs.SetInt("firstPlay2", 1);
+                        break;
+                    }
+                case 3:
+                    {
+                        PlayerPrefs.SetInt("firstPlay3", 1);
+                        break;
+                    }
+                case 4:
+                    {
+                        PlayerPrefs.SetInt("firstPlay4", 1);
+                        break;
+                    }
+            }
             SceneManager.LoadScene("MainMenu");
             LevelManager.instance.correctAnswerPoints = 0;
             UIManager.instance.HUD.SetActive(false);

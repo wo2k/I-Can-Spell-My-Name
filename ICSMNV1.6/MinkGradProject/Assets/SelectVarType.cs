@@ -104,7 +104,7 @@ public class SelectVarType : MonoBehaviour {
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
 				PlayerPrefs.SetInt("firstVar", index + 1);
-				break;
+                    break;
 			}
 		case 2:
 			{

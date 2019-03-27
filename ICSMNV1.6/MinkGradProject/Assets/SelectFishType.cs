@@ -102,22 +102,22 @@ public class SelectFishType : MonoBehaviour {
 	public void SaveType(int index){
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", index + 1);
+				PlayerPrefs.SetInt("firstCharacter", index);
 				break;
 			}
 		case 2:
 			{
-				PlayerPrefs.SetInt ("secondCharacter", index + 1);
+				PlayerPrefs.SetInt ("secondCharacter", index);
 				break;
 			}
 		case 3:
 			{
-				PlayerPrefs.SetInt ("thirdCharacter", index +1);
+				PlayerPrefs.SetInt ("thirdCharacter", index);
 				break;
 			}
 		case 4:
 			{
-				PlayerPrefs.SetInt ("fourthCharacter", index +1);
+				PlayerPrefs.SetInt ("fourthCharacter", index);
 				break;
 			}
 		}

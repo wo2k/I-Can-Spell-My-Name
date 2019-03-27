@@ -73,6 +73,7 @@
     <Compile Include="Assets\ColorMe.cs" />
     <Compile Include="Assets\CorrectName.cs" />
     <Compile Include="Assets\CreditScreen.cs" />
+    <Compile Include="Assets\CustomInputField.cs" />
     <Compile Include="Assets\CustomOutline.cs" />
     <Compile Include="Assets\DestroyItem.cs" />
     <Compile Include="Assets\EnemyBoat.cs" />

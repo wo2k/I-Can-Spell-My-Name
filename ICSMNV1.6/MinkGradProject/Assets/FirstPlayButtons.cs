@@ -12,7 +12,7 @@ public class FirstPlayButtons : MonoBehaviour {
 	public int LoginNumber = 0;
 	bool firstplay;
 	public InputField input;
-	bool EditToggle = false;
+	public bool EditToggle = false;
 
     // Use this for initialization
     void Start() {

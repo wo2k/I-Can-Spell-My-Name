@@ -43,7 +43,7 @@ public class CorrectName : MonoBehaviour {
 		ConfermationScreen.SetActive (false);
 	}
 	public void OpenConfermation() {
-		if(playername.text != "Add Player")
+		if(playername.text != "Add Player" && playername.text.Length > 0)
 			ConfermationScreen.SetActive (true);
 	}
 }
