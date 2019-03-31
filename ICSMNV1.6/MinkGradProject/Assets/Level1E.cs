@@ -51,6 +51,8 @@ public class Level1E: MonoBehaviour {
 
     void Start()
     {
+        
+
         switch (LevelManager.instance.m_Difficulty)
         {
             case LevelManager.Difficulty.Easy:

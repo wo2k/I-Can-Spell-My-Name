@@ -36,7 +36,7 @@ public class Level1B : MonoBehaviour {
     public Vector3[] dolphinIdlePos;
 
 	void Start () {
-
+       
         switch (LevelManager.instance.m_Difficulty)
         {
             case LevelManager.Difficulty.Easy:
@@ -59,7 +59,7 @@ public class Level1B : MonoBehaviour {
         m_Dolphin = DolphinState.Up;
         NameData = FindObjectOfType<LevelManager>().gameObject;
         UIManager.instance.StartGame();
-        for(int i = 0; i < m_Dolphins.Length; i++)
+        for (int i = 0; i < m_Dolphins.Length; i++)
         dolphinPos[i] = m_Dolphins[i].transform.localPosition;
 
         StartCoroutine(DolphinUp()); 

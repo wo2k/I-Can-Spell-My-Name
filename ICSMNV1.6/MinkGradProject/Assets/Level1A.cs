@@ -38,15 +38,16 @@ public class Level1A : MonoBehaviour {
                     case 0:
                         AnswersText[3].GetComponentInParent<Image>().sprite = AnswersText[0].GetComponentInParent<Image>().sprite;
                         AnswersText[1].GetComponentInParent<Image>().sprite = AnswersText[2].GetComponentInParent<Image>().sprite;
+                        UIManager.instance.heartsAmount = 3;
                         break;
                     case 1:
-                       
+                        UIManager.instance.heartsAmount = 3;
                         break;
                     case 2:
-                       
+                        UIManager.instance.heartsAmount = 3;
                         break;
                     case 3:
-                   
+                        UIManager.instance.heartsAmount = 3;
                         break;
                 }
             }

@@ -169,7 +169,7 @@ public class ProgessionCheck : MonoBehaviour {
                                 LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
                                 SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
 
-                                //LevelManager.instance.level1Capture.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.Easy;
+                              
 
                                 UIManager.instance.MakeSpriteGlow(LevelManager.instance.level1Capture.Easy.GetComponent<Image>());
                                 break;
@@ -183,7 +183,7 @@ public class ProgessionCheck : MonoBehaviour {
                                     if (LevelManager.instance.level1Capture.locked)
                                         LevelManager.instance.level1Capture.locked = false;
                                     LevelManager.instance.level1Capture.hasLockedBefore = true;
-                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
+                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Normal + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
                                 }
 
                                 else
@@ -206,7 +206,7 @@ public class ProgessionCheck : MonoBehaviour {
                                     if (LevelManager.instance.level1Capture.locked)
                                         LevelManager.instance.level1Capture.locked = false;
                                     LevelManager.instance.level1Capture.hasLockedBefore = true;
-                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Genius + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
+                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
                                 }
 
                                 else
@@ -231,7 +231,7 @@ public class ProgessionCheck : MonoBehaviour {
 
                                     LevelManager.instance.level1Capture.hasLockedBefore = true;
 
-                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
+                                    PlayerPrefs.SetInt(LevelManager.Difficulty.Genius + " HasLockedBefore " + i, UIManager.instance.BoolToInt(LevelManager.instance.level1Capture.hasLockedBefore));
 
                                 }
 
@@ -247,6 +247,8 @@ public class ProgessionCheck : MonoBehaviour {
                 }              
                 break;
         }
+
+        LevelManager.instance.SavePlayerPrefs();
     }
 	
 	public void GetParentID()
@@ -787,6 +789,10 @@ public class ProgessionCheck : MonoBehaviour {
                 }
 
                 LevelManager.instance.level1Capture.modePassed = 2;
+                
+                PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " ModePassed " + i, LevelManager.instance.level1Capture.modePassed);
+                
+                    
                 UIManager.instance.hasWonIndex = (int)LevelManager.instance.m_LevelToBeat;
 
                 if (!UIManager.instance.hasWonAlready[UIManager.instance.hasWonIndex])

@@ -35,6 +35,8 @@ public class Level1C: MonoBehaviour {
 
     void Start()
     {
+        
+
         for (int i = 0; i < 4; i++)
         {
             if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)i)

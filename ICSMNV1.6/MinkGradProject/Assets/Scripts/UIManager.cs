@@ -206,11 +206,11 @@ public class UIManager : MonoBehaviour {
                         break;
                 }
 
-                for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; mode++)
+                for (int j = 0; j < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; j++)
                 {
-                    if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)mode)
+                    if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)j)
                     {
-                        switch (mode)
+                        switch (j)
                         {
                             case 0:
                                 LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
@@ -250,7 +250,9 @@ public class UIManager : MonoBehaviour {
                     }
                 }
             }
-        }       
+        }
+
+        LevelManager.instance.SavePlayerPrefs();       
     }
 
     public void RestartGame()
@@ -352,8 +354,8 @@ public class UIManager : MonoBehaviour {
                         winScreen.SetActive(false);
                     if (healthBar)
                         Destroy(healthBar);
-                    if (heartsAmount != 3)
-                        heartsAmount = 3;
+                   // if (heartsAmount != 3)
+                     //   heartsAmount = 3;
                     if (HUD)
                         HUD.SetActive(false);
                 }
@@ -383,8 +385,8 @@ public class UIManager : MonoBehaviour {
                         hearts[i] = healthBar.transform.GetChild(i).gameObject;
                     }
 
-                    if (heartsAmount != 3)
-                        heartsAmount = 3;
+                    //if (heartsAmount != 3)
+                      //  heartsAmount = 3;
 
                     for (int i = 0; i < bubbleQueue.Count; i++)
                         Destroy(bubbleQueue[i]);
@@ -419,8 +421,8 @@ public class UIManager : MonoBehaviour {
                         winScreen.SetActive(false);
                     if (healthBar)
                         Destroy(healthBar);
-                    if (heartsAmount != 3)
-                        heartsAmount = 3;
+                  //  if (heartsAmount != 3)
+                    //    heartsAmount = 3;
                     if (HUD)
                         HUD.SetActive(false);
                 }
@@ -437,8 +439,8 @@ public class UIManager : MonoBehaviour {
                         winScreen.SetActive(false);
                     if (healthBar)
                         Destroy(healthBar);
-                    if (heartsAmount != 3)
-                        heartsAmount = 3;
+                   // if (heartsAmount != 3)
+                   //     heartsAmount = 3;
                     if (HUD)
                         HUD.SetActive(false);
                 }

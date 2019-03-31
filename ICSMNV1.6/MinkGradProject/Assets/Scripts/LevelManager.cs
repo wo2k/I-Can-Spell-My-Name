@@ -202,7 +202,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void SavePlayerPrefs()
+    public void SavePlayerPrefs()
     {
 
         for (int i = 0; i < 5; i++)
@@ -817,6 +817,7 @@ public class LevelManager : MonoBehaviour
 #endif
             heartsQty--;
             UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
+            
             if (heartsQty <= 0)
                 UIManager.instance.GameOver();
             else
