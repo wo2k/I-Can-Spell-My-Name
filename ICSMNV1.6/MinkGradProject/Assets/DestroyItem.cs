@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestroyItem : MonoBehaviour {
 
     Level1E level1E;
+    public bool boatDestroyed;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,8 @@ public class DestroyItem : MonoBehaviour {
 
     public void DestroyBoat()
     {
-        Destroy(gameObject);
+        boatDestroyed = true;
+        Destroy(gameObject.transform.parent.gameObject);
     }
 
     public void DestroyThis()
@@ -34,9 +36,10 @@ public class DestroyItem : MonoBehaviour {
         {
             if (level1E.AnswerCorrect)
             {
-                if (UIManager.instance.inGame)
+                if (UIManager.instance.inGame && boatDestroyed)
                 {
-                    UIManager.instance.ScorePoints(5);
+                    boatDestroyed = false;
+                    UIManager.instance.ScorePoints(false);
                     UIManager.instance.gameStart = true; // Un Pause Timer
                     FindObjectOfType<Level1E>().PlaceAnswer();
                     if (FindObjectOfType<EnemyBoat>())
@@ -46,16 +49,18 @@ public class DestroyItem : MonoBehaviour {
                             item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0.2f;
                         }
                     }
+                    
                     else
                         return;
                 }
             }
             else
             {
-                if (UIManager.instance.inGame)
+                if (UIManager.instance.inGame && boatDestroyed)
                 {
                     level1E.AnswerCorrect = false;
                     LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+                    boatDestroyed = false;
                 }
                 else
                     return;

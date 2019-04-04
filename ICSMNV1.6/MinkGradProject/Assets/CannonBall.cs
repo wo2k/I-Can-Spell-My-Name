@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CannonBall : MonoBehaviour {
+public class CannonBall : MonoBehaviour
+{
 
     public Rigidbody2D physics;
-    [SerializeField]
-    [Range(10f, 80f)]
-    private float angle = 45f;
+    //[SerializeField]
+    //[Range(10f, 80f)]
+    //private float angle = 45f;
 
     public GameObject target;
     public Vector3 targetPos;
     public Level1E level1E;
-    private int numOfTrajectoryPoints = 30;
-    private List<GameObject> trajectoryPoints = new List<GameObject>();
+    //private int numOfTrajectoryPoints = 30;
+    //private List<GameObject> trajectoryPoints = new List<GameObject>();
 
     bool hasFired = false;
 
@@ -22,7 +23,8 @@ public class CannonBall : MonoBehaviour {
     public int lane;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         level1E = FindObjectOfType<Level1E>();
         physics = GetComponent<Rigidbody2D>();
@@ -69,7 +71,7 @@ public class CannonBall : MonoBehaviour {
 
     void FireAtWill()
     {
-       physics.AddForce(GetForceFrom(transform.localPosition, targetPos, new Vector3(750, -275, 0)), ForceMode2D.Impulse);     
+        physics.AddForce(GetForceFrom(transform.localPosition, targetPos, new Vector3(750, -275, 0)), ForceMode2D.Impulse);
         hasFired = true;
     }
 
@@ -88,7 +90,7 @@ public class CannonBall : MonoBehaviour {
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(1,0,0,1);
+        Gizmos.color = new Color(1, 0, 0, 1);
         Gizmos.DrawLine(level1E.muzzlePos.position, targetPos);
     }
 
@@ -98,5 +100,12 @@ public class CannonBall : MonoBehaviour {
         return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y) - new Vector2(speed.x, speed.y));
     }
 
-
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.name == "PlayerBoat")
+        {
+            if(gameObject && collider.gameObject)
+                Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), collider.gameObject.GetComponent<BoxCollider2D>());
+        }
+    }
 }

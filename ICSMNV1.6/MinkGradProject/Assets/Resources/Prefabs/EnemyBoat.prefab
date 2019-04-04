@@ -127,6 +127,8 @@ MonoBehaviour:
   animate: 0
   boatNumber: 0
   shipWreck: {fileID: 1236889594130948, guid: 518080ab561a3ff4ead1f98d8012ba49, type: 2}
+  smokePrefab: {fileID: 1614010438747416, guid: 53c9f3f0c1c503a43b897ca274cac489,
+    type: 2}
 --- !u!114 &114535255490003012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f744506e810f39a48a0c22fdc1752c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boatDestroyed: 0
 --- !u!222 &222028115241578034
 CanvasRenderer:
   m_ObjectHideFlags: 1

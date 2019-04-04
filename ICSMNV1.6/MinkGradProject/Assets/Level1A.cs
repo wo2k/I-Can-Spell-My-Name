@@ -234,11 +234,11 @@ public class Level1A : MonoBehaviour {
         switch (LevelManager.instance.m_Difficulty)
         {
             case LevelManager.Difficulty.Easy:
-                UIManager.instance.ScorePoints();
+                UIManager.instance.ScorePoints(true);
                 break;
 
             case LevelManager.Difficulty.Normal:
-                UIManager.instance.ScorePoints();
+                UIManager.instance.ScorePoints(true);
                 break;
 
             case LevelManager.Difficulty.Hard:

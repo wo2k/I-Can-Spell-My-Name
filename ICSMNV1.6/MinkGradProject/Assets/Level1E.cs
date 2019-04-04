@@ -136,19 +136,8 @@ public class Level1E: MonoBehaviour {
     IEnumerator SpawnEnemyWaves()
     {
         for (; currentWaveIndex < MaxWaveIndex; currentWaveIndex++)
-        {
-            switch(currentWaveIndex)
-            {
-                case 0:
-                    StartCoroutine(SpawnEnemyBoat(1));
-                    break;
-                case 1:
-                    StartCoroutine(SpawnEnemyBoat(2));
-                    break;
-                case 2:
-                    StartCoroutine(SpawnEnemyBoat(3));
-                    break;
-            }
+        {            
+            StartCoroutine(SpawnEnemyBoat(currentWaveIndex));
 
             yield return new WaitUntil(() => boatsInWave.Count <= 0);
             boatIDNum.Clear();
@@ -427,10 +416,13 @@ public class Level1E: MonoBehaviour {
 
         if (lockedOntoBoat)
         {
-            velocity = GetForceFrom(muzzlePos.localPosition, FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).gameObject.transform.position, new Vector3(750, -300, 0));
-            float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-            angle /= 2.5f;
-            m_Cannon.transform.localEulerAngles = new Vector3(0, 0, angle);
+            if (FindObjectOfType<EnemyBoat>())
+            {
+                velocity = GetForceFrom(muzzlePos.localPosition, FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).gameObject.transform.position, new Vector3(750, -300, 0));
+                float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+                angle /= 2.5f;
+                m_Cannon.transform.localEulerAngles = new Vector3(0, 0, angle);
+            }
         }
 
     }

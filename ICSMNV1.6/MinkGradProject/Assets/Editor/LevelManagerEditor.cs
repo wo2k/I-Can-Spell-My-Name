@@ -69,7 +69,7 @@ public class LevelManagerEditor : Editor {
     //GUI Settings
     Color defBackgroundColor;
     GUISkin defGUISkin;
-    GUIStyle defGUIStyle;
+   // GUIStyle defGUIStyle;
     float labelWidth;
     float fieldWidth;
     //Level Creation Toolbar
@@ -79,8 +79,8 @@ public class LevelManagerEditor : Editor {
     GUISkin mainToolbarSkin;
     GUIStyle mainStyle;
     //Difficulty Toolbar
-    GUISkin diffToolbarSkin;// = new GUISkin[5];
-    GUIStyle diffStyle;
+   // GUISkin diffToolbarSkin;// = new GUISkin[5];
+    GUIStyle diffStyle = null;
 
     //Saved Preferences for Creation
     private SerializedProperty sceneNameCapture;
@@ -100,7 +100,7 @@ public class LevelManagerEditor : Editor {
 
 
     private SerializedProperty[] level1Name = new SerializedProperty[5];
-    private SerializedProperty[,] level1Description = new SerializedProperty[5,4];
+   // private SerializedProperty[,] level1Description = new SerializedProperty[5,4];
     private SerializedProperty[] level1Icon = new SerializedProperty[5];
     private SerializedProperty[] level1VideoTexture = new SerializedProperty[5];
     private SerializedProperty[] level1VideoFile = new SerializedProperty[5];
@@ -132,8 +132,8 @@ public class LevelManagerEditor : Editor {
         tabStyle = toolBarSkin.GetStyle("Tab");
 
         //Retrieve custom GUISkin for Toolbar for Level Creation
-        diffToolbarSkin = defGUISkin;    
-        diffStyle = defGUIStyle;
+        //diffToolbarSkin = defGUISkin;    
+        //diffStyle = defGUIStyle;
         //Captures saved variable in LevelManager by the name of sceneName 
         sceneNameCapture = m_Target.FindProperty("sceneName");
         this.sceneAssetCapture = this.m_Target.FindProperty("sceneAssets");

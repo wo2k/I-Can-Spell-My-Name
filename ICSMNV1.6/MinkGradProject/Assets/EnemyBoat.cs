@@ -12,6 +12,7 @@ public class EnemyBoat : MonoBehaviour {
     public bool animate = false;
     public int boatNumber;
     public GameObject shipWreck;
+    public GameObject smokePrefab;
 
 	// Use this for initialization
 	void Start() {
@@ -100,11 +101,17 @@ public class EnemyBoat : MonoBehaviour {
             level1E.boatsInWave.Remove(gameObject);
             level1E.AnswerCorrect = false;
             level1E.lockedOntoBoat = false;
-
-            GameObject boatDown = Instantiate(shipWreck, boatPos, transform.GetChild(0).localRotation, transform.parent);
+            boatPos = transform.GetChild(0).localPosition;
+  
+            GameObject boatDown = Instantiate(shipWreck, transform.position, transform.localRotation, transform.parent);
             boatDown.transform.SetSiblingIndex(transform.GetSiblingIndex());
-            boatDown.GetComponent<Animator>().Play("ShipWreck");
-            boatDown.transform.localPosition = boatPos;
+            boatDown.transform.GetChild(0).transform.GetChild(0).localPosition = boatPos;
+            boatDown.transform.GetChild(0).GetComponent<Animator>().Play("ShipWreck");
+            boatDown.transform.GetChild(0).transform.GetChild(0).localPosition = boatPos;
+
+            GameObject smokeEffect = Instantiate(smokePrefab, transform.parent);
+            smokeEffect.transform.localPosition = new Vector2(boatDown.transform.GetChild(0).transform.GetChild(0).localPosition.x + transform.position.x, boatDown.transform.GetChild(0).localPosition.y);
+            smokeEffect.GetComponent<Animator>().Play("Smoking");
             level1E.boatsInWave.Remove(gameObject);
             Destroy(gameObject);
 
@@ -113,15 +120,24 @@ public class EnemyBoat : MonoBehaviour {
         if(collider.gameObject.name == "CannonBall" && level1E.AnswerCorrect)
         {           
             SoundManagement.TriggerEvent("PlayCannonHit");
-            boatPos = transform.GetChild(0).localPosition;
+            
             animate = true;
-            GameObject boatDown = Instantiate(shipWreck, boatPos, transform.GetChild(0).localRotation, transform.parent);
+            boatPos = transform.GetChild(0).localPosition;
+            
+            GameObject boatDown = Instantiate(shipWreck, transform.position, transform.localRotation, transform.parent);
             boatDown.transform.SetSiblingIndex(transform.GetSiblingIndex());
-            boatDown.GetComponent<Animator>().Play("ShipWreck");
-            boatDown.transform.localPosition = boatPos;
+            boatDown.transform.GetChild(0).transform.GetChild(0).localPosition = boatPos;
+            boatDown.transform.GetChild(0).GetComponent<Animator>().Play("ShipWreck");
+            boatDown.transform.GetChild(0).transform.GetChild(0).localPosition = boatPos;
+
+            GameObject smokeEffect = Instantiate(smokePrefab, transform.parent);
+            smokeEffect.transform.localPosition = new Vector2(boatDown.transform.GetChild(0).transform.GetChild(0).localPosition.x + transform.position.x, boatDown.transform.GetChild(0).localPosition.y);
+            smokeEffect.GetComponent<Animator>().Play("Smoking");
+          //  smokeEffect.transform.localPosition = new Vector2
+
             level1E.boatsInWave.Remove(gameObject);
             Destroy(gameObject);
-          //  anim.Play("Boat-Down");
+          
             UIManager.instance.gameStart = false; // Pause Timer
             level1E.lockedOntoBoat = false;
             Destroy(collider.gameObject);
@@ -130,40 +146,6 @@ public class EnemyBoat : MonoBehaviour {
         }
     }
 
-  
-
-   /* private void OnDestroy()
-    {
-        
-        if (level1E.AnswerCorrect)
-        {
-            if (UIManager.instance.inGame)
-            {
-                UIManager.instance.ScorePoints(5);
-                UIManager.instance.gameStart = true; // Un Pause Timer
-                FindObjectOfType<Level1E>().PlaceAnswer();
-                if (FindObjectOfType<EnemyBoat>())
-                {
-                    foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
-                    {
-                        item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0.2f;
-                    }
-                }
-                else
-                    return;
-            }
-        }
-        else
-        {
-            if (UIManager.instance.inGame)
-            {
-                level1E.AnswerCorrect = false;
-                LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-            }
-            else
-                return;
-        }
-    }*/
 
     private void LateUpdate()
     {

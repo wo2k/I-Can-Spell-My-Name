@@ -475,12 +475,12 @@ public class UIManager : MonoBehaviour {
     #endregion
 
 
-    public void ScorePoints()
+    public void ScorePoints(bool needsPointsToWin)
     {
         score += 1;
         scoreText.text = score.ToString();
         total++;
-        LevelManager.instance.CheckAnswer(true, seahorseAnim);
+        LevelManager.instance.CheckAnswer(true, needsPointsToWin, seahorseAnim);
     }
 
 /// <summary>
@@ -691,9 +691,9 @@ public class UIManager : MonoBehaviour {
             }
             else if (timer <= 0)
             {
-              //  if (mode == subLevels1.Level1E)
-                  //  WinGame();
-              //  else
+                if (mode == subLevels1.Level1E)
+                    WinGame();
+                else
                     GameOver();
             }
 

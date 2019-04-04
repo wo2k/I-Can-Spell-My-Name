@@ -871,7 +871,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void CheckAnswer(bool isCorrect, Animator seahorseAnim)
+    public void CheckAnswer(bool isCorrect, bool needsPointsToWin, Animator seahorseAnim)
     {
 
 
@@ -881,7 +881,8 @@ public class LevelManager : MonoBehaviour
             correctAnswerPoints++;
             seahorseAnim.SetTrigger("Wink");
             seahorseAnim.SetTrigger("Idle");
-            if (correctAnswerPoints >= 3)
+
+            if (needsPointsToWin && correctAnswerPoints >= 3)
                 UIManager.instance.WinGame();
             else
               UIManager.instance.InstantiateBubble(isCorrect);

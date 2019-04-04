@@ -849,7 +849,7 @@ MonoBehaviour:
   canShoot: 0
   LoadingBars: []
   currentWaveIndex: 0
-  MaxWaveIndex: 3
+  MaxWaveIndex: 10
   boatsInWave: []
   boatIDNum: 
 --- !u!114 &635743708
