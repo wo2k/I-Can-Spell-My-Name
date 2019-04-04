@@ -75,7 +75,7 @@ public class Level1E: MonoBehaviour {
         NameData = FindObjectOfType<LevelManager>().gameObject;
 
         UIManager.instance.StartGame();
-        UIManager.instance.mode = UIManager.subLevels1.Level1A;
+        UIManager.instance.mode = UIManager.subLevels1.Level1E;
 
         int LoginNumber = PlayerPrefs.GetInt("loginNumber");
         switch (LoginNumber)
@@ -129,7 +129,8 @@ public class Level1E: MonoBehaviour {
      
 
         LoadingBars = FindObjectsOfType<ReloadCannonAmmo>();
-    
+
+        PlaceAnswer();
     }
 
     IEnumerator SpawnEnemyWaves()
@@ -156,11 +157,11 @@ public class Level1E: MonoBehaviour {
 
     IEnumerator SpawnEnemyBoat(int enemyQty)
     {
+       
         for (int i = 0; i < enemyQty; i++)
         {
             GameObject enemyBoat = Instantiate(enemyRef, new Vector3(1200, 0, 0), Quaternion.identity, m_Waves.transform);
             enemyIndex++;
-            PlaceAnswer();
             enemyBoat.name = "Enemy Boat " + enemyIndex;
             boatsInWave.Add(enemyBoat);
             float duration = Random.Range(0f, 5f);
@@ -224,6 +225,7 @@ public class Level1E: MonoBehaviour {
             lockedOntoBoat = false;
             AnswerCorrect = false;
             StartCoroutine("AnimateCannon");
+            PlaceAnswer();
             
         }
     }
@@ -250,6 +252,7 @@ public class Level1E: MonoBehaviour {
             lockedOntoBoat = false;
             AnswerCorrect = false;
             StartCoroutine("AnimateCannon");
+            PlaceAnswer();
         }
     }
     public void Choice3()
@@ -278,6 +281,7 @@ public class Level1E: MonoBehaviour {
             
             AnswerCorrect = false;
             StartCoroutine("AnimateCannon");
+            PlaceAnswer();
         }
     }
 

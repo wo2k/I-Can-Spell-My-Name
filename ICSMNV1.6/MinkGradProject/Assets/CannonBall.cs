@@ -38,6 +38,12 @@ public class CannonBall : MonoBehaviour {
             target = level1E.targetMiss[lane].gameObject;
             SetWaves(lane);
             targetPos = target.transform.localPosition;
+
+            if (FindObjectOfType<EnemyBoat>())
+            {
+                foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+                    Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), item.GetComponent<BoxCollider2D>());
+            }
         }
 
     }

@@ -221,6 +221,15 @@ public class ProgessionCheck : MonoBehaviour {
                                 break;
 
                             case 3://Genius
+
+                                if(LevelManager.instance.level1Capture.usedCheatCode)
+                                {
+                                    LevelManager.instance.level1Capture.levelParent = GameObject.FindGameObjectWithTag("Genius").gameObject;
+                                    SetParentID(LevelManager.instance.level1Capture.levelParent.transform.position.x, LevelManager.instance.level1Capture.levelParent.transform.position.y, LevelManager.instance.level1Capture.levelParent.transform.position.z);
+                                    GetParentID();
+                                    LevelManager.instance.level1Capture.usedCheatCode = false;
+                                }
+
                                 if (!LevelManager.instance.level1Capture.hasLockedBefore)
                                 {
                                     if (!LevelManager.instance.level1Capture.lockMode)
@@ -283,12 +292,12 @@ public class ProgessionCheck : MonoBehaviour {
                 parentX = PlayerPrefs.GetFloat("ParentXMode");
                 parentY = PlayerPrefs.GetFloat("ParentYMode");
                 parentZ = PlayerPrefs.GetFloat("ParentZMode");
-                previousParent.position = new Vector3(parentX, parentY, parentZ);
+                previousParentMode.position = new Vector3(parentX, parentY, parentZ);
 
                 if (UIManager.instance.levelName == "LevelDescription")//Remove this line
-                    previousParent.SetParent(GameObject.Find("Container").transform);
+                    previousParentMode.SetParent(GameObject.Find("Container").transform);
 
-                previousParent.localScale = Vector3.one;
+                previousParentMode.localScale = Vector3.one;
                 break;
         }
 
@@ -418,8 +427,15 @@ public class ProgessionCheck : MonoBehaviour {
 
                 }
                 LevelManager.instance.CheckLevelState(true);
+
+                if (!LevelManager.instance.hasShownStoryAlready)
+                    ToggleStoryAssets(true, 5 - LevelManager.instance.subLevelPassed1);
+                else
+                    ToggleStoryAssets(false);
                 break;
         }
+
+        LevelManager.instance.SavePlayerPrefs();
     }
 
     /// <summary>
@@ -579,6 +595,7 @@ public class ProgessionCheck : MonoBehaviour {
         {
             GameObject speechBubble = InstantiateBubble(sentence);
             yield return new WaitUntil(() => turnPage);
+            if(speechBubble)
             speechBubble.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
             yield return new WaitForSeconds(2);
         }
@@ -741,10 +758,10 @@ public class ProgessionCheck : MonoBehaviour {
                 break;
             case LevelManager.LevelToBeat.Level1E:
                 uiOverlay.transform.SetSiblingIndex(childIndex);
-                LevelManager.instance.level1_D.transform.SetSiblingIndex(childIndex - 1);
-                LevelManager.instance.level1_C.transform.SetSiblingIndex(childIndex - 2);
-                LevelManager.instance.level1_B.transform.SetSiblingIndex(childIndex - 3);
-                LevelManager.instance.level1_A.transform.SetSiblingIndex(childIndex - 4);
+                LevelManager.instance.level1_D.transform.SetAsFirstSibling();//.SetSiblingIndex(childIndex - 1);
+                LevelManager.instance.level1_C.transform.SetAsFirstSibling();//SetSiblingIndex(childIndex - 2);
+                LevelManager.instance.level1_B.transform.SetAsFirstSibling();//SetSiblingIndex(childIndex - 2);
+                LevelManager.instance.level1_A.transform.SetAsFirstSibling();//SetSiblingIndex(childIndex - 2);
 
 
                 break;
@@ -773,22 +790,27 @@ public class ProgessionCheck : MonoBehaviour {
                 {
                     case 0:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        LevelManager.instance.level1Capture.usedCheatCode = true;
                         break;
                     case 1:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        LevelManager.instance.level1Capture.usedCheatCode = true;
                         break;
                     case 2:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        LevelManager.instance.level1Capture.usedCheatCode = true;
                         break;
                     case 3:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        LevelManager.instance.level1Capture.usedCheatCode = true;
                         break;
                     case 4:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        LevelManager.instance.level1Capture.usedCheatCode = true;
                         break;
                 }
 
-                LevelManager.instance.level1Capture.modePassed = 2;
+                LevelManager.instance.level1Capture.modePassed = 3;
                 
                 PlayerPrefs.SetInt(LevelManager.Difficulty.Hard + " ModePassed " + i, LevelManager.instance.level1Capture.modePassed);
                 
@@ -816,8 +838,11 @@ public class ProgessionCheck : MonoBehaviour {
             }
         }
         LevelManager.instance.m_LevelToBeat = (LevelManager.LevelToBeat)LevelManager.instance.subLevelPassed1;
+       // LevelManager.instance.diff
         CheckProgression();
 
+        
+       
 
         if (showCheatCodes)
             ccLevelToBeatResult.text = LevelManager.instance.m_LevelToBeat.ToString();

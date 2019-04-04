@@ -39,7 +39,7 @@ public class LevelSettings
     public bool locked = true;
     public bool hasLockedBefore = false;
     public bool[,] hasWonAlready = { { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false } }; //Easy-Hard for Level1A-E
-
+    public bool usedCheatCode = false;
     //Current difficulty Player needs to beat
     public enum DifficultyToBeat { Easy, Normal, Hard, Genius, None, PleaseSelectLevelToView };
     public DifficultyToBeat m_DifficultyToBeat;
@@ -124,6 +124,7 @@ public class LevelManager : MonoBehaviour
     public int correctAnswerPoints = 0;
     public GameObject toggleVibration;
     public bool abovePreK = false;
+    
     public static LevelManager instance;
 
     void Awake()
@@ -432,6 +433,18 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    private void OnApplicationQuit()
+    {
+        //SavePlayerPrefs();
+        UIManager.instance.inGame = false;
+
+      /*  foreach (GameObject item in FindObjectsOfType<GameObject>())
+        {
+            if (item.scene == SceneManager.GetActiveScene())
+                Destroy(item);
+        }*/
+    }
+
     public void SetIconOpacity(Button levelBtn, float alpha, bool interactable)
     {
         levelBtn.interactable = interactable;
@@ -702,6 +715,8 @@ public class LevelManager : MonoBehaviour
             lockLevel = InstantiateLock(levelParent.transform);
         else
             return;
+
+     //   SavePlayerPrefs();
     }
 
     public void Reset()
@@ -816,12 +831,18 @@ public class LevelManager : MonoBehaviour
             VibrateOnHandHeld();
 #endif
             heartsQty--;
-            UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
             
+
             if (heartsQty <= 0)
                 UIManager.instance.GameOver();
             else
-               UIManager.instance.InstantiateBubble(false);
+            {
+                if (UIManager.instance.hearts[heartsQty])
+                {
+                    UIManager.instance.hearts[heartsQty].GetComponent<Animation>().Play("HealthShake");
+                }
+                UIManager.instance.InstantiateBubble(false);
+            }
         }
 
         UIManager.instance.heartsAmount = heartsQty;

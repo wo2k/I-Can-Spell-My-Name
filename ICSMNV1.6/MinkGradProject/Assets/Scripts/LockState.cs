@@ -10,11 +10,39 @@ public class LockState : MonoBehaviour {
     AnimatorClipInfo[] animClip;
     public float animTime;
     public Button[] btnObjs;
+    public GameObject levelParent;
 
-	void Start ()
+    void Start()
     {
-        anim = GetComponent<Animator>();       
-	}
+        anim = GetComponent<Animator>();
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels1)).Length; i++)
+        {
+            if (UIManager.instance.mode == (UIManager.subLevels1)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                        break;
+                    case 1:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                        break;
+                    case 2:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                        break;
+                    case 3:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                        break;
+                    case 4:
+                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        break;
+                }
+                levelParent = LevelManager.instance.level1Capture.levelParent;
+
+            }
+        }
+    }
 
 
 
@@ -136,10 +164,13 @@ public class LockState : MonoBehaviour {
                         }
                     }
                 }
+              //  LevelManager.instance.SavePlayerPrefs();
             }
         }
         else
         {
+           // if (gameObject)
+             //   Destroy(gameObject);
         }
     }
 

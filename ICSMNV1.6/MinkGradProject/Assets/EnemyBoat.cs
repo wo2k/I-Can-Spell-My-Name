@@ -11,6 +11,7 @@ public class EnemyBoat : MonoBehaviour {
     public Vector3 boatPos;
     public bool animate = false;
     public int boatNumber;
+    public GameObject shipWreck;
 
 	// Use this for initialization
 	void Start() {
@@ -63,7 +64,7 @@ public class EnemyBoat : MonoBehaviour {
                     level1E.boatIDNum.Add(boatNumber);
                 else
                 {
-                    boatNumber = RandomWithExclusion(0, level1E.boatsInWave.Count, 0);
+                    boatNumber = RandomWithExclusion(0, level1E.boatsInWave.Count, 1);
                     SetWaves();
                 }
 
@@ -79,7 +80,7 @@ public class EnemyBoat : MonoBehaviour {
                     level1E.boatIDNum.Add(boatNumber);
                 else
                 {
-                    boatNumber = RandomWithExclusion(0, level1E.boatsInWave.Count, 0);
+                    boatNumber = RandomWithExclusion(0, level1E.boatsInWave.Count, 2);
                     SetWaves();
                 }
 
@@ -99,8 +100,14 @@ public class EnemyBoat : MonoBehaviour {
             level1E.boatsInWave.Remove(gameObject);
             level1E.AnswerCorrect = false;
             level1E.lockedOntoBoat = false;
+
+            GameObject boatDown = Instantiate(shipWreck, boatPos, transform.GetChild(0).localRotation, transform.parent);
+            boatDown.transform.SetSiblingIndex(transform.GetSiblingIndex());
+            boatDown.GetComponent<Animator>().Play("ShipWreck");
+            boatDown.transform.localPosition = boatPos;
+            level1E.boatsInWave.Remove(gameObject);
             Destroy(gameObject);
-            
+
         }
 
         if(collider.gameObject.name == "CannonBall" && level1E.AnswerCorrect)
@@ -108,7 +115,13 @@ public class EnemyBoat : MonoBehaviour {
             SoundManagement.TriggerEvent("PlayCannonHit");
             boatPos = transform.GetChild(0).localPosition;
             animate = true;
-            anim.Play("Boat-Down");
+            GameObject boatDown = Instantiate(shipWreck, boatPos, transform.GetChild(0).localRotation, transform.parent);
+            boatDown.transform.SetSiblingIndex(transform.GetSiblingIndex());
+            boatDown.GetComponent<Animator>().Play("ShipWreck");
+            boatDown.transform.localPosition = boatPos;
+            level1E.boatsInWave.Remove(gameObject);
+            Destroy(gameObject);
+          //  anim.Play("Boat-Down");
             UIManager.instance.gameStart = false; // Pause Timer
             level1E.lockedOntoBoat = false;
             Destroy(collider.gameObject);
@@ -119,30 +132,38 @@ public class EnemyBoat : MonoBehaviour {
 
   
 
-    private void OnDestroy()
+   /* private void OnDestroy()
     {
         
         if (level1E.AnswerCorrect)
         {
-            UIManager.instance.ScorePoints(5);
-            UIManager.instance.gameStart = true; // Un Pause Timer
-
-            if (FindObjectOfType<EnemyBoat>())
+            if (UIManager.instance.inGame)
             {
-                foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+                UIManager.instance.ScorePoints(5);
+                UIManager.instance.gameStart = true; // Un Pause Timer
+                FindObjectOfType<Level1E>().PlaceAnswer();
+                if (FindObjectOfType<EnemyBoat>())
                 {
-                    item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0.2f;
+                    foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+                    {
+                        item.gameObject.transform.GetChild(0).GetComponent<Animation>()["Boat-Cruise02"].speed = 0.2f;
+                    }
                 }
+                else
+                    return;
+            }
+        }
+        else
+        {
+            if (UIManager.instance.inGame)
+            {
+                level1E.AnswerCorrect = false;
+                LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
             }
             else
                 return;
         }
-        else
-        {
-            level1E.AnswerCorrect = false;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
-        }
-    }
+    }*/
 
     private void LateUpdate()
     {

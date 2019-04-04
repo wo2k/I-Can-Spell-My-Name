@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour {
     public int hasWonDifficultyIndex;
     [HideInInspector]
     public bool gameStart = false;
-    [HideInInspector]
+  //  [HideInInspector]
     public bool inGame = false;
 
    // public Image spriteToGlow;
@@ -171,6 +171,7 @@ public class UIManager : MonoBehaviour {
         endMenu.SetActive(true);
         gameStart = false;
         Time.timeScale = 0;
+        inGame = false;
     }
 
     public void WinGame()
@@ -203,6 +204,10 @@ public class UIManager : MonoBehaviour {
                         break;
                     case 4:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                        if (FindObjectOfType<CannonBall>())
+                            Destroy(FindObjectOfType<CannonBall>());
+
+                        FindObjectOfType<Level1E>().lockedOntoBoat = false;
                         break;
                 }
 
@@ -257,10 +262,21 @@ public class UIManager : MonoBehaviour {
 
     public void RestartGame()
     {
+        if (mode == subLevels1.Level1E && !inGame)
+        {
+            FindObjectOfType<Level1E>().AnswerCorrect = false;
+
+            foreach (GameObject item in FindObjectsOfType<GameObject>())
+            {
+                if (item.scene == SceneManager.GetActiveScene())
+                    Destroy(item);
+            }
+        }
+
+       
         LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
         SceneManager.LoadScene(levelName);
-        ResetGameStats();
-     
+        ResetGameStats();       
     }
 
     public void GoToMainMenu()
@@ -291,7 +307,7 @@ public class UIManager : MonoBehaviour {
     public void NextLevel()
     {
         SoundManagement.TriggerEvent("PlayPop");
-        
+        inGame = false;
 
         for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
         {
@@ -313,6 +329,13 @@ public class UIManager : MonoBehaviour {
                         break;
                     case 4:
                         LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+
+                        if (FindObjectOfType<EnemyBoat>())
+                        {
+                            foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+                                Destroy(item.gameObject);
+                        }
+
                         break;
                 }
 
@@ -668,7 +691,10 @@ public class UIManager : MonoBehaviour {
             }
             else if (timer <= 0)
             {
-                GameOver();
+              //  if (mode == subLevels1.Level1E)
+                  //  WinGame();
+              //  else
+                    GameOver();
             }
 
             minutes = Mathf.Floor(timer / 60);

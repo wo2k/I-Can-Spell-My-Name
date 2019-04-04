@@ -210,6 +210,7 @@ public class LevelManagerEditor : Editor {
     {
 
         m_Target.Update();
+      //  m_Target.ApplyModifiedProperties();
         SerializedProperty sceneCaptureCopy = sceneAssetCapture.Copy();
         
         //Set Inspector background and parimeters to public variables
@@ -283,6 +284,15 @@ public class LevelManagerEditor : Editor {
 
         m_Target.ApplyModifiedProperties();
 
+        if (EditorApplication.isPlaying)
+        {
+            EditorUtility.SetDirty(target);
+            Repaint();
+        }
+
+       
+
+
     }
 
     // Get child property of parent serializedProperty
@@ -343,7 +353,7 @@ public class LevelManagerEditor : Editor {
                     break;
                 case 4:
                     levelName = "Level 1E";
-                    levelManager.level1Capture = levelManager.level1E;
+                   // levelManager.level1Capture = levelManager.level1E;
                     break;
             }
 

@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 224540183077057052}
   - component: {fileID: 114435572967287396}
   - component: {fileID: 61018119754370276}
+  - component: {fileID: 251063687465115996}
   m_Layer: 5
   m_Name: EnemyBoat
   m_TagString: Untagged
@@ -78,7 +79,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -118.7}
   m_SpriteTilingProperty:
@@ -91,8 +92,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 400, y: 85.45}
-  m_EdgeRadius: 0
+  m_Size: {x: 375.9, y: 85.45}
+  m_EdgeRadius: 11
 --- !u!111 &111035192824720890
 Animation:
   m_ObjectHideFlags: 1
@@ -104,7 +105,6 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 7ac28c29454e4a34ba558ac8d50b3e3a, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 7ac28c29454e4a34ba558ac8d50b3e3a, type: 2}
-  - {fileID: 7400000, guid: 06c602bc670c9bf49a22c1c9fd6efcd5, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   boatPos: {x: 0, y: 0, z: 0}
   animate: 0
   boatNumber: 0
+  shipWreck: {fileID: 1236889594130948, guid: 518080ab561a3ff4ead1f98d8012ba49, type: 2}
 --- !u!114 &114535255490003012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,14 +139,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.21662426, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b31e04e0d094f314f8c3b4cedb525273, type: 3}
+  m_Sprite: {fileID: 21300000, guid: abf5afe6aa0ee1b42a3b9a3340c01c9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -207,3 +208,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!251 &251063687465115996
+PlatformEffector2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956396136811964}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
