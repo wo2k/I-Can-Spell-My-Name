@@ -90,7 +90,7 @@ public class LevelManagerEditor : Editor {
 
     //Saved Preferences for Settings
 
-    //Level1A
+    
     private SerializedProperty level1Capture;
     private SerializedProperty level1A;
     private SerializedProperty level1B;
@@ -100,7 +100,7 @@ public class LevelManagerEditor : Editor {
 
 
     private SerializedProperty[] level1Name = new SerializedProperty[5];
-   // private SerializedProperty[,] level1Description = new SerializedProperty[5,4];
+   
     private SerializedProperty[] level1Icon = new SerializedProperty[5];
     private SerializedProperty[] level1VideoTexture = new SerializedProperty[5];
     private SerializedProperty[] level1VideoFile = new SerializedProperty[5];
@@ -109,6 +109,26 @@ public class LevelManagerEditor : Editor {
     private SerializedProperty level1Description2;
     private List<SerializedProperty> levelDescriptionCapture = new List<SerializedProperty>();
     private List<SerializedProperty> levelVideoCapture = new List<SerializedProperty>();
+
+    private SerializedProperty level2Capture;
+    private SerializedProperty level2A;
+    private SerializedProperty level2B;
+    private SerializedProperty level2C;
+    private SerializedProperty level2D;
+    private SerializedProperty level2E;
+    private SerializedProperty level2F;
+
+
+    private SerializedProperty[] level2Name = new SerializedProperty[6];
+
+    private SerializedProperty[] level2Icon = new SerializedProperty[6];
+    private SerializedProperty[] level2VideoTexture = new SerializedProperty[6];
+    private SerializedProperty[] level2VideoFile = new SerializedProperty[6];
+    private SerializedProperty[] level2Intro = new SerializedProperty[6];
+    private SerializedProperty[] level2Outro = new SerializedProperty[6];
+    private SerializedProperty level2Description2;
+    private List<SerializedProperty> levelDescriptionCapture2 = new List<SerializedProperty>();
+    private List<SerializedProperty> levelVideoCapture2 = new List<SerializedProperty>();
 
     //GUILayouts
     Texture2D headerTexture;
@@ -147,7 +167,14 @@ public class LevelManagerEditor : Editor {
         level1C = m_Target.FindProperty("level1C");
         level1D = m_Target.FindProperty("level1D");
         level1E = m_Target.FindProperty("level1E");
-       
+
+        level2A = m_Target.FindProperty("level2A");
+        level2B = m_Target.FindProperty("level2B");
+        level2C = m_Target.FindProperty("level2C");
+        level2D = m_Target.FindProperty("level2D");
+        level2E = m_Target.FindProperty("level2E");
+        level2F = m_Target.FindProperty("level2F");
+
         for (int i = 0; i < 5; i++)
         {
             
@@ -183,7 +210,46 @@ public class LevelManagerEditor : Editor {
             levelVideoCapture.Add(AssignRelativeProperty(level1Description2.GetArrayElementAtIndex(i), "videoFile"));
 
         }
-        
+
+        for (int j = 0; j < 6; j++)
+        {
+
+            switch (j)
+            {
+                case 0:
+                    level2Capture = level2A;
+                    break;
+                case 1:
+                    level2Capture = level2B;
+                    break;
+                case 2:
+                    level2Capture = level2C;
+                    break;
+                case 3:
+                    level2Capture = level2D;
+                    break;
+                case 4:
+                    level2Capture = level2E;
+                    break;
+                case 5:
+                    level2Capture = level2F;
+                    break;
+            }
+
+            level2Name[j] = AssignRelativeProperty(level2Capture, "levelName");
+            level2Intro[j] = AssignRelativeProperty(level2Capture, "levelIntro");
+            level2Outro[j] = AssignRelativeProperty(level2Capture, "levelOutro");
+            level2Icon[j] = AssignRelativeProperty(level2Capture, "levelIcon");
+            level2VideoTexture[j] = AssignRelativeProperty(level2Capture, "videoTexture");
+
+            level2VideoFile[j] = AssignRelativeProperty(level2Capture, "videoFile");
+
+            level2Description2 = AssignRelativeProperty(level2Capture, "level");
+            levelDescriptionCapture2.Add(AssignRelativeProperty(level2Description2.GetArrayElementAtIndex(j), "levelDescription"));
+            levelVideoCapture2.Add(AssignRelativeProperty(level2Description2.GetArrayElementAtIndex(j), "videoFile"));
+
+        }
+
         InitTextures();
     }
 

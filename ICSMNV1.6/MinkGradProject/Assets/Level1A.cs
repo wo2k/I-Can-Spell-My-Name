@@ -142,7 +142,7 @@ public class Level1A : MonoBehaviour {
             }
             
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
             gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
@@ -167,7 +167,7 @@ public class Level1A : MonoBehaviour {
                     break;
             }
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
             gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
@@ -192,7 +192,7 @@ public class Level1A : MonoBehaviour {
                     break;
             }
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
             gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();
@@ -217,7 +217,7 @@ public class Level1A : MonoBehaviour {
                     break;
             }
             Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
             gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 3)
                 NextLetter();

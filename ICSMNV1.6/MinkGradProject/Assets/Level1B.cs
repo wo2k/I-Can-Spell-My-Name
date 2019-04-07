@@ -257,7 +257,7 @@ public class Level1B : MonoBehaviour {
                     UIManager.instance.DeductTime(5);
                     break;
             }
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
 
         }
     }
@@ -296,7 +296,7 @@ public class Level1B : MonoBehaviour {
                     UIManager.instance.DeductTime(5);
                     break;
             }
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
      
         }
     }
@@ -333,7 +333,7 @@ public class Level1B : MonoBehaviour {
                     UIManager.instance.DeductTime(5);
                     break;
             }
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
         }
     }
 

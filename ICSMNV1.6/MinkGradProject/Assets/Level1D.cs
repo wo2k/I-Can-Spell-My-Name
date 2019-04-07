@@ -158,7 +158,7 @@ public class Level1D: MonoBehaviour {
         }
         else
         {
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
             GameObject bubbleParticle = Instantiate(bubbleRef, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
             bubbleParticle.transform.position = fish.transform.position;
             Destroy(fish);

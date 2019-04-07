@@ -126,8 +126,8 @@ GameObject:
   - component: {fileID: 25618052}
   - component: {fileID: 25618051}
   m_Layer: 5
-  m_Name: Level3Button (1)
-  m_TagString: Untagged
+  m_Name: Level3Button
+  m_TagString: Level1C
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,6 +164,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
+  isBackButton: 0
 --- !u!114 &25618052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,8 +276,8 @@ GameObject:
   - component: {fileID: 103978840}
   - component: {fileID: 103978839}
   m_Layer: 5
-  m_Name: Level5Button (2)
-  m_TagString: Untagged
+  m_Name: Level6Button
+  m_TagString: Level2F
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -311,6 +314,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
+  isBackButton: 0
 --- !u!114 &103978840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,7 +426,7 @@ GameObject:
   - component: {fileID: 107877911}
   - component: {fileID: 107877910}
   m_Layer: 5
-  m_Name: Level1Button (1)
+  m_Name: Level1Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,6 +464,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
+  isBackButton: 0
 --- !u!114 &107877911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,6 +577,7 @@ GameObject:
   - component: {fileID: 170536205}
   - component: {fileID: 170536204}
   - component: {fileID: 170536210}
+  - component: {fileID: 170536211}
   m_Layer: 5
   m_Name: Level2
   m_TagString: Untagged
@@ -681,6 +691,7 @@ RectTransform:
   - {fileID: 1587418513}
   - {fileID: 1290997410}
   - {fileID: 103978838}
+  - {fileID: 1630309693}
   - {fileID: 2026486333}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -702,6 +713,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonToMode: 0
+--- !u!114 &170536211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170536203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dacfd07f270386347b8b69f69ed90e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previousParent: {fileID: 0}
+  previousParentMode: {fileID: 0}
+  bubblePos: {fileID: 0}
+  m_Seahorse: {fileID: 0}
+  seahorsePos: {fileID: 0}
+  previousLock: {fileID: 0}
+  parentX: 0
+  parentY: 0
+  parentZ: 0
+  levelIcons: []
+  turnPage: 0
+  uiOverlay: {fileID: 0}
+  skipButton: {fileID: 0}
+  infoButton: {fileID: 0}
+  floatingBubbles: {fileID: 0}
+  bubbleQueue: []
+  ccLevelToBeat: {fileID: 0}
+  ccSkipMainLevel: {fileID: 0}
+  ccToggle: {fileID: 0}
+  ccLevelToBeatResult: {fileID: 0}
+  showCheatCodes: 0
 --- !u!1 &254674872
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,8 +936,8 @@ GameObject:
   - component: {fileID: 1185736758}
   - component: {fileID: 1185736757}
   m_Layer: 5
-  m_Name: Level2Button (1)
-  m_TagString: Untagged
+  m_Name: Level2Button
+  m_TagString: Level1B
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -931,6 +974,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
+  isBackButton: 0
 --- !u!114 &1185736758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1129,8 +1175,8 @@ GameObject:
   - component: {fileID: 1290997412}
   - component: {fileID: 1290997411}
   m_Layer: 5
-  m_Name: Level5Button (1)
-  m_TagString: Untagged
+  m_Name: Level5Button
+  m_TagString: Level1E
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1167,6 +1213,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
+  isBackButton: 0
 --- !u!114 &1290997412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,8 +1569,8 @@ GameObject:
   - component: {fileID: 1587418515}
   - component: {fileID: 1587418514}
   m_Layer: 5
-  m_Name: Level4Button (1)
-  m_TagString: Untagged
+  m_Name: Level4Button
+  m_TagString: Level1D
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1558,6 +1607,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 0}
+  anim: {fileID: 0}
+  level: 
+  isBackButton: 0
 --- !u!114 &1587418515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,6 +1706,126 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1587418512}
+--- !u!1001 &1630309692
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 170536209}
+    m_Modifications:
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -875.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 358.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388668620391360, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 170536211}
+    - target: {fileID: 114388668620391360, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SkipLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388668620391360, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: level2Capture
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: dbd60eef5583a5e4397a9ca2a77c264f, type: 2}
+  m_IsPrefabParent: 0
+--- !u!224 &1630309693 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224949101425799382, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1630309692}
 --- !u!1 &1747993136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1836,7 +2008,7 @@ RectTransform:
   m_Children:
   - {fileID: 254674873}
   m_Father: {fileID: 170536209}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1856,6 +2028,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuToGoTo: {fileID: 0}
   CurrentMenu: {fileID: 170536203}
+  anim: {fileID: 0}
+  level: 
+  isBackButton: 0
 --- !u!114 &2026486335
 MonoBehaviour:
   m_ObjectHideFlags: 0

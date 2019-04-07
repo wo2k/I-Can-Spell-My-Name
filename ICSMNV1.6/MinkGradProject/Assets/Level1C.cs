@@ -150,7 +150,7 @@ public class Level1C: MonoBehaviour {
         else
         {
         
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
            
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
@@ -196,7 +196,7 @@ public class Level1C: MonoBehaviour {
         else
         {
           
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
     
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
@@ -241,7 +241,7 @@ public class Level1C: MonoBehaviour {
         else
         {
            // Miss++;
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
            // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {
@@ -298,7 +298,7 @@ public class Level1C: MonoBehaviour {
             speedBoatAnim.transform.localPosition = Vector3.zero;
             speedBoatAnim.Stop();
 
-            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
            // gameStart = false;
             if (LevelManager.instance.correctAnswerPoints < 5)
             {

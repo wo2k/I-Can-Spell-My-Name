@@ -62,6 +62,8 @@ public class LevelManager : MonoBehaviour
     //Sub Levels
     [Header("Sub Level Settings")]
     public Button level1_A, level1_B, level1_C, level1_D, level1_E;
+    public Button level2_A, level2_B, level2_C, level2_D, level2_E, level2_F;
+    public List<Button> subLevelButtons = new List<Button>();
     [SerializeField]
     public LevelSettings level1A;
     public LevelSettings level1B;
@@ -69,6 +71,16 @@ public class LevelManager : MonoBehaviour
     public LevelSettings level1D;
     public LevelSettings level1E;
     public LevelSettings level1Capture;
+    public List<LevelSettings> level1Container = new List<LevelSettings>();
+
+    public LevelSettings level2A;
+    public LevelSettings level2B;
+    public LevelSettings level2C;
+    public LevelSettings level2D;
+    public LevelSettings level2E;
+    public LevelSettings level2F;
+    public LevelSettings level2Capture;
+    public List<LevelSettings> level2Container = new List<LevelSettings>();
     /// <summary>
     /// Utilize to capture level difficulty to beat and place resultant to editor
     /// </summary>
@@ -76,7 +88,7 @@ public class LevelManager : MonoBehaviour
     public Difficulty m_DifficultyCapture;
     public GameObject levelParent;
     public GameObject lockLevel;
-    public int levelPassed, subLevelPassed1;
+    public int levelPassed, subLevelPassed;//, subLevelPassed2;
     public bool locked = true;
     public bool hasLockedBefore = false;
     public bool hasShownStoryAlready = false;
@@ -140,10 +152,14 @@ public class LevelManager : MonoBehaviour
     void LoadPlayerPrefs()
     {
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
-        subLevelPassed1 = PlayerPrefs.GetInt("SubLevelPassed");
+        subLevelPassed = PlayerPrefs.GetInt("SubLevelPassed");
+        //subLevelPassed2 = PlayerPrefs.GetInt("SubLevelPassed2");
 
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
             UIManager.instance.hasWonAlready[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready " + i));
+
+        for (int i = 0; i < UIManager.instance.hasWonAlready2.Length; i++)
+            UIManager.instance.hasWonAlready2[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready2 " + i));
 
         hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
         hasShownStoryAlready = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasShownStoryAlready"));
@@ -200,6 +216,63 @@ public class LevelManager : MonoBehaviour
                 if (PlayerPrefs.HasKey(mode + " levelDescription " + i))
                     level1Capture.levelDescription[i, mode] = PlayerPrefs.GetString(mode + " levelDescription " + i);
             }           
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    level2Capture = level2A;
+                    break;
+                case 1:
+                    level2Capture = level2B;
+                    break;
+                case 2:
+                    level2Capture = level2C;
+                    break;
+                case 3:
+                    level2Capture = level2D;
+                    break;
+                case 4:
+                    level2Capture = level2E;
+                    break;
+                case 5:
+                    level2Capture = level2F;
+                    break;
+            }
+            for (int mode = 0; mode < 4; mode++)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        m_DifficultyCapture = Difficulty.Easy;
+                        break;
+                    case 1:
+                        m_DifficultyCapture = Difficulty.Normal;
+                        break;
+                    case 2:
+                        m_DifficultyCapture = Difficulty.Hard;
+                        break;
+                    case 3:
+                        m_DifficultyCapture = Difficulty.Genius;
+                        break;
+                }
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore2 " + i))
+                    level2Capture.highScore[i, mode] = PlayerPrefs.GetFloat(m_DifficultyCapture + " HighScore2 " + i);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " ModePassed2 " + i))
+                    level2Capture.modePassed = PlayerPrefs.GetInt(m_DifficultyCapture + " ModePassed2 " + i);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasLockedBefore2 " + i))
+                    level2Capture.hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasLockedBefore2 " + i));
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasWonAlready2 " + i))
+                    level2Capture.hasWonAlready[i, mode] = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasWonAlready2 " + i));
+
+                if (PlayerPrefs.HasKey(mode + " levelDescription2 " + i))
+                    level2Capture.levelDescription[i, mode] = PlayerPrefs.GetString(mode + " levelDescription2 " + i);
+            }
         }
     }
 
@@ -258,10 +331,73 @@ public class LevelManager : MonoBehaviour
             }              
         }
 
-        if(PlayerPrefs.HasKey("SubLevelPassed")) PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
+        for (int i = 0; i < 6; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    level2Capture = level2A;
+                    break;
+                case 1:
+                    level2Capture = level2B;
+                    break;
+                case 2:
+                    level2Capture = level2C;
+                    break;
+                case 3:
+                    level2Capture = level2D;
+                    break;
+                case 4:
+                    level2Capture = level2E;
+                    break;
+                case 5:
+                    level2Capture = level2F;
+                    break;
+            }
+
+            for (int mode = 0; mode < 4; mode++)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        m_DifficultyCapture = Difficulty.Easy;
+                        break;
+                    case 1:
+                        m_DifficultyCapture = Difficulty.Normal;
+                        break;
+                    case 2:
+                        m_DifficultyCapture = Difficulty.Hard;
+                        break;
+                    case 3:
+                        m_DifficultyCapture = Difficulty.Genius;
+                        break;
+                }
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore2 " + i))
+                    PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore2 " + i, level2Capture.highScore[i, mode]);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " ModePassed2 " + i))
+                    PlayerPrefs.SetInt(m_DifficultyCapture + " ModePassed2 " + i, level2Capture.modePassed);
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasLockedBefore2 " + i))
+                    PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore2 " + i, UIManager.instance.BoolToInt(level2Capture.hasLockedBefore));
+
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasWonAlready2 " + i))
+                    PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready2 " + i, UIManager.instance.BoolToInt(level2Capture.hasWonAlready[i, mode]));
+            }
+        }
+
+        //if (PlayerPrefs.HasKey("SubLevelPassed2")) PlayerPrefs.SetInt("SubLevelPassed2", subLevelPassed2);
+        
+
+        if (PlayerPrefs.HasKey("SubLevelPassed")) PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed);
         if (PlayerPrefs.HasKey("LevelPassed")) PlayerPrefs.SetInt("LevelPassed", levelPassed);
+
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
             if (PlayerPrefs.HasKey("HasWonAlready " + i)) PlayerPrefs.SetInt("HasWonAlready " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
+
+        for (int i = 0; i < UIManager.instance.hasWonAlready2.Length; i++)
+            if (PlayerPrefs.HasKey("HasWonAlready2 " + i)) PlayerPrefs.SetInt("HasWonAlready2 " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready2[i]));
+
         if (PlayerPrefs.HasKey("HasLockedBefore")) PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
         if (PlayerPrefs.HasKey("HasShownStoryAlready")) PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(hasShownStoryAlready));
 
@@ -270,11 +406,15 @@ public class LevelManager : MonoBehaviour
 
     void ResetPlayerPrefs()
     {
-        subLevelPassed1 = 0; 
+        subLevelPassed = 0;
+        //subLevelPassed2 = 0;
         levelPassed = 0; 
 
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
-            UIManager.instance.hasWonAlready[i] = false;            
+            UIManager.instance.hasWonAlready[i] = false;
+
+        for (int i = 0; i < UIManager.instance.hasWonAlready2.Length; i++)
+            UIManager.instance.hasWonAlready2[i] = false;
 
         hasLockedBefore = false;
         hasShownStoryAlready = false;
@@ -326,41 +466,122 @@ public class LevelManager : MonoBehaviour
             }           
         }
 
+        for (int i = 0; i < 6; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    level2Capture = level2A;
+                    break;
+                case 1:
+                    level2Capture = level2B;
+                    break;
+                case 2:
+                    level2Capture = level2C;
+                    break;
+                case 3:
+                    level2Capture = level2D;
+                    break;
+                case 4:
+                    level2Capture = level2E;
+                    break;
+                case 5:
+                    level2Capture = level2F;
+                    break;
+            }
+            level2Capture.modePassed = 0;
+            level2Capture.hasLockedBefore = false;
+
+            for (int mode = 0; mode < 4; mode++)
+            {
+                level2Capture.highScore[i, mode] = 0;
+                level2Capture.hasWonAlready[i, mode] = false;
+            }
+        }
+
         SavePlayerPrefs();
     }
 
-    public void SetNewHighScore(UIManager.subLevels1 level, Difficulty levelDifficulty)
+    public void SetNewHighScore(int subLevel, Difficulty levelDifficulty)
     {
-        for (int i = 0; i < 5; i++)
+        if ((SceneManager.GetActiveScene().name.ToString().Contains("Level1")))
         {
-           if(level == (UIManager.subLevels1)i)
+            for (int i = 0; i < subLevel; i++)
             {
-                switch (i)
+                if ((SceneManager.GetActiveScene().name.ToString().Contains("Level1")))
                 {
-                    case 0:
-                        level1Capture = level1A;
-                        break;
-                    case 1:
-                        level1Capture = level1B;
-                        break;
-                    case 2:
-                        level1Capture = level1C;
-                        break;
-                    case 3:
-                        level1Capture = level1D;
-                        break;
-                    case 4:
-                        level1Capture = level1E;
-                        break;
-                }
-                for (int mode = 0; mode < 4; mode++)
-                {
-                   if(levelDifficulty == (Difficulty)mode)
+                    if (UIManager.instance.mode == (UIManager.subLevels1)i)
                     {
-                        if (UIManager.instance.score > level1Capture.highScore[i, mode])
+                        switch (i)
                         {
-                            level1Capture.highScore[i, mode] = UIManager.instance.score;
-                            PlayerPrefs.SetFloat(levelDifficulty + " HighScore " + i, level1Capture.highScore[i, mode]);
+                            case 0:
+                                level1Capture = level1A;
+                                break;
+                            case 1:
+                                level1Capture = level1B;
+                                break;
+                            case 2:
+                                level1Capture = level1C;
+                                break;
+                            case 3:
+                                level1Capture = level1D;
+                                break;
+                            case 4:
+                                level1Capture = level1E;
+                                break;
+                        }
+                        for (int mode = 0; mode < 4; mode++)
+                        {
+                            if (levelDifficulty == (Difficulty)mode)
+                            {
+                                if (UIManager.instance.score > level1Capture.highScore[i, mode])
+                                {
+                                    level1Capture.highScore[i, mode] = UIManager.instance.score;
+                                    PlayerPrefs.SetFloat(levelDifficulty + " HighScore " + i, level1Capture.highScore[i, mode]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if ((SceneManager.GetActiveScene().name.ToString().Contains("Level2")))
+        {
+            for (int i = 0; i < subLevel; i++)
+            {
+                if (UIManager.instance.mode2 == (UIManager.subLevels2)i)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            level2Capture = level2A;
+                            break;
+                        case 1:
+                            level2Capture = level2B;
+                            break;
+                        case 2:
+                            level2Capture = level2C;
+                            break;
+                        case 3:
+                            level2Capture = level2D;
+                            break;
+                        case 4:
+                            level2Capture = level2E;
+                            break;
+                        case 5:
+                            level2Capture = level2F;
+                            break;
+                    }
+                    for (int mode = 0; mode < 4; mode++)
+                    {
+                        if (levelDifficulty == (Difficulty)mode)
+                        {
+                            if (UIManager.instance.score > level2Capture.highScore[i, mode])
+                            {
+                                level2Capture.highScore[i, mode] = UIManager.instance.score;
+                                PlayerPrefs.SetFloat(levelDifficulty + " HighScore2 " + i, level2Capture.highScore[i, mode]);
+                            }
                         }
                     }
                 }
@@ -368,38 +589,80 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void GetHighScore(UIManager.subLevels1 level, Difficulty levelDifficulty, Text highscore)
+    public void GetHighScore(int subLevel, Difficulty levelDifficulty, Text highscore)
     {
-        for (int i = 0; i < 5; i++)
+        if ((SceneManager.GetActiveScene().name.ToString().Contains("Level1")))
         {
-            if (level == (UIManager.subLevels1)i)
+            for (int i = 0; i < subLevel; i++)
             {
-                switch (i)
+                if (UIManager.instance.mode == (UIManager.subLevels1)i)
                 {
-                    case 0:
-                        level1Capture = level1A;
-                        break;
-                    case 1:
-                        level1Capture = level1B;
-                        break;
-                    case 2:
-                        level1Capture = level1C;
-                        break;
-                    case 3:
-                        level1Capture = level1D;
-                        break;
-                    case 4:
-                        level1Capture = level1E;
-                        break;
-                }
-                for (int mode = 0; mode < 4; mode++)
-                {
-                    if (levelDifficulty == (Difficulty)mode)
+                    switch (i)
                     {
-                        level1Capture.highScore[i, mode] = PlayerPrefs.GetFloat(levelDifficulty + " HighScore " + i);
-                        highscore.text = level1Capture.highScore[i, mode].ToString();
-                    }         
-                }                            
+                        case 0:
+                            level1Capture = level1A;
+                            break;
+                        case 1:
+                            level1Capture = level1B;
+                            break;
+                        case 2:
+                            level1Capture = level1C;
+                            break;
+                        case 3:
+                            level1Capture = level1D;
+                            break;
+                        case 4:
+                            level1Capture = level1E;
+                            break;
+                    }
+                    for (int mode = 0; mode < 4; mode++)
+                    {
+                        if (levelDifficulty == (Difficulty)mode)
+                        {
+                            level1Capture.highScore[i, mode] = PlayerPrefs.GetFloat(levelDifficulty + " HighScore " + i);
+                            highscore.text = level1Capture.highScore[i, mode].ToString();
+                        }
+                    }
+                }
+            }
+        }
+
+        if ((SceneManager.GetActiveScene().name.ToString().Contains("Level2")))
+        {
+            for (int i = 0; i < subLevel; i++)
+            {
+                if (UIManager.instance.mode2 == (UIManager.subLevels2)i)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            level2Capture = level2A;
+                            break;
+                        case 1:
+                            level2Capture = level2B;
+                            break;
+                        case 2:
+                            level2Capture = level2C;
+                            break;
+                        case 3:
+                            level2Capture = level2D;
+                            break;
+                        case 4:
+                            level2Capture = level2E;
+                            break;
+                        case 5:
+                            level2Capture = level2F;
+                            break;
+                    }
+                    for (int mode = 0; mode < 4; mode++)
+                    {
+                        if (levelDifficulty == (Difficulty)mode)
+                        {
+                            level2Capture.highScore[i, mode] = PlayerPrefs.GetFloat(levelDifficulty + " HighScore2 " + i);
+                            highscore.text = level2Capture.highScore[i, mode].ToString();
+                        }
+                    }
+                }
             }
         }
     }
@@ -431,18 +694,26 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
+        level1Container.Add(level1A);
+        level1Container.Add(level1B);
+        level1Container.Add(level1C);
+        level1Container.Add(level1D);
+        level1Container.Add(level1E);
+
+        level2Container.Add(level2A);
+        level2Container.Add(level2B);
+        level2Container.Add(level2C);
+        level2Container.Add(level2D);
+        level2Container.Add(level2E);
+        level2Container.Add(level2F);
+
+        
     }
 
     private void OnApplicationQuit()
     {
-        //SavePlayerPrefs();
+       
         UIManager.instance.inGame = false;
-
-      /*  foreach (GameObject item in FindObjectsOfType<GameObject>())
-        {
-            if (item.scene == SceneManager.GetActiveScene())
-                Destroy(item);
-        }*/
     }
 
     public void SetIconOpacity(Button levelBtn, float alpha, bool interactable)
@@ -505,7 +776,7 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case "Level1":
-                switch (subLevelPassed1)
+                switch (subLevelPassed)
                 {
                     case 1: //Lock B
                         SetIconOpacity(level1_B, 1f, true);
@@ -690,13 +961,72 @@ public class LevelManager : MonoBehaviour
             }                
         }
 
-        subLevelPassed1 = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed1);
+        for (int i = 0; i < 6; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    level2Capture = level2A;
+                    break;
+                case 1:
+                    level2Capture = level2B;
+                    break;
+                case 2:
+                    level2Capture = level2C;
+                    break;
+                case 3:
+                    level2Capture = level2D;
+                    break;
+                case 4:
+                    level2Capture = level2E;
+                    break;
+                case 5:
+                    level2Capture = level2F;
+                    break;
+            }
+            for (int mode = 0; mode < 4; mode++)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        m_DifficultyCapture = Difficulty.Easy;
+                        break;
+                    case 1:
+                        m_DifficultyCapture = Difficulty.Normal;
+                        break;
+                    case 2:
+                        m_DifficultyCapture = Difficulty.Hard;
+                        break;
+                    case 3:
+                        m_DifficultyCapture = Difficulty.Genius;
+                        break;
+                }
+                level2Capture.modePassed = 0; PlayerPrefs.SetInt(m_DifficultyCapture + " ModePassed2 " + i, level2Capture.modePassed);
+                level2Capture.hasLockedBefore = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore2 " + i, UIManager.instance.BoolToInt(level2Capture.hasLockedBefore));
+                level2Capture.hasWonAlready[i, mode] = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready2 " + i, UIManager.instance.BoolToInt(level2Capture.hasWonAlready[i, mode]));
+                level2Capture.locked = true;
+                level2Capture.highScore[i, mode] = 0;
+                if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore2 " + i))
+                    PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore2 " + i, level2Capture.highScore[i, mode]);
+            }
+        }
+
+        subLevelPassed = 0; PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed);
+        //subLevelPassed2 = 0; PlayerPrefs.SetInt("SubLevelPassed2", subLevelPassed2);
         levelPassed = 0; PlayerPrefs.SetInt("LevelPassed", levelPassed);
+
         for (int i = 0; i < UIManager.instance.hasWonAlready.Length; i++)
         {
             UIManager.instance.hasWonAlready[i] = false;
             PlayerPrefs.SetInt("HasWonAlready " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready[i]));
         }
+
+        for (int i = 0; i < UIManager.instance.hasWonAlready2.Length; i++)
+        {
+            UIManager.instance.hasWonAlready2[i] = false;
+            PlayerPrefs.SetInt("HasWonAlready2 " + i, UIManager.instance.BoolToInt(UIManager.instance.hasWonAlready2[i]));
+        }
+
         hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
         hasShownStoryAlready = false; PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(hasShownStoryAlready));
 
@@ -775,7 +1105,7 @@ public class LevelManager : MonoBehaviour
 #endif
 
     #region CheckAnswer
-    public void CheckAnswer(bool isCorrect, int heartsQty)
+    public void CheckAnswer(bool isCorrect, int heartsQty, int subLevel)
     {
         if (isCorrect)
         {
@@ -783,7 +1113,7 @@ public class LevelManager : MonoBehaviour
             correctAnswerPoints++;
 
             if (correctAnswerPoints >= 3)
-                UIManager.instance.WinGame();
+                UIManager.instance.WinGame(subLevel);
 
             else
                 UIManager.instance.InstantiateBubble(isCorrect);
@@ -807,7 +1137,7 @@ public class LevelManager : MonoBehaviour
         UIManager.instance.heartsAmount = heartsQty;
     }
 
-    public void CheckAnswer(bool isCorrect, int heartsQty, Animator seahorseAnim)
+    public void CheckAnswer(bool isCorrect, int heartsQty, Animator seahorseAnim, int subLevel)
     {
 
 
@@ -818,7 +1148,7 @@ public class LevelManager : MonoBehaviour
             seahorseAnim.SetTrigger("Wink");
             seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= 3)
-                UIManager.instance.WinGame();
+                UIManager.instance.WinGame(subLevel);
             else
                 UIManager.instance.InstantiateBubble(true);
         }
@@ -848,7 +1178,7 @@ public class LevelManager : MonoBehaviour
         UIManager.instance.heartsAmount = heartsQty;
     }
 
-    public void CheckAnswer(bool isCorrect)
+    public void CheckAnswer(bool isCorrect, int subLevel)
     {
         if (isCorrect)
         {
@@ -856,7 +1186,7 @@ public class LevelManager : MonoBehaviour
             correctAnswerPoints++;
 
             if (correctAnswerPoints >= 3)
-                UIManager.instance.WinGame();
+                UIManager.instance.WinGame(subLevel);
             else
                 UIManager.instance.InstantiateBubble(isCorrect);
         }
@@ -871,7 +1201,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void CheckAnswer(bool isCorrect, bool needsPointsToWin, Animator seahorseAnim)
+    public void CheckAnswer(bool isCorrect, bool needsPointsToWin, Animator seahorseAnim, int subLevel)
     {
 
 
@@ -883,7 +1213,7 @@ public class LevelManager : MonoBehaviour
             seahorseAnim.SetTrigger("Idle");
 
             if (needsPointsToWin && correctAnswerPoints >= 3)
-                UIManager.instance.WinGame();
+                UIManager.instance.WinGame(subLevel);
             else
               UIManager.instance.InstantiateBubble(isCorrect);
         }
@@ -898,7 +1228,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void CheckAnswer(bool isCorrect, Animator seahorseAnim, int answerAmount)
+    public void CheckAnswer(bool isCorrect, Animator seahorseAnim, int answerAmount, int subLevel)
     {
 
 
@@ -909,7 +1239,7 @@ public class LevelManager : MonoBehaviour
             seahorseAnim.SetTrigger("Wink");
             seahorseAnim.SetTrigger("Idle");
             if (correctAnswerPoints >= answerAmount)
-                UIManager.instance.WinGame();
+                UIManager.instance.WinGame(subLevel);
             else
                 UIManager.instance.InstantiateBubble(isCorrect);
         }

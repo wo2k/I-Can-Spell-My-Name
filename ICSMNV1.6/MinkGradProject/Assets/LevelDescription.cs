@@ -44,44 +44,93 @@ public class LevelDescription : MonoBehaviour {
                 break;
         }
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels1)).Length; i++)
+        if (UIManager.instance.mode <= UIManager.subLevels1.Level1E && UIManager.instance.mode2 == UIManager.subLevels2.None)
         {
-            if (UIManager.instance.mode == (UIManager.subLevels1)i)
+            for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels1)).Length; i++)
             {
-                switch (i)
+                if (UIManager.instance.mode == (UIManager.subLevels1)i)
                 {
-                    case 0:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                        break;
-                    case 1:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                        break;
-                    case 2:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                        break;
-                    case 3:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                        break;
-                    case 4:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
-                        break;
-                }
-
-                levelName.text = LevelManager.instance.level1Capture.levelName;
-                levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level1Capture.levelIcon;
-
-                for (int j = 0; j < levelModes.transform.childCount; j++)
-                    levelModes.transform.GetChild(j).GetComponent<Image>().sprite = LevelManager.instance.level1Capture.levelIcon;
-              
-
-                for (int modes = 0; modes < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; modes++)
-                {
-                    if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)modes)
+                    switch (i)
                     {
-                        LevelManager.instance.GetHighScore(UIManager.instance.mode, LevelManager.instance.m_Difficulty, highscore);
-                        modeText.text = LevelManager.instance.level1Capture.level[i].levelDescription[modes].ToString();
+                        case 0:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                            break;
+                        case 1:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                            break;
+                        case 2:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                            break;
+                        case 3:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                            break;
+                        case 4:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                            break;
+                    }
 
-                        videoFile.clip = LevelManager.instance.level1Capture.level[i].videoFile[modes];
+                    levelName.text = LevelManager.instance.level1Capture.levelName;
+                    levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level1Capture.levelIcon;
+
+                    for (int j = 0; j < levelModes.transform.childCount; j++)
+                        levelModes.transform.GetChild(j).GetComponent<Image>().sprite = LevelManager.instance.level1Capture.levelIcon;
+
+
+                    for (int modes = 0; modes < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; modes++)
+                    {
+                        if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)modes)
+                        {
+                            LevelManager.instance.GetHighScore(System.Enum.GetValues(typeof(UIManager.subLevels1)).Length, LevelManager.instance.m_Difficulty, highscore);
+                            modeText.text = LevelManager.instance.level1Capture.level[i].levelDescription[modes].ToString();
+
+                            videoFile.clip = LevelManager.instance.level1Capture.level[i].videoFile[modes];
+                        }
+                    }
+                }
+            }
+        }
+
+        if (UIManager.instance.mode2 <= UIManager.subLevels2.Level2F && UIManager.instance.mode == UIManager.subLevels1.None)
+        {
+            for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels2)).Length; i++)
+            {
+                if (UIManager.instance.mode2 == (UIManager.subLevels2)i)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1A;
+                            break;
+                        case 1:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1B;
+                            break;
+                        case 2:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1C;
+                            break;
+                        case 3:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1D;
+                            break;
+                        case 4:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1E;
+                            break;
+                    }
+
+                    levelName.text = LevelManager.instance.level2Capture.levelName;
+                    levelIcon.GetComponent<Image>().sprite = LevelManager.instance.level2Capture.levelIcon;
+
+                    for (int j = 0; j < levelModes.transform.childCount; j++)
+                        levelModes.transform.GetChild(j).GetComponent<Image>().sprite = LevelManager.instance.level2Capture.levelIcon;
+
+
+                    for (int modes = 0; modes < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; modes++)
+                    {
+                        if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)modes)
+                        {
+                            LevelManager.instance.GetHighScore(System.Enum.GetValues(typeof(UIManager.subLevels2)).Length, LevelManager.instance.m_Difficulty, highscore);
+                            modeText.text = LevelManager.instance.level2Capture.level[i].levelDescription[modes].ToString();
+
+                            videoFile.clip = LevelManager.instance.level2Capture.level[i].videoFile[modes];
+                        }
                     }
                 }
             }

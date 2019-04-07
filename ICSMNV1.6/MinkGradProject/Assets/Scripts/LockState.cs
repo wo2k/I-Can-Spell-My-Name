@@ -11,6 +11,7 @@ public class LockState : MonoBehaviour {
     public float animTime;
     public Button[] btnObjs;
     public GameObject levelParent;
+    public GameObject levelParent2;
 
     void Start()
     {
@@ -42,6 +43,36 @@ public class LockState : MonoBehaviour {
 
             }
         }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels2)).Length; i++)
+        {
+            if (UIManager.instance.mode2 == (UIManager.subLevels2)i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        LevelManager.instance.level2Capture = LevelManager.instance.level2A;
+                        break;
+                    case 1:
+                        LevelManager.instance.level2Capture = LevelManager.instance.level2B;
+                        break;
+                    case 2:
+                        LevelManager.instance.level2Capture = LevelManager.instance.level2C;
+                        break;
+                    case 3:
+                        LevelManager.instance.level2Capture = LevelManager.instance.level2D;
+                        break;
+                    case 4:
+                        LevelManager.instance.level2Capture = LevelManager.instance.level2E;
+                        break;
+                    case 5:
+                        LevelManager.instance.level2Capture = LevelManager.instance.level2F;
+                        break;
+                }
+                levelParent2 = LevelManager.instance.level2Capture.levelParent;
+
+            }
+        }
     }
 
 
@@ -56,30 +87,66 @@ public class LockState : MonoBehaviour {
 
         if (UIManager.instance.levelName == "LevelDescription")
         {
-            for (int i = 0; i < 5; i++)
+            if (UIManager.instance.mode <= UIManager.subLevels1.Level1E && UIManager.instance.mode2 == UIManager.subLevels2.None)
             {
-                if (UIManager.instance.mode == (UIManager.subLevels1)i)
+                for (int i = 0; i < 5; i++)
                 {
-                    switch (i)
+                    if (UIManager.instance.mode == (UIManager.subLevels1)i)
                     {
-                        case 0:
-                            LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                            break;
-                        case 1:
-                            LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                            break;
-                        case 2:
-                            LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                            break;
-                        case 3:
-                            LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                            break;
-                        case 4:
-                            LevelManager.instance.level1Capture = LevelManager.instance.level1E;
-                            break;
-                    }
+                        switch (i)
+                        {
+                            case 0:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                                break;
+                            case 1:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                                break;
+                            case 2:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                                break;
+                            case 3:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                                break;
+                            case 4:
+                                LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                                break;
+                        }
 
-                    SetState(LevelManager.instance.level1Capture.locked);
+                        SetState(LevelManager.instance.level1Capture.locked);
+                    }
+                }
+            }
+
+            if (UIManager.instance.mode2 <= UIManager.subLevels2.Level2F && UIManager.instance.mode == UIManager.subLevels1.None)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    if (UIManager.instance.mode2 == (UIManager.subLevels2)i)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                LevelManager.instance.level2Capture = LevelManager.instance.level2A;
+                                break;
+                            case 1:
+                                LevelManager.instance.level2Capture = LevelManager.instance.level2B;
+                                break;
+                            case 2:
+                                LevelManager.instance.level2Capture = LevelManager.instance.level2C;
+                                break;
+                            case 3:
+                                LevelManager.instance.level2Capture = LevelManager.instance.level2D;
+                                break;
+                            case 4:
+                                LevelManager.instance.level2Capture = LevelManager.instance.level2E;
+                                break;
+                            case 5:
+                                LevelManager.instance.level2Capture = LevelManager.instance.level2F;
+                                break;
+                        }
+
+                        SetState(LevelManager.instance.level2Capture.locked);
+                    }
                 }
             }
         } 
@@ -115,62 +182,124 @@ public class LockState : MonoBehaviour {
                     LevelManager.instance.lockLevel = null;
                     Destroy(gameObject);
                     SetButtonsInteractable(true);
-                    if (LevelManager.instance.subLevelPassed1 < 4)
+                    if (LevelManager.instance.subLevelPassed < 4)
                         LevelManager.instance.lockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.levelParent.transform);
 
                     LevelManager.instance.CheckLevelState(true);
                     LevelManager.instance.locked = true;
 
                     if (!LevelManager.instance.hasShownStoryAlready)
-                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false));
+                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false, LevelManager.instance.level1Capture));
                     else
                         FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false);
 
                 }
+
+                if(UIManager.instance.levelName == "Level2")
+                {
+                    LevelManager.instance.lockLevel = null;
+                    Destroy(gameObject);
+                    SetButtonsInteractable(true);
+                    if (LevelManager.instance.subLevelPassed < 10)
+                        LevelManager.instance.lockLevel = LevelManager.instance.InstantiateLock(LevelManager.instance.levelParent.transform);
+
+                    LevelManager.instance.CheckLevelState(true);
+                    LevelManager.instance.locked = true;
+
+                    if (!LevelManager.instance.hasShownStoryAlready)
+                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false, LevelManager.instance.level2Capture));
+                    else
+                        FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false);
+
+                }
+
                 if (UIManager.instance.levelName == "LevelDescription")
                 {
-                    for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels1)).Length; i++)
+                    if (UIManager.instance.mode <= UIManager.subLevels1.Level1E && UIManager.instance.mode2 == UIManager.subLevels2.None)
                     {
-                        if (UIManager.instance.mode == (UIManager.subLevels1)i)
+                        for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels1)).Length; i++)
                         {
-                            switch (i)
+                            if (UIManager.instance.mode == (UIManager.subLevels1)i)
                             {
-                                case 0:
-                                    LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                                    break;
-                                case 1:
-                                    LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                                    break;
-                                case 2:
-                                    LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                                    break;
-                                case 3:
-                                    LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                                    break;
-                                case 4:
-                                    LevelManager.instance.level1Capture = LevelManager.instance.level1E;
-                                    break;
+                                switch (i)
+                                {
+                                    case 0:
+                                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                                        break;
+                                    case 1:
+                                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                                        break;
+                                    case 2:
+                                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                                        break;
+                                    case 3:
+                                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                                        break;
+                                    case 4:
+                                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                                        break;
+                                }
+                                LevelManager.instance.level1Capture.lockMode = null;
+                                Destroy(gameObject);
+                                SetButtonsInteractable(true);
+                                if (LevelManager.instance.level1Capture.modePassed < 3)
+                                    LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
+
+                                LevelManager.instance.CheckLevelState(true);
+                                LevelManager.instance.level1Capture.locked = true;
+
+                                UIManager.instance.MakeDifficultyButtonGlow(true);
                             }
-                            LevelManager.instance.level1Capture.lockMode = null;
-                            Destroy(gameObject);
-                            SetButtonsInteractable(true);
-                            if (LevelManager.instance.level1Capture.modePassed < 3)
-                                LevelManager.instance.level1Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level1Capture.levelParent.transform);
+                        }
+                    }
 
-                            LevelManager.instance.CheckLevelState(true);
-                            LevelManager.instance.level1Capture.locked = true;
+                    if (UIManager.instance.mode2 <= UIManager.subLevels2.Level2F && UIManager.instance.mode == UIManager.subLevels1.None)
+                    {
+                        for (int i = 0; i < System.Enum.GetValues(typeof(UIManager.subLevels2)).Length; i++)
+                        {
+                            if (UIManager.instance.mode2 == (UIManager.subLevels2)i)
+                            {
+                                switch (i)
+                                {
+                                    case 0:
+                                        LevelManager.instance.level2Capture = LevelManager.instance.level2A;
+                                        break;
+                                    case 1:
+                                        LevelManager.instance.level2Capture = LevelManager.instance.level2B;
+                                        break;
+                                    case 2:
+                                        LevelManager.instance.level2Capture = LevelManager.instance.level2C;
+                                        break;
+                                    case 3:
+                                        LevelManager.instance.level2Capture = LevelManager.instance.level2D;
+                                        break;
+                                    case 4:
+                                        LevelManager.instance.level2Capture = LevelManager.instance.level2E;
+                                        break;
+                                    case 5:
+                                        LevelManager.instance.level2Capture = LevelManager.instance.level2F;
+                                        break;
+                                }
+                                LevelManager.instance.level2Capture.lockMode = null;
+                                Destroy(gameObject);
+                                SetButtonsInteractable(true);
+                                if (LevelManager.instance.level2Capture.modePassed < 3)
+                                    LevelManager.instance.level2Capture.lockMode = LevelManager.instance.InstantiateLock(LevelManager.instance.level2Capture.levelParent.transform);
 
-                            UIManager.instance.MakeDifficultyButtonGlow();
+                                LevelManager.instance.CheckLevelState(true);
+                                LevelManager.instance.level2Capture.locked = true;
+
+                                UIManager.instance.MakeDifficultyButtonGlow(false);
+                            }
                         }
                     }
                 }
-              //  LevelManager.instance.SavePlayerPrefs();
+            
             }
         }
         else
         {
-           // if (gameObject)
-             //   Destroy(gameObject);
+           
         }
     }
 

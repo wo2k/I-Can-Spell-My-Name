@@ -59,7 +59,7 @@ public class DestroyItem : MonoBehaviour {
                 if (UIManager.instance.inGame && boatDestroyed)
                 {
                     level1E.AnswerCorrect = false;
-                    LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim);
+                    LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, (int)UIManager.instance.mode);
                     boatDestroyed = false;
                 }
                 else

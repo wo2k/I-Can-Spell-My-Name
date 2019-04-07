@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         UIManager.instance.mode = UIManager.subLevels1.None;
+        UIManager.instance.mode2 = UIManager.subLevels2.None;
 
         int LoginNumber = PlayerPrefs.GetInt("loginNumber");
 		string temp = "fixthis"; 

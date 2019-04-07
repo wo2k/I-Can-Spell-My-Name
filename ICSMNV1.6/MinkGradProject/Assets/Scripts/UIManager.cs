@@ -76,8 +76,12 @@ public class UIManager : MonoBehaviour {
     
     public enum subLevels1 { Level1A, Level1B, Level1C, Level1D, Level1E, None };
     public subLevels1 mode;
+    public enum subLevels2 { Level2A, Level2B, Level2C, Level2D, Level2E, Level2F, None };
+    public subLevels2 mode2;
     public bool[] hasWonAlready = { false, false, false, false, false };
+    public bool[] hasWonAlready2 = { false, false, false, false, false };
     public int hasWonIndex;
+    public int hasWonIndex2;
     public int hasWonDifficultyIndex;
     [HideInInspector]
     public bool gameStart = false;
@@ -174,84 +178,177 @@ public class UIManager : MonoBehaviour {
         inGame = false;
     }
 
-    public void WinGame()
+    public void WinGame(int subLevel)
     {
         SoundManagement.TriggerEvent("PlayLevelComplete");
         winScreen.SetActive(true);
         gameStart = false;
         hasWonIndex = (int)mode;
+        hasWonIndex2 = (int)mode2;
         hasWonDifficultyIndex = (int)LevelManager.instance.m_Difficulty;
-        LevelManager.instance.SetNewHighScore(mode, LevelManager.instance.m_Difficulty);
+        
         Time.timeScale = 0;
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
+        for (int i = 0; i < subLevel; i++)
         {
-            if (mode == (subLevels1)i)
+            if ((SceneManager.GetActiveScene().name.ToString().Contains("Level1")))
             {
-                switch (i)
+                if (mode == (subLevels1)i)
                 {
-                    case 0:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                        break;
-                    case 1:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                        break;
-                    case 2:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                        break;
-                    case 3:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                        break;
-                    case 4:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
-                        if (FindObjectOfType<CannonBall>())
-                            Destroy(FindObjectOfType<CannonBall>());
-
-                        FindObjectOfType<Level1E>().lockedOntoBoat = false;
-                        break;
-                }
-
-                for (int j = 0; j < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; j++)
-                {
-                    if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)j)
+                    switch (i)
                     {
-                        switch (j)
-                        {
-                            case 0:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
-                                break;
-                            case 1:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
-                                break;
-                            case 2:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
-                                if (!hasWonAlready[hasWonIndex])
-                                {
-                                    hasWonAlready[hasWonIndex] = true;
-                                    LevelManager.instance.subLevelPassed1++;
-                                    PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed1);
-                                    PlayerPrefs.SetInt("HasWonAlready " + i, BoolToInt(hasWonAlready[hasWonIndex]));
-                                    LevelManager.instance.hasLockedBefore = false;
-                                    LevelManager.instance.hasShownStoryAlready = false;
-                                    PlayerPrefs.SetInt("HasShownStoryAlready", BoolToInt(LevelManager.instance.hasShownStoryAlready));
-                                }
-                                break;
-                            case 3:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
-                                break;
-                        }
+                        case 0:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                            break;
+                        case 1:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                            break;
+                        case 2:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                            break;
+                        case 3:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                            break;
+                        case 4:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                            if (FindObjectOfType<CannonBall>())
+                                Destroy(FindObjectOfType<CannonBall>());
 
-                        if (!LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex,hasWonDifficultyIndex])
+                            FindObjectOfType<Level1E>().lockedOntoBoat = false;
+                            break;
+                    }
+
+                    LevelManager.instance.SetNewHighScore(System.Enum.GetValues(typeof(subLevels1)).Length, LevelManager.instance.m_Difficulty);
+
+                    for (int j = 0; j < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; j++)
+                    {
+                        if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)j)
                         {
-                            LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex,hasWonDifficultyIndex] = true;
-                            LevelManager.instance.level1Capture.modePassed++;
-                            PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " ModePassed " + i, LevelManager.instance.level1Capture.modePassed);
-                            PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex,hasWonDifficultyIndex]));
-                            LevelManager.instance.level1Capture.hasLockedBefore = false;
-                            LevelManager.instance.level1Capture.m_DifficultyToBeat = (LevelSettings.DifficultyToBeat)LevelManager.instance.level1Capture.modePassed;
+                            switch (j)
+                            {
+                                case 0:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
+                                    break;
+                                case 1:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
+                                    break;
+                                case 2:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
+                                    if (!hasWonAlready[hasWonIndex])
+                                    {
+                                        hasWonAlready[hasWonIndex] = true;
+                                        if (mode != subLevels1.Level1E)
+                                        {
+                                            LevelManager.instance.subLevelPassed++;
+                                            PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed);
+                                        }
+                                        else
+                                        {
+                                            LevelManager.instance.levelPassed++;
+                                            PlayerPrefs.SetInt("LevelPassed", LevelManager.instance.levelPassed);
+                                            LevelManager.instance.subLevelPassed++;
+                                            PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed);
+                                            LevelManager.instance.m_MainLevelToBeat = (LevelManager.MainLevelToBeat)LevelManager.instance.levelPassed;
+                                        }
+                                        LevelManager.instance.m_LevelToBeat = (LevelManager.LevelToBeat)LevelManager.instance.subLevelPassed;
+                                        PlayerPrefs.SetInt("HasWonAlready " + i, BoolToInt(hasWonAlready[hasWonIndex]));
+                                        LevelManager.instance.hasLockedBefore = false;
+                                        LevelManager.instance.hasShownStoryAlready = false;
+                                        PlayerPrefs.SetInt("HasShownStoryAlready", BoolToInt(LevelManager.instance.hasShownStoryAlready));
+                                    }
+                                    break;
+                                case 3:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
+                                    break;
+                            }
+
+                            if (!LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex, hasWonDifficultyIndex])
+                            {
+                                LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex, hasWonDifficultyIndex] = true;
+                                LevelManager.instance.level1Capture.modePassed++;
+                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " ModePassed " + i, LevelManager.instance.level1Capture.modePassed);
+                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level1Capture.hasWonAlready[hasWonIndex, hasWonDifficultyIndex]));
+                                LevelManager.instance.level1Capture.hasLockedBefore = false;
+                                LevelManager.instance.level1Capture.m_DifficultyToBeat = (LevelSettings.DifficultyToBeat)LevelManager.instance.level1Capture.modePassed;
+                            }
+                            else
+                                return;
                         }
-                        else
-                            return;
+                    }
+                }
+            }
+
+            if(SceneManager.GetActiveScene().name.ToString().Contains("Level2"))
+            {
+                if (mode2 == (subLevels2)i)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2A;
+                            break;
+                        case 1:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2B;
+                            break;
+                        case 2:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2C;
+                            break;
+                        case 3:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2D;
+                            break;
+                        case 4:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2E;                   
+                            break;
+                        case 5:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2F;
+                            break;
+                    }
+
+                    LevelManager.instance.SetNewHighScore(System.Enum.GetValues(typeof(subLevels2)).Length, LevelManager.instance.m_Difficulty);
+
+                    for (int j = 0; j < System.Enum.GetValues(typeof(LevelManager.Difficulty)).Length; j++)
+                    {
+                        if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)j)
+                        {
+                            switch (j)
+                            {
+                                case 0:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
+                                    break;
+                                case 1:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
+                                    break;
+                                case 2:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
+                                    if (!hasWonAlready2[hasWonIndex2])
+                                    {
+                                        hasWonAlready2[hasWonIndex2] = true;
+                                        LevelManager.instance.subLevelPassed++;
+                                        LevelManager.instance.m_LevelToBeat = (LevelManager.LevelToBeat)LevelManager.instance.subLevelPassed;
+                                        PlayerPrefs.SetInt("SubLevelPassed", LevelManager.instance.subLevelPassed);
+                                        PlayerPrefs.SetInt("HasWonAlready2 " + i, BoolToInt(hasWonAlready2[hasWonIndex2]));
+                                        LevelManager.instance.hasLockedBefore = false;
+                                        LevelManager.instance.hasShownStoryAlready = false;
+                                        PlayerPrefs.SetInt("HasShownStoryAlready", BoolToInt(LevelManager.instance.hasShownStoryAlready));
+                                    }
+                                    break;
+                                case 3:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
+                                    break;
+                            }
+
+                            if (!LevelManager.instance.level2Capture.hasWonAlready[hasWonIndex2, hasWonDifficultyIndex])
+                            {
+                                LevelManager.instance.level2Capture.hasWonAlready[hasWonIndex2, hasWonDifficultyIndex] = true;
+                                LevelManager.instance.level2Capture.modePassed++;
+                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " ModePassed " + i, LevelManager.instance.level2Capture.modePassed);
+                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level2Capture.hasWonAlready[hasWonIndex, hasWonDifficultyIndex]));
+                                LevelManager.instance.level2Capture.hasLockedBefore = false;
+                                LevelManager.instance.level2Capture.m_DifficultyToBeat = (LevelSettings.DifficultyToBeat)LevelManager.instance.level2Capture.modePassed;
+                            }
+                            else
+                                return;
+                        }
                     }
                 }
             }
@@ -309,51 +406,106 @@ public class UIManager : MonoBehaviour {
         SoundManagement.TriggerEvent("PlayPop");
         inGame = false;
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
+        if ((SceneManager.GetActiveScene().name.ToString().Contains("Level1")))
         {
-            if (mode == (subLevels1)i)
+            for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
             {
-                switch (i)
+                if (mode == (subLevels1)i)
                 {
-                    case 0:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                        break;
-                    case 1:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                        break;
-                    case 2:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                        break;
-                    case 3:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                        break;
-                    case 4:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                    switch (i)
+                    {
+                        case 0:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                            break;
+                        case 1:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                            break;
+                        case 2:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                            break;
+                        case 3:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                            break;
+                        case 4:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1E;
 
-                        if (FindObjectOfType<EnemyBoat>())
-                        {
-                            foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
-                                Destroy(item.gameObject);
-                        }
+                            if (FindObjectOfType<EnemyBoat>())
+                            {
+                                foreach (EnemyBoat item in FindObjectsOfType<EnemyBoat>())
+                                    Destroy(item.gameObject);
+                            }
 
-                        break;
-                }
+                            break;
+                    }
 
-                if (LevelManager.instance.level1Capture.m_DifficultyToBeat <= LevelSettings.DifficultyToBeat.Hard && LevelManager.instance.level1Capture.m_DifficultyToBeat >= LevelSettings.DifficultyToBeat.Easy)
-                {
-                    levelName = "LevelDescription";
-                    SceneManager.LoadScene(levelName);
-                    LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
+                    if (mode == subLevels1.Level1E && LevelManager.instance.level1Capture.m_DifficultyToBeat >= LevelSettings.DifficultyToBeat.Genius && LevelManager.instance.m_LevelToBeat >= LevelManager.LevelToBeat.Level2A)
+                    {
+                        levelName = "Level2";
+                        SceneManager.LoadScene(levelName);
+                        LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
+                    }
+
+                    if (LevelManager.instance.level1Capture.m_DifficultyToBeat <= LevelSettings.DifficultyToBeat.Hard && LevelManager.instance.level1Capture.m_DifficultyToBeat >= LevelSettings.DifficultyToBeat.Easy)
+                    {
+                        levelName = "LevelDescription";
+                        SceneManager.LoadScene(levelName);
+                        LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
+                    }
+                    else
+                    {
+                        levelName = "Level1";
+                        SceneManager.LoadScene(levelName);
+                        LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
+                    }
+
                 }
-                else
-                {
-                    levelName = "Level1";
-                    SceneManager.LoadScene(levelName);
-                    LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
-                }
-                
             }
         }
+
+        if ((SceneManager.GetActiveScene().name.ToString().Contains("Level2")))
+        {
+            for (int i = 0; i < System.Enum.GetValues(typeof(subLevels2)).Length; i++)
+            {
+                if (mode2 == (subLevels2)i)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1A;
+                            break;
+                        case 1:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1B;
+                            break;
+                        case 2:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1C;
+                            break;
+                        case 3:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1D;
+                            break;
+                        case 4:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level1E;
+                            break;
+                    }
+
+                
+
+                    if (LevelManager.instance.level2Capture.m_DifficultyToBeat <= LevelSettings.DifficultyToBeat.Hard && LevelManager.instance.level2Capture.m_DifficultyToBeat >= LevelSettings.DifficultyToBeat.Easy)
+                    {
+                        levelName = "LevelDescription";
+                        SceneManager.LoadScene(levelName);
+                        LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
+                    }
+                    else
+                    {
+                        levelName = "Level2";
+                        SceneManager.LoadScene(levelName);
+                        LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
+                    }
+
+                }
+            }
+        }
+
         ResetGameStats();      
     }
 
@@ -429,6 +581,7 @@ public class UIManager : MonoBehaviour {
             case LevelManager.LevelType.Menus:
 
                 mode = subLevels1.None;
+                mode2 = subLevels2.None;
                 LevelManager.instance.levelCaptureEditor.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.PleaseSelectLevelToView;
                 LevelManager.instance.m_Difficulty = LevelManager.Difficulty.None;
 
@@ -480,7 +633,7 @@ public class UIManager : MonoBehaviour {
         score += 1;
         scoreText.text = score.ToString();
         total++;
-        LevelManager.instance.CheckAnswer(true, needsPointsToWin, seahorseAnim);
+        LevelManager.instance.CheckAnswer(true, needsPointsToWin, seahorseAnim, (int)mode);
     }
 
 /// <summary>
@@ -492,7 +645,7 @@ public class UIManager : MonoBehaviour {
         score += 1;
         scoreText.text = score.ToString();
         total++;
-        LevelManager.instance.CheckAnswer(true, seahorseAnim, correctAnswer);
+        LevelManager.instance.CheckAnswer(true, seahorseAnim, correctAnswer, (int)mode);
     }
 
     public void BonusPoints()
@@ -562,81 +715,168 @@ public class UIManager : MonoBehaviour {
         return sprite;
     }
 
-    public void MakeDifficultyButtonGlow()
+    public void MakeDifficultyButtonGlow(bool isLevel1)
     {
-        for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
+        if (isLevel1)
         {
-            if (mode == (subLevels1)i)
+            for (int i = 0; i < System.Enum.GetValues(typeof(subLevels1)).Length; i++)
             {
-                switch (i)
+                if (mode == (subLevels1)i)
                 {
-                    case 0:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1A;
-                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
-                        break;
-                    case 1:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1B;
-                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
-                        break;
-                    case 2:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1C;
-                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
-                        break;
-                    case 3:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1D;
-                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
-                        break;
-                    case 4:
-                        LevelManager.instance.level1Capture = LevelManager.instance.level1E;
-                        LevelManager.instance.level1Capture.difficultyBtns.Clear();
-                        break;
-                }
-                
-                for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelSettings.DifficultyToBeat)).Length; mode++)
-                {
-                    if (LevelManager.instance.level1Capture.m_DifficultyToBeat == (LevelSettings.DifficultyToBeat)mode)
+                    switch (i)
                     {
-                        switch (mode)
+                        case 0:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1A;
+                            LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                            break;
+                        case 1:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1B;
+                            LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                            break;
+                        case 2:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1C;
+                            LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                            break;
+                        case 3:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1D;
+                            LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                            break;
+                        case 4:
+                            LevelManager.instance.level1Capture = LevelManager.instance.level1E;
+                            LevelManager.instance.level1Capture.difficultyBtns.Clear();
+                            break;
+                    }
+
+                    for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelSettings.DifficultyToBeat)).Length; mode++)
+                    {
+                        if (LevelManager.instance.level1Capture.m_DifficultyToBeat == (LevelSettings.DifficultyToBeat)mode)
                         {
-                            case 0:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
+                            switch (mode)
+                            {
+                                case 0:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
 
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
-                                break;
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                    break;
 
-                            case 1:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
+                                case 1:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
 
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
-                                break;
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                    break;
 
-                            case 2:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
+                                case 2:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
 
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
-                                break;
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                    break;
 
-                            case 3:
-                                LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
+                                case 3:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
 
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
-                                LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
-                                break;
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Easy);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Normal);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Hard);
+                                    LevelManager.instance.level1Capture.difficultyBtns.Add(LevelManager.instance.level1Capture.Genius);
+                                    break;
 
+                            }
+
+                            MakeSpriteGlow(LevelManager.instance.level1Capture.difficultyBtns[mode].GetComponent<Image>());
                         }
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < System.Enum.GetValues(typeof(subLevels2)).Length; i++)
+            {
+                if (mode2== (subLevels2)i)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2A;
+                            LevelManager.instance.level2Capture.difficultyBtns.Clear();
+                            break;
+                        case 1:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2B;
+                            LevelManager.instance.level2Capture.difficultyBtns.Clear();
+                            break;
+                        case 2:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2C;
+                            LevelManager.instance.level2Capture.difficultyBtns.Clear();
+                            break;
+                        case 3:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2D;
+                            LevelManager.instance.level2Capture.difficultyBtns.Clear();
+                            break;
+                        case 4:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2E;
+                            LevelManager.instance.level2Capture.difficultyBtns.Clear();
+                            break;
+                        case 5:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2F;
+                            LevelManager.instance.level2Capture.difficultyBtns.Clear();
+                            break;
+                    }
 
-                        MakeSpriteGlow(LevelManager.instance.level1Capture.difficultyBtns[mode].GetComponent<Image>());
+                    for (int mode = 0; mode < System.Enum.GetValues(typeof(LevelSettings.DifficultyToBeat)).Length; mode++)
+                    {
+                        if (LevelManager.instance.level2Capture.m_DifficultyToBeat == (LevelSettings.DifficultyToBeat)mode)
+                        {
+                            switch (mode)
+                            {
+                                case 0:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Easy;
+
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Easy);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Normal);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Hard);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Genius);
+                                    break;
+
+                                case 1:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Normal;
+
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Easy);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Normal);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Hard);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Genius);
+                                    break;
+
+                                case 2:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Hard;
+
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Easy);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Normal);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Hard);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Genius);
+                                    break;
+
+                                case 3:
+                                    LevelManager.instance.m_DifficultyCapture = LevelManager.Difficulty.Genius;
+
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Easy);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Normal);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Hard);
+                                    LevelManager.instance.level2Capture.difficultyBtns.Add(LevelManager.instance.level2Capture.Genius);
+                                    break;
+
+                            }
+
+                            MakeSpriteGlow(LevelManager.instance.level2Capture.difficultyBtns[mode].GetComponent<Image>());
+                        }
                     }
                 }
             }
@@ -692,7 +932,7 @@ public class UIManager : MonoBehaviour {
             else if (timer <= 0)
             {
                 if (mode == subLevels1.Level1E)
-                    WinGame();
+                    WinGame((int)mode);
                 else
                     GameOver();
             }

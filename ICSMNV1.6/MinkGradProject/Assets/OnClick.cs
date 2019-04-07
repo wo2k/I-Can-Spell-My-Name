@@ -69,6 +69,7 @@ public class OnClick : MonoBehaviour {
         if(isBackButton)
         {
             UIManager.instance.mode = UIManager.subLevels1.None;
+            UIManager.instance.mode2 = UIManager.subLevels2.None;
             LevelManager.instance.levelCaptureEditor.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.PleaseSelectLevelToView;
             LevelManager.instance.m_Difficulty = LevelManager.Difficulty.None;
         }

@@ -12,6 +12,7 @@ TagManager:
   - Normal
   - Hard
   - Genius
+  - Level2F
   layers:
   - Default
   - TransparentFX

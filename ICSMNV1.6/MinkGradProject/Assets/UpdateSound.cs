@@ -43,6 +43,7 @@ public class UpdateSound : MonoBehaviour {
         /*Retrieves saved SfX Volume___________________________Retrieves saved SfX Slider Value*//////////////////////////
 
         UIManager.instance.mode = UIManager.subLevels1.None;
+        UIManager.instance.mode2 = UIManager.subLevels2.None;
     }
 
     #region Do we need this?
