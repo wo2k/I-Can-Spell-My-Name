@@ -12,6 +12,7 @@ public class MultiDimensionalArray
 {
     [TextArea]
     public string[] levelDescription = { "", "", "", "" };
+    public string[] levelDescription2 = { "", "", "", "" };
     public VideoClip[] videoFile = new VideoClip[4];
 }
 
@@ -26,11 +27,14 @@ public class LevelSettings
 
     [TextArea]
     public string[,] levelDescription = { { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" } };
+    public string[,] levelDescription2 = { { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" }, { "", "", "", "" } };
     public Sprite levelIcon;
     public Texture videoTexture;
     public VideoClip videoFile;
     public MultiDimensionalArray[] level = new MultiDimensionalArray[5];
+    public MultiDimensionalArray[] level2 = new MultiDimensionalArray[6];
     public float[,] highScore = new float[5,4];
+    public float[,] highScore2 = new float[6, 4];
     public int modePassed;
     public Button Easy, Normal, Hard, Genius;
     public List<Button> difficultyBtns = new List<Button>();
@@ -39,6 +43,7 @@ public class LevelSettings
     public bool locked = true;
     public bool hasLockedBefore = false;
     public bool[,] hasWonAlready = { { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false } }; //Easy-Hard for Level1A-E
+    public bool[,] hasWonAlready2 = { { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false }, { false, false, false, false } }; //Easy-Hard for Level2A-F
     public bool usedCheatCode = false;
     //Current difficulty Player needs to beat
     public enum DifficultyToBeat { Easy, Normal, Hard, Genius, None, PleaseSelectLevelToView };
@@ -268,7 +273,7 @@ public class LevelManager : MonoBehaviour
                     level2Capture.hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasLockedBefore2 " + i));
 
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasWonAlready2 " + i))
-                    level2Capture.hasWonAlready[i, mode] = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasWonAlready2 " + i));
+                    level2Capture.hasWonAlready2[i, mode] = UIManager.instance.IntToBool(PlayerPrefs.GetInt(m_DifficultyCapture + " HasWonAlready2 " + i));
 
                 if (PlayerPrefs.HasKey(mode + " levelDescription2 " + i))
                     level2Capture.levelDescription[i, mode] = PlayerPrefs.GetString(mode + " levelDescription2 " + i);
@@ -382,7 +387,7 @@ public class LevelManager : MonoBehaviour
                     PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore2 " + i, UIManager.instance.BoolToInt(level2Capture.hasLockedBefore));
 
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HasWonAlready2 " + i))
-                    PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready2 " + i, UIManager.instance.BoolToInt(level2Capture.hasWonAlready[i, mode]));
+                    PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready2 " + i, UIManager.instance.BoolToInt(level2Capture.hasWonAlready2[i, mode]));
             }
         }
 
@@ -495,7 +500,7 @@ public class LevelManager : MonoBehaviour
             for (int mode = 0; mode < 4; mode++)
             {
                 level2Capture.highScore[i, mode] = 0;
-                level2Capture.hasWonAlready[i, mode] = false;
+                level2Capture.hasWonAlready2[i, mode] = false;
             }
         }
 
@@ -1003,7 +1008,7 @@ public class LevelManager : MonoBehaviour
                 }
                 level2Capture.modePassed = 0; PlayerPrefs.SetInt(m_DifficultyCapture + " ModePassed2 " + i, level2Capture.modePassed);
                 level2Capture.hasLockedBefore = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore2 " + i, UIManager.instance.BoolToInt(level2Capture.hasLockedBefore));
-                level2Capture.hasWonAlready[i, mode] = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready2 " + i, UIManager.instance.BoolToInt(level2Capture.hasWonAlready[i, mode]));
+                level2Capture.hasWonAlready2[i, mode] = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready2 " + i, UIManager.instance.BoolToInt(level2Capture.hasWonAlready2[i, mode]));
                 level2Capture.locked = true;
                 level2Capture.highScore[i, mode] = 0;
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore2 " + i))

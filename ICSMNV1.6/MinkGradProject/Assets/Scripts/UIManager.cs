@@ -337,12 +337,12 @@ public class UIManager : MonoBehaviour {
                                     break;
                             }
 
-                            if (!LevelManager.instance.level2Capture.hasWonAlready[hasWonIndex2, hasWonDifficultyIndex])
+                            if (!LevelManager.instance.level2Capture.hasWonAlready2[hasWonIndex2, hasWonDifficultyIndex])
                             {
-                                LevelManager.instance.level2Capture.hasWonAlready[hasWonIndex2, hasWonDifficultyIndex] = true;
+                                LevelManager.instance.level2Capture.hasWonAlready2[hasWonIndex2, hasWonDifficultyIndex] = true;
                                 LevelManager.instance.level2Capture.modePassed++;
                                 PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " ModePassed " + i, LevelManager.instance.level2Capture.modePassed);
-                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level2Capture.hasWonAlready[hasWonIndex, hasWonDifficultyIndex]));
+                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level2Capture.hasWonAlready2[hasWonIndex, hasWonDifficultyIndex]));
                                 LevelManager.instance.level2Capture.hasLockedBefore = false;
                                 LevelManager.instance.level2Capture.m_DifficultyToBeat = (LevelSettings.DifficultyToBeat)LevelManager.instance.level2Capture.modePassed;
                             }

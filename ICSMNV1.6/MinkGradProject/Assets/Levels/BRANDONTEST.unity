@@ -1613,7 +1613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &121907173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14239,6 +14239,182 @@ Prefab:
       propertyPath: level1E.level.Array.data[4].levelDescription.Array.data[3]
       value: dfff
       objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.levelName
+      value: Spell It!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.levelName
+      value: Octo-bet
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.levelName
+      value: Name Search
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.levelName
+      value: Fish Net
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.levelName
+      value: Fish Race
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.levelName
+      value: Seeking Treasure
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.levelName
+      value: Fish Net
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.levelIntro
+      value: Congratulations on recognizing your name. You did a great job and saved
+        us from the pirate ships. But we still have a threat on hands and I need to
+        know if you can spell your name if you want to help. Can you spell your name?
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.levelOutro
+      value: You spelled it right on the first try. Great Job. Let's keep practicing
+        just in case. I heard there's a treasure lurking in a pirate ship somewhere.
+        Let's see if we can find my friend.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.levelIntro
+      value: My friend, Calamari will help us practice spelling your name. He said
+        if you can spell your name right, he'll tell us where the pirate ship is at.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.levelOutro
+      value: Your're amazing. You just spelled your name. At this rate, the Big Bad
+        Pirate is probably shaking. Bye Calamari and thanks for the location.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.levelIntro
+      value: Time for another game. This time you have to search for your name.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.levelOutro
+      value: You did it. We're getting closer to that treasure. But first, we have
+        to take care of something.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.levelIntro
+      value: There, you see. We need to distract that net so our friends can get away.
+        Spell your name right so you don't get caught, though.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.levelOutro
+      value: You saved our friends. You really are a hero. Oh, some of the fish came
+        back. Looks like they want to play.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.levelIntro
+      value: Spell your name so you can search for the treasure before the pirates
+        get back.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.levelOutro
+      value: Wow. You found all the treasure the pirate stole. Oh no. This isn't any
+        pirates treasure. This is the Big Bad Pirate's treasure. Quick swim away.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.levelIntro
+      value: Let's race. That sounds like fun. Spell your name as fast as you can
+        to beat the other fishs. First one to make it to the finish line wins.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.levelIntro
+      value: There, you see. We need to distract that net so our friends can get away.
+        Spell your name right so you don't get caught, though.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.levelOutro
+      value: You saved our friends. You really are a hero. Oh, some of the fish came
+        back. Looks like they want to play.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.levelOutro
+      value: You did it. You spelled your name really fast, nice. Oh, it looks like
+        we found the pirate ship exactly where Calamari said it would be. Looks like
+        the coast is clear. Let's search it for treasure.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].levelDescription2.Array.data[0]
+      value: hghg
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].levelDescription2.Array.data[0]
+      value: hghgh
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].levelDescription2.Array.data[0]
+      value: hghgh
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].levelDescription2.Array.data[0]
+      value: hghgh
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.level2.Array.data[5].levelDescription2.Array.data[0]
+      value: hghgh
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}
   m_IsPrefabParent: 0

@@ -244,8 +244,8 @@ public class LevelManagerEditor : Editor {
 
             level2VideoFile[j] = AssignRelativeProperty(level2Capture, "videoFile");
 
-            level2Description2 = AssignRelativeProperty(level2Capture, "level");
-            levelDescriptionCapture2.Add(AssignRelativeProperty(level2Description2.GetArrayElementAtIndex(j), "levelDescription"));
+            level2Description2 = AssignRelativeProperty(level2Capture, "level2");
+            levelDescriptionCapture2.Add(AssignRelativeProperty(level2Description2.GetArrayElementAtIndex(j), "levelDescription2"));
             levelVideoCapture2.Add(AssignRelativeProperty(level2Description2.GetArrayElementAtIndex(j), "videoFile"));
 
         }
@@ -492,6 +492,112 @@ public class LevelManagerEditor : Editor {
 
             EditorGUILayout.LabelField("Video Texture", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
             level1VideoTexture[i].objectReferenceValue = (Texture)EditorGUILayout.ObjectField(level1VideoTexture[i].objectReferenceValue, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
+
+            EditorGUILayout.EndVertical();//-------------------------------------------------------------4
+            EditorGUILayout.EndHorizontal();//-------------------------------------------------------------2
+
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            string levelName = "";
+            switch (i)
+            {
+                case 0:
+                    levelName = "Level 2A";
+                    levelManager.level2Capture = levelManager.level2A;
+                    break;
+                case 1:
+                    levelName = "Level 2B";
+                    levelManager.level2Capture = levelManager.level2B;
+                    break;
+                case 2:
+                    levelName = "Level 2C";
+                    levelManager.level2Capture = levelManager.level2C;
+                    break;
+                case 3:
+                    levelName = "Level 2D";
+                    levelManager.level2Capture = levelManager.level2D;
+                    break;
+                case 4:
+                    levelName = "Level 2E";
+                   // levelManager.level2Capture = levelManager.level2E;
+                    break;
+                case 5:
+                    levelName = "Level 2F";
+                 //   levelManager.level2Capture = levelManager.level2F;
+                    break;
+            }
+
+            EditorGUILayout.LabelField(levelName, Label(EditorStyles.largeLabel, CustomColors.teal, 12, FontStyle.Bold));
+            levelManager.diffCurrentTab = GUILayout.Toolbar(levelManager.diffCurrentTab, difficultyButtonNames, diffStyle);
+
+            GUILayout.BeginHorizontal(levelBoxTexture, "Box");//-------------------------------------------------------------2
+            EditorGUILayout.BeginVertical();//-------------------------------------------------------------3
+            EditorGUILayout.LabelField("Level Icon", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold), GUILayout.Width(75));
+            level2Icon[i].objectReferenceValue = (Sprite)EditorGUILayout.ObjectField(level2Icon[i].objectReferenceValue, typeof(Sprite), false, GUILayout.Width(100), GUILayout.Height(100));
+            EditorGUILayout.LabelField("Highscore", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold), GUILayout.Width(75));
+            for (int j = 0; j < 4; j++)
+            {
+                switch (j)
+                {
+                    case 0:
+                        EditorGUILayout.LabelField("Easy: " + levelManager.level2Capture.highScore2[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                    case 1:
+                        EditorGUILayout.LabelField("Normal: " + levelManager.level2Capture.highScore2[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                    case 2:
+                        EditorGUILayout.LabelField("Hard: " + levelManager.level2Capture.highScore2[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                    case 3:
+                        EditorGUILayout.LabelField("Genius: " + levelManager.level2Capture.highScore2[i, j], Label(EditorStyles.radioButton, Color.black, 10, FontStyle.Bold), GUILayout.Width(90));
+                        break;
+                }
+
+
+            }
+            EditorGUILayout.EndVertical();//-------------------------------------------------------------3
+
+            EditorGUILayout.Space();
+            GUILayout.BeginVertical(levelSettingsTexture, GUIStyle.none);//-------------------------------------------------------------4
+            EditorGUILayout.LabelField("Level Name", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+            level2Name[i].stringValue = GUILayout.TextField(level2Name[i].stringValue, GUILayout.Width(200), GUILayout.Height(15));
+
+            EditorGUILayout.LabelField(levelName + " Story", Label(EditorStyles.label, CustomColors.dark_slate_gray, 13, FontStyle.BoldAndItalic));
+
+            EditorGUILayout.LabelField("Intro", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+            level2Intro[i].stringValue = GUILayout.TextArea(level2Intro[i].stringValue, GUILayout.Width(300), GUILayout.Height(50));
+
+            EditorGUILayout.LabelField("Outro", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+            level2Outro[i].stringValue = GUILayout.TextArea(level2Outro[i].stringValue, GUILayout.Width(300), GUILayout.Height(50));
+
+            EditorGUILayout.LabelField("Level Description", Label(EditorStyles.label, CustomColors.dark_slate_gray, 13, FontStyle.BoldAndItalic));
+            for (int mode = 0; mode < 4; mode++)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        EditorGUILayout.LabelField("Easy", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                    case 1:
+                        EditorGUILayout.LabelField("Normal", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                    case 2:
+                        EditorGUILayout.LabelField("Hard", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                    case 3:
+                        EditorGUILayout.LabelField("Genius", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                        break;
+                }
+                levelDescriptionCapture2[i].GetArrayElementAtIndex(mode).stringValue = EditorGUILayout.TextArea(levelDescriptionCapture2[i].GetArrayElementAtIndex(mode).stringValue, GUILayout.Width(300), GUILayout.Height(50));
+
+                EditorGUILayout.LabelField("Video File", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+                levelVideoCapture2[i].GetArrayElementAtIndex(mode).objectReferenceValue = (VideoClip)EditorGUILayout.ObjectField(levelVideoCapture2[i].GetArrayElementAtIndex(mode).objectReferenceValue, typeof(VideoClip), false, GUILayout.Width(200), GUILayout.Height(15));
+            }
+
+            EditorGUILayout.LabelField("Video Texture", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold));
+            level2VideoTexture[i].objectReferenceValue = (Texture)EditorGUILayout.ObjectField(level2VideoTexture[i].objectReferenceValue, typeof(Texture), false, GUILayout.Width(200), GUILayout.Height(15));
 
             EditorGUILayout.EndVertical();//-------------------------------------------------------------4
             EditorGUILayout.EndHorizontal();//-------------------------------------------------------------2
