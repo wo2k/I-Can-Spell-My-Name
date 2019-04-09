@@ -99,19 +99,22 @@ public class LevelDescription : MonoBehaviour {
                     switch (i)
                     {
                         case 0:
-                            LevelManager.instance.level2Capture = LevelManager.instance.level1A;
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2A;
                             break;
                         case 1:
-                            LevelManager.instance.level2Capture = LevelManager.instance.level1B;
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2B;
                             break;
                         case 2:
-                            LevelManager.instance.level2Capture = LevelManager.instance.level1C;
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2C;
                             break;
                         case 3:
-                            LevelManager.instance.level2Capture = LevelManager.instance.level1D;
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2D;
                             break;
                         case 4:
-                            LevelManager.instance.level2Capture = LevelManager.instance.level1E;
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2E;
+                            break;
+                        case 5:
+                            LevelManager.instance.level2Capture = LevelManager.instance.level2F;
                             break;
                     }
 

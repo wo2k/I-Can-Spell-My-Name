@@ -85,6 +85,9 @@ public class LockState : MonoBehaviour {
         if (UIManager.instance.levelName == "Level1")
             SetState(LevelManager.instance.locked);
 
+        if (UIManager.instance.levelName == "Level2")
+            SetState(LevelManager.instance.locked);
+
         if (UIManager.instance.levelName == "LevelDescription")
         {
             if (UIManager.instance.mode <= UIManager.subLevels1.Level1E && UIManager.instance.mode2 == UIManager.subLevels2.None)
@@ -189,9 +192,9 @@ public class LockState : MonoBehaviour {
                     LevelManager.instance.locked = true;
 
                     if (!LevelManager.instance.hasShownStoryAlready)
-                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false, LevelManager.instance.level1Capture));
+                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false, LevelManager.instance.level1Capture, true));
                     else
-                        FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false);
+                        FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false, true);
 
                 }
 
@@ -207,9 +210,9 @@ public class LockState : MonoBehaviour {
                     LevelManager.instance.locked = true;
 
                     if (!LevelManager.instance.hasShownStoryAlready)
-                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false, LevelManager.instance.level2Capture));
+                        FindObjectOfType<ProgessionCheck>().StartCoroutine(FindObjectOfType<ProgessionCheck>().InstantiateStory(false, LevelManager.instance.level2Capture, false));
                     else
-                        FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false);
+                        FindObjectOfType<ProgessionCheck>().ToggleStoryAssets(false, false);
 
                 }
 

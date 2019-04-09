@@ -10831,7 +10831,7 @@ MonoBehaviour:
   mode: 0
   mode2: 0
   hasWonAlready: 0000000000
-  hasWonAlready2: 0000000000
+  hasWonAlready2: 000000000000
   hasWonIndex: 0
   hasWonIndex2: 0
   hasWonDifficultyIndex: 0

@@ -167,6 +167,7 @@ public class LevelManager : MonoBehaviour
             UIManager.instance.hasWonAlready2[i] = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasWonAlready2 " + i));
 
         hasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasLockedBefore"));
+        mainHasLockedBefore = UIManager.instance.IntToBool(PlayerPrefs.GetInt("MainHasLockedBefore"));
         hasShownStoryAlready = UIManager.instance.IntToBool(PlayerPrefs.GetInt("HasShownStoryAlready"));
 
         for (int i = 0; i < 5; i++)
@@ -264,7 +265,7 @@ public class LevelManager : MonoBehaviour
                         break;
                 }
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore2 " + i))
-                    level2Capture.highScore[i, mode] = PlayerPrefs.GetFloat(m_DifficultyCapture + " HighScore2 " + i);
+                    level2Capture.highScore2[i, mode] = PlayerPrefs.GetFloat(m_DifficultyCapture + " HighScore2 " + i);
 
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " ModePassed2 " + i))
                     level2Capture.modePassed = PlayerPrefs.GetInt(m_DifficultyCapture + " ModePassed2 " + i);
@@ -378,7 +379,7 @@ public class LevelManager : MonoBehaviour
                         break;
                 }
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore2 " + i))
-                    PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore2 " + i, level2Capture.highScore[i, mode]);
+                    PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore2 " + i, level2Capture.highScore2[i, mode]);
 
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " ModePassed2 " + i))
                     PlayerPrefs.SetInt(m_DifficultyCapture + " ModePassed2 " + i, level2Capture.modePassed);
@@ -391,7 +392,7 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        //if (PlayerPrefs.HasKey("SubLevelPassed2")) PlayerPrefs.SetInt("SubLevelPassed2", subLevelPassed2);
+    
         
 
         if (PlayerPrefs.HasKey("SubLevelPassed")) PlayerPrefs.SetInt("SubLevelPassed", subLevelPassed);
@@ -405,6 +406,8 @@ public class LevelManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("HasLockedBefore")) PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
         if (PlayerPrefs.HasKey("HasShownStoryAlready")) PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(hasShownStoryAlready));
+
+        if(PlayerPrefs.HasKey("MainHasLockedBefore")) PlayerPrefs.SetInt("MainHasLockedBefore", UIManager.instance.BoolToInt(mainHasLockedBefore));
 
         PlayerPrefs.Save();
     }
@@ -422,6 +425,7 @@ public class LevelManager : MonoBehaviour
             UIManager.instance.hasWonAlready2[i] = false;
 
         hasLockedBefore = false;
+        mainHasLockedBefore = false;
         hasShownStoryAlready = false;
 
         PlayerPrefs.SetString("firstName", "Add Player");
@@ -499,7 +503,7 @@ public class LevelManager : MonoBehaviour
 
             for (int mode = 0; mode < 4; mode++)
             {
-                level2Capture.highScore[i, mode] = 0;
+                level2Capture.highScore2[i, mode] = 0;
                 level2Capture.hasWonAlready2[i, mode] = false;
             }
         }
@@ -582,10 +586,10 @@ public class LevelManager : MonoBehaviour
                     {
                         if (levelDifficulty == (Difficulty)mode)
                         {
-                            if (UIManager.instance.score > level2Capture.highScore[i, mode])
+                            if (UIManager.instance.score > level2Capture.highScore2[i, mode])
                             {
-                                level2Capture.highScore[i, mode] = UIManager.instance.score;
-                                PlayerPrefs.SetFloat(levelDifficulty + " HighScore2 " + i, level2Capture.highScore[i, mode]);
+                                level2Capture.highScore2[i, mode] = UIManager.instance.score;
+                                PlayerPrefs.SetFloat(levelDifficulty + " HighScore2 " + i, level2Capture.highScore2[i, mode]);
                             }
                         }
                     }
@@ -663,8 +667,8 @@ public class LevelManager : MonoBehaviour
                     {
                         if (levelDifficulty == (Difficulty)mode)
                         {
-                            level2Capture.highScore[i, mode] = PlayerPrefs.GetFloat(levelDifficulty + " HighScore2 " + i);
-                            highscore.text = level2Capture.highScore[i, mode].ToString();
+                            level2Capture.highScore2[i, mode] = PlayerPrefs.GetFloat(levelDifficulty + " HighScore2 " + i);
+                            highscore.text = level2Capture.highScore2[i, mode].ToString();
                         }
                     }
                 }
@@ -829,6 +833,82 @@ public class LevelManager : MonoBehaviour
                         SetIconOpacity(level1_C, 1f, true);
                         SetIconOpacity(level1_D, 1f, true);
                         SetIconOpacity(level1_E, 1f, true);
+
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+                        break;
+                }
+                break;
+
+            case "Level2":
+                switch (subLevelPassed)
+                {
+                    case 6: //Lock B
+                        SetIconOpacity(level2_B, 1f, true);
+                       
+
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+
+                        if (disableLevelBtns)
+                        {
+                            SetIconOpacity(level2_C, 0.5f, false);
+                            SetIconOpacity(level2_D, 0.5f, false);
+                            SetIconOpacity(level2_E, 0.5f, false);
+                            SetIconOpacity(level2_F, 0.5f, false);
+                        }
+
+                        break;
+                    case 7: //Lock C
+                        SetIconOpacity(level2_B, 1f, true);
+                        SetIconOpacity(level2_C, 1f, true);
+
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+
+                        if (disableLevelBtns)
+                        {
+                            SetIconOpacity(level2_D, 0.5f, false);
+                            SetIconOpacity(level2_E, 0.5f, false);
+                            SetIconOpacity(level2_F, 0.5f, false);
+                        }
+
+                        break;
+                    case 8: //Lock D
+                        SetIconOpacity(level2_B, 1f, true);
+                        SetIconOpacity(level2_C, 1f, true);
+                        SetIconOpacity(level2_D, 1f, true);
+
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+
+                        if (disableLevelBtns)
+                        {
+                            SetIconOpacity(level2_E, 0.5f, false);
+                            SetIconOpacity(level2_F, 0.5f, false);
+                        }
+
+                        break;
+                    case 9: //Lock E
+                        SetIconOpacity(level2_B, 1f, true);
+                        SetIconOpacity(level2_C, 1f, true);
+                        SetIconOpacity(level2_D, 1f, true);
+                        SetIconOpacity(level2_E, 1f, true);
+
+                        if (lockLevel)
+                            lockLevel.GetComponent<Animator>().enabled = true;
+
+                        if (disableLevelBtns)
+                            SetIconOpacity(level2_F, 0.5f, false);
+
+                        break;
+
+                    case 10: //Lock F
+                        SetIconOpacity(level2_B, 1f, true);
+                        SetIconOpacity(level2_C, 1f, true);
+                        SetIconOpacity(level2_D, 1f, true);
+                        SetIconOpacity(level2_E, 1f, true);
+                        SetIconOpacity(level2_F, 1f, true);
 
                         if (lockLevel)
                             lockLevel.GetComponent<Animator>().enabled = true;
@@ -1010,9 +1090,9 @@ public class LevelManager : MonoBehaviour
                 level2Capture.hasLockedBefore = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasLockedBefore2 " + i, UIManager.instance.BoolToInt(level2Capture.hasLockedBefore));
                 level2Capture.hasWonAlready2[i, mode] = false; PlayerPrefs.SetInt(m_DifficultyCapture + " HasWonAlready2 " + i, UIManager.instance.BoolToInt(level2Capture.hasWonAlready2[i, mode]));
                 level2Capture.locked = true;
-                level2Capture.highScore[i, mode] = 0;
+                level2Capture.highScore2[i, mode] = 0;
                 if (PlayerPrefs.HasKey(m_DifficultyCapture + " HighScore2 " + i))
-                    PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore2 " + i, level2Capture.highScore[i, mode]);
+                    PlayerPrefs.SetFloat(m_DifficultyCapture + " HighScore2 " + i, level2Capture.highScore2[i, mode]);
             }
         }
 
@@ -1033,6 +1113,7 @@ public class LevelManager : MonoBehaviour
         }
 
         hasLockedBefore = false; PlayerPrefs.SetInt("HasLockedBefore", UIManager.instance.BoolToInt(hasLockedBefore));
+        mainHasLockedBefore = false; PlayerPrefs.SetInt("MainHasLockedBefore", UIManager.instance.BoolToInt(mainHasLockedBefore));
         hasShownStoryAlready = false; PlayerPrefs.SetInt("HasShownStoryAlready", UIManager.instance.BoolToInt(hasShownStoryAlready));
 
         UIManager.instance.heartsAmount = 3;

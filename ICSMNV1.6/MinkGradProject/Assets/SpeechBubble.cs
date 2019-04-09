@@ -38,7 +38,7 @@ public class SpeechBubble : MonoBehaviour {
             yield return null;
         }
 
-        if (UIManager.instance.levelName == "Level1")
+        if (UIManager.instance.levelName == "Level1" || UIManager.instance.levelName == "Level2")
             yield return new WaitUntil(() => turnPage);
         else
             yield return new WaitForSeconds(animationTime);
@@ -50,7 +50,7 @@ public class SpeechBubble : MonoBehaviour {
             yield return null;
         }
 
-        if (UIManager.instance.levelName == "Level1")
+        if (UIManager.instance.levelName == "Level1" || UIManager.instance.levelName == "Level2")
             yield return new WaitUntil(() => turnPage);
 
         //Reverse animation
@@ -70,7 +70,7 @@ public class SpeechBubble : MonoBehaviour {
         }
 
         //Deletes current instance of speech bubble after completing reverse animation
-        if (UIManager.instance.levelName == "Level1")
+        if (UIManager.instance.levelName == "Level1" || UIManager.instance.levelName == "Level2")
         {
             Destroy(gameObject.transform.parent.gameObject);
             FindObjectOfType<ProgessionCheck>().turnPage = false;

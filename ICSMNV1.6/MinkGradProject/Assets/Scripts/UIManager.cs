@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour {
     public enum subLevels2 { Level2A, Level2B, Level2C, Level2D, Level2E, Level2F, None };
     public subLevels2 mode2;
     public bool[] hasWonAlready = { false, false, false, false, false };
-    public bool[] hasWonAlready2 = { false, false, false, false, false };
+    public bool[] hasWonAlready2 = { false, false, false, false, false, false };
     public int hasWonIndex;
     public int hasWonIndex2;
     public int hasWonDifficultyIndex;
@@ -186,7 +186,8 @@ public class UIManager : MonoBehaviour {
         hasWonIndex = (int)mode;
         hasWonIndex2 = (int)mode2;
         hasWonDifficultyIndex = (int)LevelManager.instance.m_Difficulty;
-        
+
+      //  Debug.LogError(SceneManager.GetActiveScene().name.ToString());
         Time.timeScale = 0;
 
         for (int i = 0; i < subLevel; i++)
@@ -440,7 +441,7 @@ public class UIManager : MonoBehaviour {
 
                     if (mode == subLevels1.Level1E && LevelManager.instance.level1Capture.m_DifficultyToBeat >= LevelSettings.DifficultyToBeat.Genius && LevelManager.instance.m_LevelToBeat >= LevelManager.LevelToBeat.Level2A)
                     {
-                        levelName = "Level2";
+                        levelName = "Campaign";
                         SceneManager.LoadScene(levelName);
                         LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
                     }

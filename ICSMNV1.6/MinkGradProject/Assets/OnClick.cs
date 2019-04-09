@@ -63,9 +63,17 @@ public class OnClick : MonoBehaviour {
     public void LoadLevel(string LevelName)
     {
         SoundManagement.TriggerEvent("PlayPop");
-        SceneManager.LoadScene(LevelName);
-        UIManager.instance.levelName = LevelName;
 
+        if (LevelName == "Level1" && UIManager.instance.mode == UIManager.subLevels1.None && UIManager.instance.mode2 >= UIManager.subLevels2.Level2A && UIManager.instance.mode2 <= UIManager.subLevels2.Level2F)
+        {
+            UIManager.instance.levelName = "Level2";
+            SceneManager.LoadScene(UIManager.instance.levelName);
+        }
+        else
+        {
+            SceneManager.LoadScene(LevelName);
+            UIManager.instance.levelName = LevelName;
+        }
         if(isBackButton)
         {
             UIManager.instance.mode = UIManager.subLevels1.None;
@@ -73,6 +81,8 @@ public class OnClick : MonoBehaviour {
             LevelManager.instance.levelCaptureEditor.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.PleaseSelectLevelToView;
             LevelManager.instance.m_Difficulty = LevelManager.Difficulty.None;
         }
+
+       
     }
 
     public void GoToGameMode()
