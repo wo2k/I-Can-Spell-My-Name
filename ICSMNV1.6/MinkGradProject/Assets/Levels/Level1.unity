@@ -612,6 +612,10 @@ Prefab:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1856510803629018, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
   m_IsPrefabParent: 0
@@ -1730,6 +1734,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1856510803629018, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
   m_IsPrefabParent: 0
@@ -2069,6 +2077,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1856510803629018, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
   m_IsPrefabParent: 0
@@ -2262,6 +2274,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbd60eef5583a5e4397a9ca2a77c264f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1310008404 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1285311547830428, guid: dbd60eef5583a5e4397a9ca2a77c264f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1310008403}
 --- !u!1001 &1322883329
 Prefab:
   m_ObjectHideFlags: 0
@@ -2487,6 +2504,10 @@ Prefab:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1856510803629018, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
   m_IsPrefabParent: 0
@@ -2672,6 +2693,7 @@ MonoBehaviour:
   infoButton: {fileID: 1287919489}
   floatingBubbles: {fileID: 392501505}
   bubbleQueue: []
+  m_CheatCodes: {fileID: 1310008404}
   ccLevelToBeat: {fileID: 1774498734}
   ccSkipMainLevel: {fileID: 2041459677}
   ccToggle: {fileID: 1420418845}
@@ -3717,6 +3739,10 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856510803629018, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0208115d0cacb7044ae7f2623bce0545, type: 2}

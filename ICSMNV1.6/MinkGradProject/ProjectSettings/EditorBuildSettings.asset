@@ -71,4 +71,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/LevelDescription.unity
     guid: 507d83ac4016625429d7dd7785736fdd
+  - enabled: 1
+    path: Assets/Levels/GamingWorld.unity
+    guid: 200b7a4330d98ce47b6e49b35bc3b02c
   m_configObjects: {}

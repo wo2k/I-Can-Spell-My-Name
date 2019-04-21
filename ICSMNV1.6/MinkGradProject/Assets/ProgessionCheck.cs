@@ -27,6 +27,7 @@ public class ProgessionCheck : MonoBehaviour {
 
 
     //Cheat Codes
+    public GameObject m_CheatCodes;
     public GameObject ccLevelToBeat;
     public GameObject ccSkipMainLevel;
     public GameObject ccToggle;
@@ -35,7 +36,14 @@ public class ProgessionCheck : MonoBehaviour {
 
     void Start ()
     {
-  
+#if UNITY_EDITOR
+        if (LevelManager.instance.m_Console == LevelManager.AppPlatform.Windows && Application.platform == RuntimePlatform.WindowsPlayer)
+            m_CheatCodes.SetActive(false);
+
+        if (LevelManager.instance.m_Console == LevelManager.AppPlatform.MacOS && Application.platform == RuntimePlatform.OSXPlayer)
+            m_CheatCodes.SetActive(false);
+#endif
+
 
         previousLock = new GameObject("PreviousLockLocation");
         previousParent = previousLock.transform;
@@ -629,16 +637,26 @@ public class ProgessionCheck : MonoBehaviour {
         var sentences = new List<string>();
         int position = 0;
         int start = 0;
+
+        var sentencesOutro = new List<string>();
+        int positionOut = 0;
+        int startOut = 0;
+        
         int intCapture = 0;
         int j = 0;
+        LevelSettings tempCaptureOutro = null;
 
         for (int i = 0; i < System.Enum.GetValues(typeof(LevelManager.LevelToBeat)).Length; i++)
         {
             if (LevelManager.instance.m_LevelToBeat == (LevelManager.LevelToBeat)i)
             {
                 if (tempCapture.Equals(LevelManager.instance.level1Capture))
+                {
                     tempCapture = LevelManager.instance.level1Container[i];
 
+                    if(LevelManager.instance.m_LevelToBeat != LevelManager.LevelToBeat.Level1A)
+                      tempCaptureOutro = LevelManager.instance.level1Container[i - 1];
+                }
                 if (tempCapture.Equals(LevelManager.instance.level2Capture))
                 {
                                              
@@ -665,6 +683,9 @@ public class ProgessionCheck : MonoBehaviour {
                     }
                    
                     tempCapture = LevelManager.instance.level2Container[j];
+
+                    if (LevelManager.instance.m_LevelToBeat != LevelManager.LevelToBeat.Level2A)
+                        tempCaptureOutro = LevelManager.instance.level1Container[j - 1];
                 }
                 intCapture = isLevel1 ? i : j;
                 if (!skipGlowEffect)
@@ -687,6 +708,28 @@ public class ProgessionCheck : MonoBehaviour {
                 levelIcons[intCapture].enabled = false;
             }
         }
+        if (LevelManager.instance.m_LevelToBeat != LevelManager.LevelToBeat.Level1A && LevelManager.instance.m_LevelToBeat != LevelManager.LevelToBeat.Level2A)
+        {
+            do
+            {
+                positionOut = tempCaptureOutro.levelOutro.IndexOf('.', startOut);
+                if (positionOut >= 0)
+                {
+                    sentencesOutro.Add(tempCaptureOutro.levelOutro.Substring(startOut, positionOut - startOut + 1).Trim());
+                    startOut = positionOut + 1;
+                }
+            }
+            while (positionOut > 0);
+
+            foreach (string sentence in sentencesOutro)
+            {
+                GameObject speechBubble = InstantiateBubble(sentence);
+                yield return new WaitUntil(() => turnPage);
+                if (speechBubble)
+                    speechBubble.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
+                yield return new WaitForSeconds(2);
+            }
+        }
 
         do
         {
@@ -699,12 +742,12 @@ public class ProgessionCheck : MonoBehaviour {
         }
         while (position > 0);
 
-        foreach(string sentence in sentences)
+        foreach (string sentence in sentences)
         {
             GameObject speechBubble = InstantiateBubble(sentence);
             yield return new WaitUntil(() => turnPage);
-            if(speechBubble)
-            speechBubble.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
+            if (speechBubble)
+                speechBubble.GetComponentInChildren<SpeechBubble>().turnPage = turnPage;
             yield return new WaitForSeconds(2);
         }
 

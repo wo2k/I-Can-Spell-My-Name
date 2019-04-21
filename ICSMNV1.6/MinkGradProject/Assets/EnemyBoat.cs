@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class EnemyBoat : MonoBehaviour {
 
     public int lane;
@@ -13,9 +13,25 @@ public class EnemyBoat : MonoBehaviour {
     public int boatNumber;
     public GameObject shipWreck;
     public GameObject smokePrefab;
+    private CanvasScaler canvasScalar;
+    private Vector2 ScreenScale
+    {
+        get
+        {
+            if (canvasScalar == null)
+                canvasScalar = FindObjectOfType<CanvasScaler>();
 
-	// Use this for initialization
-	void Start() {
+            if (canvasScalar)
+            {
+                return new Vector2(canvasScalar.referenceResolution.x / Screen.width, canvasScalar.referenceResolution.y / Screen.height);
+            }
+
+            else
+                return Vector2.one;
+        }
+    }
+    // Use this for initialization
+    void Start() {
 
         level1E = FindObjectOfType<Level1E>();
         anim = GetComponentInChildren<Animation>();
@@ -110,8 +126,10 @@ public class EnemyBoat : MonoBehaviour {
             boatDown.transform.GetChild(0).transform.GetChild(0).localPosition = boatPos;
 
             GameObject smokeEffect = Instantiate(smokePrefab, transform.parent);
-            smokeEffect.transform.localPosition = new Vector2(boatDown.transform.GetChild(0).transform.GetChild(0).localPosition.x + transform.position.x, boatDown.transform.GetChild(0).localPosition.y);
-            smokeEffect.GetComponent<Animator>().Play("Smoking");
+            smokeEffect.transform.localPosition = Vector2.zero;
+            smokeEffect.transform.localPosition = boatDown.transform.localPosition;
+            smokeEffect.transform.GetChild(0).localPosition = boatPos;
+            smokeEffect.transform.GetChild(0).GetComponent<Animator>().Play("Smoking");
             level1E.boatsInWave.Remove(gameObject);
             Destroy(gameObject);
 
@@ -131,9 +149,11 @@ public class EnemyBoat : MonoBehaviour {
             boatDown.transform.GetChild(0).transform.GetChild(0).localPosition = boatPos;
 
             GameObject smokeEffect = Instantiate(smokePrefab, transform.parent);
-            smokeEffect.transform.localPosition = new Vector2(boatDown.transform.GetChild(0).transform.GetChild(0).localPosition.x + transform.position.x, boatDown.transform.GetChild(0).localPosition.y);
-            smokeEffect.GetComponent<Animator>().Play("Smoking");
-          //  smokeEffect.transform.localPosition = new Vector2
+            smokeEffect.transform.localPosition = Vector2.zero;
+            smokeEffect.transform.localPosition = boatDown.transform.localPosition;
+            smokeEffect.transform.GetChild(0).localPosition = boatPos;
+            smokeEffect.transform.GetChild(0).GetComponent<Animator>().Play("Smoking");
+           
 
             level1E.boatsInWave.Remove(gameObject);
             Destroy(gameObject);
@@ -144,6 +164,8 @@ public class EnemyBoat : MonoBehaviour {
 
             
         }
+
+     
     }
 
 

@@ -8,6 +8,7 @@ public class UpdateSound : MonoBehaviour {
 
 
 	AudioSource m_Audio;
+    public GameObject resetProgress;
 
 	public AudioSource audioRecord;
 	public AudioSource audioMusic;
@@ -30,7 +31,16 @@ public class UpdateSound : MonoBehaviour {
          if (LevelManager.instance.m_Console == LevelManager.AppPlatform.iPhone)
          LevelManager.instance.toggleVibration.SetActive(true);
 
-        if (!audioSfx)
+         
+    
+        if (LevelManager.instance.m_Console == LevelManager.AppPlatform.Windows && Application.platform == RuntimePlatform.WindowsPlayer)
+            resetProgress.SetActive(false);
+
+        if (LevelManager.instance.m_Console == LevelManager.AppPlatform.MacOS && Application.platform == RuntimePlatform.OSXPlayer)
+            resetProgress.SetActive(false);
+    
+
+            if (!audioSfx)
             audioSfx = FindObjectOfType<LevelManager>().gameObject.GetComponent<AudioSource>();
         if (!audioMusic)
             audioMusic = FindObjectOfType<LevelManager>().gameObject.GetComponent<AudioSource>();

@@ -5,14 +5,30 @@ using System.IO;
 public class FileHandler : MonoBehaviour {
 	// Load and Save Data
 	// Use this for initialization
-	public static string savePath = "Assets/data/";
+	public static string savePath = "Resources/Text/";
 	public static string fileExtension = ".txt";
+
+    public static List<string> PrintTxt(string s)
+    {
+        string tmps;
+        StringReader read = null;
+        TextAsset file = Resources.Load("Text/dta.txt") as TextAsset;
+        read = new StringReader(s);
+        List<string> Lines = new List<string>();
+        for(int i = 0; i < 39; i++)
+        {
+            Lines.Add(read.ReadLine());
+        }
+
+        return Lines;
+    }
 
 	public static List<string> LinesofFile(string filePath, bool removeblanklines = true)
 	{
-		filePath = AttemptCorrectFilePath (filePath);
-
-		if (File.Exists (filePath)) {
+        //filePath = AttemptCorrectFilePath (filePath);
+        //string content = GetRawFileContent(filePath);
+       // string file = "dta.txt";
+        if (File.Exists (filePath)) {
 			string content = GetRawFileContent (filePath);
 			List<string> Lines = GetLinesFromContent (content, removeblanklines);
 			return Lines;

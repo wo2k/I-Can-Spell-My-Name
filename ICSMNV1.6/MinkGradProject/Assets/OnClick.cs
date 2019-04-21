@@ -116,11 +116,47 @@ public class OnClick : MonoBehaviour {
                 SceneManager.LoadScene(GameLevel);
                 break;
         }
+
+        switch (UIManager.instance.mode2)
+        {
+            case UIManager.subLevels2.Level2A:
+                GameLevel = "Level2A";
+                UIManager.instance.levelName = GameLevel;
+                SceneManager.LoadScene(GameLevel);
+                break;
+            case UIManager.subLevels2.Level2B:
+                GameLevel = "Level2B";
+                UIManager.instance.levelName = GameLevel;
+                SceneManager.LoadScene(GameLevel);
+                break;
+            case UIManager.subLevels2.Level2C:
+                GameLevel = "Level2C";
+                UIManager.instance.levelName = GameLevel;
+                SceneManager.LoadScene(GameLevel);
+                break;
+            case UIManager.subLevels2.Level2D:
+                GameLevel = "Level2D";
+                UIManager.instance.levelName = GameLevel;
+                SceneManager.LoadScene(GameLevel);
+                break;
+            case UIManager.subLevels2.Level2E:
+                GameLevel = "Level2E";
+                UIManager.instance.levelName = GameLevel;
+                SceneManager.LoadScene(GameLevel);
+                break;
+            case UIManager.subLevels2.Level2F:
+                GameLevel = "Level2F";
+                UIManager.instance.levelName = GameLevel;
+                SceneManager.LoadScene(GameLevel);
+                break;
+        }
+
         SoundManagement.TriggerEvent("PlayPop");
         UIManager.instance.inGame = true;
-        UIManager.instance.pauseButton.SetActive(true);      
+        UIManager.instance.pauseButton.SetActive(true);
         if (UIManager.instance.heartsAmount <= 0)
             UIManager.instance.heartsAmount = 3;
+
     }
 
 

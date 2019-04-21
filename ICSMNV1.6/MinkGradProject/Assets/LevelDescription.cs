@@ -84,6 +84,7 @@ public class LevelDescription : MonoBehaviour {
                             modeText.text = LevelManager.instance.level1Capture.level[i].levelDescription[modes].ToString();
 
                             videoFile.clip = LevelManager.instance.level1Capture.level[i].videoFile[modes];
+                            PrepareCompleted(videoFile);
                         }
                     }
                 }
@@ -130,9 +131,10 @@ public class LevelDescription : MonoBehaviour {
                         if (LevelManager.instance.m_Difficulty == (LevelManager.Difficulty)modes)
                         {
                             LevelManager.instance.GetHighScore(System.Enum.GetValues(typeof(UIManager.subLevels2)).Length, LevelManager.instance.m_Difficulty, highscore);
-                            modeText.text = LevelManager.instance.level2Capture.level[i].levelDescription[modes].ToString();
+                            modeText.text = LevelManager.instance.level2Capture.level2[i].levelDescription2[modes].ToString();
 
                             videoFile.clip = LevelManager.instance.level2Capture.level[i].videoFile[modes];
+                            PrepareCompleted(videoFile);
                         }
                     }
                 }

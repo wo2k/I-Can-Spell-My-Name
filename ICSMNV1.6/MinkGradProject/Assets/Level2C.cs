@@ -20,14 +20,23 @@ public class Level2C : MonoBehaviour {
 	public GameObject StartMenu;
 	public GameObject EndMenu;
 	public int LevelNumber = 0;
+    public GameObject Keyboard;
+    public List<GameObject> incorrectPanel = new List<GameObject>();
+    public int incorrectIndex = 0;
 
-	// Use this for initialization
-	public void StartGame(){
+    // Use this for initialization
+    public void StartGame(){
 		StartMenu.SetActive (false);
 		gameStart = true;
 	}
 	void Start () {
-		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
+
+        UIManager.instance.heartsAmount = 3;
+        UIManager.instance.StartGame();
+        UIManager.instance.mode2 = UIManager.subLevels2.Level2C;
+        Keyboard = FindObjectOfType<Keyboard>().gameObject;
+
+        switch (FindObjectOfType<FirstPlayButtons>().LoginNumber){
 		case 1:{
 				PlayersName = PlayerPrefs.GetString ("firstName");
 
@@ -51,16 +60,43 @@ public class Level2C : MonoBehaviour {
 				break;
 			}
 		}
-		if (LevelNumber == 0)
-			ChoiceBlock.GetComponent<ChoiceBlock> ().PlayersName = PlayersName;
-		else {
-			AnswerName = PlayersName;
-			ChoiceBlock.GetComponent<Keyboard> ().PlayersName = PlayersName;
-			ChoiceBlock.GetComponent<Keyboard> ().SetUpName ();
-		}
+
+        Keyboard.GetComponent<Keyboard>().PlayersName = PlayersName;
+
+
+
+        if (UIManager.instance.levelName != "Level2D" && UIManager.instance.levelName != "Level2E")
+        {
+            ChoiceBlock.GetComponent<ChoiceBlock>().PlayersName = PlayersName;
+            FindObjectOfType<Keyboard>().LevelNum = 3;
+            Keyboard.GetComponent<Keyboard>().SetUpName(0.4f, false);
+        }
+        if(UIManager.instance.levelName == "Level2D")
+        {
+            Keyboard.GetComponent<Keyboard>().SetUpName(0.6f, false);
+            FindObjectOfType<Keyboard>().LevelNum = 4;
+            UIManager.instance.mode2 = UIManager.subLevels2.Level2D;
+            for (int i = 0; i < incorrectPanel.Count; i++)
+                incorrectPanel[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
+        }
+
+        if (UIManager.instance.levelName == "Level2E")
+        {
+            FindObjectOfType<Keyboard>().LevelNum = 1;
+            UIManager.instance.mode2 = UIManager.subLevels2.Level2F;
+            Keyboard.GetComponent<Keyboard>().SetUpName(0.6f, true);
+
+        }
+
+        FindObjectOfType<Keyboard>().Used = new bool[PlayersName.Length];
+        for (int i = 0; i < PlayersName.Length; i++)
+            FindObjectOfType<Keyboard>().Used[i] = false;
+    //    LettersBlockHM = FindObjectOfType<Keyboard>().LetterBlocks;
+
+}
 			
-	//	ChoiceBlock.GetComponent<ChoiceBlock> ().SetUpName ();
-	}
+
+	
 
 	// Update is called once per frame
 	public void ScorePoints(){
@@ -70,8 +106,10 @@ public class Level2C : MonoBehaviour {
 	}
 
 	void Update () {
-		if (gameStart) {
-			if (LevelNumber == 1)
+        FindObjectOfType<Keyboard>().KeyBoardInput();
+
+        if (gameStart) {
+			if (LevelNumber == 1 || LevelNumber == 3)
 				ChoiceBlock.GetComponent<Keyboard> ().KeyBoardInput ();
 			
 			if (LevelNumber == 0) {
@@ -101,7 +139,20 @@ public class Level2C : MonoBehaviour {
 		}
 	}
 
-	public void Reset(){
+    public void ResetRace()
+    {
+        int count = Keyboard.GetComponent<Keyboard>().LetterBlocks.Count;
+        for (int i = 0; i < count; i++)
+            Keyboard.GetComponent<Keyboard>().LetterBlocks[i].GetComponent<LetterPlacement>().RemoveLetter();
+        Keyboard.GetComponent<Keyboard>().answerString = "";
+        Keyboard.GetComponent<Keyboard>().Home = false;
+        Keyboard.GetComponent<Keyboard>().MoveFoward = false;
+        Case_Control.index = 0;
+        if (Keyboard.GetComponent<Keyboard>().CapsLock != true)
+            Keyboard.GetComponent<Keyboard>().Shift();
+    }
+
+    public void Reset(){
 		int count =	ChoiceBlock.GetComponent<ChoiceBlock> ().LetterBlocks.Count;
 		for (int i = 0; i < count; i++)
 			ChoiceBlock.GetComponent<ChoiceBlock> ().LetterBlocks [i].GetComponent<LetterPlacement> ().RemoveLetter ();

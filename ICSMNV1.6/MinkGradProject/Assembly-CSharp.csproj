@@ -85,6 +85,7 @@
     <Compile Include="Assets\HealthScript.cs" />
     <Compile Include="Assets\IntroButtonScipt.cs" />
     <Compile Include="Assets\Keyboard.cs" />
+    <Compile Include="Assets\KeyboardAnswerPlacement.cs" />
     <Compile Include="Assets\LetterPlacement.cs" />
     <Compile Include="Assets\Letters.cs" />
     <Compile Include="Assets\LetterSearchSetUp.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Level2B.cs" />
     <Compile Include="Assets\Level2C.cs" />
     <Compile Include="Assets\LevelDescription.cs" />
+    <Compile Include="Assets\LockOn.cs" />
     <Compile Include="Assets\LoginButtons.cs" />
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\ModeFinder.cs" />
@@ -131,7 +133,7 @@
     <Compile Include="Assets\WaveComplete.cs" />
     <Compile Include="Assets\Win.cs" />
     <None Include="Assets\Resources\Shaders\SpriteOutline.shader" />
-    <None Include="Assets\data\dta.txt" />
+    <None Include="Assets\Resources\Text\dta.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Anthony/Documents/GitHub/I-Can-Spell-My-Name/ICSMNV1.6/MinkGradProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

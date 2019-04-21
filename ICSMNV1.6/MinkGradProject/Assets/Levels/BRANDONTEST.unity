@@ -5468,7 +5468,7 @@ Prefab:
     - target: {fileID: 224690662875625302, guid: d446e82b41167aa4b89179dedd3c684d,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224690662875625302, guid: d446e82b41167aa4b89179dedd3c684d,
         type: 2}
@@ -10791,6 +10791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hearts: []
   healthBar: {fileID: 0}
+  keyboard: {fileID: 0}
   heartsAmount: 3
   HUD: {fileID: 2099204003}
   timetext: {fileID: 2028103885}
@@ -10802,6 +10803,7 @@ MonoBehaviour:
   total: 0
   seahorseAnim: {fileID: 1515107318}
   answerHint: {fileID: 634539413}
+  scoreBoard: {fileID: 2087331593}
   startMenu: {fileID: 1828654686}
   endMenu: {fileID: 1047260673}
   pauseMenu: {fileID: 1131744777}
@@ -10837,6 +10839,7 @@ MonoBehaviour:
   hasWonDifficultyIndex: 0
   gameStart: 0
   inGame: 0
+  isLevel1: 0
 --- !u!114 &832350548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13833,13 +13836,13 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.levelName
-      value: Fish Bait
+      value: Boat-O-Boat
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.levelIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 290bc68e813898a4f98f09a549b4708f,
+      objectReference: {fileID: 21300000, guid: 67f0d658e0f55644db1123a95524a60b,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -13850,7 +13853,7 @@ Prefab:
         type: 2}
       propertyPath: level1Capture.videoFile
       value: 
-      objectReference: {fileID: 32900000, guid: 73aadf0513615564ea16365d0ea61272,
+      objectReference: {fileID: 32900000, guid: 32cbedd3e078c5d46b24a6685cdc20c3,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -13891,7 +13894,8 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1A.level.Array.data[0].levelDescription.Array.data[3]
-      value: fffdhdf
+      value: Let's see how many times you can recognize your name within the given
+        time.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -13911,7 +13915,8 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1B.level.Array.data[1].levelDescription.Array.data[3]
-      value: ggfgfg
+      value: Oh no, the dolphins are moving every 3 seconds. Keep recognizing your
+        name within the given time.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -13959,7 +13964,7 @@ Prefab:
         type: 2}
       propertyPath: level1A.level.Array.data[0].videoFile.Array.data[1]
       value: 
-      objectReference: {fileID: 32900000, guid: d4e6fd6af2fe60645a04d980c2ef0707,
+      objectReference: {fileID: 32900000, guid: 353e1df0aec01b44eba1d3fa1ad3ccc9,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -13971,7 +13976,7 @@ Prefab:
         type: 2}
       propertyPath: level1B.level.Array.data[1].videoFile.Array.data[0]
       value: 
-      objectReference: {fileID: 32900000, guid: 1506e6021b4e5c34d8f9c4a89bff91a1,
+      objectReference: {fileID: 32900000, guid: e4f328ca6aabe174c911b52160d4870d,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -13989,7 +13994,7 @@ Prefab:
         type: 2}
       propertyPath: level1C.level.Array.data[2].videoFile.Array.data[0]
       value: 
-      objectReference: {fileID: 32900000, guid: 70a305a586120704e9adfac745cef497,
+      objectReference: {fileID: 32900000, guid: adc290fab8634cd4d878fe12de50bb2f,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -14107,7 +14112,8 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1D.level.Array.data[3].levelDescription.Array.data[3]
-      value: ddddd
+      value: This seems like its a never lasting of fishes. Let's see how many fishes
+        we can recognize before the time runs up.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -14122,64 +14128,51 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.levelIntro
-      value: I'm glad you took the time to rest. It's nice and sunny out again and
-        we just made it just in time for the party. Wow did you see that, our fishy
-        friends are doing flips. Let's go play with them. Maybe they can help you
-        recognize your name even more.
+      value: It's starting to get dark outside. Seems like these boats are sailing
+        back home. Let's take this opportunity to work on how fast you can recognize
+        your name with another game. Win this and I'll give you a new reward.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.levelOutro
-      value: Oh no silly me. I think we swam to far in the ocean. These aren't our
-        fish friends we met from the beginning, we've been fish bait. Look closely,
-        these are pirate fish.
+      value: You did it. You're really good at recognizing your name. Let's maybe
+        get some time to rest now. Oh, I almost forgot. Here ya go.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.level.Array.data[3].levelDescription.Array.data[0]
-      value: Two types of fishes will be jumping in and out of the water with your
-        name on it. Correctly recognize your name or spot the green fish seven times
-        to win. Be aware of the red fishes though!
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.level.Array.data[3].levelDescription.Array.data[1]
-      value: Our friends are trying to bait us! Seems like they're more than two types
-        of fish in the sea. Our friends are not going to give us hints here. Correctly
-        recoginize your name seven times to win. Answering incorrectly will deduct
-        time from us.
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.level.Array.data[3].levelDescription.Array.data[2]
-      value: Be cautious! Our fish friends are jumping out of the water with your
-        name spelled incorrectly. See if you can find the fish with your name spelled
-        correctly ten times to win. I'll help you out by adding time for every answer
-        you get correctly.
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.level.Array.data[3].levelDescription.Array.data[3]
-      value: ddddd
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.level.Array.data[3].videoFile.Array.data[0]
       value: 
-      objectReference: {fileID: 32900000, guid: 73aadf0513615564ea16365d0ea61272,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.level.Array.data[3].videoFile.Array.data[1]
       value: 
-      objectReference: {fileID: 32900000, guid: ee1bbfcf8320575439d9541af308ab87,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1Capture.level.Array.data[3].videoFile.Array.data[2]
       value: 
-      objectReference: {fileID: 32900000, guid: a04b6c260a65c96488fe06dcd346d8c7,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1E.levelIntro
@@ -14195,19 +14188,19 @@ Prefab:
         type: 2}
       propertyPath: level1E.level.Array.data[4].videoFile.Array.data[0]
       value: 
-      objectReference: {fileID: 32900000, guid: c1376b6fa51bb824b91087689b80ed3f,
+      objectReference: {fileID: 32900000, guid: 83824f2a8169724409104c197ca97149,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1E.level.Array.data[4].videoFile.Array.data[1]
       value: 
-      objectReference: {fileID: 32900000, guid: c1376b6fa51bb824b91087689b80ed3f,
+      objectReference: {fileID: 32900000, guid: 2fbca08de18f5664c99dd24cd7cf5d4c,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1E.level.Array.data[4].videoFile.Array.data[2]
       value: 
-      objectReference: {fileID: 32900000, guid: c1376b6fa51bb824b91087689b80ed3f,
+      objectReference: {fileID: 32900000, guid: 3125816cf6ea2f04c93d35e4b6720c27,
         type: 3}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -14237,7 +14230,8 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level1E.level.Array.data[4].levelDescription.Array.data[3]
-      value: dfff
+      value: Shoot down the enemy boats as long as you can. Each wave will cause the
+        boats to go faster. One damage on your boat will cause us to be done.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -14272,7 +14266,7 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2Capture.levelName
-      value: Fish Net
+      value: Octo-bet
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -14344,14 +14338,14 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2Capture.levelIntro
-      value: There, you see. We need to distract that net so our friends can get away.
-        Spell your name right so you don't get caught, though.
+      value: My friend, Calamari will help us practice spelling your name. He said
+        if you can spell your name right, he'll tell us where the pirate ship is at.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2Capture.levelOutro
-      value: You saved our friends. You really are a hero. Oh, some of the fish came
-        back. Looks like they want to play.
+      value: Your're amazing. You just spelled your name. At this rate, the Big Bad
+        Pirate is probably shaking. Bye Calamari and thanks for the location.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -14363,27 +14357,36 @@ Prefab:
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2A.level2.Array.data[0].levelDescription2.Array.data[0]
-      value: hghg
+      value: Type your name using the keyboard on screen or with a keyboard of your
+        own. Hit enter to check to see if you get your name right. Only 45 seconds
+        are given to win but don't worry, you'll get 10 seconds added for each correct
+        letter. You have five hearts.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2B.level2.Array.data[1].levelDescription2.Array.data[0]
-      value: hghgh
+      value: Type your name again using the keyboard on screen or with a keyboard
+        you have. You only have three attempts to win within 30 seconds.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2C.level2.Array.data[2].levelDescription2.Array.data[0]
-      value: hghgh
+      value: Find the letters of your name in the word search. Click the letter to
+        see if the letter is in your name or pressed the letter on the keyboard. Pressing
+        an incorrect letter will lose you a heart. Get all letters right to win.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2E.level2.Array.data[4].levelDescription2.Array.data[0]
-      value: hghgh
+      value: Keep spelling your name correctly and fastly to move your fish. Spelling
+        your name incorrectly will lose you a heart and prevent you from moving. Time
+        to show whose the fastest fish in the sea.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
       propertyPath: level2F.level2.Array.data[5].levelDescription2.Array.data[0]
-      value: hghgh
+      value: We have 1 minute to find 5 treasures. Spelling your name correctly will
+        boost your chances of finding treasure.
       objectReference: {fileID: 0}
     - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
         type: 2}
@@ -14415,6 +14418,414 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
         type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].levelDescription2.Array.data[1]
+      value: Seems like its getting harder. You only have four attempts to spell your
+        name within 40 seconds. Press enter after typing your name to see if your
+        right. You get 5 seconds for each letter correct.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].levelDescription2.Array.data[2]
+      value: Oh boy. We only have three attempt to type your name with only 30 seconds.
+        Type your name swiftly then hit enter. You do not get any additional time.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].levelDescription2.Array.data[3]
+      value: They don't call us genius for nothing. Type your name as much as you
+        can in the given time. Getting one wrong answer will cause us to lose.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].levelDescription2.Array.data[3]
+      value: Type your name as fast as you can in the given time.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].levelDescription2.Array.data[1]
+      value: We only have two attempts to get this right. Type your name in and Calamari
+        will tell us if its right.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].levelDescription2.Array.data[2]
+      value: One shot to win this! Type your name in using the keyboard. Getting one
+        letter wrong will cause us to lose.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].levelDescription2.Array.data[1]
+      value: Seems like we have three word search's to beat this time. Find the letters
+        of your name within the given time.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].levelDescription2.Array.data[2]
+      value: Not only do we have five word search's to beat but now there are incorrect
+        letters in our name. Switch out the right letters and find the right letters
+        in the word search to win.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].levelDescription2.Array.data[3]
+      value: Complete as many word search's as you can and fix your name if there
+        are incorrect letters in it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].levelDescription2.Array.data[1]
+      value: Seems like the finish line is further. We only have 45 seconds to get
+        to the finish line. Quick, keep spelling your name to win this race.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].levelDescription2.Array.data[2]
+      value: Wow, only 30 seconds to win this race. Our fellow fish competitors seem
+        very smart. Type your name faster then them to win.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].levelDescription2.Array.data[3]
+      value: A marathon?! Well let's see who can go the furthest in the given time.
+        Spelling your name incorrectly once will cost us the race.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.level2.Array.data[5].levelDescription2.Array.data[1]
+      value: We have 1 minute to find 7 treasures. Keep typing your name to boost
+        the chances to finding all the treasure.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.level2.Array.data[5].levelDescription2.Array.data[2]
+      value: Oh boy, seems like we are in treasure haven. Ten treasures have been
+        spotted, lets see if we can get all of it within 45 seconds.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.level2.Array.data[5].levelDescription2.Array.data[3]
+      value: Let's see how many treasures we can capture within the given time.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.levelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 572c7a6dff461f441acc6f7fd7147c3c,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[2].levelDescription2.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[2].levelDescription2.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[2].levelDescription2.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[2].levelDescription2.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.level2.Array.data[3].levelDescription2.Array.data[0]
+      value: You have 60 seconds to spell your name 3 times. Spell incorrectly will
+        cause the fish net to get closer to the fish. Try not to let the fish get
+        captured.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.level2.Array.data[3].levelDescription2.Array.data[1]
+      value: 'We only have 45 seconds to spell your name 5 times. The fish net now
+        gets even more close when spelling your name wrong. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.level2.Array.data[3].levelDescription2.Array.data[2]
+      value: 30 seconds to spell your name 10 times. 5 incorrect letters will cause
+        the fish to be captured.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.level2.Array.data[3].levelDescription2.Array.data[3]
+      value: Keep spelling your name consecutively to cause the fish net to move slower.
+        Survive within a minute.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1C.level.Array.data[2].levelDescription.Array.data[3]
+      value: Keep recognizing your name within the given time. Letters on the boat
+        now have a timer. When the timer is up, the letter will change. Get one wrong
+        answer and you lose.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 9a91e295b87b8f94daa62b9eeec9e489,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 9a91e295b87b8f94daa62b9eeec9e489,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: 9a91e295b87b8f94daa62b9eeec9e489,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.level2.Array.data[0].videoFile.Array.data[3]
+      value: 
+      objectReference: {fileID: 32900000, guid: 9a91e295b87b8f94daa62b9eeec9e489,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2A.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2F.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2B.level2.Array.data[1].videoFile.Array.data[3]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.level2.Array.data[3].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 042cf1cd3638fef4e8d44294b4386de3,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.level2.Array.data[3].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 042cf1cd3638fef4e8d44294b4386de3,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2D.level2.Array.data[3].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: 042cf1cd3638fef4e8d44294b4386de3,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 07ef174ecdf26d6419cfe897e583cfa5,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 07ef174ecdf26d6419cfe897e583cfa5,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: 07ef174ecdf26d6419cfe897e583cfa5,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2E.level2.Array.data[4].videoFile.Array.data[3]
+      value: 
+      objectReference: {fileID: 32900000, guid: 07ef174ecdf26d6419cfe897e583cfa5,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.videoTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 2a35038527568bf4ea485016528d4773, type: 2}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].levelDescription2.Array.data[0]
+      value: Type your name again using the keyboard on screen or with a keyboard
+        you have. You only have three attempts to win within 30 seconds.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].levelDescription2.Array.data[1]
+      value: We only have two attempts to get this right. Type your name in and Calamari
+        will tell us if its right.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].levelDescription2.Array.data[2]
+      value: One shot to win this! Type your name in using the keyboard. Getting one
+        letter wrong will cause us to lose.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].levelDescription2.Array.data[3]
+      value: Type your name as fast as you can in the given time.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2Capture.level2.Array.data[1].videoFile.Array.data[3]
+      value: 
+      objectReference: {fileID: 32900000, guid: 2b48db287b8dcaa468c1e93cf44491f8,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: f25ef6cce54040945842075ffca1ab39,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 042cf1cd3638fef4e8d44294b4386de3,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: f25ef6cce54040945842075ffca1ab39,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level2C.level2.Array.data[2].videoFile.Array.data[3]
+      value: 
+      objectReference: {fileID: 32900000, guid: f25ef6cce54040945842075ffca1ab39,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.level.Array.data[2].levelDescription.Array.data[0]
+      value: Touch the boats with your name on it! Boats will be passing by from both
+        directions. Correctly recognize your name five times to win. Let's make this
+        easy for you, find the boats that are marked green but avoid the red ones.
+        You get bonus points if you get a speed boat with your name on it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.level.Array.data[2].levelDescription.Array.data[1]
+      value: Seems like our friends want to help us know our name. This time correctly
+        recognize your name seven times to win. The boats have different colors now!
+        Try and see if you can spot a speed boat with your name on it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.level.Array.data[2].levelDescription.Array.data[2]
+      value: Phew! This is going to be a tricky one. The boats are passing by with
+        your name spelled incorrectly. Try and see if you can find the boat with your
+        right name seven times. I'll help you out, every right answer will add time
+        for us.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.level.Array.data[2].levelDescription.Array.data[3]
+      value: Keep recognizing your name within the given time. Letters on the boat
+        now have a timer. When the timer is up, the letter will change. Get one wrong
+        answer and you lose.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.level.Array.data[2].videoFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: adc290fab8634cd4d878fe12de50bb2f,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.level.Array.data[2].videoFile.Array.data[1]
+      value: 
+      objectReference: {fileID: 32900000, guid: 32cbedd3e078c5d46b24a6685cdc20c3,
+        type: 3}
+    - target: {fileID: 114861156169789400, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: level1Capture.level.Array.data[2].videoFile.Array.data[2]
+      value: 
+      objectReference: {fileID: 32900000, guid: ab84f5837a5203848a3cd6e056fc4c3e,
+        type: 3}
+    - target: {fileID: 114767789462959296, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: dataText
+      value: 
+      objectReference: {fileID: 4900000, guid: 5bb92154e6ecb9a4cba0102c7eada9be, type: 3}
+    - target: {fileID: 114767789462959296, guid: 86a45772cef131941ae7237c0111e8e1,
+        type: 2}
+      propertyPath: datFile
+      value: '[]dta.txt'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a45772cef131941ae7237c0111e8e1, type: 2}
   m_IsPrefabParent: 0

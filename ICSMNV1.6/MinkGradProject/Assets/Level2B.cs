@@ -28,7 +28,13 @@ public class Level2B : MonoBehaviour {
 		gameStart = true;
 	}
 	void Start () {
-		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
+
+        UIManager.instance.heartsAmount = 3;
+        UIManager.instance.StartGame();
+        UIManager.instance.mode2 = UIManager.subLevels2.Level2B;
+        Keyboard = FindObjectOfType<Keyboard>().gameObject;
+
+        switch (FindObjectOfType<FirstPlayButtons>().LoginNumber){
 		case 1:{
 				PlayersName = PlayerPrefs.GetString ("firstName");
 
@@ -53,7 +59,7 @@ public class Level2B : MonoBehaviour {
 			}
 		}
 		Keyboard.GetComponent<Keyboard> ().PlayersName = PlayersName;
-		Keyboard.GetComponent<Keyboard> ().SetUpName ();
+		Keyboard.GetComponent<Keyboard> ().SetUpName (0.6f, false);
 	}
 
 	// Update is called once per frame
@@ -66,7 +72,7 @@ public class Level2B : MonoBehaviour {
 		EndMenu.SetActive (true);
 	}
 	void Update () {
-		if (gameStart) {
+		/*if (gameStart) {
 			if (timer > 0) {
 				timer -= Time.deltaTime;
 				if (timer <= 0)
@@ -83,7 +89,7 @@ public class Level2B : MonoBehaviour {
 			else
 				timetext.text = Mathf.RoundToInt (minutes).ToString () + ":" + Mathf.RoundToInt (seconds).ToString ();
 
-		}
+		}*/
 		Keyboard.GetComponent<Keyboard> ().KeyBoardInput ();
 
 	}

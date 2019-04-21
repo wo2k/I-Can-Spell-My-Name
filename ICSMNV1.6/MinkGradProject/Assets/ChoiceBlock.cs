@@ -18,11 +18,13 @@ public class ChoiceBlock : MonoBehaviour {
 
 	public List<char> LowerCasesChar;
 	public List<Image> LowerCasesImage;
+    public bool isUpper = false;
+    public Image letterImage;
 
-	public void Miss () {
+    public void Miss () {
 	}
 	void Start () {
-		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
+		switch(FindObjectOfType<FirstPlayButtons>().LoginNumber){
 		case 1:{
 				PlayersName = PlayerPrefs.GetString ("firstName");
 
@@ -143,267 +145,480 @@ public class ChoiceBlock : MonoBehaviour {
 
 	}
 	public void PlaceLetter(int index,char letter, int placement){
+
+        
+
 		if (letter == 'a') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [0]);
-			return;
+            letterImage = LowerCasesImage[0];
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'A') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [0]);
-			return;
+            letterImage = UpperCasesImage[0];  
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'b') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [1]);
-			return;
+            letterImage = LowerCasesImage[1]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'B') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [1]);
-			return;
+            letterImage = UpperCasesImage[1]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'c') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [2]);
-			return;
+            letterImage = LowerCasesImage[2]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'C') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [2]);
-			return;
+            letterImage = UpperCasesImage[2]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'd') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [3]);
-			return;
+            letterImage = LowerCasesImage[3]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'D') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [3]);
-			return;
+            letterImage = UpperCasesImage[3]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'e') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [4]);
-			return;
+            letterImage = LowerCasesImage[4]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'E') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [4]);
-			return;
+            letterImage = UpperCasesImage[4]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'f') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [5]);
-			return;
+            letterImage = LowerCasesImage[5]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'F') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter(UpperCasesImage [5]);
-			return;
+            letterImage = UpperCasesImage[5];  
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'g') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [6]);
-			return;
+            letterImage = LowerCasesImage[6]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'G') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter(UpperCasesImage [6]);
-			return;
+            letterImage = UpperCasesImage[6];  
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'h') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter(LowerCasesImage [7]);
-			return;
+            letterImage = LowerCasesImage[7];  
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'H') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [7]);
-			return;
+            letterImage = UpperCasesImage[7]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'i') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [8]);
-			return;
+            letterImage = LowerCasesImage[8]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'I') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [8]);
-			return;
+            letterImage = UpperCasesImage[8]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'j') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter(LowerCasesImage [9]);
-			return;
+            letterImage = LowerCasesImage[9];  
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'J') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [9]);
-			return;
+            letterImage = UpperCasesImage[9]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'k') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [10]);
-			return;
+            letterImage = LowerCasesImage[10]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'K') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter(UpperCasesImage [10]);
-			return;
+            letterImage = UpperCasesImage[10];  
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'l') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [11]);
-			return;
+            letterImage = LowerCasesImage[11]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'L') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [11]);
-			return;
+            letterImage = UpperCasesImage[11]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'm') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [12]);
-			return;
+            letterImage = LowerCasesImage[12]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'M') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [12]);
-			return;
+            letterImage = UpperCasesImage[12]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'n') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [13]);
-			return;
+            letterImage = LowerCasesImage[13]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'N') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [13]);
-			return;
+            letterImage = UpperCasesImage[13]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'o') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [14]);
-			return;
+            letterImage = LowerCasesImage[14]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'O') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [14]);
-			return;
+            letterImage = UpperCasesImage[14]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'p') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [15]);
-			return;
+            letterImage = LowerCasesImage[15]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'P') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [15]);
-			return;
+            letterImage = UpperCasesImage[15]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'q') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [16]);
-			return;
+            letterImage = LowerCasesImage[16]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'Q') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [16]);
-			return;
+            letterImage = UpperCasesImage[16]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'r') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [17]);
-			return;
+            letterImage = LowerCasesImage[17]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'R') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [17]);
-			return;
+            letterImage = UpperCasesImage[17]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 's') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [18]);
-			return;
+            letterImage = LowerCasesImage[18]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'S') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [18]);
-			return;
+            letterImage = UpperCasesImage[18]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 't') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [19]);
-			return;
+            letterImage = LowerCasesImage[19]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'T') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [19]);
-			return;
+            letterImage = UpperCasesImage[19]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'u') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [20]);
-			return;
+            letterImage = LowerCasesImage[20]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'U') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [20]);
-			return;
+            letterImage = UpperCasesImage[20]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'v') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [21]);
-			return;
+            letterImage = LowerCasesImage[21];
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'V') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [21]);
-			return;
+            letterImage = UpperCasesImage[21]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'w') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [22]);
-			return;
+            letterImage = LowerCasesImage[22]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'W') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [22]);
-			return;
+            letterImage = UpperCasesImage[22]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'x') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [23]);
-			return;
+            letterImage = LowerCasesImage[23]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'X') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [23]);
-			return;
+            letterImage = UpperCasesImage[23]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'y') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [24]);
-			return;
+            letterImage = LowerCasesImage[24]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'Y') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [24]);
-			return;
+            letterImage = UpperCasesImage[24]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'z') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (LowerCasesImage [25]);
-			return;
+            letterImage = LowerCasesImage[25]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().lower = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Lower = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
 		if (letter == 'Z') {
 			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().index = placement;
-			LetterBlocks [index].GetComponent<LetterSearchSetUp> ().SetLetter (UpperCasesImage [25]);
-			return;
+            letterImage = UpperCasesImage[25]; 
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().upper = letter.ToString();
+            LetterBlocks[index].GetComponent<Case_Control>().Upper = letterImage.gameObject;
+            LetterBlocks[index].GetComponent<LetterSearchSetUp>().SetLetter(letterImage);
+            return;
 		}
-	}
+        LetterBlocks[index].GetComponent<Case_Control>().isKeyboard = false;
+        
+    }
 
 	// Update is called once per frameS
 	void Update () {

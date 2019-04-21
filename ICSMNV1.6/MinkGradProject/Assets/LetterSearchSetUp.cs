@@ -14,15 +14,24 @@ public class LetterSearchSetUp : MonoBehaviour {
 	// Use this for initialization
 	public void SetImage(){
 		if (index != -1) {
-			this.GetComponentInParent<ChoiceBlock> ().AnswerBlocks [index].GetComponent<LetterPlacement> ().SetLetter (image);
+            int item = this.GetComponentInParent<ChoiceBlock>().LetterBlocks.IndexOf(this.gameObject);
+
+            this.GetComponentInParent<ChoiceBlock> ().LetterBlocks [item].GetComponent<Case_Control> ().SetImage ();
 			count++;
 			this.GetComponentInParent<ChoiceBlock> ().Count = count;
-		} else {
-			this.GetComponentInParent<ChoiceBlock> ().Miss ();
-		}
+            //this.GetComponentInParent<ChoiceBlock>().SetUpName();
+           
+
+        } else {
+           // GetComponentInChildren<Button>().interactable = false;
+           // GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0.5f);
+            LevelManager.instance.CheckAnswer(false, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, FindObjectOfType<Keyboard>().PlayersName.Length, System.Enum.GetValues(typeof(UIManager.subLevels2)).Length);
+        }
 	}
-	public void SetLetter (Image image_){
+	public Image SetLetter (Image image_){
 		image.sprite = image_.sprite;
+
+        return image;
 
 	}
 	public void RemoveLetter (){

@@ -13,7 +13,6 @@ public class Level1E: MonoBehaviour {
 	int answerIndex = 8;
     public string answer;
 
-
     public string[] NamesChosen;
 
     public GameObject enemyRef;
@@ -49,10 +48,28 @@ public class Level1E: MonoBehaviour {
     public List<GameObject> boatsInWave = new List<GameObject>();
     public List<int> boatIDNum = new List<int>();
 
+    public CanvasScaler canvasScalar;
+    private Vector2 ScreenScale
+    {
+        get
+        {
+            if (canvasScalar == null)
+                canvasScalar = FindObjectOfType<CanvasScaler>();
+
+            if (canvasScalar)
+            {
+                return new Vector2(canvasScalar.referenceResolution.x / Screen.width, canvasScalar.referenceResolution.y / Screen.height);
+            }
+
+            else
+                return Vector2.one;
+        }
+    }
+
     void Start()
     {
         
-
+        canvasScalar = FindObjectOfType<CanvasScaler>();
         switch (LevelManager.instance.m_Difficulty)
         {
             case LevelManager.Difficulty.Easy:
@@ -416,11 +433,19 @@ public class Level1E: MonoBehaviour {
 
         if (lockedOntoBoat)
         {
-            if (FindObjectOfType<EnemyBoat>())
+            if (boatsInWave.Count >= 1)
             {
-                velocity = GetForceFrom(muzzlePos.localPosition, FindObjectOfType<EnemyBoat>().gameObject.transform.GetChild(0).gameObject.transform.position, new Vector3(750, -300, 0));
+                Vector2 boatPos = boatsInWave[0].gameObject.transform.GetChild(0).gameObject.transform.position;
+             //   if (canvasScalar.referenceResolution == new Vector2(1920, 1080))
+               //     velocity = GetForceFrom(muzzlePos.localPosition / 1, boatPos / 1, new Vector3(750, -300, 0) / 1);
+               // else
+                    velocity = GetForceFrom(muzzlePos.localPosition / ScreenScale, boatPos / ScreenScale, new Vector3(750, -300, 0) / ScreenScale);
+
                 float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-                angle /= 2.5f;
+                if (canvasScalar.referenceResolution == new Vector2(1920, 1080))
+                    angle /= 2.5f;
+                else
+                    angle /= 1.5f;
                 m_Cannon.transform.localEulerAngles = new Vector3(0, 0, angle);
             }
         }

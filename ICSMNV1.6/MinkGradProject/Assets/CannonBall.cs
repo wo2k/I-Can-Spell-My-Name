@@ -19,13 +19,30 @@ public class CannonBall : MonoBehaviour
 
     bool hasFired = false;
 
+    private CanvasScaler canvasScalar;
+    private Vector2 ScreenScale
+    {
+        get
+        {
+            if (canvasScalar == null)
+                canvasScalar = FindObjectOfType<CanvasScaler>();
+
+            if (canvasScalar)
+            {
+                return new Vector2(canvasScalar.referenceResolution.x / Screen.width, canvasScalar.referenceResolution.y / Screen.height);
+            }
+
+            else
+                return Vector2.one;
+        }
+    }
 
     public int lane;
 
     // Use this for initialization
     void Start()
     {
-
+        canvasScalar = FindObjectOfType<CanvasScaler>();
         level1E = FindObjectOfType<Level1E>();
         physics = GetComponent<Rigidbody2D>();
 
@@ -71,7 +88,10 @@ public class CannonBall : MonoBehaviour
 
     void FireAtWill()
     {
-        physics.AddForce(GetForceFrom(transform.localPosition, targetPos, new Vector3(750, -275, 0)), ForceMode2D.Impulse);
+        //if(canvasScalar.referenceResolution == new Vector2(1920, 1080))
+         //   physics.AddForce(GetForceFrom(transform.localPosition / 1, targetPos / 1, new Vector3(750, -250, 0)) / 1, ForceMode2D.Impulse);
+       // else
+            physics.AddForce(GetForceFrom(transform.localPosition / ScreenScale, targetPos / ScreenScale, new Vector3(900, -205, 0))/ ScreenScale, ForceMode2D.Impulse);
         hasFired = true;
     }
 

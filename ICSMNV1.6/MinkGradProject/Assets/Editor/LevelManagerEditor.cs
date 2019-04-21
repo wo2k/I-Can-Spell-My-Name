@@ -415,7 +415,7 @@ public class LevelManagerEditor : Editor {
                     break;
                 case 3:
                     levelName = "Level 1D";
-                    levelManager.level1Capture = levelManager.level1D;
+                 //   levelManager.level1Capture = levelManager.level1D;
                     break;
                 case 4:
                     levelName = "Level 1E";
@@ -513,11 +513,11 @@ public class LevelManagerEditor : Editor {
                     break;
                 case 2:
                     levelName = "Level 2C";
-                    levelManager.level2Capture = levelManager.level2C;
+                   // levelManager.level2Capture = levelManager.level2C;
                     break;
                 case 3:
                     levelName = "Level 2D";
-                    levelManager.level2Capture = levelManager.level2D;
+                    //levelManager.level2Capture = levelManager.level2D;
                     break;
                 case 4:
                     levelName = "Level 2E";
@@ -537,7 +537,7 @@ public class LevelManagerEditor : Editor {
             EditorGUILayout.LabelField("Level Icon", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold), GUILayout.Width(75));
             level2Icon[i].objectReferenceValue = (Sprite)EditorGUILayout.ObjectField(level2Icon[i].objectReferenceValue, typeof(Sprite), false, GUILayout.Width(100), GUILayout.Height(100));
             EditorGUILayout.LabelField("Highscore", Label(EditorStyles.miniLabel, Color.black, 10, FontStyle.Bold), GUILayout.Width(75));
-            for (int j = 0; j < 4; j++)
+         /*   for (int j = 0; j < 4; j++)
             {
                 switch (j)
                 {
@@ -556,7 +556,7 @@ public class LevelManagerEditor : Editor {
                 }
 
 
-            }
+            }*/
             EditorGUILayout.EndVertical();//-------------------------------------------------------------3
 
             EditorGUILayout.Space();

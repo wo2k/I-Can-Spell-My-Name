@@ -60,24 +60,21 @@ public class CharacterSelection : MonoBehaviour {
 				break;
 			}
 		}
-		if (selected == 0) {
-			SelectFish ();
-	
-		}
+		if (selected == 0) 
+			SelectFish ();	
 		if (selected == 1)
 			SelectJelly ();
 		if (selected == 2)
-			SelectFish ();
-		if (selected == 3)
 			SelectStar ();
-		if (selected == 4)
+		if (selected == 3)
 			SelectUrchin ();
+		if (selected == 4)
+			SelectAngel ();
 		if (selected == 5)
 			SelectShark();
 		if (selected == 6)
-			SelectAngel();
-		if (selected == 7)
 			SelectWhale();
+	
 		
 		if (color == 0)
 			Red ();
@@ -278,12 +275,14 @@ public class CharacterSelection : MonoBehaviour {
 
     public void SelectFish()
     {
+        selected = 0;
+        SetVariation(selected, Fish.GetComponent<Image>().sprite);
         Fish.GetComponent<ColorMe>().SetUp(Variation);
         switch (GameManager.GetComponent<FirstPlayButtons>().LoginNumber)
         {
             case 1:
                 {
-                    PlayerPrefs.SetInt("firstCharacter", 1);
+                    PlayerPrefs.SetInt("firstCharacter", 0);
                     PlayerPrefs.SetInt("firstVar", Variation);
                     break;
                 }
@@ -317,10 +316,12 @@ public class CharacterSelection : MonoBehaviour {
     }
 
     public void SelectJelly () {
-		Jelly.GetComponent<ColorMe> ().SetUp (Variation);
+        selected = 1;
+        SetVariation(selected, Jelly.GetComponent<Image>().sprite);
+        Jelly.GetComponent<ColorMe> ().SetUp (Variation);
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 2);
+				PlayerPrefs.SetInt("firstCharacter", 1);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
 			}
@@ -354,10 +355,12 @@ public class CharacterSelection : MonoBehaviour {
 	}
 
 	public void SelectStar () {
-		Star.GetComponent<ColorMe> ().SetUp (Variation);
+        selected = 2;
+        SetVariation(selected, Star.GetComponent<Image>().sprite);
+        Star.GetComponent<ColorMe> ().SetUp (Variation);
 	switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 3);
+				PlayerPrefs.SetInt("firstCharacter", 2);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
 			}
@@ -391,10 +394,12 @@ public class CharacterSelection : MonoBehaviour {
 }
 
 	public void SelectUrchin () {
-		Urchin.GetComponent<ColorMe> ().SetUp (Variation);
+        selected = 3;
+        SetVariation(selected, Urchin.GetComponent<Image>().sprite);
+        Urchin.GetComponent<ColorMe> ().SetUp (Variation);
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 4);
+				PlayerPrefs.SetInt("firstCharacter", 3);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
 			}
@@ -427,10 +432,12 @@ public class CharacterSelection : MonoBehaviour {
 		UrchinText.SetActive (true);
 	}
 	public void SelectShark () {
-		Shark.GetComponent<ColorMe> ().SetUp (Variation);
+        selected = 5;
+        SetVariation(selected, Shark.GetComponent<Image>().sprite);
+        Shark.GetComponent<ColorMe> ().SetUp (Variation);
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 6);
+				PlayerPrefs.SetInt("firstCharacter", 5);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
 			}
@@ -463,10 +470,12 @@ public class CharacterSelection : MonoBehaviour {
 		UrchinText.SetActive (false);
 	}
 	public void SelectAngel () {
-		Angel.GetComponent<ColorMe> ().SetUp (Variation);
+        selected = 4;
+        SetVariation(selected, Angel.GetComponent<Image>().sprite);
+        Angel.GetComponent<ColorMe> ().SetUp (Variation);
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 5);
+				PlayerPrefs.SetInt("firstCharacter", 4);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
 			}
@@ -499,10 +508,12 @@ public class CharacterSelection : MonoBehaviour {
 		UrchinText.SetActive (false);
 	}
 	public void SelectWhale () {
-		Whale.GetComponent<ColorMe> ().SetUp (Variation);
+        selected = 6;
+        SetVariation(selected, Whale.GetComponent<Image>().sprite);
+        Whale.GetComponent<ColorMe> ().SetUp (Variation);
 		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
 		case 1:{
-				PlayerPrefs.SetInt("firstCharacter", 7);
+				PlayerPrefs.SetInt("firstCharacter", 6);
 				PlayerPrefs.SetInt("firstVar", Variation);
 				break;
 			}

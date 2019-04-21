@@ -4,6 +4,49 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
+#region RectTransformExtensions
+public static class RectTransformExtensions
+{
+    public static void SetSize(this RectTransform rect, Vector2 newSize)
+    {
+        Vector2 oldSize = rect.rect.size;
+        Vector2 deltaSize = newSize - oldSize;
+        rect.offsetMin = rect.offsetMin - new Vector2(deltaSize.x * rect.pivot.x, deltaSize.y * rect.pivot.y);
+        rect.offsetMax = rect.offsetMax + new Vector2(deltaSize.x * (1f - rect.pivot.x), deltaSize.y * (1f - rect.pivot.y));
+    }
+    public static float GetWidth(this RectTransform rect)
+    {
+        return rect.rect.width;
+    }
+
+    public static void SetWidth(this RectTransform rect, float newSize)
+    {
+        SetSize(rect, new Vector2(newSize, rect.rect.size.y));
+    }
+
+    public static float GetHeight(this RectTransform rect)
+    {
+        return rect.rect.height;
+    }
+
+    public static void SetHeight(this RectTransform rect, float newSize)
+    {
+        SetSize(rect, new Vector2(rect.rect.size.x, newSize));
+    }
+
+    public static void SetDefaultScale(this RectTransform rect)
+    {
+        rect.localScale = new Vector3(0, 0, 0);
+    }
+
+    public static void SetScale(this RectTransform rect, float x, float y, float z)
+    {
+        rect.localScale = new Vector3(x, y, z);
+    }
+}
+#endregion RectTransformExtensions
+
 public static class GameObjectExtensions
 {
     /// <summary>
@@ -26,6 +69,7 @@ public class UIManager : MonoBehaviour {
     [Header("HUD")]
     public GameObject[] hearts;
     public GameObject healthBar;
+    public GameObject keyboard;
     public int heartsAmount = 3;
     public GameObject HUD;
     public Text timetext;
@@ -42,6 +86,7 @@ public class UIManager : MonoBehaviour {
     public int total = 0;
     public Animator seahorseAnim;
     public Text answerHint;
+    public GameObject scoreBoard;
 
     [Space]
 
@@ -87,6 +132,7 @@ public class UIManager : MonoBehaviour {
     public bool gameStart = false;
   //  [HideInInspector]
     public bool inGame = false;
+    public bool isLevel1 = false;
 
    // public Image spriteToGlow;
 
@@ -158,6 +204,7 @@ public class UIManager : MonoBehaviour {
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
+        pauseMenu.transform.SetAsLastSibling();
         gameStart = false;
         LevelManager.instance.m_Mode = LevelManager.LevelType.Menus;
         Time.timeScale = 0;    
@@ -173,6 +220,7 @@ public class UIManager : MonoBehaviour {
     public void GameOver()
     {
         endMenu.SetActive(true);
+        endMenu.transform.SetAsLastSibling();
         gameStart = false;
         Time.timeScale = 0;
         inGame = false;
@@ -182,6 +230,7 @@ public class UIManager : MonoBehaviour {
     {
         SoundManagement.TriggerEvent("PlayLevelComplete");
         winScreen.SetActive(true);
+        winScreen.transform.SetAsLastSibling();
         gameStart = false;
         hasWonIndex = (int)mode;
         hasWonIndex2 = (int)mode2;
@@ -343,7 +392,7 @@ public class UIManager : MonoBehaviour {
                                 LevelManager.instance.level2Capture.hasWonAlready2[hasWonIndex2, hasWonDifficultyIndex] = true;
                                 LevelManager.instance.level2Capture.modePassed++;
                                 PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " ModePassed " + i, LevelManager.instance.level2Capture.modePassed);
-                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready " + i, BoolToInt(LevelManager.instance.level2Capture.hasWonAlready2[hasWonIndex, hasWonDifficultyIndex]));
+                                PlayerPrefs.SetInt(LevelManager.instance.m_DifficultyCapture + " HasWonAlready2 " + i, BoolToInt(LevelManager.instance.level2Capture.hasWonAlready2[hasWonIndex, hasWonDifficultyIndex]));
                                 LevelManager.instance.level2Capture.hasLockedBefore = false;
                                 LevelManager.instance.level2Capture.m_DifficultyToBeat = (LevelSettings.DifficultyToBeat)LevelManager.instance.level2Capture.modePassed;
                             }
@@ -371,7 +420,12 @@ public class UIManager : MonoBehaviour {
             }
         }
 
-       
+        //if (levelName == "Level2A")
+         //   FindObjectOfType<Level2A>().Reset();
+
+        //if (levelName == "Level2C" || levelName == "Level2D")
+         //   FindObjectOfType<Level2C>().Reset();
+
         LevelManager.instance.m_Mode = LevelManager.LevelType.GameMode;
         SceneManager.LoadScene(levelName);
         ResetGameStats();       
@@ -396,6 +450,15 @@ public class UIManager : MonoBehaviour {
                 break;
             case "Level1E":
                // FindObjectOfType<Level1E>().Reset();
+                break;
+            case "Level2A":
+              //  FindObjectOfType<Level2A>().Reset();
+                break;
+            case "Level2B":
+                break;
+            case "Level2C":
+                break;
+            case "Level2D":
                 break;
         }
         ResetGameStats();
@@ -534,6 +597,9 @@ public class UIManager : MonoBehaviour {
                      //   heartsAmount = 3;
                     if (HUD)
                         HUD.SetActive(false);
+
+                    if (keyboard)
+                        Destroy(keyboard);
                 }
                 else
                 {
@@ -561,9 +627,6 @@ public class UIManager : MonoBehaviour {
                         hearts[i] = healthBar.transform.GetChild(i).gameObject;
                     }
 
-                    //if (heartsAmount != 3)
-                      //  heartsAmount = 3;
-
                     for (int i = 0; i < bubbleQueue.Count; i++)
                         Destroy(bubbleQueue[i]);
                     bubbleQueue.Clear();
@@ -576,6 +639,19 @@ public class UIManager : MonoBehaviour {
                     score = 0;
                     timetext.text = "1:00";
                     total = 0;
+                    answerHint.gameObject.SetActive(true);
+                    scoreBoard.SetActive(true);
+
+                    if (!isLevelOne())
+                    {
+                        if (keyboard)
+                            Destroy(keyboard);
+
+                        keyboard = InstantiateKeyboard(FindObjectOfType<UIManager>().transform);
+
+                        answerHint.gameObject.SetActive(false);
+                        scoreBoard.SetActive(false);
+                    }
                 }
                 break;
                 
@@ -585,6 +661,8 @@ public class UIManager : MonoBehaviour {
                 mode2 = subLevels2.None;
                 LevelManager.instance.levelCaptureEditor.m_DifficultyToBeat = LevelSettings.DifficultyToBeat.PleaseSelectLevelToView;
                 LevelManager.instance.m_Difficulty = LevelManager.Difficulty.None;
+                if (keyboard)
+                    Destroy(keyboard);
 
                 if (levelName == "Level1")
                 {
@@ -681,6 +759,13 @@ public class UIManager : MonoBehaviour {
             heart.transform.localPosition = new Vector3(heart.transform.localPosition.x + 112 * i+1, heart.transform.localPosition.y);
         }
         return hpHolder;
+    }
+
+    public GameObject InstantiateKeyboard(Transform keyboardPlacement)
+    {
+        GameObject m_Keyboard = Instantiate(Resources.Load("Prefabs/Keyboard"), keyboardPlacement) as GameObject;
+        m_Keyboard.transform.SetAsLastSibling();
+        return m_Keyboard;
     }
 
     /// <summary>
@@ -916,6 +1001,16 @@ public class UIManager : MonoBehaviour {
     public void AddTime(float addition)
     {
         timer += addition;
+    }
+
+    public bool isLevelOne()
+    {
+        if (SceneManager.GetActiveScene().name.ToString().Contains("Level1"))
+            isLevel1 = true;
+        if (SceneManager.GetActiveScene().name.ToString().Contains("Level2"))
+            isLevel1 = false;
+
+        return isLevel1;
     }
 
     // Update is called once per frame

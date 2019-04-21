@@ -9,8 +9,10 @@ public class Win : MonoBehaviour {
 		
 	}
 	public void WinState(){
-		endSub.GetComponent<SetEndSubState> ().WinMessage ();
-		endSub.SetActive (true);
+        //UIManager.instance.WinGame(System.Enum.GetValues(typeof(UIManager.subLevels2)).Length);
+        LevelManager.instance.CheckAnswer(true, UIManager.instance.heartsAmount, UIManager.instance.seahorseAnim, 1, System.Enum.GetValues(typeof(UIManager.subLevels2)).Length);
+		//endSub.GetComponent<SetEndSubState> ().WinMessage ();
+		//endSub.SetActive (true);
 	}
 	public void LoseState(){
 		endSub.GetComponent<SetEndSubState> ().LoseMessage ();

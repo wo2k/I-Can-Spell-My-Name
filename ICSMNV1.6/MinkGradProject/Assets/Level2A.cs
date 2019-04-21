@@ -25,7 +25,13 @@ public class Level2A : MonoBehaviour {
 		gameStart = true;
 	}
 	void Start () {
-		switch(GameManager.GetComponent<FirstPlayButtons>().LoginNumber){
+
+        UIManager.instance.heartsAmount = 3;
+        UIManager.instance.StartGame();
+        UIManager.instance.mode2 = UIManager.subLevels2.Level2A;
+        Keyboard = FindObjectOfType<Keyboard>().gameObject;
+
+        switch (FindObjectOfType<FirstPlayButtons>().LoginNumber){
 		case 1:{
 				PlayersName = PlayerPrefs.GetString ("firstName");
 				break;
@@ -49,7 +55,7 @@ public class Level2A : MonoBehaviour {
 			}
 		}
 		Keyboard.GetComponent<Keyboard> ().PlayersName = PlayersName;
-		Keyboard.GetComponent<Keyboard> ().SetUpName ();
+		Keyboard.GetComponent<Keyboard> ().SetUpName (0.4f, true);
 	}
 	
 	// Update is called once per frame
@@ -69,7 +75,7 @@ public class Level2A : MonoBehaviour {
 		Case_Control.index = 0;
 		if (Keyboard.GetComponent<Keyboard> ().CapsLock != true)
 			Keyboard.GetComponent<Keyboard> ().Shift ();
-		StartMenu.SetActive (true);
+	//	StartMenu.SetActive (true);
 	}
 
 	public void ResetRace(){
